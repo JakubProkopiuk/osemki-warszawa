@@ -2,11 +2,9 @@
 
 import { useState } from 'react';
 
-// --- STYLING HELPERS ---
 const cardStyle = "bg-white/[0.85] backdrop-blur-2xl border border-white shadow-[0_32px_80px_-20px_rgba(0,0,0,0.08)] rounded-[48px]";
 const inputStyle = "w-full bg-slate-100/50 border-2 border-transparent focus:border-blue-500/20 focus:bg-white p-5 rounded-3xl outline-none transition-all duration-300 text-lg placeholder:text-slate-400 shadow-[inset_0_2px_4px_rgba(0,0,0,0.02)]";
 
-// --- ICONS ---
 const IconVerify = () => <svg className="w-5 h-5 text-blue-500" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>;
 const StarIcon = () => <svg className="w-4 h-4 text-amber-400" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" /></svg>;
 
@@ -69,8 +67,7 @@ export default function LocationClient({ locationData }: { locationData: any }) 
             </div>
 
             <div className="flex flex-col md:flex-row items-center gap-6 p-8 rounded-[40px] bg-slate-50/50 border border-slate-100 transition-all hover:bg-white hover:shadow-xl duration-500">
-              {/* ZDJĘCIE TYMCZASOWE - AWATAR ZAMIAST ZEPSUTEGO LINKU */}
-              <div className="h-24 w-24 rounded-full bg-blue-600 flex items-center justify-center text-white text-3xl font-black ring-4 ring-white shadow-lg">RK</div>
+              <div className="h-24 w-24 rounded-full bg-blue-600 flex items-center justify-center text-white text-3xl font-black ring-4 ring-white shadow-lg shrink-0">RK</div>
               <div className="text-center md:text-left">
                 <h4 className="text-xl font-black text-slate-900 uppercase tracking-tight">dr n. med. Robert Kisiel</h4>
                 <p className="text-slate-500 font-medium leading-relaxed italic">
@@ -81,7 +78,8 @@ export default function LocationClient({ locationData }: { locationData: any }) 
             </div>
           </div>
 
-          <div className={`${cardStyle} p-10 md:p-14 transition-transform duration-500 hover:scale-[1.01]`}>
+          {/* Formularz powraca na swoje miejsce po prawej stronie! */}
+          <div className={`${cardStyle} p-10 md:p-14 transition-transform duration-500 hover:scale-[1.01] w-full`}>
             {status === 'success' ? (
               <div className="text-center py-20 animate-in zoom-in duration-500">
                 <div className="w-24 h-24 bg-blue-600 rounded-full mx-auto flex items-center justify-center text-white text-4xl shadow-2xl shadow-blue-200 mb-8 font-bold">✓</div>

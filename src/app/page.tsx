@@ -13,6 +13,7 @@ export default function HomePage() {
             Warszawskie Centrum Chirurgii Ósemek
           </div>
           
+          {/* PRZYWRÓCONY WIELKI TEKST ZAMIAST ZEPSUTEGO LOGO */}
           <h1 className="text-6xl md:text-[100px] font-black tracking-tight leading-[0.85] text-slate-900">
             Ochota na <br />
             <span className="text-slate-300 font-light italic">Uśmiech.</span>
