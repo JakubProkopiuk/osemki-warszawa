@@ -18,6 +18,7 @@ export default function LocationClient({ locationData }: { locationData: any }) 
     ? { name: "lek. dent. Małgorzata Sturska", role: "Specjalista chirurgii szczękowo-twarzowej", img: "/doctors/sturska.jpg", locName: "Ochota" }
     : { name: "lek. dent. Natalia Kowalczyk-Zuchora", role: "Lekarz dentysta", img: "/doctors/kowalczyk.webp", locName: "Ursynów" };
 
+  const formattedTime = locationData.czas_dojazdu.replace('1 minuta', '1 minutę');
   const locationName = locationData.nazwa_lokalizacji === 'Rakowiec' ? 'Osiedle Rakowiec' : locationData.nazwa_lokalizacji;
 
   const handlePhoneChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -71,10 +72,9 @@ export default function LocationClient({ locationData }: { locationData: any }) 
                 Bez bólu. <br />
                 <span className="text-slate-300 font-light italic">Bez stresu.</span>
               </h1>
-              {/* POPRAWKA: Usunięta rakieta i zmieniony kod odpowiedzialny za czas */}
               <p className="text-xl md:text-2xl text-slate-400 font-medium leading-relaxed max-w-lg">
                 Profesjonalne usuwanie ósemek. Lokalizacja: <strong>{locationName}</strong>. Zapraszamy do gabinetu przy <strong>ul. {locationData.klinika}</strong>, blisko <strong>{locationData.punkt_orientacyjny}</strong>. <br />
-                Dotrzesz do nas w <strong>{locationData.czas_dojazdu}</strong>.
+                Dotrzesz do nas w <strong>{formattedTime}</strong>.
               </p>
             </div>
 
@@ -174,7 +174,15 @@ export default function LocationClient({ locationData }: { locationData: any }) 
             <div className="h-px flex-grow bg-slate-100 rounded-full" />
           </div>
           <div className="w-full h-[500px] rounded-[56px] overflow-hidden border-8 border-white shadow-2xl relative bg-slate-50">
-            <iframe width="100%" height="100%" style={{ border: 0 }} loading="lazy" allowFullScreen src={`https://www.google.com/maps/embed/v1/search?key=TWOJ_API_KEY_JESLI_MASZ&q=${encodeURIComponent('Ochota na Uśmiech Warszawa ' + locationData.klinika)}`} />
+            {/* TO JEST TA JEDNA POPRAWIONA LINIJKA - DARMOWY LINK GOOGLE MAPS */}
+            <iframe 
+              width="100%" 
+              height="100%" 
+              style={{ border: 0 }} 
+              loading="lazy" 
+              allowFullScreen 
+              src={`https://maps.google.com/maps?q=${encodeURIComponent('Ochota na Uśmiech ' + locationData.klinika + ' Warszawa')}&t=&z=15&ie=UTF8&iwloc=&output=embed`} 
+            />
           </div>
         </div>
       </main>
