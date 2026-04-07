@@ -1,11 +1,11 @@
 'use client';
 
 import Link from 'next/link';
+import Image from 'next/image';
 
 export default function HomePage() {
   return (
     <div className="min-h-screen bg-[#FDFDFD] text-[#1A1C1E] font-sans antialiased">
-      {/* Dynamiczne tło */}
       <div className="fixed top-[-10%] right-[-10%] w-[60%] h-[60%] bg-blue-50/50 blur-[120px] rounded-full z-0" />
       
       <main className="relative z-10 max-w-[1140px] mx-auto pt-24 px-6 md:pt-40">
@@ -54,37 +54,38 @@ export default function HomePage() {
           </Link>
         </div>
 
-        {/* SEKCCJA: NASZ ZESPÓŁ */}
+        {/* SEKCCJA: NASI EKSPERCI */}
         <div className="mb-32 text-left px-2">
           <div className="flex items-center gap-4 mb-16">
             <h2 className="text-4xl font-black tracking-tight italic uppercase">Nasi Eksperci</h2>
             <div className="h-[2px] flex-grow bg-slate-100 rounded-full" />
           </div>
           
-          <div className="grid md:grid-cols-3 gap-8">
+          <div className="grid md:grid-cols-2 gap-8 max-w-4xl">
             {[
               {
-                name: "dr n. med. Robert Kisiel",
-                role: "Chirurg Szczękowo-Twarzowy",
-                desc: "Lider zespołu, specjalista z wieloletnim doświadczeniem w usuwaniu najtrudniejszych ósemek.",
-                initials: "RK"
+                name: "lek. dent. Małgorzata Sturska",
+                role: "Specjalista chirurgii szczękowo-twarzowej",
+                desc: "Odpowiada za zabiegi chirurgiczne w gabinecie na Ochocie. Ekspertka w dziedzinie bezbolesnego usuwania ósemek.",
+                img: "/doctors/sturska.jpg"
               },
               {
-                name: "lek. dent. Anna Nowak",
-                role: "Chirurg Stomatologiczny",
-                desc: "Ekspertka w dziedzinie atraumatycznych ekstrakcji i regeneracji kości.",
-                initials: "AN"
-              },
-              {
-                name: "lek. dent. Piotr Wiśniewski",
-                role: "Chirurg Stomatologiczny",
-                desc: "Specjalizuje się w zabiegach w sedacji oraz pracy z pacjentami z dentofobią.",
-                initials: "PW"
+                name: "lek. dent. Natalia Kowalczyk-Zuchora",
+                role: "Lekarz dentysta",
+                desc: "Zapewnia profesjonalną opiekę stomatologiczną w gabinecie na Ursynowie, dbając o komfort i bezpieczeństwo pacjentów.",
+                img: "/doctors/Natalia_Kowalczyk-Zuchora-zdjecie.webp"
               }
             ].map((doc, i) => (
               <div key={i} className="group p-8 rounded-[40px] bg-white border border-slate-100 shadow-sm hover:shadow-2xl transition-all duration-500">
-                <div className="w-16 h-16 rounded-2xl bg-slate-900 text-white flex items-center justify-center text-xl font-black mb-6 group-hover:scale-110 group-hover:bg-blue-600 transition-all duration-500">
-                  {doc.initials}
+                <div className="relative w-24 h-24 rounded-3xl overflow-hidden mb-6 bg-slate-50 ring-4 ring-white group-hover:scale-105 transition-transform duration-500">
+                   <Image 
+                    src={doc.img} 
+                    alt={doc.name} 
+                    fill 
+                    className="object-cover grayscale group-hover:grayscale-0 transition-all duration-700"
+                    onError={(e) => { e.currentTarget.style.display = 'none' }}
+                   />
+                   <div className="absolute inset-0 flex items-center justify-center text-slate-200 font-bold text-xs uppercase tracking-tighter">Dr</div>
                 </div>
                 <h3 className="text-xl font-black uppercase tracking-tight text-slate-900 mb-1">{doc.name}</h3>
                 <p className="text-blue-600 font-bold text-xs uppercase tracking-widest mb-4">{doc.role}</p>
@@ -94,7 +95,6 @@ export default function HomePage() {
           </div>
         </div>
 
-        {/* STATYSTYKI */}
         <div className="grid md:grid-cols-3 gap-12 pb-24 border-t border-slate-100 pt-24 text-center">
           <div>
             <h3 className="font-black text-4xl mb-2">15 min</h3>
@@ -105,11 +105,10 @@ export default function HomePage() {
             <p className="text-slate-400 font-medium uppercase tracking-widest text-xs">Bezbolesne metody</p>
           </div>
           <div>
-            <h3 className="font-black text-4xl mb-2">RTG/Tomograf</h3>
+            <h3 className="font-black text-4xl mb-2">RTG / Tomograf</h3>
             <p className="text-slate-400 font-medium uppercase tracking-widest text-xs">Pełna diagnostyka na miejscu</p>
           </div>
         </div>
-
       </main>
 
       <footer className="py-12 text-center text-slate-300 text-[10px] font-bold uppercase tracking-[0.5em] opacity-50">

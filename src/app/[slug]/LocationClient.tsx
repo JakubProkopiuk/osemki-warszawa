@@ -54,25 +54,25 @@ export default function LocationClient({ locationData }: { locationData: any }) 
           <div className="space-y-10 animate-in fade-in slide-in-from-bottom-8 duration-1000">
             <div className="space-y-6 text-left">
               <div className="inline-flex items-center gap-3 px-5 py-2.5 rounded-full bg-white border border-slate-100 shadow-sm text-slate-500 text-xs font-bold uppercase tracking-widest leading-none">
-                <IconVerify /> Ochota na Uśmiech | Warszawa {locationData.nazwa_lokalizacji}
+                <IconVerify /> Ochota na Uśmiech | Warszawa
               </div>
               <h1 className="text-6xl md:text-[92px] font-black tracking-tight leading-[0.88] text-slate-900">
                 Bez bólu. <br />
                 <span className="text-slate-300 font-light italic">Bez stresu.</span>
               </h1>
               <p className="text-xl md:text-2xl text-slate-400 font-medium leading-relaxed max-w-lg">
-                Profesjonalne usuwanie ósemek. Lokalizacja: {locationData.nazwa_lokalizacji}. 
+                Profesjonalne usuwanie ósemek. Lokalizacja: <strong>{locationData.nazwa_lokalizacji === 'Rakowiec' ? 'Osiedle Rakowiec' : locationData.nazwa_lokalizacji}</strong>. 
                 Nasz gabinet znajduje się przy <strong>ul. {locationData.klinika}</strong>, dojedziesz do nas w <strong>{locationData.czas_dojazdu}</strong>.
               </p>
             </div>
 
             <div className="flex flex-col md:flex-row items-center gap-6 p-8 rounded-[40px] bg-slate-50/50 border border-slate-100 transition-all hover:bg-white hover:shadow-xl duration-500">
-              <div className="h-24 w-24 rounded-full bg-blue-600 flex items-center justify-center text-white text-3xl font-black ring-4 ring-white shadow-lg shrink-0">RK</div>
+              <div className="h-24 w-24 rounded-full bg-blue-600 flex items-center justify-center text-white text-3xl font-black ring-4 ring-white shadow-lg shrink-0">ON</div>
               <div className="text-center md:text-left">
-                <h4 className="text-xl font-black text-slate-900 uppercase tracking-tight">dr n. med. Robert Kisiel</h4>
+                <h4 className="text-xl font-black text-slate-900 uppercase tracking-tight">Zespół Chirurgiczny</h4>
                 <p className="text-slate-500 font-medium leading-relaxed italic">
-                  Specjalista chirurgii szczękowo-twarzowej. <br />
-                  Ekspert w bezbolesnym usuwaniu trudnych ósemek.
+                  Specjaliści chirurgii stomatologicznej i szczękowej. <br />
+                  Bezbolesne usuwanie ósemek w komfortowych warunkach.
                 </p>
               </div>
             </div>
@@ -119,25 +119,6 @@ export default function LocationClient({ locationData }: { locationData: any }) 
           </div>
         </div>
 
-        <div className="mb-32 text-left">
-          <div className="flex items-center gap-4 mb-16">
-            <h2 className="text-4xl font-black tracking-tight italic uppercase">Opinie pacjentów</h2>
-            <div className="h-[2px] flex-grow bg-slate-100 rounded-full" />
-          </div>
-          <div className="grid md:grid-cols-2 gap-10">
-            {[ 
-              { name: "Aleksandra P.", text: "Profesjonalizm na każdym kroku. Dr Kisiel to chirurg z powołania, uratował mnie przed weekendem z bólem. Gabinet luksusowy, czułam się bezpiecznie." }, 
-              { name: "Michał B.", text: "Nowoczesne podejście, zero stresu. Nie sądziłem, że usuwanie ósemki może odbyć się w tak przyjaznej atmosferze. Sprzęt topowy!" }
-            ].map((rev, i) => (
-              <div key={i} className="p-10 rounded-[40px] bg-white border border-slate-50 shadow-sm hover:shadow-xl hover:-translate-y-1 transition-all duration-500 group text-left">
-                <div className="flex gap-1 mb-6 opacity-40 group-hover:opacity-100 transition-opacity">{[...Array(5)].map((_, i) => <StarIcon key={i} />)}</div>
-                <p className="text-slate-600 text-xl leading-relaxed italic mb-8 font-medium">"{rev.text}"</p>
-                <p className="text-slate-900 font-black text-xs uppercase tracking-[0.3em]">— {rev.name}</p>
-              </div>
-            ))}
-          </div>
-        </div>
-
         <div className="mb-32 relative overflow-hidden p-12 md:p-20 rounded-[56px] bg-[#1A1C1E] text-white shadow-[0_50px_100px_-20px_rgba(0,0,0,0.4)] text-left">
           <div className="absolute top-0 right-0 w-96 h-96 bg-blue-600/20 blur-[100px] rounded-full" />
           <h2 className="text-4xl font-black mb-16 tracking-tight relative z-10 italic underline underline-offset-8 decoration-blue-600 uppercase">Częste pytania</h2>
@@ -155,7 +136,6 @@ export default function LocationClient({ locationData }: { locationData: any }) 
           </div>
         </div>
 
-        {/* SEKCCJA MAPY */}
         <div className="mb-32 text-left">
           <div className="flex items-center gap-4 mb-16">
             <h2 className="text-4xl font-black tracking-tight italic uppercase">Jak dojechać</h2>
@@ -165,11 +145,11 @@ export default function LocationClient({ locationData }: { locationData: any }) 
             <iframe
               width="100%"
               height="100%"
-              style={{ border: 0, filter: 'contrast(1.05) saturate(1.1)' }}
+              style={{ border: 0 }}
               loading="lazy"
               allowFullScreen
               referrerPolicy="no-referrer-when-downgrade"
-              src={`https://maps.google.com/maps?q=${encodeURIComponent('Ochota na Uśmiech ' + locationData.klinika + ' Warszawa')}&t=m&z=15&output=embed`}
+              src={`https://maps.google.com/maps?q=${encodeURIComponent('Ochota na Uśmiech ' + locationData.klinika + ' Warszawa')}&t=&z=15&ie=UTF8&iwloc=&output=embed`}
             ></iframe>
           </div>
         </div>
