@@ -13,9 +13,13 @@ const geistMono = Geist_Mono({
   subsets: ["latin"],
 });
 
-export const metadata = {
+// TUTAJ DODAŁEM TWÓJ KOD WERYFIKACYJNY GOOGLE
+export const metadata: Metadata = {
   title: 'Usuwanie Ósemek Warszawa | Ochota na Uśmiech',
   description: 'Profesjonalne i bezbolesne usuwanie zębów mądrości w Warszawie. Najnowocześniejsza chirurgia stomatologiczna.',
+  verification: {
+    google: '_vO5_sjty4HV81TiSXbD7Tuu5opYlFzhJimN4ZnF1Ks',
+  },
 };
 
 export default function RootLayout({
