@@ -49,8 +49,7 @@ export default function LocationClient({ locationData }: { locationData: any }) 
           phone: rawPhone, 
           slug: locationData.slug, 
           locationName,
-          // POPRAWKA: Wysyłamy timestamp, który Make.com odbierze
-          timestamp: new Date().toLocaleString('pl-PL'),
+          timestamp: new Date().toLocaleString('pl-PL'), // Wymuszenie aktualnej daty
         }),
       });
       if (res.ok) setStatus('success'); else setStatus('error');
@@ -62,8 +61,8 @@ export default function LocationClient({ locationData }: { locationData: any }) 
       
       <div className={`fixed top-[-10%] left-[-10%] w-[50%] h-[50%] transition-colors duration-1000 blur-[120px] rounded-full z-0 ${formData.painLevel > 7 ? 'bg-red-100/30' : 'bg-blue-100/20'}`} />
 
-      <main className="relative z-10 w-full max-w-[1140px] mt-12 md:mt-24 text-left">
-        <div className="grid lg:grid-cols-[1.1fr,0.9fr] gap-16 md:gap-24 items-start mb-32">
+      <main className="relative z-10 w-full max-w-[1240px] mt-12 md:mt-24 text-left">
+        <div className="grid lg:grid-cols-[1.2fr,0.8fr] gap-16 md:gap-24 items-start mb-24">
           
           <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} className="space-y-12">
             <div className="space-y-6">
@@ -72,11 +71,11 @@ export default function LocationClient({ locationData }: { locationData: any }) 
               </div>
               <h1 className="text-6xl md:text-[88px] font-black tracking-tight leading-[0.9] text-slate-900">
                 Bez bólu. <br />
-                <span className="text-slate-300 font-light italic">Bez stresu.</span>
+                <span className="text-slate-300 font-light italic text-[0.9em]">Bez stresu.</span>
               </h1>
-              <p className="text-xl md:text-2xl text-slate-400 font-medium leading-relaxed max-w-lg">
+              <p className="text-xl md:text-2xl text-slate-400 font-medium leading-relaxed max-w-xl">
                 Profesjonalne usuwanie ósemek. Lokalizacja: <strong>{locationName}</strong>. Zapraszamy do gabinetu przy <strong>ul. {locationData.klinika}</strong>, blisko <strong>{locationData.punkt_orientacyjny}</strong>. <br />
-                🚀 Dotrzesz do nas w <strong>{formattedTime}</strong>.
+                Dotrzesz do nas w <strong>{formattedTime}</strong>.
               </p>
             </div>
 
@@ -91,23 +90,39 @@ export default function LocationClient({ locationData }: { locationData: any }) 
               </div>
             </div>
 
-            <div className="flex items-center gap-12 pt-4 opacity-50 grayscale hover:grayscale-0 transition-all duration-500">
-                <div className="space-y-2 leading-none">
-                    <div className="flex gap-1"><Star/><Star/><Star/><Star/><Star/></div>
-                    <p className="text-[10px] font-black uppercase tracking-tighter">4.9/5 Google Maps</p>
+            {/* SEKCJA OPINII PACJENTÓW (PRZY LEKARZU) */}
+            <div className="space-y-8">
+                <div className="flex items-center gap-4">
+                    <div className="flex items-center gap-2 bg-blue-50 px-4 py-2 rounded-2xl border border-blue-100">
+                        <Star /><span className="font-black text-sm text-blue-700 underline tracking-tighter uppercase">4.9/5 Google Maps</span>
+                    </div>
+                    <div className="h-px flex-grow bg-slate-100" />
+                    <span className="text-[10px] font-black uppercase tracking-widest text-slate-300">Certyfikowana Klinika</span>
                 </div>
-                <div className="h-10 w-px bg-slate-200" />
-                <p className="text-[10px] font-black uppercase tracking-widest leading-tight">Certyfikowana <br/> klinika</p>
+                <div className="grid md:grid-cols-2 gap-6">
+                    {locationData.reviews?.slice(0, 2).map((rev: any, i: number) => (
+                    <motion.div key={i} className="p-6 rounded-[32px] bg-white border border-slate-50 shadow-sm relative">
+                        <div className="flex gap-1 mb-3 text-amber-400 scale-75 origin-left">
+                            {[...Array(5)].map((_, s) => <Star key={s} />)}
+                        </div>
+                        <p className="text-slate-500 italic text-sm leading-relaxed mb-4">"{rev.text}"</p>
+                        <div className="flex items-center gap-2">
+                            <div className="w-6 h-6 rounded-full bg-slate-100 text-slate-400 flex items-center justify-center font-black text-[8px]">{rev.author[0]}</div>
+                            <span className="font-black text-slate-900 text-[10px] uppercase tracking-widest">{rev.author}</span>
+                        </div>
+                    </motion.div>
+                    ))}
+                </div>
             </div>
           </motion.div>
 
-          <motion.div initial={{ opacity: 0, scale: 0.95 }} animate={{ opacity: 1, scale: 1 }} className={`${cardStyle} p-10 md:p-14 relative overflow-hidden`}>
+          <motion.div initial={{ opacity: 0, scale: 0.95 }} animate={{ opacity: 1, scale: 1 }} className={`${cardStyle} p-10 md:p-14 sticky top-12`}>
             {status === 'success' ? (
               <div className="text-center py-20">
                 <div className="w-20 h-20 bg-blue-600 rounded-full mx-auto flex items-center justify-center text-white text-3xl mb-8">✓</div>
-                <h2 className="text-3xl font-black uppercase tracking-tight text-slate-900">Zgłoszenie przyjęte</h2>
+                <h2 className="text-3xl font-black uppercase tracking-tight text-slate-900 leading-tight">Zgłoszenie przyjęte</h2>
                 <p className="text-slate-500 mt-4 leading-relaxed">
-                  Dziękujemy za kontakt. Skontaktujemy się z Tobą jak najszybciej w celu ustalenia dogodnego terminu wizyty.
+                  Dziękujemy za kontakt. Skontaktujemy się z Tobą jak najszybciej w celu ustalenia terminu wizyty.
                 </p>
               </div>
             ) : (
@@ -135,48 +150,20 @@ export default function LocationClient({ locationData }: { locationData: any }) 
           </motion.div>
         </div>
 
-        {/* --- SEKCJA OPINII PACJENTÓW --- */}
         <div className="mb-32 text-left">
-          <div className="flex items-center gap-4 mb-16">
-            <h2 className="text-4xl font-black tracking-tight italic uppercase leading-none text-slate-900">Opinie Pacjentów</h2>
-            <div className="h-px flex-grow bg-slate-100" />
-            <div className="flex items-center gap-2 bg-slate-50 px-4 py-2 rounded-2xl border border-slate-100">
-              <Star /><span className="font-black text-sm text-slate-900">4.9/5 (347 opinii)</span>
-            </div>
-          </div>
-
-          <div className="grid md:grid-cols-3 gap-8">
-            {locationData.reviews?.map((rev: any, i: number) => (
-              <motion.div 
-                key={i}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: i * 0.1 }}
-                className="p-8 rounded-[40px] bg-white border border-slate-100 shadow-sm hover:shadow-xl transition-all duration-500 relative"
-              >
-                <div className="flex gap-1 mb-4 text-amber-400">
-                  {[...Array(5)].map((_, starI) => <Star key={starI} />)}
-                </div>
-                <p className="text-slate-500 italic mb-6 leading-relaxed">"{rev.text}"</p>
-                <div className="flex items-center gap-3">
-                  <div className="w-8 h-8 rounded-full bg-blue-100 text-blue-600 flex items-center justify-center font-black text-[10px]">
-                    {rev.author[0]}
-                  </div>
-                  <span className="font-black text-slate-900 text-xs uppercase tracking-widest">{rev.author}</span>
-                </div>
-              </motion.div>
-            ))}
-          </div>
-        </div>
-
-        <div className="mb-32 text-left">
-          <div className="flex items-center gap-4 mb-16">
+          <div className="flex items-center gap-4 mb-12">
             <h2 className="text-4xl font-black tracking-tight italic uppercase leading-none text-slate-900">Mapa Dojazdu</h2>
             <div className="h-px flex-grow bg-slate-100 rounded-full" />
           </div>
-          <div className="w-full h-[500px] rounded-[56px] overflow-hidden border-8 border-white shadow-2xl relative bg-slate-50">
-            <iframe width="100%" height="100%" style={{ border: 0 }} loading="lazy" allowFullScreen src={`https://www.google.com/maps/embed/v1/search?key=TWOJ_API_KEY_JESLI_MASZ&q=${encodeURIComponent('Ochota na Uśmiech Warszawa ' + locationData.klinika)}`} />
+          <div className="w-full h-[500px] rounded-[56px] overflow-hidden border-8 border-white shadow-2xl relative bg-slate-100">
+            <iframe 
+                width="100%" 
+                height="100%" 
+                style={{ border: 0 }} 
+                loading="lazy" 
+                allowFullScreen 
+                src={`https://www.google.com/maps?q=${encodeURIComponent('Ochota na Uśmiech ' + locationData.klinika + ' Warszawa')}&output=embed`}
+            />
           </div>
         </div>
       </main>
