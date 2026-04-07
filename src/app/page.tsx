@@ -5,27 +5,25 @@ import Link from 'next/link';
 export default function HomePage() {
   return (
     <div className="min-h-screen bg-[#FDFDFD] text-[#1A1C1E] font-sans antialiased">
-      {/* Dekoracyjne tło */}
       <div className="fixed top-[-10%] right-[-10%] w-[60%] h-[60%] bg-blue-50/50 blur-[120px] rounded-full z-0" />
       
       <main className="relative z-10 max-w-[1140px] mx-auto pt-24 px-6 md:pt-40">
         <div className="text-center space-y-8 mb-24">
-          <img 
-            src="https://ochotanausmiech.pl/wp-content/uploads/2018/02/logo-ochota-na-usmiech.png" 
-            alt="Ochota na Uśmiech Logo" 
-            className="h-20 mx-auto" 
-          />
           <div className="inline-flex items-center gap-3 px-5 py-2.5 rounded-full bg-white border border-slate-100 shadow-sm text-blue-600 text-xs font-bold uppercase tracking-widest leading-none mx-auto">
             Warszawskie Centrum Chirurgii Ósemek
           </div>
-          <h1 className="sr-only">Ochota na Uśmiech</h1>
+          
+          <h1 className="text-6xl md:text-[100px] font-black tracking-tight leading-[0.85] text-slate-900">
+            Ochota na <br />
+            <span className="text-slate-300 font-light italic">Uśmiech.</span>
+          </h1>
+          
           <p className="text-xl md:text-2xl text-slate-400 font-medium leading-relaxed max-w-2xl mx-auto">
             Dwa specjalistyczne gabinety w Warszawie. <br /> 
             Precyzyjne usuwanie ósemek przez doświadczonych chirurgów.
           </p>
         </div>
 
-        {/* Wybór Kliniki */}
         <div className="grid md:grid-cols-2 gap-8 mb-32">
           <Link href="/rakowiec" className="group relative overflow-hidden bg-white p-12 rounded-[48px] border border-slate-100 shadow-xl transition-all duration-500 hover:scale-[1.02]">
             <div className="relative z-10 space-y-4">
@@ -52,7 +50,6 @@ export default function HomePage() {
           </Link>
         </div>
 
-        {/* Sekcja Korzyści */}
         <div className="grid md:grid-cols-3 gap-12 pb-24 border-t border-slate-100 pt-24 text-center">
           <div>
             <h3 className="font-black text-4xl mb-2">15 min</h3>
@@ -68,10 +65,6 @@ export default function HomePage() {
           </div>
         </div>
       </main>
-
-      <footer className="py-12 text-center text-slate-300 text-[10px] font-bold uppercase tracking-[0.5em] opacity-50">
-        © 2026 Ochota na Uśmiech | Designed for Excellence
-      </footer>
     </div>
   );
 }

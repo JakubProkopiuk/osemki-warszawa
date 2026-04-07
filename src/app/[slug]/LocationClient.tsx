@@ -47,24 +47,12 @@ export default function LocationClient({ locationData }: { locationData: any }) 
   return (
     <div className="min-h-screen bg-[#FDFDFD] text-[#1A1C1E] font-sans antialiased flex flex-col items-center p-4 md:p-8 relative overflow-x-hidden">
       
-      {/* Dynamiczne Tło reagujące na ból */}
       <div className={`fixed top-[-10%] left-[-10%] w-[50%] h-[50%] transition-colors duration-700 blur-[120px] rounded-full z-0 ${formData.painLevel > 7 ? 'bg-red-100/40' : 'bg-blue-100/30'}`} />
       <div className="fixed bottom-[-10%] right-[-10%] w-[40%] h-[40%] bg-emerald-50/40 blur-[120px] rounded-full z-0" />
 
       <main className="relative z-10 w-full max-w-[1140px] mt-12 md:mt-24 text-left">
-        
-        {/* LOGOTYP KLINIKI W NAGŁÓWKU */}
-        <div className="mb-12">
-          <img 
-            src="https://ochotanausmiech.pl/wp-content/uploads/2018/02/logo-ochota-na-usmiech.png" 
-            alt="Ochota na Uśmiech Logo" 
-            className="h-12 md:h-16" 
-          />
-        </div>
-
         <div className="grid lg:grid-cols-[1.1fr,0.9fr] gap-16 md:gap-24 items-center mb-32">
           
-          {/* SEKCCJA HERO */}
           <div className="space-y-10 animate-in fade-in slide-in-from-bottom-8 duration-1000">
             <div className="space-y-6 text-left">
               <div className="inline-flex items-center gap-3 px-5 py-2.5 rounded-full bg-white border border-slate-100 shadow-sm text-slate-500 text-xs font-bold uppercase tracking-widest leading-none">
@@ -80,13 +68,9 @@ export default function LocationClient({ locationData }: { locationData: any }) 
               </p>
             </div>
 
-            {/* PROFESJONALNY PROFIL LEKARZA - PODMIENIONY */}
             <div className="flex flex-col md:flex-row items-center gap-6 p-8 rounded-[40px] bg-slate-50/50 border border-slate-100 transition-all hover:bg-white hover:shadow-xl duration-500">
-              <img 
-                className="h-24 w-24 rounded-full object-cover ring-4 ring-white shadow-lg" 
-                src="https://ochotanausmiech.pl/wp-content/uploads/2021/06/kisiel-robert.jpg" 
-                alt="Dr Robert Kisiel" 
-              />
+              {/* ZDJĘCIE TYMCZASOWE - AWATAR ZAMIAST ZEPSUTEGO LINKU */}
+              <div className="h-24 w-24 rounded-full bg-blue-600 flex items-center justify-center text-white text-3xl font-black ring-4 ring-white shadow-lg">RK</div>
               <div className="text-center md:text-left">
                 <h4 className="text-xl font-black text-slate-900 uppercase tracking-tight">dr n. med. Robert Kisiel</h4>
                 <p className="text-slate-500 font-medium leading-relaxed italic">
@@ -97,7 +81,6 @@ export default function LocationClient({ locationData }: { locationData: any }) 
             </div>
           </div>
 
-          {/* FORMULARZ KONWERSJI */}
           <div className={`${cardStyle} p-10 md:p-14 transition-transform duration-500 hover:scale-[1.01]`}>
             {status === 'success' ? (
               <div className="text-center py-20 animate-in zoom-in duration-500">
@@ -139,7 +122,6 @@ export default function LocationClient({ locationData }: { locationData: any }) 
           </div>
         </div>
 
-        {/* OPINIE PACJENTÓW */}
         <div className="mb-32 text-left">
           <div className="flex items-center gap-4 mb-16">
             <h2 className="text-4xl font-black tracking-tight italic uppercase">Opinie pacjentów</h2>
@@ -159,7 +141,6 @@ export default function LocationClient({ locationData }: { locationData: any }) 
           </div>
         </div>
 
-        {/* SEKCCJA FAQ */}
         <div className="mb-32 relative overflow-hidden p-12 md:p-20 rounded-[56px] bg-[#1A1C1E] text-white shadow-[0_50px_100px_-20px_rgba(0,0,0,0.4)] text-left">
           <div className="absolute top-0 right-0 w-96 h-96 bg-blue-600/20 blur-[100px] rounded-full" />
           <h2 className="text-4xl font-black mb-16 tracking-tight relative z-10 italic underline underline-offset-8 decoration-blue-600 uppercase">Częste pytania</h2>
