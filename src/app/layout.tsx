@@ -6,19 +6,14 @@ const inter = Inter({ subsets: ["latin"], variable: "--font-inter" });
 
 export const metadata: Metadata = {
   title: "Ochota na Uśmiech - Warszawskie Centrum Chirurgii Ósemek",
-  description: "Specjalistyczne usuwanie ósemek w Warszawie. Bezboleśnie i profesjonalnie w dwóch lokalizacjach: Ochota i Ursynów.",
+  description: "Specjalistyczne usuwanie ósemek w Warszawie. Ochota i Ursynów.",
   icons: {
-    icon: "/favicon.ico", // To wymusza Twoją ikonę
-    shortcut: "/favicon.ico",
-    apple: "/favicon.ico",
+    icon: "/favicon.ico?v=1", // v=1 wymusza odświeżenie ikony
+    apple: "/favicon.ico?v=1",
   },
 };
 
-export default function RootLayout({
-  children,
-}: {
-  children: React.ReactNode;
-}) {
+export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="pl">
       <body className={`${inter.variable} font-sans`}>
