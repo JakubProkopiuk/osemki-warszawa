@@ -1,24 +1,48 @@
 [
   {
+    "slug": "ochota",
+    "nazwa_lokalizacji": "Klinika Ochota",
+    "klinika": "Pruszkowska 6b",
+    "czas_dojazdu": "1 minuty",
+    "punkt_orientacyjny": "Pola Mokotowskiego",
+    "reviews": [
+      {
+        "author": "Marek W.",
+        "text": "Pełen profesjonalizm. Ósemka usunięta w 15 minut, bez żadnego bólu. Polecam!",
+        "rating": 5
+      },
+      {
+        "author": "Tomasz R.",
+        "text": "Najlepszy chirurg w Warszawie. Szybko, konkretnie i bezboleśnie.",
+        "rating": 5
+      },
+      {
+        "author": "Katarzyna Z.",
+        "text": "Bardzo bałam się zabiegu, ale dr Sturska ma niesamowite podejście.",
+        "rating": 5
+      }
+    ]
+  },
+  {
     "slug": "rakowiec",
     "nazwa_lokalizacji": "Rakowiec",
     "klinika": "Pruszkowska 6b",
-    "czas_dojazdu": "17 minut",
-    "punkt_orientacyjny": "Atrium Reduta",
+    "czas_dojazdu": "2 minuty",
+    "punkt_orientacyjny": "Pola Mokotowskiego",
     "reviews": [
       {
-        "author": "Dominika W.",
-        "text": "Nigdy nie sądziłam, że wizyta u chirurga może być tak bezstresowa. Bardzo dziękuję za pomoc z moimi ósemkami!",
+        "author": "Tomasz R.",
+        "text": "Najlepszy chirurg w Warszawie. Szybko, konkretnie i bezboleśnie.",
         "rating": 5
       },
       {
-        "author": "Karolina S.",
-        "text": "Bardzo nowoczesne podejście. Zdjęcie RTG zrobione na miejscu, od razu diagnoza i zabieg. Pełen komfort.",
+        "author": "Marek W.",
+        "text": "Pełen profesjonalizm. Ósemka usunięta w 15 minut, bez żadnego bólu. Polecam!",
         "rating": 5
       },
       {
-        "author": "Zofia T.",
-        "text": "Pani doktor Natalia ma złote ręce. Zabieg wykonany z ogromną precyzją. Jestem bardzo zadowolona.",
+        "author": "Magdalena L.",
+        "text": "Gabinet na najwyższym poziomie. Nowoczesny sprzęt i świetna atmosfera.",
         "rating": 5
       }
     ]
@@ -27,22 +51,22 @@
     "slug": "szczesliwice",
     "nazwa_lokalizacji": "Szczęśliwice",
     "klinika": "Pruszkowska 6b",
-    "czas_dojazdu": "19 minut",
-    "punkt_orientacyjny": "Ronda Daszyńskiego",
+    "czas_dojazdu": "3 minuty",
+    "punkt_orientacyjny": "Pola Mokotowskiego",
     "reviews": [
       {
-        "author": "Sylwia R.",
-        "text": "Zabieg trwał krócej niż myślałam. Atmosfera w gabinecie sprawia, że człowiek przestaje się stresować.",
-        "rating": 5
-      },
-      {
         "author": "Katarzyna Z.",
-        "text": "Bardzo bałam się zabiegu, ale podejście dr Sturskiej jest niesamowite. Czułam się bardzo zaopiekowana.",
+        "text": "Bardzo bałam się zabiegu, ale dr Sturska ma niesamowite podejście.",
         "rating": 5
       },
       {
-        "author": "Marek W.",
-        "text": "Pełen profesjonalizm. Ósemka usunięta w 15 minut, bez żadnego bólu. Polecam!",
+        "author": "Magdalena L.",
+        "text": "Gabinet na najwyższym poziomie. Nowoczesny sprzęt i świetna atmosfera.",
+        "rating": 5
+      },
+      {
+        "author": "Tomasz R.",
+        "text": "Najlepszy chirurg w Warszawie. Szybko, konkretnie i bezboleśnie.",
         "rating": 5
       }
     ]
@@ -51,17 +75,17 @@
     "slug": "wlochy",
     "nazwa_lokalizacji": "Włochy",
     "klinika": "Pruszkowska 6b",
-    "czas_dojazdu": "7 minut",
-    "punkt_orientacyjny": "Parku Szczęśliwickiego",
+    "czas_dojazdu": "3 minuty",
+    "punkt_orientacyjny": "Pola Mokotowskiego",
     "reviews": [
       {
-        "author": "Janusz P.",
-        "text": "Fachowa pomoc w nagłym przypadku. Ból ósemki był nie do zniesienia, przyjęto mnie bardzo szybko. Ulga natychmiastowa.",
+        "author": "Magdalena L.",
+        "text": "Gabinet na najwyższym poziomie. Nowoczesny sprzęt i świetna atmosfera.",
         "rating": 5
       },
       {
         "author": "Katarzyna Z.",
-        "text": "Bardzo bałam się zabiegu, ale podejście dr Sturskiej jest niesamowite. Czułam się bardzo zaopiekowana.",
+        "text": "Bardzo bałam się zabiegu, ale dr Sturska ma niesamowite podejście.",
         "rating": 5
       },
       {
@@ -75,22 +99,22 @@
     "slug": "wola",
     "nazwa_lokalizacji": "Wola",
     "klinika": "Pruszkowska 6b",
-    "czas_dojazdu": "8 minut",
+    "czas_dojazdu": "3 minuty",
     "punkt_orientacyjny": "Pola Mokotowskiego",
     "reviews": [
       {
-        "author": "Ewa B.",
-        "text": "Asystentki bardzo miłe, lekarze uśmiechnięci. Czuć, że znają się na rzeczy. Najlepsza klinika na Ochocie.",
+        "author": "Marek W.",
+        "text": "Pełen profesjonalizm. Ósemka usunięta w 15 minut, bez żadnego bólu. Polecam!",
         "rating": 5
       },
       {
-        "author": "Robert N.",
-        "text": "Konkretnie i na temat. Krótki czas oczekiwania na wizytę i sprawne usunięcie zęba. To się ceni.",
+        "author": "Tomasz R.",
+        "text": "Najlepszy chirurg w Warszawie. Szybko, konkretnie i bezboleśnie.",
         "rating": 5
       },
       {
-        "author": "Janusz P.",
-        "text": "Fachowa pomoc w nagłym przypadku. Ból ósemki był nie do zniesienia, przyjęto mnie bardzo szybko. Ulga natychmiastowa.",
+        "author": "Katarzyna Z.",
+        "text": "Bardzo bałam się zabiegu, ale dr Sturska ma niesamowite podejście.",
         "rating": 5
       }
     ]
@@ -99,22 +123,22 @@
     "slug": "pruszkow",
     "nazwa_lokalizacji": "Pruszków",
     "klinika": "Pruszkowska 6b",
-    "czas_dojazdu": "17 minut",
-    "punkt_orientacyjny": "WUM (Warszawski Uniwersytet Medyczny)",
+    "czas_dojazdu": "2 minuty",
+    "punkt_orientacyjny": "Pola Mokotowskiego",
     "reviews": [
       {
-        "author": "Łukasz G.",
-        "text": "Wszystko zgodnie z planem. Żadnych komplikacji po zabiegu, rana zagoiła się bardzo szybko. Super opieka.",
+        "author": "Katarzyna Z.",
+        "text": "Bardzo bałam się zabiegu, ale dr Sturska ma niesamowite podejście.",
         "rating": 5
       },
       {
-        "author": "Magdalena L.",
-        "text": "Gabinet na najwyższym poziomie. Nowoczesny sprzęt i świetna atmosfera. Wszystko wyjaśnione krok po kroku.",
+        "author": "Marek W.",
+        "text": "Pełen profesjonalizm. Ósemka usunięta w 15 minut, bez żadnego bólu. Polecam!",
         "rating": 5
       },
       {
         "author": "Tomasz R.",
-        "text": "Najlepszy chirurg w Warszawie. Szybko, konkretnie i co najważniejsze - bezboleśnie. Pozdrawiam cały zespół.",
+        "text": "Najlepszy chirurg w Warszawie. Szybko, konkretnie i bezboleśnie.",
         "rating": 5
       }
     ]
@@ -123,22 +147,22 @@
     "slug": "ursus",
     "nazwa_lokalizacji": "Ursus",
     "klinika": "Pruszkowska 6b",
-    "czas_dojazdu": "9 minut",
-    "punkt_orientacyjny": "Ronda Daszyńskiego",
+    "czas_dojazdu": "3 minuty",
+    "punkt_orientacyjny": "Pola Mokotowskiego",
     "reviews": [
       {
-        "author": "Dominika W.",
-        "text": "Nigdy nie sądziłam, że wizyta u chirurga może być tak bezstresowa. Bardzo dziękuję za pomoc z moimi ósemkami!",
+        "author": "Marek W.",
+        "text": "Pełen profesjonalizm. Ósemka usunięta w 15 minut, bez żadnego bólu. Polecam!",
         "rating": 5
       },
       {
-        "author": "Karolina S.",
-        "text": "Bardzo nowoczesne podejście. Zdjęcie RTG zrobione na miejscu, od razu diagnoza i zabieg. Pełen komfort.",
+        "author": "Katarzyna Z.",
+        "text": "Bardzo bałam się zabiegu, ale dr Sturska ma niesamowite podejście.",
         "rating": 5
       },
       {
-        "author": "Paweł H.",
-        "text": "Najlepsze miejsce na mapie Warszawy jeśli chodzi o chirurgię stomatologiczną. Bez bicia daję 5 gwiazdek.",
+        "author": "Tomasz R.",
+        "text": "Najlepszy chirurg w Warszawie. Szybko, konkretnie i bezboleśnie.",
         "rating": 5
       }
     ]
@@ -147,22 +171,22 @@
     "slug": "bemowo",
     "nazwa_lokalizacji": "Bemowo",
     "klinika": "Pruszkowska 6b",
-    "czas_dojazdu": "11 minut",
-    "punkt_orientacyjny": "Gmachu Filtrów",
+    "czas_dojazdu": "3 minuty",
+    "punkt_orientacyjny": "Pola Mokotowskiego",
     "reviews": [
+      {
+        "author": "Magdalena L.",
+        "text": "Gabinet na najwyższym poziomie. Nowoczesny sprzęt i świetna atmosfera.",
+        "rating": 5
+      },
       {
         "author": "Marek W.",
         "text": "Pełen profesjonalizm. Ósemka usunięta w 15 minut, bez żadnego bólu. Polecam!",
         "rating": 5
       },
       {
-        "author": "Magdalena L.",
-        "text": "Gabinet na najwyższym poziomie. Nowoczesny sprzęt i świetna atmosfera. Wszystko wyjaśnione krok po kroku.",
-        "rating": 5
-      },
-      {
-        "author": "Paweł H.",
-        "text": "Najlepsze miejsce na mapie Warszawy jeśli chodzi o chirurgię stomatologiczną. Bez bicia daję 5 gwiazdek.",
+        "author": "Tomasz R.",
+        "text": "Najlepszy chirurg w Warszawie. Szybko, konkretnie i bezboleśnie.",
         "rating": 5
       }
     ]
@@ -171,113 +195,17 @@
     "slug": "srodmiescie",
     "nazwa_lokalizacji": "Śródmieście",
     "klinika": "Pruszkowska 6b",
-    "czas_dojazdu": "14 minut",
-    "punkt_orientacyjny": "Placu Zawiszy",
+    "czas_dojazdu": "2 minuty",
+    "punkt_orientacyjny": "Pola Mokotowskiego",
     "reviews": [
-      {
-        "author": "Anna M.",
-        "text": "Cudowne podejście do pacjenta z dentofobią. Pani Natalia jest niezwykle delikatna i cierpliwa. Dziękuję!",
-        "rating": 5
-      },
-      {
-        "author": "Ewa B.",
-        "text": "Asystentki bardzo miłe, lekarze uśmiechnięci. Czuć, że znają się na rzeczy. Najlepsza klinika na Ochocie.",
-        "rating": 5
-      },
-      {
-        "author": "Łukasz G.",
-        "text": "Wszystko zgodnie z planem. Żadnych komplikacji po zabiegu, rana zagoiła się bardzo szybko. Super opieka.",
-        "rating": 5
-      }
-    ]
-  },
-  {
-    "slug": "stara-ochota",
-    "nazwa_lokalizacji": "Stara Ochota",
-    "klinika": "Pruszkowska 6b",
-    "czas_dojazdu": "8 minut",
-    "punkt_orientacyjny": "WUM (Warszawski Uniwersytet Medyczny)",
-    "reviews": [
-      {
-        "author": "Zofia T.",
-        "text": "Pani doktor Natalia ma złote ręce. Zabieg wykonany z ogromną precyzją. Jestem bardzo zadowolona.",
-        "rating": 5
-      },
-      {
-        "author": "Marta O.",
-        "text": "Świetna lokalizacja i jeszcze lepsza obsługa. Polecam szczególnie osobom, które cenią swój czas.",
-        "rating": 5
-      },
-      {
-        "author": "Janusz P.",
-        "text": "Fachowa pomoc w nagłym przypadku. Ból ósemki był nie do zniesienia, przyjęto mnie bardzo szybko. Ulga natychmiastowa.",
-        "rating": 5
-      }
-    ]
-  },
-  {
-    "slug": "filtry",
-    "nazwa_lokalizacji": "Filtry",
-    "klinika": "Pruszkowska 6b",
-    "czas_dojazdu": "15 minut",
-    "punkt_orientacyjny": "Hali Kopińskiej",
-    "reviews": [
-      {
-        "author": "Marek W.",
-        "text": "Pełen profesjonalizm. Ósemka usunięta w 15 minut, bez żadnego bólu. Polecam!",
-        "rating": 5
-      },
-      {
-        "author": "Paweł H.",
-        "text": "Najlepsze miejsce na mapie Warszawy jeśli chodzi o chirurgię stomatologiczną. Bez bicia daję 5 gwiazdek.",
-        "rating": 5
-      },
-      {
-        "author": "Katarzyna Z.",
-        "text": "Bardzo bałam się zabiegu, ale podejście dr Sturskiej jest niesamowite. Czułam się bardzo zaopiekowana.",
-        "rating": 5
-      }
-    ]
-  },
-  {
-    "slug": "odolany",
-    "nazwa_lokalizacji": "Odolany",
-    "klinika": "Pruszkowska 6b",
-    "czas_dojazdu": "12 minut",
-    "punkt_orientacyjny": "Atrium Reduta",
-    "reviews": [
-      {
-        "author": "Katarzyna Z.",
-        "text": "Bardzo bałam się zabiegu, ale podejście dr Sturskiej jest niesamowite. Czułam się bardzo zaopiekowana.",
-        "rating": 5
-      },
       {
         "author": "Magdalena L.",
-        "text": "Gabinet na najwyższym poziomie. Nowoczesny sprzęt i świetna atmosfera. Wszystko wyjaśnione krok po kroku.",
+        "text": "Gabinet na najwyższym poziomie. Nowoczesny sprzęt i świetna atmosfera.",
         "rating": 5
       },
       {
-        "author": "Krzysztof F.",
-        "text": "Czysto, sterylnie i profesjonalnie. To była moja trzecia ósemka usuwana w tym miejscu i zawsze ten sam wysoki poziom.",
-        "rating": 5
-      }
-    ]
-  },
-  {
-    "slug": "czyste",
-    "nazwa_lokalizacji": "Czyste",
-    "klinika": "Pruszkowska 6b",
-    "czas_dojazdu": "18 minut",
-    "punkt_orientacyjny": "Alei Prymasa Tysiąclecia",
-    "reviews": [
-      {
-        "author": "Anna M.",
-        "text": "Cudowne podejście do pacjenta z dentofobią. Pani Natalia jest niezwykle delikatna i cierpliwa. Dziękuję!",
-        "rating": 5
-      },
-      {
-        "author": "Łukasz G.",
-        "text": "Wszystko zgodnie z planem. Żadnych komplikacji po zabiegu, rana zagoiła się bardzo szybko. Super opieka.",
+        "author": "Tomasz R.",
+        "text": "Najlepszy chirurg w Warszawie. Szybko, konkretnie i bezboleśnie.",
         "rating": 5
       },
       {
@@ -288,73 +216,25 @@
     ]
   },
   {
-    "slug": "jelonki",
-    "nazwa_lokalizacji": "Jelonki",
-    "klinika": "Pruszkowska 6b",
-    "czas_dojazdu": "18 minut",
-    "punkt_orientacyjny": "Blue City",
+    "slug": "ursynow",
+    "nazwa_lokalizacji": "Klinika Ursynów",
+    "klinika": "KEN 96",
+    "czas_dojazdu": "1 minuty",
+    "punkt_orientacyjny": "Metra Imielin",
     "reviews": [
-      {
-        "author": "Łukasz G.",
-        "text": "Wszystko zgodnie z planem. Żadnych komplikacji po zabiegu, rana zagoiła się bardzo szybko. Super opieka.",
-        "rating": 5
-      },
       {
         "author": "Magdalena L.",
-        "text": "Gabinet na najwyższym poziomie. Nowoczesny sprzęt i świetna atmosfera. Wszystko wyjaśnione krok po kroku.",
+        "text": "Gabinet na najwyższym poziomie. Nowoczesny sprzęt i świetna atmosfera.",
         "rating": 5
       },
       {
-        "author": "Piotr K.",
-        "text": "Ekstrakcja ósemki przebiegła błyskawicznie. Nawet nie poczułem kiedy było po wszystkim. Szczerze polecam!",
-        "rating": 5
-      }
-    ]
-  },
-  {
-    "slug": "mirow",
-    "nazwa_lokalizacji": "Mirów",
-    "klinika": "Pruszkowska 6b",
-    "czas_dojazdu": "14 minut",
-    "punkt_orientacyjny": "Alei Prymasa Tysiąclecia",
-    "reviews": [
-      {
-        "author": "Zofia T.",
-        "text": "Pani doktor Natalia ma złote ręce. Zabieg wykonany z ogromną precyzją. Jestem bardzo zadowolona.",
+        "author": "Tomasz R.",
+        "text": "Najlepszy chirurg w Warszawie. Szybko, konkretnie i bezboleśnie.",
         "rating": 5
       },
       {
-        "author": "Piotr K.",
-        "text": "Ekstrakcja ósemki przebiegła błyskawicznie. Nawet nie poczułem kiedy było po wszystkim. Szczerze polecam!",
-        "rating": 5
-      },
-      {
-        "author": "Karolina S.",
-        "text": "Bardzo nowoczesne podejście. Zdjęcie RTG zrobione na miejscu, od razu diagnoza i zabieg. Pełen komfort.",
-        "rating": 5
-      }
-    ]
-  },
-  {
-    "slug": "okecie",
-    "nazwa_lokalizacji": "Okęcie",
-    "klinika": "Pruszkowska 6b",
-    "czas_dojazdu": "12 minut",
-    "punkt_orientacyjny": "Gmachu Filtrów",
-    "reviews": [
-      {
-        "author": "Janusz P.",
-        "text": "Fachowa pomoc w nagłym przypadku. Ból ósemki był nie do zniesienia, przyjęto mnie bardzo szybko. Ulga natychmiastowa.",
-        "rating": 5
-      },
-      {
-        "author": "Katarzyna Z.",
-        "text": "Bardzo bałam się zabiegu, ale podejście dr Sturskiej jest niesamowite. Czułam się bardzo zaopiekowana.",
-        "rating": 5
-      },
-      {
-        "author": "Krzysztof F.",
-        "text": "Czysto, sterylnie i profesjonalnie. To była moja trzecia ósemka usuwana w tym miejscu i zawsze ten sam wysoki poziom.",
+        "author": "Marek W.",
+        "text": "Pełen profesjonalizm. Ósemka usunięta w 15 minut, bez żadnego bólu. Polecam!",
         "rating": 5
       }
     ]
@@ -363,22 +243,22 @@
     "slug": "mokotow",
     "nazwa_lokalizacji": "Mokotów",
     "klinika": "KEN 96",
-    "czas_dojazdu": "15 minut",
-    "punkt_orientacyjny": "SGGW",
+    "czas_dojazdu": "3 minuty",
+    "punkt_orientacyjny": "Metra Imielin",
     "reviews": [
       {
-        "author": "Ewa B.",
-        "text": "Asystentki bardzo miłe, lekarze uśmiechnięci. Czuć, że znają się na rzeczy. Najlepsza klinika na Ochocie.",
+        "author": "Tomasz R.",
+        "text": "Najlepszy chirurg w Warszawie. Szybko, konkretnie i bezboleśnie.",
         "rating": 5
       },
       {
         "author": "Magdalena L.",
-        "text": "Gabinet na najwyższym poziomie. Nowoczesny sprzęt i świetna atmosfera. Wszystko wyjaśnione krok po kroku.",
+        "text": "Gabinet na najwyższym poziomie. Nowoczesny sprzęt i świetna atmosfera.",
         "rating": 5
       },
       {
-        "author": "Andrzej J.",
-        "text": "Bardzo dobry kontakt z kliniką. Wszystkie zalecenia po zabiegu jasno wytłumaczone. Pełne zaufanie.",
+        "author": "Marek W.",
+        "text": "Pełen profesjonalizm. Ósemka usunięta w 15 minut, bez żadnego bólu. Polecam!",
         "rating": 5
       }
     ]
@@ -387,22 +267,22 @@
     "slug": "wilanow",
     "nazwa_lokalizacji": "Wilanów",
     "klinika": "KEN 96",
-    "czas_dojazdu": "14 minut",
-    "punkt_orientacyjny": "Multikina Ursynów",
+    "czas_dojazdu": "1 minuty",
+    "punkt_orientacyjny": "Metra Imielin",
     "reviews": [
       {
+        "author": "Marek W.",
+        "text": "Pełen profesjonalizm. Ósemka usunięta w 15 minut, bez żadnego bólu. Polecam!",
+        "rating": 5
+      },
+      {
         "author": "Magdalena L.",
-        "text": "Gabinet na najwyższym poziomie. Nowoczesny sprzęt i świetna atmosfera. Wszystko wyjaśnione krok po kroku.",
+        "text": "Gabinet na najwyższym poziomie. Nowoczesny sprzęt i świetna atmosfera.",
         "rating": 5
       },
       {
-        "author": "Robert N.",
-        "text": "Konkretnie i na temat. Krótki czas oczekiwania na wizytę i sprawne usunięcie zęba. To się ceni.",
-        "rating": 5
-      },
-      {
-        "author": "Karolina S.",
-        "text": "Bardzo nowoczesne podejście. Zdjęcie RTG zrobione na miejscu, od razu diagnoza i zabieg. Pełen komfort.",
+        "author": "Katarzyna Z.",
+        "text": "Bardzo bałam się zabiegu, ale dr Sturska ma niesamowite podejście.",
         "rating": 5
       }
     ]
@@ -411,12 +291,12 @@
     "slug": "kabaty",
     "nazwa_lokalizacji": "Kabaty",
     "klinika": "KEN 96",
-    "czas_dojazdu": "17 minut",
-    "punkt_orientacyjny": "Centrum Onkologii",
+    "czas_dojazdu": "1 minuty",
+    "punkt_orientacyjny": "Metra Imielin",
     "reviews": [
       {
-        "author": "Piotr K.",
-        "text": "Ekstrakcja ósemki przebiegła błyskawicznie. Nawet nie poczułem kiedy było po wszystkim. Szczerze polecam!",
+        "author": "Katarzyna Z.",
+        "text": "Bardzo bałam się zabiegu, ale dr Sturska ma niesamowite podejście.",
         "rating": 5
       },
       {
@@ -425,8 +305,8 @@
         "rating": 5
       },
       {
-        "author": "Marta O.",
-        "text": "Świetna lokalizacja i jeszcze lepsza obsługa. Polecam szczególnie osobom, które cenią swój czas.",
+        "author": "Tomasz R.",
+        "text": "Najlepszy chirurg w Warszawie. Szybko, konkretnie i bezboleśnie.",
         "rating": 5
       }
     ]
@@ -435,22 +315,22 @@
     "slug": "natolin",
     "nazwa_lokalizacji": "Natolin",
     "klinika": "KEN 96",
-    "czas_dojazdu": "13 minut",
-    "punkt_orientacyjny": "Lasu Kabackiego",
+    "czas_dojazdu": "2 minuty",
+    "punkt_orientacyjny": "Metra Imielin",
     "reviews": [
       {
-        "author": "Piotr K.",
-        "text": "Ekstrakcja ósemki przebiegła błyskawicznie. Nawet nie poczułem kiedy było po wszystkim. Szczerze polecam!",
+        "author": "Tomasz R.",
+        "text": "Najlepszy chirurg w Warszawie. Szybko, konkretnie i bezboleśnie.",
         "rating": 5
       },
       {
-        "author": "Robert N.",
-        "text": "Konkretnie i na temat. Krótki czas oczekiwania na wizytę i sprawne usunięcie zęba. To się ceni.",
+        "author": "Marek W.",
+        "text": "Pełen profesjonalizm. Ósemka usunięta w 15 minut, bez żadnego bólu. Polecam!",
         "rating": 5
       },
       {
-        "author": "Sylwia R.",
-        "text": "Zabieg trwał krócej niż myślałam. Atmosfera w gabinecie sprawia, że człowiek przestaje się stresować.",
+        "author": "Katarzyna Z.",
+        "text": "Bardzo bałam się zabiegu, ale dr Sturska ma niesamowite podejście.",
         "rating": 5
       }
     ]
@@ -459,22 +339,22 @@
     "slug": "stoklosy",
     "nazwa_lokalizacji": "Stokłosy",
     "klinika": "KEN 96",
-    "czas_dojazdu": "5 minut",
-    "punkt_orientacyjny": "Areny Ursynów",
+    "czas_dojazdu": "3 minuty",
+    "punkt_orientacyjny": "Metra Imielin",
     "reviews": [
       {
-        "author": "Alicja C.",
-        "text": "Dziękuję za cierpliwość i profesjonalizm. Moje trudne ósemki w końcu przestały być problemem!",
+        "author": "Marek W.",
+        "text": "Pełen profesjonalizm. Ósemka usunięta w 15 minut, bez żadnego bólu. Polecam!",
         "rating": 5
       },
       {
-        "author": "Katarzyna Z.",
-        "text": "Bardzo bałam się zabiegu, ale podejście dr Sturskiej jest niesamowite. Czułam się bardzo zaopiekowana.",
+        "author": "Magdalena L.",
+        "text": "Gabinet na najwyższym poziomie. Nowoczesny sprzęt i świetna atmosfera.",
         "rating": 5
       },
       {
-        "author": "Piotr K.",
-        "text": "Ekstrakcja ósemki przebiegła błyskawicznie. Nawet nie poczułem kiedy było po wszystkim. Szczerze polecam!",
+        "author": "Tomasz R.",
+        "text": "Najlepszy chirurg w Warszawie. Szybko, konkretnie i bezboleśnie.",
         "rating": 5
       }
     ]
@@ -483,238 +363,22 @@
     "slug": "piaseczno",
     "nazwa_lokalizacji": "Piaseczno",
     "klinika": "KEN 96",
-    "czas_dojazdu": "18 minut",
-    "punkt_orientacyjny": "Torów Wyścigowych Służewiec",
+    "czas_dojazdu": "2 minuty",
+    "punkt_orientacyjny": "Metra Imielin",
     "reviews": [
       {
-        "author": "Dominika W.",
-        "text": "Nigdy nie sądziłam, że wizyta u chirurga może być tak bezstresowa. Bardzo dziękuję za pomoc z moimi ósemkami!",
+        "author": "Katarzyna Z.",
+        "text": "Bardzo bałam się zabiegu, ale dr Sturska ma niesamowite podejście.",
         "rating": 5
       },
-      {
-        "author": "Karolina S.",
-        "text": "Bardzo nowoczesne podejście. Zdjęcie RTG zrobione na miejscu, od razu diagnoza i zabieg. Pełen komfort.",
-        "rating": 5
-      },
-      {
-        "author": "Janusz P.",
-        "text": "Fachowa pomoc w nagłym przypadku. Ból ósemki był nie do zniesienia, przyjęto mnie bardzo szybko. Ulga natychmiastowa.",
-        "rating": 5
-      }
-    ]
-  },
-  {
-    "slug": "konstancin-jeziorna",
-    "nazwa_lokalizacji": "Konstancin-Jeziorna",
-    "klinika": "KEN 96",
-    "czas_dojazdu": "12 minut",
-    "punkt_orientacyjny": "Centrum Onkologii",
-    "reviews": [
       {
         "author": "Marek W.",
         "text": "Pełen profesjonalizm. Ósemka usunięta w 15 minut, bez żadnego bólu. Polecam!",
-        "rating": 5
-      },
-      {
-        "author": "Ewa B.",
-        "text": "Asystentki bardzo miłe, lekarze uśmiechnięci. Czuć, że znają się na rzeczy. Najlepsza klinika na Ochocie.",
-        "rating": 5
-      },
-      {
-        "author": "Katarzyna Z.",
-        "text": "Bardzo bałam się zabiegu, ale podejście dr Sturskiej jest niesamowite. Czułam się bardzo zaopiekowana.",
-        "rating": 5
-      }
-    ]
-  },
-  {
-    "slug": "gora-kalwaria",
-    "nazwa_lokalizacji": "Góra Kalwaria",
-    "klinika": "KEN 96",
-    "czas_dojazdu": "7 minut",
-    "punkt_orientacyjny": "Alei KEN",
-    "reviews": [
-      {
-        "author": "Dominika W.",
-        "text": "Nigdy nie sądziłam, że wizyta u chirurga może być tak bezstresowa. Bardzo dziękuję za pomoc z moimi ósemkami!",
         "rating": 5
       },
       {
         "author": "Magdalena L.",
-        "text": "Gabinet na najwyższym poziomie. Nowoczesny sprzęt i świetna atmosfera. Wszystko wyjaśnione krok po kroku.",
-        "rating": 5
-      },
-      {
-        "author": "Sylwia R.",
-        "text": "Zabieg trwał krócej niż myślałam. Atmosfera w gabinecie sprawia, że człowiek przestaje się stresować.",
-        "rating": 5
-      }
-    ]
-  },
-  {
-    "slug": "grabow",
-    "nazwa_lokalizacji": "Grabów",
-    "klinika": "KEN 96",
-    "czas_dojazdu": "12 minut",
-    "punkt_orientacyjny": "Centrum Onkologii",
-    "reviews": [
-      {
-        "author": "Katarzyna Z.",
-        "text": "Bardzo bałam się zabiegu, ale podejście dr Sturskiej jest niesamowite. Czułam się bardzo zaopiekowana.",
-        "rating": 5
-      },
-      {
-        "author": "Marta O.",
-        "text": "Świetna lokalizacja i jeszcze lepsza obsługa. Polecam szczególnie osobom, które cenią swój czas.",
-        "rating": 5
-      },
-      {
-        "author": "Michał D.",
-        "text": "Polecam każdemu, kto boi się wyrywania zębów. Znieczulenie zadziałało idealnie, nic nie czuć. Profeska!",
-        "rating": 5
-      }
-    ]
-  },
-  {
-    "slug": "pyry",
-    "nazwa_lokalizacji": "Pyry",
-    "klinika": "KEN 96",
-    "czas_dojazdu": "15 minut",
-    "punkt_orientacyjny": "Areny Ursynów",
-    "reviews": [
-      {
-        "author": "Janusz P.",
-        "text": "Fachowa pomoc w nagłym przypadku. Ból ósemki był nie do zniesienia, przyjęto mnie bardzo szybko. Ulga natychmiastowa.",
-        "rating": 5
-      },
-      {
-        "author": "Robert N.",
-        "text": "Konkretnie i na temat. Krótki czas oczekiwania na wizytę i sprawne usunięcie zęba. To się ceni.",
-        "rating": 5
-      },
-      {
-        "author": "Zofia T.",
-        "text": "Pani doktor Natalia ma złote ręce. Zabieg wykonany z ogromną precyzją. Jestem bardzo zadowolona.",
-        "rating": 5
-      }
-    ]
-  },
-  {
-    "slug": "sluzew",
-    "nazwa_lokalizacji": "Służew",
-    "klinika": "KEN 96",
-    "czas_dojazdu": "14 minut",
-    "punkt_orientacyjny": "Metra Imielin",
-    "reviews": [
-      {
-        "author": "Łukasz G.",
-        "text": "Wszystko zgodnie z planem. Żadnych komplikacji po zabiegu, rana zagoiła się bardzo szybko. Super opieka.",
-        "rating": 5
-      },
-      {
-        "author": "Marek W.",
-        "text": "Pełen profesjonalizm. Ósemka usunięta w 15 minut, bez żadnego bólu. Polecam!",
-        "rating": 5
-      },
-      {
-        "author": "Karolina S.",
-        "text": "Bardzo nowoczesne podejście. Zdjęcie RTG zrobione na miejscu, od razu diagnoza i zabieg. Pełen komfort.",
-        "rating": 5
-      }
-    ]
-  },
-  {
-    "slug": "miasteczko-wilanow",
-    "nazwa_lokalizacji": "Miasteczko Wilanów",
-    "klinika": "KEN 96",
-    "czas_dojazdu": "10 minut",
-    "punkt_orientacyjny": "Alei KEN",
-    "reviews": [
-      {
-        "author": "Paweł H.",
-        "text": "Najlepsze miejsce na mapie Warszawy jeśli chodzi o chirurgię stomatologiczną. Bez bicia daję 5 gwiazdek.",
-        "rating": 5
-      },
-      {
-        "author": "Marek W.",
-        "text": "Pełen profesjonalizm. Ósemka usunięta w 15 minut, bez żadnego bólu. Polecam!",
-        "rating": 5
-      },
-      {
-        "author": "Marta O.",
-        "text": "Świetna lokalizacja i jeszcze lepsza obsługa. Polecam szczególnie osobom, które cenią swój czas.",
-        "rating": 5
-      }
-    ]
-  },
-  {
-    "slug": "stegny",
-    "nazwa_lokalizacji": "Stegny",
-    "klinika": "KEN 96",
-    "czas_dojazdu": "19 minut",
-    "punkt_orientacyjny": "Metra Stokłosy",
-    "reviews": [
-      {
-        "author": "Tomasz R.",
-        "text": "Najlepszy chirurg w Warszawie. Szybko, konkretnie i co najważniejsze - bezboleśnie. Pozdrawiam cały zespół.",
-        "rating": 5
-      },
-      {
-        "author": "Karolina S.",
-        "text": "Bardzo nowoczesne podejście. Zdjęcie RTG zrobione na miejscu, od razu diagnoza i zabieg. Pełen komfort.",
-        "rating": 5
-      },
-      {
-        "author": "Anna M.",
-        "text": "Cudowne podejście do pacjenta z dentofobią. Pani Natalia jest niezwykle delikatna i cierpliwa. Dziękuję!",
-        "rating": 5
-      }
-    ]
-  },
-  {
-    "slug": "sadyba",
-    "nazwa_lokalizacji": "Sadyba",
-    "klinika": "KEN 96",
-    "czas_dojazdu": "19 minut",
-    "punkt_orientacyjny": "Metra Stokłosy",
-    "reviews": [
-      {
-        "author": "Katarzyna Z.",
-        "text": "Bardzo bałam się zabiegu, ale podejście dr Sturskiej jest niesamowite. Czułam się bardzo zaopiekowana.",
-        "rating": 5
-      },
-      {
-        "author": "Łukasz G.",
-        "text": "Wszystko zgodnie z planem. Żadnych komplikacji po zabiegu, rana zagoiła się bardzo szybko. Super opieka.",
-        "rating": 5
-      },
-      {
-        "author": "Dominika W.",
-        "text": "Nigdy nie sądziłam, że wizyta u chirurga może być tak bezstresowa. Bardzo dziękuję za pomoc z moimi ósemkami!",
-        "rating": 5
-      }
-    ]
-  },
-  {
-    "slug": "sluzewiec",
-    "nazwa_lokalizacji": "Służewiec",
-    "klinika": "KEN 96",
-    "czas_dojazdu": "9 minut",
-    "punkt_orientacyjny": "Areny Ursynów",
-    "reviews": [
-      {
-        "author": "Karolina S.",
-        "text": "Bardzo nowoczesne podejście. Zdjęcie RTG zrobione na miejscu, od razu diagnoza i zabieg. Pełen komfort.",
-        "rating": 5
-      },
-      {
-        "author": "Katarzyna Z.",
-        "text": "Bardzo bałam się zabiegu, ale podejście dr Sturskiej jest niesamowite. Czułam się bardzo zaopiekowana.",
-        "rating": 5
-      },
-      {
-        "author": "Krzysztof F.",
-        "text": "Czysto, sterylnie i profesjonalnie. To była moja trzecia ósemka usuwana w tym miejscu i zawsze ten sam wysoki poziom.",
+        "text": "Gabinet na najwyższym poziomie. Nowoczesny sprzęt i świetna atmosfera.",
         "rating": 5
       }
     ]
@@ -723,8 +387,8 @@
     "slug": "ulica-grojecka",
     "nazwa_lokalizacji": "ul. Grójecka",
     "klinika": "Pruszkowska 6b",
-    "czas_dojazdu": "14 minut",
-    "punkt_orientacyjny": "Pola Mokotowskiego",
+    "czas_dojazdu": "6 minut",
+    "punkt_orientacyjny": "Placu Narutowicza",
     "reviews": [
       {
         "author": "Marek W.",
@@ -732,13 +396,13 @@
         "rating": 5
       },
       {
-        "author": "Marta O.",
-        "text": "Świetna lokalizacja i jeszcze lepsza obsługa. Polecam szczególnie osobom, które cenią swój czas.",
+        "author": "Tomasz R.",
+        "text": "Najlepszy chirurg w Warszawie. Szybko, konkretnie i bezboleśnie.",
         "rating": 5
       },
       {
         "author": "Katarzyna Z.",
-        "text": "Bardzo bałam się zabiegu, ale podejście dr Sturskiej jest niesamowite. Czułam się bardzo zaopiekowana.",
+        "text": "Bardzo bałam się zabiegu, ale dr Sturska ma niesamowite podejście.",
         "rating": 5
       }
     ]
@@ -747,22 +411,22 @@
     "slug": "ulica-zwirki-i-wigury",
     "nazwa_lokalizacji": "ul. Żwirki i Wigury",
     "klinika": "Pruszkowska 6b",
-    "czas_dojazdu": "11 minut",
+    "czas_dojazdu": "5 minut",
     "punkt_orientacyjny": "Placu Narutowicza",
     "reviews": [
       {
-        "author": "Piotr K.",
-        "text": "Ekstrakcja ósemki przebiegła błyskawicznie. Nawet nie poczułem kiedy było po wszystkim. Szczerze polecam!",
+        "author": "Marek W.",
+        "text": "Pełen profesjonalizm. Ósemka usunięta w 15 minut, bez żadnego bólu. Polecam!",
         "rating": 5
       },
       {
-        "author": "Anna M.",
-        "text": "Cudowne podejście do pacjenta z dentofobią. Pani Natalia jest niezwykle delikatna i cierpliwa. Dziękuję!",
+        "author": "Katarzyna Z.",
+        "text": "Bardzo bałam się zabiegu, ale dr Sturska ma niesamowite podejście.",
         "rating": 5
       },
       {
-        "author": "Marta O.",
-        "text": "Świetna lokalizacja i jeszcze lepsza obsługa. Polecam szczególnie osobom, które cenią swój czas.",
+        "author": "Magdalena L.",
+        "text": "Gabinet na najwyższym poziomie. Nowoczesny sprzęt i świetna atmosfera.",
         "rating": 5
       }
     ]
@@ -771,22 +435,22 @@
     "slug": "ulica-banacha",
     "nazwa_lokalizacji": "ul. Banacha",
     "klinika": "Pruszkowska 6b",
-    "czas_dojazdu": "6 minut",
-    "punkt_orientacyjny": "Hali Kopińskiej",
+    "czas_dojazdu": "4 minut",
+    "punkt_orientacyjny": "Pola Mokotowskiego",
     "reviews": [
       {
-        "author": "Krzysztof F.",
-        "text": "Czysto, sterylnie i profesjonalnie. To była moja trzecia ósemka usuwana w tym miejscu i zawsze ten sam wysoki poziom.",
+        "author": "Katarzyna Z.",
+        "text": "Bardzo bałam się zabiegu, ale dr Sturska ma niesamowite podejście.",
         "rating": 5
       },
       {
-        "author": "Dominika W.",
-        "text": "Nigdy nie sądziłam, że wizyta u chirurga może być tak bezstresowa. Bardzo dziękuję za pomoc z moimi ósemkami!",
+        "author": "Marek W.",
+        "text": "Pełen profesjonalizm. Ósemka usunięta w 15 minut, bez żadnego bólu. Polecam!",
         "rating": 5
       },
       {
-        "author": "Łukasz G.",
-        "text": "Wszystko zgodnie z planem. Żadnych komplikacji po zabiegu, rana zagoiła się bardzo szybko. Super opieka.",
+        "author": "Magdalena L.",
+        "text": "Gabinet na najwyższym poziomie. Nowoczesny sprzęt i świetna atmosfera.",
         "rating": 5
       }
     ]
@@ -795,22 +459,22 @@
     "slug": "ulica-dickensa",
     "nazwa_lokalizacji": "ul. Dickensa",
     "klinika": "Pruszkowska 6b",
-    "czas_dojazdu": "8 minut",
-    "punkt_orientacyjny": "Hali Kopińskiej",
+    "czas_dojazdu": "5 minut",
+    "punkt_orientacyjny": "Pola Mokotowskiego",
     "reviews": [
       {
-        "author": "Janusz P.",
-        "text": "Fachowa pomoc w nagłym przypadku. Ból ósemki był nie do zniesienia, przyjęto mnie bardzo szybko. Ulga natychmiastowa.",
+        "author": "Marek W.",
+        "text": "Pełen profesjonalizm. Ósemka usunięta w 15 minut, bez żadnego bólu. Polecam!",
+        "rating": 5
+      },
+      {
+        "author": "Tomasz R.",
+        "text": "Najlepszy chirurg w Warszawie. Szybko, konkretnie i bezboleśnie.",
         "rating": 5
       },
       {
         "author": "Magdalena L.",
-        "text": "Gabinet na najwyższym poziomie. Nowoczesny sprzęt i świetna atmosfera. Wszystko wyjaśnione krok po kroku.",
-        "rating": 5
-      },
-      {
-        "author": "Zofia T.",
-        "text": "Pani doktor Natalia ma złote ręce. Zabieg wykonany z ogromną precyzją. Jestem bardzo zadowolona.",
+        "text": "Gabinet na najwyższym poziomie. Nowoczesny sprzęt i świetna atmosfera.",
         "rating": 5
       }
     ]
@@ -819,22 +483,22 @@
     "slug": "ulica-korotynskiego",
     "nazwa_lokalizacji": "ul. Korotyńskiego",
     "klinika": "Pruszkowska 6b",
-    "czas_dojazdu": "8 minut",
-    "punkt_orientacyjny": "Alei Prymasa Tysiąclecia",
+    "czas_dojazdu": "7 minut",
+    "punkt_orientacyjny": "Atrium Reduta",
     "reviews": [
       {
-        "author": "Sylwia R.",
-        "text": "Zabieg trwał krócej niż myślałam. Atmosfera w gabinecie sprawia, że człowiek przestaje się stresować.",
+        "author": "Katarzyna Z.",
+        "text": "Bardzo bałam się zabiegu, ale dr Sturska ma niesamowite podejście.",
         "rating": 5
       },
       {
         "author": "Magdalena L.",
-        "text": "Gabinet na najwyższym poziomie. Nowoczesny sprzęt i świetna atmosfera. Wszystko wyjaśnione krok po kroku.",
+        "text": "Gabinet na najwyższym poziomie. Nowoczesny sprzęt i świetna atmosfera.",
         "rating": 5
       },
       {
-        "author": "Katarzyna Z.",
-        "text": "Bardzo bałam się zabiegu, ale podejście dr Sturskiej jest niesamowite. Czułam się bardzo zaopiekowana.",
+        "author": "Marek W.",
+        "text": "Pełen profesjonalizm. Ósemka usunięta w 15 minut, bez żadnego bólu. Polecam!",
         "rating": 5
       }
     ]
@@ -843,22 +507,22 @@
     "slug": "ulica-bitwy-warszawskiej",
     "nazwa_lokalizacji": "ul. Bitwy Warszawskiej",
     "klinika": "Pruszkowska 6b",
-    "czas_dojazdu": "11 minut",
-    "punkt_orientacyjny": "Hali Kopińskiej",
+    "czas_dojazdu": "8 minut",
+    "punkt_orientacyjny": "Placu Narutowicza",
     "reviews": [
       {
-        "author": "Piotr K.",
-        "text": "Ekstrakcja ósemki przebiegła błyskawicznie. Nawet nie poczułem kiedy było po wszystkim. Szczerze polecam!",
+        "author": "Katarzyna Z.",
+        "text": "Bardzo bałam się zabiegu, ale dr Sturska ma niesamowite podejście.",
         "rating": 5
       },
       {
-        "author": "Łukasz G.",
-        "text": "Wszystko zgodnie z planem. Żadnych komplikacji po zabiegu, rana zagoiła się bardzo szybko. Super opieka.",
+        "author": "Tomasz R.",
+        "text": "Najlepszy chirurg w Warszawie. Szybko, konkretnie i bezboleśnie.",
         "rating": 5
       },
       {
-        "author": "Krzysztof F.",
-        "text": "Czysto, sterylnie i profesjonalnie. To była moja trzecia ósemka usuwana w tym miejscu i zawsze ten sam wysoki poziom.",
+        "author": "Magdalena L.",
+        "text": "Gabinet na najwyższym poziomie. Nowoczesny sprzęt i świetna atmosfera.",
         "rating": 5
       }
     ]
@@ -867,1054 +531,22 @@
     "slug": "ulica-al-jerozolimskie",
     "nazwa_lokalizacji": "ul. Al. Jerozolimskie",
     "klinika": "Pruszkowska 6b",
-    "czas_dojazdu": "14 minut",
-    "punkt_orientacyjny": "Parku Szczęśliwickiego",
-    "reviews": [
-      {
-        "author": "Ewa B.",
-        "text": "Asystentki bardzo miłe, lekarze uśmiechnięci. Czuć, że znają się na rzeczy. Najlepsza klinika na Ochocie.",
-        "rating": 5
-      },
-      {
-        "author": "Zofia T.",
-        "text": "Pani doktor Natalia ma złote ręce. Zabieg wykonany z ogromną precyzją. Jestem bardzo zadowolona.",
-        "rating": 5
-      },
-      {
-        "author": "Alicja C.",
-        "text": "Dziękuję za cierpliwość i profesjonalizm. Moje trudne ósemki w końcu przestały być problemem!",
-        "rating": 5
-      }
-    ]
-  },
-  {
-    "slug": "ulica-kopinska",
-    "nazwa_lokalizacji": "ul. Kopińska",
-    "klinika": "Pruszkowska 6b",
-    "czas_dojazdu": "5 minut",
-    "punkt_orientacyjny": "Blue City",
-    "reviews": [
-      {
-        "author": "Krzysztof F.",
-        "text": "Czysto, sterylnie i profesjonalnie. To była moja trzecia ósemka usuwana w tym miejscu i zawsze ten sam wysoki poziom.",
-        "rating": 5
-      },
-      {
-        "author": "Anna M.",
-        "text": "Cudowne podejście do pacjenta z dentofobią. Pani Natalia jest niezwykle delikatna i cierpliwa. Dziękuję!",
-        "rating": 5
-      },
-      {
-        "author": "Sylwia R.",
-        "text": "Zabieg trwał krócej niż myślałam. Atmosfera w gabinecie sprawia, że człowiek przestaje się stresować.",
-        "rating": 5
-      }
-    ]
-  },
-  {
-    "slug": "ulica-filtrowa",
-    "nazwa_lokalizacji": "ul. Filtrowa",
-    "klinika": "Pruszkowska 6b",
-    "czas_dojazdu": "12 minut",
-    "punkt_orientacyjny": "Placu Zawiszy",
-    "reviews": [
-      {
-        "author": "Janusz P.",
-        "text": "Fachowa pomoc w nagłym przypadku. Ból ósemki był nie do zniesienia, przyjęto mnie bardzo szybko. Ulga natychmiastowa.",
-        "rating": 5
-      },
-      {
-        "author": "Ewa B.",
-        "text": "Asystentki bardzo miłe, lekarze uśmiechnięci. Czuć, że znają się na rzeczy. Najlepsza klinika na Ochocie.",
-        "rating": 5
-      },
-      {
-        "author": "Paweł H.",
-        "text": "Najlepsze miejsce na mapie Warszawy jeśli chodzi o chirurgię stomatologiczną. Bez bicia daję 5 gwiazdek.",
-        "rating": 5
-      }
-    ]
-  },
-  {
-    "slug": "ulica-niemcewicza",
-    "nazwa_lokalizacji": "ul. Niemcewicza",
-    "klinika": "Pruszkowska 6b",
-    "czas_dojazdu": "5 minut",
-    "punkt_orientacyjny": "Placu Zawiszy",
-    "reviews": [
-      {
-        "author": "Janusz P.",
-        "text": "Fachowa pomoc w nagłym przypadku. Ból ósemki był nie do zniesienia, przyjęto mnie bardzo szybko. Ulga natychmiastowa.",
-        "rating": 5
-      },
-      {
-        "author": "Zofia T.",
-        "text": "Pani doktor Natalia ma złote ręce. Zabieg wykonany z ogromną precyzją. Jestem bardzo zadowolona.",
-        "rating": 5
-      },
-      {
-        "author": "Piotr K.",
-        "text": "Ekstrakcja ósemki przebiegła błyskawicznie. Nawet nie poczułem kiedy było po wszystkim. Szczerze polecam!",
-        "rating": 5
-      }
-    ]
-  },
-  {
-    "slug": "ulica-wlodarzewska",
-    "nazwa_lokalizacji": "ul. Włodarzewska",
-    "klinika": "Pruszkowska 6b",
     "czas_dojazdu": "7 minut",
-    "punkt_orientacyjny": "Gmachu Filtrów",
-    "reviews": [
-      {
-        "author": "Marek W.",
-        "text": "Pełen profesjonalizm. Ósemka usunięta w 15 minut, bez żadnego bólu. Polecam!",
-        "rating": 5
-      },
-      {
-        "author": "Andrzej J.",
-        "text": "Bardzo dobry kontakt z kliniką. Wszystkie zalecenia po zabiegu jasno wytłumaczone. Pełne zaufanie.",
-        "rating": 5
-      },
-      {
-        "author": "Katarzyna Z.",
-        "text": "Bardzo bałam się zabiegu, ale podejście dr Sturskiej jest niesamowite. Czułam się bardzo zaopiekowana.",
-        "rating": 5
-      }
-    ]
-  },
-  {
-    "slug": "ulica-opaczewska",
-    "nazwa_lokalizacji": "ul. Opaczewska",
-    "klinika": "Pruszkowska 6b",
-    "czas_dojazdu": "14 minut",
-    "punkt_orientacyjny": "Pola Mokotowskiego",
-    "reviews": [
-      {
-        "author": "Janusz P.",
-        "text": "Fachowa pomoc w nagłym przypadku. Ból ósemki był nie do zniesienia, przyjęto mnie bardzo szybko. Ulga natychmiastowa.",
-        "rating": 5
-      },
-      {
-        "author": "Robert N.",
-        "text": "Konkretnie i na temat. Krótki czas oczekiwania na wizytę i sprawne usunięcie zęba. To się ceni.",
-        "rating": 5
-      },
-      {
-        "author": "Michał D.",
-        "text": "Polecam każdemu, kto boi się wyrywania zębów. Znieczulenie zadziałało idealnie, nic nie czuć. Profeska!",
-        "rating": 5
-      }
-    ]
-  },
-  {
-    "slug": "ulica-bialobrzeska",
-    "nazwa_lokalizacji": "ul. Białobrzeska",
-    "klinika": "Pruszkowska 6b",
-    "czas_dojazdu": "12 minut",
-    "punkt_orientacyjny": "Alei Prymasa Tysiąclecia",
-    "reviews": [
-      {
-        "author": "Karolina S.",
-        "text": "Bardzo nowoczesne podejście. Zdjęcie RTG zrobione na miejscu, od razu diagnoza i zabieg. Pełen komfort.",
-        "rating": 5
-      },
-      {
-        "author": "Marta O.",
-        "text": "Świetna lokalizacja i jeszcze lepsza obsługa. Polecam szczególnie osobom, które cenią swój czas.",
-        "rating": 5
-      },
-      {
-        "author": "Paweł H.",
-        "text": "Najlepsze miejsce na mapie Warszawy jeśli chodzi o chirurgię stomatologiczną. Bez bicia daję 5 gwiazdek.",
-        "rating": 5
-      }
-    ]
-  },
-  {
-    "slug": "ulica-szczesliwicka",
-    "nazwa_lokalizacji": "ul. Szczęśliwicka",
-    "klinika": "Pruszkowska 6b",
-    "czas_dojazdu": "14 minut",
-    "punkt_orientacyjny": "Parku Szczęśliwickiego",
-    "reviews": [
-      {
-        "author": "Łukasz G.",
-        "text": "Wszystko zgodnie z planem. Żadnych komplikacji po zabiegu, rana zagoiła się bardzo szybko. Super opieka.",
-        "rating": 5
-      },
-      {
-        "author": "Sylwia R.",
-        "text": "Zabieg trwał krócej niż myślałam. Atmosfera w gabinecie sprawia, że człowiek przestaje się stresować.",
-        "rating": 5
-      },
-      {
-        "author": "Tomasz R.",
-        "text": "Najlepszy chirurg w Warszawie. Szybko, konkretnie i co najważniejsze - bezboleśnie. Pozdrawiam cały zespół.",
-        "rating": 5
-      }
-    ]
-  },
-  {
-    "slug": "ulica-barska",
-    "nazwa_lokalizacji": "ul. Barska",
-    "klinika": "Pruszkowska 6b",
-    "czas_dojazdu": "7 minut",
-    "punkt_orientacyjny": "Parku Szczęśliwickiego",
-    "reviews": [
-      {
-        "author": "Katarzyna Z.",
-        "text": "Bardzo bałam się zabiegu, ale podejście dr Sturskiej jest niesamowite. Czułam się bardzo zaopiekowana.",
-        "rating": 5
-      },
-      {
-        "author": "Tomasz R.",
-        "text": "Najlepszy chirurg w Warszawie. Szybko, konkretnie i co najważniejsze - bezboleśnie. Pozdrawiam cały zespół.",
-        "rating": 5
-      },
-      {
-        "author": "Paweł H.",
-        "text": "Najlepsze miejsce na mapie Warszawy jeśli chodzi o chirurgię stomatologiczną. Bez bicia daję 5 gwiazdek.",
-        "rating": 5
-      }
-    ]
-  },
-  {
-    "slug": "ulica-spiska",
-    "nazwa_lokalizacji": "ul. Spiska",
-    "klinika": "Pruszkowska 6b",
-    "czas_dojazdu": "13 minut",
-    "punkt_orientacyjny": "Placu Zawiszy",
-    "reviews": [
-      {
-        "author": "Sylwia R.",
-        "text": "Zabieg trwał krócej niż myślałam. Atmosfera w gabinecie sprawia, że człowiek przestaje się stresować.",
-        "rating": 5
-      },
-      {
-        "author": "Tomasz R.",
-        "text": "Najlepszy chirurg w Warszawie. Szybko, konkretnie i co najważniejsze - bezboleśnie. Pozdrawiam cały zespół.",
-        "rating": 5
-      },
-      {
-        "author": "Ewa B.",
-        "text": "Asystentki bardzo miłe, lekarze uśmiechnięci. Czuć, że znają się na rzeczy. Najlepsza klinika na Ochocie.",
-        "rating": 5
-      }
-    ]
-  },
-  {
-    "slug": "ulica-kaliska",
-    "nazwa_lokalizacji": "ul. Kaliska",
-    "klinika": "Pruszkowska 6b",
-    "czas_dojazdu": "11 minut",
-    "punkt_orientacyjny": "Blue City",
-    "reviews": [
-      {
-        "author": "Marek W.",
-        "text": "Pełen profesjonalizm. Ósemka usunięta w 15 minut, bez żadnego bólu. Polecam!",
-        "rating": 5
-      },
-      {
-        "author": "Zofia T.",
-        "text": "Pani doktor Natalia ma złote ręce. Zabieg wykonany z ogromną precyzją. Jestem bardzo zadowolona.",
-        "rating": 5
-      },
-      {
-        "author": "Marta O.",
-        "text": "Świetna lokalizacja i jeszcze lepsza obsługa. Polecam szczególnie osobom, które cenią swój czas.",
-        "rating": 5
-      }
-    ]
-  },
-  {
-    "slug": "ulica-radomska",
-    "nazwa_lokalizacji": "ul. Radomska",
-    "klinika": "Pruszkowska 6b",
-    "czas_dojazdu": "13 minut",
-    "punkt_orientacyjny": "Gmachu Filtrów",
-    "reviews": [
-      {
-        "author": "Katarzyna Z.",
-        "text": "Bardzo bałam się zabiegu, ale podejście dr Sturskiej jest niesamowite. Czułam się bardzo zaopiekowana.",
-        "rating": 5
-      },
-      {
-        "author": "Marek W.",
-        "text": "Pełen profesjonalizm. Ósemka usunięta w 15 minut, bez żadnego bólu. Polecam!",
-        "rating": 5
-      },
-      {
-        "author": "Marta O.",
-        "text": "Świetna lokalizacja i jeszcze lepsza obsługa. Polecam szczególnie osobom, które cenią swój czas.",
-        "rating": 5
-      }
-    ]
-  },
-  {
-    "slug": "ulica-joteyki",
-    "nazwa_lokalizacji": "ul. Joteyki",
-    "klinika": "Pruszkowska 6b",
-    "czas_dojazdu": "7 minut",
-    "punkt_orientacyjny": "Atrium Reduta",
-    "reviews": [
-      {
-        "author": "Łukasz G.",
-        "text": "Wszystko zgodnie z planem. Żadnych komplikacji po zabiegu, rana zagoiła się bardzo szybko. Super opieka.",
-        "rating": 5
-      },
-      {
-        "author": "Andrzej J.",
-        "text": "Bardzo dobry kontakt z kliniką. Wszystkie zalecenia po zabiegu jasno wytłumaczone. Pełne zaufanie.",
-        "rating": 5
-      },
-      {
-        "author": "Dominika W.",
-        "text": "Nigdy nie sądziłam, że wizyta u chirurga może być tak bezstresowa. Bardzo dziękuję za pomoc z moimi ósemkami!",
-        "rating": 5
-      }
-    ]
-  },
-  {
-    "slug": "ulica-skarzynskiego",
-    "nazwa_lokalizacji": "ul. Skarżyńskiego",
-    "klinika": "Pruszkowska 6b",
-    "czas_dojazdu": "6 minut",
-    "punkt_orientacyjny": "Gmachu Filtrów",
-    "reviews": [
-      {
-        "author": "Marta O.",
-        "text": "Świetna lokalizacja i jeszcze lepsza obsługa. Polecam szczególnie osobom, które cenią swój czas.",
-        "rating": 5
-      },
-      {
-        "author": "Paweł H.",
-        "text": "Najlepsze miejsce na mapie Warszawy jeśli chodzi o chirurgię stomatologiczną. Bez bicia daję 5 gwiazdek.",
-        "rating": 5
-      },
-      {
-        "author": "Janusz P.",
-        "text": "Fachowa pomoc w nagłym przypadku. Ból ósemki był nie do zniesienia, przyjęto mnie bardzo szybko. Ulga natychmiastowa.",
-        "rating": 5
-      }
-    ]
-  },
-  {
-    "slug": "ulica-balonowa",
-    "nazwa_lokalizacji": "ul. Balonowa",
-    "klinika": "Pruszkowska 6b",
-    "czas_dojazdu": "9 minut",
-    "punkt_orientacyjny": "Pola Mokotowskiego",
-    "reviews": [
-      {
-        "author": "Karolina S.",
-        "text": "Bardzo nowoczesne podejście. Zdjęcie RTG zrobione na miejscu, od razu diagnoza i zabieg. Pełen komfort.",
-        "rating": 5
-      },
-      {
-        "author": "Anna M.",
-        "text": "Cudowne podejście do pacjenta z dentofobią. Pani Natalia jest niezwykle delikatna i cierpliwa. Dziękuję!",
-        "rating": 5
-      },
-      {
-        "author": "Magdalena L.",
-        "text": "Gabinet na najwyższym poziomie. Nowoczesny sprzęt i świetna atmosfera. Wszystko wyjaśnione krok po kroku.",
-        "rating": 5
-      }
-    ]
-  },
-  {
-    "slug": "ulica-raclawicka",
-    "nazwa_lokalizacji": "ul. Racławicka",
-    "klinika": "Pruszkowska 6b",
-    "czas_dojazdu": "5 minut",
-    "punkt_orientacyjny": "Placu Narutowicza",
-    "reviews": [
-      {
-        "author": "Piotr K.",
-        "text": "Ekstrakcja ósemki przebiegła błyskawicznie. Nawet nie poczułem kiedy było po wszystkim. Szczerze polecam!",
-        "rating": 5
-      },
-      {
-        "author": "Zofia T.",
-        "text": "Pani doktor Natalia ma złote ręce. Zabieg wykonany z ogromną precyzją. Jestem bardzo zadowolona.",
-        "rating": 5
-      },
-      {
-        "author": "Marek W.",
-        "text": "Pełen profesjonalizm. Ósemka usunięta w 15 minut, bez żadnego bólu. Polecam!",
-        "rating": 5
-      }
-    ]
-  },
-  {
-    "slug": "ulica-pawinskiego",
-    "nazwa_lokalizacji": "ul. Pawińskiego",
-    "klinika": "Pruszkowska 6b",
-    "czas_dojazdu": "13 minut",
-    "punkt_orientacyjny": "Dworca Zachodniego",
-    "reviews": [
-      {
-        "author": "Paweł H.",
-        "text": "Najlepsze miejsce na mapie Warszawy jeśli chodzi o chirurgię stomatologiczną. Bez bicia daję 5 gwiazdek.",
-        "rating": 5
-      },
-      {
-        "author": "Magdalena L.",
-        "text": "Gabinet na najwyższym poziomie. Nowoczesny sprzęt i świetna atmosfera. Wszystko wyjaśnione krok po kroku.",
-        "rating": 5
-      },
-      {
-        "author": "Tomasz R.",
-        "text": "Najlepszy chirurg w Warszawie. Szybko, konkretnie i co najważniejsze - bezboleśnie. Pozdrawiam cały zespół.",
-        "rating": 5
-      }
-    ]
-  },
-  {
-    "slug": "ulica-gorlicka",
-    "nazwa_lokalizacji": "ul. Gorlicka",
-    "klinika": "Pruszkowska 6b",
-    "czas_dojazdu": "7 minut",
-    "punkt_orientacyjny": "Pola Mokotowskiego",
-    "reviews": [
-      {
-        "author": "Anna M.",
-        "text": "Cudowne podejście do pacjenta z dentofobią. Pani Natalia jest niezwykle delikatna i cierpliwa. Dziękuję!",
-        "rating": 5
-      },
-      {
-        "author": "Karolina S.",
-        "text": "Bardzo nowoczesne podejście. Zdjęcie RTG zrobione na miejscu, od razu diagnoza i zabieg. Pełen komfort.",
-        "rating": 5
-      },
-      {
-        "author": "Marek W.",
-        "text": "Pełen profesjonalizm. Ósemka usunięta w 15 minut, bez żadnego bólu. Polecam!",
-        "rating": 5
-      }
-    ]
-  },
-  {
-    "slug": "ulica-sanocka",
-    "nazwa_lokalizacji": "ul. Sanocka",
-    "klinika": "Pruszkowska 6b",
-    "czas_dojazdu": "12 minut",
-    "punkt_orientacyjny": "Pola Mokotowskiego",
-    "reviews": [
-      {
-        "author": "Katarzyna Z.",
-        "text": "Bardzo bałam się zabiegu, ale podejście dr Sturskiej jest niesamowite. Czułam się bardzo zaopiekowana.",
-        "rating": 5
-      },
-      {
-        "author": "Paweł H.",
-        "text": "Najlepsze miejsce na mapie Warszawy jeśli chodzi o chirurgię stomatologiczną. Bez bicia daję 5 gwiazdek.",
-        "rating": 5
-      },
-      {
-        "author": "Karolina S.",
-        "text": "Bardzo nowoczesne podejście. Zdjęcie RTG zrobione na miejscu, od razu diagnoza i zabieg. Pełen komfort.",
-        "rating": 5
-      }
-    ]
-  },
-  {
-    "slug": "ulica-jasielska",
-    "nazwa_lokalizacji": "ul. Jasielska",
-    "klinika": "Pruszkowska 6b",
-    "czas_dojazdu": "5 minut",
-    "punkt_orientacyjny": "Placu Zawiszy",
-    "reviews": [
-      {
-        "author": "Andrzej J.",
-        "text": "Bardzo dobry kontakt z kliniką. Wszystkie zalecenia po zabiegu jasno wytłumaczone. Pełne zaufanie.",
-        "rating": 5
-      },
-      {
-        "author": "Alicja C.",
-        "text": "Dziękuję za cierpliwość i profesjonalizm. Moje trudne ósemki w końcu przestały być problemem!",
-        "rating": 5
-      },
-      {
-        "author": "Krzysztof F.",
-        "text": "Czysto, sterylnie i profesjonalnie. To była moja trzecia ósemka usuwana w tym miejscu i zawsze ten sam wysoki poziom.",
-        "rating": 5
-      }
-    ]
-  },
-  {
-    "slug": "ulica-geodetow",
-    "nazwa_lokalizacji": "ul. Geodetów",
-    "klinika": "Pruszkowska 6b",
-    "czas_dojazdu": "7 minut",
-    "punkt_orientacyjny": "Parku Szczęśliwickiego",
-    "reviews": [
-      {
-        "author": "Marta O.",
-        "text": "Świetna lokalizacja i jeszcze lepsza obsługa. Polecam szczególnie osobom, które cenią swój czas.",
-        "rating": 5
-      },
-      {
-        "author": "Łukasz G.",
-        "text": "Wszystko zgodnie z planem. Żadnych komplikacji po zabiegu, rana zagoiła się bardzo szybko. Super opieka.",
-        "rating": 5
-      },
-      {
-        "author": "Krzysztof F.",
-        "text": "Czysto, sterylnie i profesjonalnie. To była moja trzecia ósemka usuwana w tym miejscu i zawsze ten sam wysoki poziom.",
-        "rating": 5
-      }
-    ]
-  },
-  {
-    "slug": "ulica-ksiecia-trojdena",
-    "nazwa_lokalizacji": "ul. Księcia Trojdena",
-    "klinika": "Pruszkowska 6b",
-    "czas_dojazdu": "11 minut",
-    "punkt_orientacyjny": "WUM (Warszawski Uniwersytet Medyczny)",
-    "reviews": [
-      {
-        "author": "Krzysztof F.",
-        "text": "Czysto, sterylnie i profesjonalnie. To była moja trzecia ósemka usuwana w tym miejscu i zawsze ten sam wysoki poziom.",
-        "rating": 5
-      },
-      {
-        "author": "Zofia T.",
-        "text": "Pani doktor Natalia ma złote ręce. Zabieg wykonany z ogromną precyzją. Jestem bardzo zadowolona.",
-        "rating": 5
-      },
-      {
-        "author": "Piotr K.",
-        "text": "Ekstrakcja ósemki przebiegła błyskawicznie. Nawet nie poczułem kiedy było po wszystkim. Szczerze polecam!",
-        "rating": 5
-      }
-    ]
-  },
-  {
-    "slug": "ulica-moldawska",
-    "nazwa_lokalizacji": "ul. Mołdawska",
-    "klinika": "Pruszkowska 6b",
-    "czas_dojazdu": "8 minut",
-    "punkt_orientacyjny": "Pola Mokotowskiego",
-    "reviews": [
-      {
-        "author": "Andrzej J.",
-        "text": "Bardzo dobry kontakt z kliniką. Wszystkie zalecenia po zabiegu jasno wytłumaczone. Pełne zaufanie.",
-        "rating": 5
-      },
-      {
-        "author": "Dominika W.",
-        "text": "Nigdy nie sądziłam, że wizyta u chirurga może być tak bezstresowa. Bardzo dziękuję za pomoc z moimi ósemkami!",
-        "rating": 5
-      },
-      {
-        "author": "Janusz P.",
-        "text": "Fachowa pomoc w nagłym przypadku. Ból ósemki był nie do zniesienia, przyjęto mnie bardzo szybko. Ulga natychmiastowa.",
-        "rating": 5
-      }
-    ]
-  },
-  {
-    "slug": "ulica-pruszkowska",
-    "nazwa_lokalizacji": "ul. Pruszkowska",
-    "klinika": "Pruszkowska 6b",
-    "czas_dojazdu": "14 minut",
-    "punkt_orientacyjny": "Placu Narutowicza",
-    "reviews": [
-      {
-        "author": "Tomasz R.",
-        "text": "Najlepszy chirurg w Warszawie. Szybko, konkretnie i co najważniejsze - bezboleśnie. Pozdrawiam cały zespół.",
-        "rating": 5
-      },
-      {
-        "author": "Łukasz G.",
-        "text": "Wszystko zgodnie z planem. Żadnych komplikacji po zabiegu, rana zagoiła się bardzo szybko. Super opieka.",
-        "rating": 5
-      },
-      {
-        "author": "Magdalena L.",
-        "text": "Gabinet na najwyższym poziomie. Nowoczesny sprzęt i świetna atmosfera. Wszystko wyjaśnione krok po kroku.",
-        "rating": 5
-      }
-    ]
-  },
-  {
-    "slug": "ulica-lezajska",
-    "nazwa_lokalizacji": "ul. Leżajska",
-    "klinika": "Pruszkowska 6b",
-    "czas_dojazdu": "14 minut",
-    "punkt_orientacyjny": "Placu Zawiszy",
-    "reviews": [
-      {
-        "author": "Piotr K.",
-        "text": "Ekstrakcja ósemki przebiegła błyskawicznie. Nawet nie poczułem kiedy było po wszystkim. Szczerze polecam!",
-        "rating": 5
-      },
-      {
-        "author": "Krzysztof F.",
-        "text": "Czysto, sterylnie i profesjonalnie. To była moja trzecia ósemka usuwana w tym miejscu i zawsze ten sam wysoki poziom.",
-        "rating": 5
-      },
-      {
-        "author": "Katarzyna Z.",
-        "text": "Bardzo bałam się zabiegu, ale podejście dr Sturskiej jest niesamowite. Czułam się bardzo zaopiekowana.",
-        "rating": 5
-      }
-    ]
-  },
-  {
-    "slug": "ulica-slupecka",
-    "nazwa_lokalizacji": "ul. Słupecka",
-    "klinika": "Pruszkowska 6b",
-    "czas_dojazdu": "6 minut",
-    "punkt_orientacyjny": "Pola Mokotowskiego",
-    "reviews": [
-      {
-        "author": "Andrzej J.",
-        "text": "Bardzo dobry kontakt z kliniką. Wszystkie zalecenia po zabiegu jasno wytłumaczone. Pełne zaufanie.",
-        "rating": 5
-      },
-      {
-        "author": "Robert N.",
-        "text": "Konkretnie i na temat. Krótki czas oczekiwania na wizytę i sprawne usunięcie zęba. To się ceni.",
-        "rating": 5
-      },
-      {
-        "author": "Karolina S.",
-        "text": "Bardzo nowoczesne podejście. Zdjęcie RTG zrobione na miejscu, od razu diagnoza i zabieg. Pełen komfort.",
-        "rating": 5
-      }
-    ]
-  },
-  {
-    "slug": "ulica-daleka",
-    "nazwa_lokalizacji": "ul. Daleka",
-    "klinika": "Pruszkowska 6b",
-    "czas_dojazdu": "13 minut",
-    "punkt_orientacyjny": "Dworca Zachodniego",
-    "reviews": [
-      {
-        "author": "Michał D.",
-        "text": "Polecam każdemu, kto boi się wyrywania zębów. Znieczulenie zadziałało idealnie, nic nie czuć. Profeska!",
-        "rating": 5
-      },
-      {
-        "author": "Janusz P.",
-        "text": "Fachowa pomoc w nagłym przypadku. Ból ósemki był nie do zniesienia, przyjęto mnie bardzo szybko. Ulga natychmiastowa.",
-        "rating": 5
-      },
-      {
-        "author": "Andrzej J.",
-        "text": "Bardzo dobry kontakt z kliniką. Wszystkie zalecenia po zabiegu jasno wytłumaczone. Pełne zaufanie.",
-        "rating": 5
-      }
-    ]
-  },
-  {
-    "slug": "ulica-hynka",
-    "nazwa_lokalizacji": "ul. Hynka",
-    "klinika": "Pruszkowska 6b",
-    "czas_dojazdu": "14 minut",
     "punkt_orientacyjny": "Hali Kopińskiej",
     "reviews": [
       {
-        "author": "Ewa B.",
-        "text": "Asystentki bardzo miłe, lekarze uśmiechnięci. Czuć, że znają się na rzeczy. Najlepsza klinika na Ochocie.",
-        "rating": 5
-      },
-      {
-        "author": "Krzysztof F.",
-        "text": "Czysto, sterylnie i profesjonalnie. To była moja trzecia ósemka usuwana w tym miejscu i zawsze ten sam wysoki poziom.",
-        "rating": 5
-      },
-      {
-        "author": "Andrzej J.",
-        "text": "Bardzo dobry kontakt z kliniką. Wszystkie zalecenia po zabiegu jasno wytłumaczone. Pełne zaufanie.",
-        "rating": 5
-      }
-    ]
-  },
-  {
-    "slug": "ulica-1-sierpnia",
-    "nazwa_lokalizacji": "ul. 1 Sierpnia",
-    "klinika": "Pruszkowska 6b",
-    "czas_dojazdu": "13 minut",
-    "punkt_orientacyjny": "Hali Kopińskiej",
-    "reviews": [
-      {
-        "author": "Michał D.",
-        "text": "Polecam każdemu, kto boi się wyrywania zębów. Znieczulenie zadziałało idealnie, nic nie czuć. Profeska!",
+        "author": "Katarzyna Z.",
+        "text": "Bardzo bałam się zabiegu, ale dr Sturska ma niesamowite podejście.",
         "rating": 5
       },
       {
         "author": "Tomasz R.",
-        "text": "Najlepszy chirurg w Warszawie. Szybko, konkretnie i co najważniejsze - bezboleśnie. Pozdrawiam cały zespół.",
-        "rating": 5
-      },
-      {
-        "author": "Alicja C.",
-        "text": "Dziękuję za cierpliwość i profesjonalizm. Moje trudne ósemki w końcu przestały być problemem!",
-        "rating": 5
-      }
-    ]
-  },
-  {
-    "slug": "ulica-instalatorow",
-    "nazwa_lokalizacji": "ul. Instalatorów",
-    "klinika": "Pruszkowska 6b",
-    "czas_dojazdu": "9 minut",
-    "punkt_orientacyjny": "Placu Narutowicza",
-    "reviews": [
-      {
-        "author": "Marek W.",
-        "text": "Pełen profesjonalizm. Ósemka usunięta w 15 minut, bez żadnego bólu. Polecam!",
-        "rating": 5
-      },
-      {
-        "author": "Marta O.",
-        "text": "Świetna lokalizacja i jeszcze lepsza obsługa. Polecam szczególnie osobom, które cenią swój czas.",
-        "rating": 5
-      },
-      {
-        "author": "Katarzyna Z.",
-        "text": "Bardzo bałam się zabiegu, ale podejście dr Sturskiej jest niesamowite. Czułam się bardzo zaopiekowana.",
-        "rating": 5
-      }
-    ]
-  },
-  {
-    "slug": "ulica-popularna",
-    "nazwa_lokalizacji": "ul. Popularna",
-    "klinika": "Pruszkowska 6b",
-    "czas_dojazdu": "8 minut",
-    "punkt_orientacyjny": "Ronda Daszyńskiego",
-    "reviews": [
-      {
-        "author": "Ewa B.",
-        "text": "Asystentki bardzo miłe, lekarze uśmiechnięci. Czuć, że znają się na rzeczy. Najlepsza klinika na Ochocie.",
-        "rating": 5
-      },
-      {
-        "author": "Karolina S.",
-        "text": "Bardzo nowoczesne podejście. Zdjęcie RTG zrobione na miejscu, od razu diagnoza i zabieg. Pełen komfort.",
-        "rating": 5
-      },
-      {
-        "author": "Andrzej J.",
-        "text": "Bardzo dobry kontakt z kliniką. Wszystkie zalecenia po zabiegu jasno wytłumaczone. Pełne zaufanie.",
-        "rating": 5
-      }
-    ]
-  },
-  {
-    "slug": "ulica-chrobrego",
-    "nazwa_lokalizacji": "ul. Chrobrego",
-    "klinika": "Pruszkowska 6b",
-    "czas_dojazdu": "11 minut",
-    "punkt_orientacyjny": "Dworca Zachodniego",
-    "reviews": [
-      {
-        "author": "Katarzyna Z.",
-        "text": "Bardzo bałam się zabiegu, ale podejście dr Sturskiej jest niesamowite. Czułam się bardzo zaopiekowana.",
+        "text": "Najlepszy chirurg w Warszawie. Szybko, konkretnie i bezboleśnie.",
         "rating": 5
       },
       {
         "author": "Marek W.",
         "text": "Pełen profesjonalizm. Ósemka usunięta w 15 minut, bez żadnego bólu. Polecam!",
-        "rating": 5
-      },
-      {
-        "author": "Ewa B.",
-        "text": "Asystentki bardzo miłe, lekarze uśmiechnięci. Czuć, że znają się na rzeczy. Najlepsza klinika na Ochocie.",
-        "rating": 5
-      }
-    ]
-  },
-  {
-    "slug": "ulica-ryzowa",
-    "nazwa_lokalizacji": "ul. Ryżowa",
-    "klinika": "Pruszkowska 6b",
-    "czas_dojazdu": "14 minut",
-    "punkt_orientacyjny": "Hali Kopińskiej",
-    "reviews": [
-      {
-        "author": "Anna M.",
-        "text": "Cudowne podejście do pacjenta z dentofobią. Pani Natalia jest niezwykle delikatna i cierpliwa. Dziękuję!",
-        "rating": 5
-      },
-      {
-        "author": "Krzysztof F.",
-        "text": "Czysto, sterylnie i profesjonalnie. To była moja trzecia ósemka usuwana w tym miejscu i zawsze ten sam wysoki poziom.",
-        "rating": 5
-      },
-      {
-        "author": "Magdalena L.",
-        "text": "Gabinet na najwyższym poziomie. Nowoczesny sprzęt i świetna atmosfera. Wszystko wyjaśnione krok po kroku.",
-        "rating": 5
-      }
-    ]
-  },
-  {
-    "slug": "ulica-dzwigowa",
-    "nazwa_lokalizacji": "ul. Dźwigowa",
-    "klinika": "Pruszkowska 6b",
-    "czas_dojazdu": "8 minut",
-    "punkt_orientacyjny": "Placu Narutowicza",
-    "reviews": [
-      {
-        "author": "Janusz P.",
-        "text": "Fachowa pomoc w nagłym przypadku. Ból ósemki był nie do zniesienia, przyjęto mnie bardzo szybko. Ulga natychmiastowa.",
-        "rating": 5
-      },
-      {
-        "author": "Łukasz G.",
-        "text": "Wszystko zgodnie z planem. Żadnych komplikacji po zabiegu, rana zagoiła się bardzo szybko. Super opieka.",
-        "rating": 5
-      },
-      {
-        "author": "Tomasz R.",
-        "text": "Najlepszy chirurg w Warszawie. Szybko, konkretnie i co najważniejsze - bezboleśnie. Pozdrawiam cały zespół.",
-        "rating": 5
-      }
-    ]
-  },
-  {
-    "slug": "ulica-polczynska",
-    "nazwa_lokalizacji": "ul. Połczyńska",
-    "klinika": "Pruszkowska 6b",
-    "czas_dojazdu": "9 minut",
-    "punkt_orientacyjny": "WUM (Warszawski Uniwersytet Medyczny)",
-    "reviews": [
-      {
-        "author": "Karolina S.",
-        "text": "Bardzo nowoczesne podejście. Zdjęcie RTG zrobione na miejscu, od razu diagnoza i zabieg. Pełen komfort.",
-        "rating": 5
-      },
-      {
-        "author": "Andrzej J.",
-        "text": "Bardzo dobry kontakt z kliniką. Wszystkie zalecenia po zabiegu jasno wytłumaczone. Pełne zaufanie.",
-        "rating": 5
-      },
-      {
-        "author": "Alicja C.",
-        "text": "Dziękuję za cierpliwość i profesjonalizm. Moje trudne ósemki w końcu przestały być problemem!",
-        "rating": 5
-      }
-    ]
-  },
-  {
-    "slug": "ulica-kasprzaka",
-    "nazwa_lokalizacji": "ul. Kasprzaka",
-    "klinika": "Pruszkowska 6b",
-    "czas_dojazdu": "14 minut",
-    "punkt_orientacyjny": "Alei Prymasa Tysiąclecia",
-    "reviews": [
-      {
-        "author": "Marek W.",
-        "text": "Pełen profesjonalizm. Ósemka usunięta w 15 minut, bez żadnego bólu. Polecam!",
-        "rating": 5
-      },
-      {
-        "author": "Andrzej J.",
-        "text": "Bardzo dobry kontakt z kliniką. Wszystkie zalecenia po zabiegu jasno wytłumaczone. Pełne zaufanie.",
-        "rating": 5
-      },
-      {
-        "author": "Karolina S.",
-        "text": "Bardzo nowoczesne podejście. Zdjęcie RTG zrobione na miejscu, od razu diagnoza i zabieg. Pełen komfort.",
-        "rating": 5
-      }
-    ]
-  },
-  {
-    "slug": "ulica-wolska",
-    "nazwa_lokalizacji": "ul. Wolska",
-    "klinika": "Pruszkowska 6b",
-    "czas_dojazdu": "14 minut",
-    "punkt_orientacyjny": "Ronda Daszyńskiego",
-    "reviews": [
-      {
-        "author": "Marek W.",
-        "text": "Pełen profesjonalizm. Ósemka usunięta w 15 minut, bez żadnego bólu. Polecam!",
-        "rating": 5
-      },
-      {
-        "author": "Michał D.",
-        "text": "Polecam każdemu, kto boi się wyrywania zębów. Znieczulenie zadziałało idealnie, nic nie czuć. Profeska!",
-        "rating": 5
-      },
-      {
-        "author": "Andrzej J.",
-        "text": "Bardzo dobry kontakt z kliniką. Wszystkie zalecenia po zabiegu jasno wytłumaczone. Pełne zaufanie.",
-        "rating": 5
-      }
-    ]
-  },
-  {
-    "slug": "ulica-gorczewska",
-    "nazwa_lokalizacji": "ul. Górczewska",
-    "klinika": "Pruszkowska 6b",
-    "czas_dojazdu": "12 minut",
-    "punkt_orientacyjny": "Ronda Daszyńskiego",
-    "reviews": [
-      {
-        "author": "Anna M.",
-        "text": "Cudowne podejście do pacjenta z dentofobią. Pani Natalia jest niezwykle delikatna i cierpliwa. Dziękuję!",
-        "rating": 5
-      },
-      {
-        "author": "Ewa B.",
-        "text": "Asystentki bardzo miłe, lekarze uśmiechnięci. Czuć, że znają się na rzeczy. Najlepsza klinika na Ochocie.",
-        "rating": 5
-      },
-      {
-        "author": "Łukasz G.",
-        "text": "Wszystko zgodnie z planem. Żadnych komplikacji po zabiegu, rana zagoiła się bardzo szybko. Super opieka.",
-        "rating": 5
-      }
-    ]
-  },
-  {
-    "slug": "ulica-elekcyjna",
-    "nazwa_lokalizacji": "ul. Elekcyjna",
-    "klinika": "Pruszkowska 6b",
-    "czas_dojazdu": "13 minut",
-    "punkt_orientacyjny": "Placu Zawiszy",
-    "reviews": [
-      {
-        "author": "Krzysztof F.",
-        "text": "Czysto, sterylnie i profesjonalnie. To była moja trzecia ósemka usuwana w tym miejscu i zawsze ten sam wysoki poziom.",
-        "rating": 5
-      },
-      {
-        "author": "Dominika W.",
-        "text": "Nigdy nie sądziłam, że wizyta u chirurga może być tak bezstresowa. Bardzo dziękuję za pomoc z moimi ósemkami!",
-        "rating": 5
-      },
-      {
-        "author": "Robert N.",
-        "text": "Konkretnie i na temat. Krótki czas oczekiwania na wizytę i sprawne usunięcie zęba. To się ceni.",
-        "rating": 5
-      }
-    ]
-  },
-  {
-    "slug": "ulica-ordona",
-    "nazwa_lokalizacji": "ul. Ordona",
-    "klinika": "Pruszkowska 6b",
-    "czas_dojazdu": "14 minut",
-    "punkt_orientacyjny": "Blue City",
-    "reviews": [
-      {
-        "author": "Krzysztof F.",
-        "text": "Czysto, sterylnie i profesjonalnie. To była moja trzecia ósemka usuwana w tym miejscu i zawsze ten sam wysoki poziom.",
-        "rating": 5
-      },
-      {
-        "author": "Marek W.",
-        "text": "Pełen profesjonalizm. Ósemka usunięta w 15 minut, bez żadnego bólu. Polecam!",
-        "rating": 5
-      },
-      {
-        "author": "Katarzyna Z.",
-        "text": "Bardzo bałam się zabiegu, ale podejście dr Sturskiej jest niesamowite. Czułam się bardzo zaopiekowana.",
-        "rating": 5
-      }
-    ]
-  },
-  {
-    "slug": "ulica-jana-kazimierza",
-    "nazwa_lokalizacji": "ul. Jana Kazimierza",
-    "klinika": "Pruszkowska 6b",
-    "czas_dojazdu": "5 minut",
-    "punkt_orientacyjny": "Dworca Zachodniego",
-    "reviews": [
-      {
-        "author": "Ewa B.",
-        "text": "Asystentki bardzo miłe, lekarze uśmiechnięci. Czuć, że znają się na rzeczy. Najlepsza klinika na Ochocie.",
-        "rating": 5
-      },
-      {
-        "author": "Marek W.",
-        "text": "Pełen profesjonalizm. Ósemka usunięta w 15 minut, bez żadnego bólu. Polecam!",
-        "rating": 5
-      },
-      {
-        "author": "Piotr K.",
-        "text": "Ekstrakcja ósemki przebiegła błyskawicznie. Nawet nie poczułem kiedy było po wszystkim. Szczerze polecam!",
-        "rating": 5
-      }
-    ]
-  },
-  {
-    "slug": "ulica-hubalczykow",
-    "nazwa_lokalizacji": "ul. Hubalczyków",
-    "klinika": "Pruszkowska 6b",
-    "czas_dojazdu": "13 minut",
-    "punkt_orientacyjny": "Placu Narutowicza",
-    "reviews": [
-      {
-        "author": "Michał D.",
-        "text": "Polecam każdemu, kto boi się wyrywania zębów. Znieczulenie zadziałało idealnie, nic nie czuć. Profeska!",
-        "rating": 5
-      },
-      {
-        "author": "Andrzej J.",
-        "text": "Bardzo dobry kontakt z kliniką. Wszystkie zalecenia po zabiegu jasno wytłumaczone. Pełne zaufanie.",
-        "rating": 5
-      },
-      {
-        "author": "Zofia T.",
-        "text": "Pani doktor Natalia ma złote ręce. Zabieg wykonany z ogromną precyzją. Jestem bardzo zadowolona.",
-        "rating": 5
-      }
-    ]
-  },
-  {
-    "slug": "ulica-sowinskiego",
-    "nazwa_lokalizacji": "ul. Sowińskiego",
-    "klinika": "Pruszkowska 6b",
-    "czas_dojazdu": "5 minut",
-    "punkt_orientacyjny": "Alei Prymasa Tysiąclecia",
-    "reviews": [
-      {
-        "author": "Sylwia R.",
-        "text": "Zabieg trwał krócej niż myślałam. Atmosfera w gabinecie sprawia, że człowiek przestaje się stresować.",
-        "rating": 5
-      },
-      {
-        "author": "Marek W.",
-        "text": "Pełen profesjonalizm. Ósemka usunięta w 15 minut, bez żadnego bólu. Polecam!",
-        "rating": 5
-      },
-      {
-        "author": "Karolina S.",
-        "text": "Bardzo nowoczesne podejście. Zdjęcie RTG zrobione na miejscu, od razu diagnoza i zabieg. Pełen komfort.",
-        "rating": 5
-      }
-    ]
-  },
-  {
-    "slug": "ulica-olbrachta",
-    "nazwa_lokalizacji": "ul. Olbrachta",
-    "klinika": "Pruszkowska 6b",
-    "czas_dojazdu": "8 minut",
-    "punkt_orientacyjny": "Alei Prymasa Tysiąclecia",
-    "reviews": [
-      {
-        "author": "Magdalena L.",
-        "text": "Gabinet na najwyższym poziomie. Nowoczesny sprzęt i świetna atmosfera. Wszystko wyjaśnione krok po kroku.",
-        "rating": 5
-      },
-      {
-        "author": "Tomasz R.",
-        "text": "Najlepszy chirurg w Warszawie. Szybko, konkretnie i co najważniejsze - bezboleśnie. Pozdrawiam cały zespół.",
-        "rating": 5
-      },
-      {
-        "author": "Anna M.",
-        "text": "Cudowne podejście do pacjenta z dentofobią. Pani Natalia jest niezwykle delikatna i cierpliwa. Dziękuję!",
         "rating": 5
       }
     ]
@@ -1923,22 +555,22 @@
     "slug": "ulica-al-ken",
     "nazwa_lokalizacji": "ul. Al. KEN",
     "klinika": "KEN 96",
-    "czas_dojazdu": "7 minut",
-    "punkt_orientacyjny": "Torów Wyścigowych Służewiec",
+    "czas_dojazdu": "5 minut",
+    "punkt_orientacyjny": "Multikina Ursynów",
     "reviews": [
       {
-        "author": "Janusz P.",
-        "text": "Fachowa pomoc w nagłym przypadku. Ból ósemki był nie do zniesienia, przyjęto mnie bardzo szybko. Ulga natychmiastowa.",
+        "author": "Magdalena L.",
+        "text": "Gabinet na najwyższym poziomie. Nowoczesny sprzęt i świetna atmosfera.",
         "rating": 5
       },
       {
-        "author": "Ewa B.",
-        "text": "Asystentki bardzo miłe, lekarze uśmiechnięci. Czuć, że znają się na rzeczy. Najlepsza klinika na Ochocie.",
+        "author": "Katarzyna Z.",
+        "text": "Bardzo bałam się zabiegu, ale dr Sturska ma niesamowite podejście.",
         "rating": 5
       },
       {
-        "author": "Zofia T.",
-        "text": "Pani doktor Natalia ma złote ręce. Zabieg wykonany z ogromną precyzją. Jestem bardzo zadowolona.",
+        "author": "Marek W.",
+        "text": "Pełen profesjonalizm. Ósemka usunięta w 15 minut, bez żadnego bólu. Polecam!",
         "rating": 5
       }
     ]
@@ -1947,22 +579,22 @@
     "slug": "ulica-indiry-gandhi",
     "nazwa_lokalizacji": "ul. Indiry Gandhi",
     "klinika": "KEN 96",
-    "czas_dojazdu": "10 minut",
-    "punkt_orientacyjny": "Metra Stokłosy",
+    "czas_dojazdu": "4 minut",
+    "punkt_orientacyjny": "Galerii Ursynów",
     "reviews": [
       {
-        "author": "Piotr K.",
-        "text": "Ekstrakcja ósemki przebiegła błyskawicznie. Nawet nie poczułem kiedy było po wszystkim. Szczerze polecam!",
+        "author": "Magdalena L.",
+        "text": "Gabinet na najwyższym poziomie. Nowoczesny sprzęt i świetna atmosfera.",
         "rating": 5
       },
       {
-        "author": "Michał D.",
-        "text": "Polecam każdemu, kto boi się wyrywania zębów. Znieczulenie zadziałało idealnie, nic nie czuć. Profeska!",
+        "author": "Marek W.",
+        "text": "Pełen profesjonalizm. Ósemka usunięta w 15 minut, bez żadnego bólu. Polecam!",
         "rating": 5
       },
       {
-        "author": "Robert N.",
-        "text": "Konkretnie i na temat. Krótki czas oczekiwania na wizytę i sprawne usunięcie zęba. To się ceni.",
+        "author": "Katarzyna Z.",
+        "text": "Bardzo bałam się zabiegu, ale dr Sturska ma niesamowite podejście.",
         "rating": 5
       }
     ]
@@ -1971,22 +603,22 @@
     "slug": "ulica-cynamonowa",
     "nazwa_lokalizacji": "ul. Cynamonowa",
     "klinika": "KEN 96",
-    "czas_dojazdu": "12 minut",
-    "punkt_orientacyjny": "Areny Ursynów",
+    "czas_dojazdu": "6 minut",
+    "punkt_orientacyjny": "Galerii Ursynów",
     "reviews": [
       {
+        "author": "Magdalena L.",
+        "text": "Gabinet na najwyższym poziomie. Nowoczesny sprzęt i świetna atmosfera.",
+        "rating": 5
+      },
+      {
+        "author": "Marek W.",
+        "text": "Pełen profesjonalizm. Ósemka usunięta w 15 minut, bez żadnego bólu. Polecam!",
+        "rating": 5
+      },
+      {
         "author": "Tomasz R.",
-        "text": "Najlepszy chirurg w Warszawie. Szybko, konkretnie i co najważniejsze - bezboleśnie. Pozdrawiam cały zespół.",
-        "rating": 5
-      },
-      {
-        "author": "Ewa B.",
-        "text": "Asystentki bardzo miłe, lekarze uśmiechnięci. Czuć, że znają się na rzeczy. Najlepsza klinika na Ochocie.",
-        "rating": 5
-      },
-      {
-        "author": "Katarzyna Z.",
-        "text": "Bardzo bałam się zabiegu, ale podejście dr Sturskiej jest niesamowite. Czułam się bardzo zaopiekowana.",
+        "text": "Najlepszy chirurg w Warszawie. Szybko, konkretnie i bezboleśnie.",
         "rating": 5
       }
     ]
@@ -1995,22 +627,22 @@
     "slug": "ulica-dereniowa",
     "nazwa_lokalizacji": "ul. Dereniowa",
     "klinika": "Pruszkowska 6b",
-    "czas_dojazdu": "11 minut",
-    "punkt_orientacyjny": "Hali Kopińskiej",
+    "czas_dojazdu": "4 minut",
+    "punkt_orientacyjny": "Pola Mokotowskiego",
     "reviews": [
       {
-        "author": "Marta O.",
-        "text": "Świetna lokalizacja i jeszcze lepsza obsługa. Polecam szczególnie osobom, które cenią swój czas.",
+        "author": "Katarzyna Z.",
+        "text": "Bardzo bałam się zabiegu, ale dr Sturska ma niesamowite podejście.",
         "rating": 5
       },
       {
-        "author": "Łukasz G.",
-        "text": "Wszystko zgodnie z planem. Żadnych komplikacji po zabiegu, rana zagoiła się bardzo szybko. Super opieka.",
+        "author": "Tomasz R.",
+        "text": "Najlepszy chirurg w Warszawie. Szybko, konkretnie i bezboleśnie.",
         "rating": 5
       },
       {
-        "author": "Anna M.",
-        "text": "Cudowne podejście do pacjenta z dentofobią. Pani Natalia jest niezwykle delikatna i cierpliwa. Dziękuję!",
+        "author": "Marek W.",
+        "text": "Pełen profesjonalizm. Ósemka usunięta w 15 minut, bez żadnego bólu. Polecam!",
         "rating": 5
       }
     ]
@@ -2019,22 +651,22 @@
     "slug": "ulica-rosola",
     "nazwa_lokalizacji": "ul. Rosoła",
     "klinika": "KEN 96",
-    "czas_dojazdu": "10 minut",
-    "punkt_orientacyjny": "Galerii Ursynów",
+    "czas_dojazdu": "6 minut",
+    "punkt_orientacyjny": "Alei KEN",
     "reviews": [
       {
-        "author": "Sylwia R.",
-        "text": "Zabieg trwał krócej niż myślałam. Atmosfera w gabinecie sprawia, że człowiek przestaje się stresować.",
+        "author": "Katarzyna Z.",
+        "text": "Bardzo bałam się zabiegu, ale dr Sturska ma niesamowite podejście.",
+        "rating": 5
+      },
+      {
+        "author": "Magdalena L.",
+        "text": "Gabinet na najwyższym poziomie. Nowoczesny sprzęt i świetna atmosfera.",
         "rating": 5
       },
       {
         "author": "Marek W.",
         "text": "Pełen profesjonalizm. Ósemka usunięta w 15 minut, bez żadnego bólu. Polecam!",
-        "rating": 5
-      },
-      {
-        "author": "Ewa B.",
-        "text": "Asystentki bardzo miłe, lekarze uśmiechnięci. Czuć, że znają się na rzeczy. Najlepsza klinika na Ochocie.",
         "rating": 5
       }
     ]
@@ -2042,9 +674,9 @@
   {
     "slug": "ulica-pulawska",
     "nazwa_lokalizacji": "ul. Puławska",
-    "klinika": "KEN 96",
-    "czas_dojazdu": "6 minut",
-    "punkt_orientacyjny": "Galerii Ursynów",
+    "klinika": "Pruszkowska 6b",
+    "czas_dojazdu": "7 minut",
+    "punkt_orientacyjny": "Hali Kopińskiej",
     "reviews": [
       {
         "author": "Marek W.",
@@ -2052,37 +684,13 @@
         "rating": 5
       },
       {
-        "author": "Ewa B.",
-        "text": "Asystentki bardzo miłe, lekarze uśmiechnięci. Czuć, że znają się na rzeczy. Najlepsza klinika na Ochocie.",
+        "author": "Katarzyna Z.",
+        "text": "Bardzo bałam się zabiegu, ale dr Sturska ma niesamowite podejście.",
         "rating": 5
       },
       {
-        "author": "Tomasz R.",
-        "text": "Najlepszy chirurg w Warszawie. Szybko, konkretnie i co najważniejsze - bezboleśnie. Pozdrawiam cały zespół.",
-        "rating": 5
-      }
-    ]
-  },
-  {
-    "slug": "ulica-plaskowickiej",
-    "nazwa_lokalizacji": "ul. Płaskowickiej",
-    "klinika": "Pruszkowska 6b",
-    "czas_dojazdu": "10 minut",
-    "punkt_orientacyjny": "Gmachu Filtrów",
-    "reviews": [
-      {
-        "author": "Michał D.",
-        "text": "Polecam każdemu, kto boi się wyrywania zębów. Znieczulenie zadziałało idealnie, nic nie czuć. Profeska!",
-        "rating": 5
-      },
-      {
-        "author": "Krzysztof F.",
-        "text": "Czysto, sterylnie i profesjonalnie. To była moja trzecia ósemka usuwana w tym miejscu i zawsze ten sam wysoki poziom.",
-        "rating": 5
-      },
-      {
-        "author": "Tomasz R.",
-        "text": "Najlepszy chirurg w Warszawie. Szybko, konkretnie i co najważniejsze - bezboleśnie. Pozdrawiam cały zespół.",
+        "author": "Magdalena L.",
+        "text": "Gabinet na najwyższym poziomie. Nowoczesny sprzęt i świetna atmosfera.",
         "rating": 5
       }
     ]
@@ -2091,46 +699,22 @@
     "slug": "ulica-belgradzka",
     "nazwa_lokalizacji": "ul. Belgradzka",
     "klinika": "KEN 96",
-    "czas_dojazdu": "7 minut",
-    "punkt_orientacyjny": "Torów Wyścigowych Służewiec",
+    "czas_dojazdu": "5 minut",
+    "punkt_orientacyjny": "Galerii Ursynów",
     "reviews": [
       {
-        "author": "Anna M.",
-        "text": "Cudowne podejście do pacjenta z dentofobią. Pani Natalia jest niezwykle delikatna i cierpliwa. Dziękuję!",
+        "author": "Marek W.",
+        "text": "Pełen profesjonalizm. Ósemka usunięta w 15 minut, bez żadnego bólu. Polecam!",
         "rating": 5
       },
-      {
-        "author": "Tomasz R.",
-        "text": "Najlepszy chirurg w Warszawie. Szybko, konkretnie i co najważniejsze - bezboleśnie. Pozdrawiam cały zespół.",
-        "rating": 5
-      },
-      {
-        "author": "Ewa B.",
-        "text": "Asystentki bardzo miłe, lekarze uśmiechnięci. Czuć, że znają się na rzeczy. Najlepsza klinika na Ochocie.",
-        "rating": 5
-      }
-    ]
-  },
-  {
-    "slug": "ulica-przy-bazantarni",
-    "nazwa_lokalizacji": "ul. Przy Bażantarni",
-    "klinika": "Pruszkowska 6b",
-    "czas_dojazdu": "14 minut",
-    "punkt_orientacyjny": "Atrium Reduta",
-    "reviews": [
       {
         "author": "Katarzyna Z.",
-        "text": "Bardzo bałam się zabiegu, ale podejście dr Sturskiej jest niesamowite. Czułam się bardzo zaopiekowana.",
+        "text": "Bardzo bałam się zabiegu, ale dr Sturska ma niesamowite podejście.",
         "rating": 5
       },
       {
         "author": "Magdalena L.",
-        "text": "Gabinet na najwyższym poziomie. Nowoczesny sprzęt i świetna atmosfera. Wszystko wyjaśnione krok po kroku.",
-        "rating": 5
-      },
-      {
-        "author": "Andrzej J.",
-        "text": "Bardzo dobry kontakt z kliniką. Wszystkie zalecenia po zabiegu jasno wytłumaczone. Pełne zaufanie.",
+        "text": "Gabinet na najwyższym poziomie. Nowoczesny sprzęt i świetna atmosfera.",
         "rating": 5
       }
     ]
@@ -2139,1534 +723,22 @@
     "slug": "ulica-wawozowa",
     "nazwa_lokalizacji": "ul. Wąwozowa",
     "klinika": "KEN 96",
-    "czas_dojazdu": "14 minut",
-    "punkt_orientacyjny": "Torów Wyścigowych Służewiec",
+    "czas_dojazdu": "4 minut",
+    "punkt_orientacyjny": "Alei KEN",
     "reviews": [
-      {
-        "author": "Michał D.",
-        "text": "Polecam każdemu, kto boi się wyrywania zębów. Znieczulenie zadziałało idealnie, nic nie czuć. Profeska!",
-        "rating": 5
-      },
-      {
-        "author": "Janusz P.",
-        "text": "Fachowa pomoc w nagłym przypadku. Ból ósemki był nie do zniesienia, przyjęto mnie bardzo szybko. Ulga natychmiastowa.",
-        "rating": 5
-      },
-      {
-        "author": "Sylwia R.",
-        "text": "Zabieg trwał krócej niż myślałam. Atmosfera w gabinecie sprawia, że człowiek przestaje się stresować.",
-        "rating": 5
-      }
-    ]
-  },
-  {
-    "slug": "ulica-pileckiego",
-    "nazwa_lokalizacji": "ul. Pileckiego",
-    "klinika": "Pruszkowska 6b",
-    "czas_dojazdu": "8 minut",
-    "punkt_orientacyjny": "Placu Zawiszy",
-    "reviews": [
-      {
-        "author": "Marek W.",
-        "text": "Pełen profesjonalizm. Ósemka usunięta w 15 minut, bez żadnego bólu. Polecam!",
-        "rating": 5
-      },
       {
         "author": "Katarzyna Z.",
-        "text": "Bardzo bałam się zabiegu, ale podejście dr Sturskiej jest niesamowite. Czułam się bardzo zaopiekowana.",
+        "text": "Bardzo bałam się zabiegu, ale dr Sturska ma niesamowite podejście.",
         "rating": 5
       },
       {
-        "author": "Andrzej J.",
-        "text": "Bardzo dobry kontakt z kliniką. Wszystkie zalecenia po zabiegu jasno wytłumaczone. Pełne zaufanie.",
-        "rating": 5
-      }
-    ]
-  },
-  {
-    "slug": "ulica-roentgena",
-    "nazwa_lokalizacji": "ul. Roentgena",
-    "klinika": "Pruszkowska 6b",
-    "czas_dojazdu": "6 minut",
-    "punkt_orientacyjny": "Gmachu Filtrów",
-    "reviews": [
-      {
-        "author": "Magdalena L.",
-        "text": "Gabinet na najwyższym poziomie. Nowoczesny sprzęt i świetna atmosfera. Wszystko wyjaśnione krok po kroku.",
-        "rating": 5
-      },
-      {
-        "author": "Robert N.",
-        "text": "Konkretnie i na temat. Krótki czas oczekiwania na wizytę i sprawne usunięcie zęba. To się ceni.",
-        "rating": 5
-      },
-      {
-        "author": "Anna M.",
-        "text": "Cudowne podejście do pacjenta z dentofobią. Pani Natalia jest niezwykle delikatna i cierpliwa. Dziękuję!",
-        "rating": 5
-      }
-    ]
-  },
-  {
-    "slug": "ulica-herbsta",
-    "nazwa_lokalizacji": "ul. Herbsta",
-    "klinika": "Pruszkowska 6b",
-    "czas_dojazdu": "7 minut",
-    "punkt_orientacyjny": "Blue City",
-    "reviews": [
-      {
-        "author": "Zofia T.",
-        "text": "Pani doktor Natalia ma złote ręce. Zabieg wykonany z ogromną precyzją. Jestem bardzo zadowolona.",
-        "rating": 5
-      },
-      {
-        "author": "Marta O.",
-        "text": "Świetna lokalizacja i jeszcze lepsza obsługa. Polecam szczególnie osobom, które cenią swój czas.",
-        "rating": 5
-      },
-      {
-        "author": "Marek W.",
-        "text": "Pełen profesjonalizm. Ósemka usunięta w 15 minut, bez żadnego bólu. Polecam!",
-        "rating": 5
-      }
-    ]
-  },
-  {
-    "slug": "ulica-jastrzebowskiego",
-    "nazwa_lokalizacji": "ul. Jastrzębowskiego",
-    "klinika": "Pruszkowska 6b",
-    "czas_dojazdu": "10 minut",
-    "punkt_orientacyjny": "Blue City",
-    "reviews": [
-      {
-        "author": "Marek W.",
-        "text": "Pełen profesjonalizm. Ósemka usunięta w 15 minut, bez żadnego bólu. Polecam!",
-        "rating": 5
-      },
-      {
-        "author": "Karolina S.",
-        "text": "Bardzo nowoczesne podejście. Zdjęcie RTG zrobione na miejscu, od razu diagnoza i zabieg. Pełen komfort.",
-        "rating": 5
-      },
-      {
-        "author": "Marta O.",
-        "text": "Świetna lokalizacja i jeszcze lepsza obsługa. Polecam szczególnie osobom, które cenią swój czas.",
-        "rating": 5
-      }
-    ]
-  },
-  {
-    "slug": "ulica-stoklosy",
-    "nazwa_lokalizacji": "ul. Stokłosy",
-    "klinika": "KEN 96",
-    "czas_dojazdu": "7 minut",
-    "punkt_orientacyjny": "Metra Kabaty",
-    "reviews": [
-      {
-        "author": "Marek W.",
-        "text": "Pełen profesjonalizm. Ósemka usunięta w 15 minut, bez żadnego bólu. Polecam!",
-        "rating": 5
-      },
-      {
-        "author": "Piotr K.",
-        "text": "Ekstrakcja ósemki przebiegła błyskawicznie. Nawet nie poczułem kiedy było po wszystkim. Szczerze polecam!",
-        "rating": 5
-      },
-      {
-        "author": "Łukasz G.",
-        "text": "Wszystko zgodnie z planem. Żadnych komplikacji po zabiegu, rana zagoiła się bardzo szybko. Super opieka.",
-        "rating": 5
-      }
-    ]
-  },
-  {
-    "slug": "ulica-romera",
-    "nazwa_lokalizacji": "ul. Romera",
-    "klinika": "Pruszkowska 6b",
-    "czas_dojazdu": "14 minut",
-    "punkt_orientacyjny": "Atrium Reduta",
-    "reviews": [
-      {
-        "author": "Janusz P.",
-        "text": "Fachowa pomoc w nagłym przypadku. Ból ósemki był nie do zniesienia, przyjęto mnie bardzo szybko. Ulga natychmiastowa.",
-        "rating": 5
-      },
-      {
-        "author": "Paweł H.",
-        "text": "Najlepsze miejsce na mapie Warszawy jeśli chodzi o chirurgię stomatologiczną. Bez bicia daję 5 gwiazdek.",
-        "rating": 5
-      },
-      {
-        "author": "Piotr K.",
-        "text": "Ekstrakcja ósemki przebiegła błyskawicznie. Nawet nie poczułem kiedy było po wszystkim. Szczerze polecam!",
-        "rating": 5
-      }
-    ]
-  },
-  {
-    "slug": "ulica-surowieckiego",
-    "nazwa_lokalizacji": "ul. Surowieckiego",
-    "klinika": "Pruszkowska 6b",
-    "czas_dojazdu": "9 minut",
-    "punkt_orientacyjny": "Hali Kopińskiej",
-    "reviews": [
-      {
-        "author": "Magdalena L.",
-        "text": "Gabinet na najwyższym poziomie. Nowoczesny sprzęt i świetna atmosfera. Wszystko wyjaśnione krok po kroku.",
-        "rating": 5
-      },
-      {
-        "author": "Piotr K.",
-        "text": "Ekstrakcja ósemki przebiegła błyskawicznie. Nawet nie poczułem kiedy było po wszystkim. Szczerze polecam!",
-        "rating": 5
-      },
-      {
-        "author": "Marta O.",
-        "text": "Świetna lokalizacja i jeszcze lepsza obsługa. Polecam szczególnie osobom, które cenią swój czas.",
-        "rating": 5
-      }
-    ]
-  },
-  {
-    "slug": "ulica-beli-bartoka",
-    "nazwa_lokalizacji": "ul. Beli Bartoka",
-    "klinika": "Pruszkowska 6b",
-    "czas_dojazdu": "9 minut",
-    "punkt_orientacyjny": "Placu Narutowicza",
-    "reviews": [
-      {
-        "author": "Alicja C.",
-        "text": "Dziękuję za cierpliwość i profesjonalizm. Moje trudne ósemki w końcu przestały być problemem!",
+        "author": "Tomasz R.",
+        "text": "Najlepszy chirurg w Warszawie. Szybko, konkretnie i bezboleśnie.",
         "rating": 5
       },
       {
         "author": "Magdalena L.",
-        "text": "Gabinet na najwyższym poziomie. Nowoczesny sprzęt i świetna atmosfera. Wszystko wyjaśnione krok po kroku.",
-        "rating": 5
-      },
-      {
-        "author": "Tomasz R.",
-        "text": "Najlepszy chirurg w Warszawie. Szybko, konkretnie i co najważniejsze - bezboleśnie. Pozdrawiam cały zespół.",
-        "rating": 5
-      }
-    ]
-  },
-  {
-    "slug": "ulica-cybisa",
-    "nazwa_lokalizacji": "ul. Cybisa",
-    "klinika": "Pruszkowska 6b",
-    "czas_dojazdu": "9 minut",
-    "punkt_orientacyjny": "Alei Prymasa Tysiąclecia",
-    "reviews": [
-      {
-        "author": "Dominika W.",
-        "text": "Nigdy nie sądziłam, że wizyta u chirurga może być tak bezstresowa. Bardzo dziękuję za pomoc z moimi ósemkami!",
-        "rating": 5
-      },
-      {
-        "author": "Alicja C.",
-        "text": "Dziękuję za cierpliwość i profesjonalizm. Moje trudne ósemki w końcu przestały być problemem!",
-        "rating": 5
-      },
-      {
-        "author": "Katarzyna Z.",
-        "text": "Bardzo bałam się zabiegu, ale podejście dr Sturskiej jest niesamowite. Czułam się bardzo zaopiekowana.",
-        "rating": 5
-      }
-    ]
-  },
-  {
-    "slug": "ulica-dunikowskiego",
-    "nazwa_lokalizacji": "ul. Dunikowskiego",
-    "klinika": "Pruszkowska 6b",
-    "czas_dojazdu": "7 minut",
-    "punkt_orientacyjny": "Dworca Zachodniego",
-    "reviews": [
-      {
-        "author": "Paweł H.",
-        "text": "Najlepsze miejsce na mapie Warszawy jeśli chodzi o chirurgię stomatologiczną. Bez bicia daję 5 gwiazdek.",
-        "rating": 5
-      },
-      {
-        "author": "Anna M.",
-        "text": "Cudowne podejście do pacjenta z dentofobią. Pani Natalia jest niezwykle delikatna i cierpliwa. Dziękuję!",
-        "rating": 5
-      },
-      {
-        "author": "Łukasz G.",
-        "text": "Wszystko zgodnie z planem. Żadnych komplikacji po zabiegu, rana zagoiła się bardzo szybko. Super opieka.",
-        "rating": 5
-      }
-    ]
-  },
-  {
-    "slug": "ulica-artystow",
-    "nazwa_lokalizacji": "ul. Artystów",
-    "klinika": "Pruszkowska 6b",
-    "czas_dojazdu": "12 minut",
-    "punkt_orientacyjny": "Parku Szczęśliwickiego",
-    "reviews": [
-      {
-        "author": "Tomasz R.",
-        "text": "Najlepszy chirurg w Warszawie. Szybko, konkretnie i co najważniejsze - bezboleśnie. Pozdrawiam cały zespół.",
-        "rating": 5
-      },
-      {
-        "author": "Ewa B.",
-        "text": "Asystentki bardzo miłe, lekarze uśmiechnięci. Czuć, że znają się na rzeczy. Najlepsza klinika na Ochocie.",
-        "rating": 5
-      },
-      {
-        "author": "Janusz P.",
-        "text": "Fachowa pomoc w nagłym przypadku. Ból ósemki był nie do zniesienia, przyjęto mnie bardzo szybko. Ulga natychmiastowa.",
-        "rating": 5
-      }
-    ]
-  },
-  {
-    "slug": "ulica-dembowskiego",
-    "nazwa_lokalizacji": "ul. Dembowskiego",
-    "klinika": "Pruszkowska 6b",
-    "czas_dojazdu": "7 minut",
-    "punkt_orientacyjny": "Atrium Reduta",
-    "reviews": [
-      {
-        "author": "Karolina S.",
-        "text": "Bardzo nowoczesne podejście. Zdjęcie RTG zrobione na miejscu, od razu diagnoza i zabieg. Pełen komfort.",
-        "rating": 5
-      },
-      {
-        "author": "Dominika W.",
-        "text": "Nigdy nie sądziłam, że wizyta u chirurga może być tak bezstresowa. Bardzo dziękuję za pomoc z moimi ósemkami!",
-        "rating": 5
-      },
-      {
-        "author": "Tomasz R.",
-        "text": "Najlepszy chirurg w Warszawie. Szybko, konkretnie i co najważniejsze - bezboleśnie. Pozdrawiam cały zespół.",
-        "rating": 5
-      }
-    ]
-  },
-  {
-    "slug": "ulica-polinezyjska",
-    "nazwa_lokalizacji": "ul. Polinezyjska",
-    "klinika": "Pruszkowska 6b",
-    "czas_dojazdu": "6 minut",
-    "punkt_orientacyjny": "Ronda Daszyńskiego",
-    "reviews": [
-      {
-        "author": "Dominika W.",
-        "text": "Nigdy nie sądziłam, że wizyta u chirurga może być tak bezstresowa. Bardzo dziękuję za pomoc z moimi ósemkami!",
-        "rating": 5
-      },
-      {
-        "author": "Marek W.",
-        "text": "Pełen profesjonalizm. Ósemka usunięta w 15 minut, bez żadnego bólu. Polecam!",
-        "rating": 5
-      },
-      {
-        "author": "Karolina S.",
-        "text": "Bardzo nowoczesne podejście. Zdjęcie RTG zrobione na miejscu, od razu diagnoza i zabieg. Pełen komfort.",
-        "rating": 5
-      }
-    ]
-  },
-  {
-    "slug": "ulica-nugat",
-    "nazwa_lokalizacji": "ul. Nugat",
-    "klinika": "Pruszkowska 6b",
-    "czas_dojazdu": "11 minut",
-    "punkt_orientacyjny": "Placu Zawiszy",
-    "reviews": [
-      {
-        "author": "Sylwia R.",
-        "text": "Zabieg trwał krócej niż myślałam. Atmosfera w gabinecie sprawia, że człowiek przestaje się stresować.",
-        "rating": 5
-      },
-      {
-        "author": "Janusz P.",
-        "text": "Fachowa pomoc w nagłym przypadku. Ból ósemki był nie do zniesienia, przyjęto mnie bardzo szybko. Ulga natychmiastowa.",
-        "rating": 5
-      },
-      {
-        "author": "Tomasz R.",
-        "text": "Najlepszy chirurg w Warszawie. Szybko, konkretnie i co najważniejsze - bezboleśnie. Pozdrawiam cały zespół.",
-        "rating": 5
-      }
-    ]
-  },
-  {
-    "slug": "ulica-kiedacza",
-    "nazwa_lokalizacji": "ul. Kiedacza",
-    "klinika": "Pruszkowska 6b",
-    "czas_dojazdu": "11 minut",
-    "punkt_orientacyjny": "Placu Narutowicza",
-    "reviews": [
-      {
-        "author": "Krzysztof F.",
-        "text": "Czysto, sterylnie i profesjonalnie. To była moja trzecia ósemka usuwana w tym miejscu i zawsze ten sam wysoki poziom.",
-        "rating": 5
-      },
-      {
-        "author": "Janusz P.",
-        "text": "Fachowa pomoc w nagłym przypadku. Ból ósemki był nie do zniesienia, przyjęto mnie bardzo szybko. Ulga natychmiastowa.",
-        "rating": 5
-      },
-      {
-        "author": "Zofia T.",
-        "text": "Pani doktor Natalia ma złote ręce. Zabieg wykonany z ogromną precyzją. Jestem bardzo zadowolona.",
-        "rating": 5
-      }
-    ]
-  },
-  {
-    "slug": "ulica-na-uboczu",
-    "nazwa_lokalizacji": "ul. Na Uboczu",
-    "klinika": "Pruszkowska 6b",
-    "czas_dojazdu": "5 minut",
-    "punkt_orientacyjny": "Blue City",
-    "reviews": [
-      {
-        "author": "Alicja C.",
-        "text": "Dziękuję za cierpliwość i profesjonalizm. Moje trudne ósemki w końcu przestały być problemem!",
-        "rating": 5
-      },
-      {
-        "author": "Anna M.",
-        "text": "Cudowne podejście do pacjenta z dentofobią. Pani Natalia jest niezwykle delikatna i cierpliwa. Dziękuję!",
-        "rating": 5
-      },
-      {
-        "author": "Karolina S.",
-        "text": "Bardzo nowoczesne podejście. Zdjęcie RTG zrobione na miejscu, od razu diagnoza i zabieg. Pełen komfort.",
-        "rating": 5
-      }
-    ]
-  },
-  {
-    "slug": "ulica-meander",
-    "nazwa_lokalizacji": "ul. Meander",
-    "klinika": "Pruszkowska 6b",
-    "czas_dojazdu": "9 minut",
-    "punkt_orientacyjny": "Placu Zawiszy",
-    "reviews": [
-      {
-        "author": "Karolina S.",
-        "text": "Bardzo nowoczesne podejście. Zdjęcie RTG zrobione na miejscu, od razu diagnoza i zabieg. Pełen komfort.",
-        "rating": 5
-      },
-      {
-        "author": "Sylwia R.",
-        "text": "Zabieg trwał krócej niż myślałam. Atmosfera w gabinecie sprawia, że człowiek przestaje się stresować.",
-        "rating": 5
-      },
-      {
-        "author": "Janusz P.",
-        "text": "Fachowa pomoc w nagłym przypadku. Ból ósemki był nie do zniesienia, przyjęto mnie bardzo szybko. Ulga natychmiastowa.",
-        "rating": 5
-      }
-    ]
-  },
-  {
-    "slug": "ulica-malej-laki",
-    "nazwa_lokalizacji": "ul. Małej Łąki",
-    "klinika": "Pruszkowska 6b",
-    "czas_dojazdu": "14 minut",
-    "punkt_orientacyjny": "Parku Szczęśliwickiego",
-    "reviews": [
-      {
-        "author": "Zofia T.",
-        "text": "Pani doktor Natalia ma złote ręce. Zabieg wykonany z ogromną precyzją. Jestem bardzo zadowolona.",
-        "rating": 5
-      },
-      {
-        "author": "Piotr K.",
-        "text": "Ekstrakcja ósemki przebiegła błyskawicznie. Nawet nie poczułem kiedy było po wszystkim. Szczerze polecam!",
-        "rating": 5
-      },
-      {
-        "author": "Robert N.",
-        "text": "Konkretnie i na temat. Krótki czas oczekiwania na wizytę i sprawne usunięcie zęba. To się ceni.",
-        "rating": 5
-      }
-    ]
-  },
-  {
-    "slug": "ulica-kazury",
-    "nazwa_lokalizacji": "ul. Kazury",
-    "klinika": "Pruszkowska 6b",
-    "czas_dojazdu": "8 minut",
-    "punkt_orientacyjny": "Placu Zawiszy",
-    "reviews": [
-      {
-        "author": "Robert N.",
-        "text": "Konkretnie i na temat. Krótki czas oczekiwania na wizytę i sprawne usunięcie zęba. To się ceni.",
-        "rating": 5
-      },
-      {
-        "author": "Paweł H.",
-        "text": "Najlepsze miejsce na mapie Warszawy jeśli chodzi o chirurgię stomatologiczną. Bez bicia daję 5 gwiazdek.",
-        "rating": 5
-      },
-      {
-        "author": "Zofia T.",
-        "text": "Pani doktor Natalia ma złote ręce. Zabieg wykonany z ogromną precyzją. Jestem bardzo zadowolona.",
-        "rating": 5
-      }
-    ]
-  },
-  {
-    "slug": "ulica-stryjenskich",
-    "nazwa_lokalizacji": "ul. Stryjeńskich",
-    "klinika": "Pruszkowska 6b",
-    "czas_dojazdu": "10 minut",
-    "punkt_orientacyjny": "Gmachu Filtrów",
-    "reviews": [
-      {
-        "author": "Zofia T.",
-        "text": "Pani doktor Natalia ma złote ręce. Zabieg wykonany z ogromną precyzją. Jestem bardzo zadowolona.",
-        "rating": 5
-      },
-      {
-        "author": "Marta O.",
-        "text": "Świetna lokalizacja i jeszcze lepsza obsługa. Polecam szczególnie osobom, które cenią swój czas.",
-        "rating": 5
-      },
-      {
-        "author": "Karolina S.",
-        "text": "Bardzo nowoczesne podejście. Zdjęcie RTG zrobione na miejscu, od razu diagnoza i zabieg. Pełen komfort.",
-        "rating": 5
-      }
-    ]
-  },
-  {
-    "slug": "ulica-nowoursynowska",
-    "nazwa_lokalizacji": "ul. Nowoursynowska",
-    "klinika": "KEN 96",
-    "czas_dojazdu": "14 minut",
-    "punkt_orientacyjny": "Metra Kabaty",
-    "reviews": [
-      {
-        "author": "Katarzyna Z.",
-        "text": "Bardzo bałam się zabiegu, ale podejście dr Sturskiej jest niesamowite. Czułam się bardzo zaopiekowana.",
-        "rating": 5
-      },
-      {
-        "author": "Marek W.",
-        "text": "Pełen profesjonalizm. Ósemka usunięta w 15 minut, bez żadnego bólu. Polecam!",
-        "rating": 5
-      },
-      {
-        "author": "Łukasz G.",
-        "text": "Wszystko zgodnie z planem. Żadnych komplikacji po zabiegu, rana zagoiła się bardzo szybko. Super opieka.",
-        "rating": 5
-      }
-    ]
-  },
-  {
-    "slug": "ulica-kokosowa",
-    "nazwa_lokalizacji": "ul. Kokosowa",
-    "klinika": "Pruszkowska 6b",
-    "czas_dojazdu": "9 minut",
-    "punkt_orientacyjny": "Blue City",
-    "reviews": [
-      {
-        "author": "Katarzyna Z.",
-        "text": "Bardzo bałam się zabiegu, ale podejście dr Sturskiej jest niesamowite. Czułam się bardzo zaopiekowana.",
-        "rating": 5
-      },
-      {
-        "author": "Zofia T.",
-        "text": "Pani doktor Natalia ma złote ręce. Zabieg wykonany z ogromną precyzją. Jestem bardzo zadowolona.",
-        "rating": 5
-      },
-      {
-        "author": "Robert N.",
-        "text": "Konkretnie i na temat. Krótki czas oczekiwania na wizytę i sprawne usunięcie zęba. To się ceni.",
-        "rating": 5
-      }
-    ]
-  },
-  {
-    "slug": "ulica-orszady",
-    "nazwa_lokalizacji": "ul. Orszady",
-    "klinika": "Pruszkowska 6b",
-    "czas_dojazdu": "7 minut",
-    "punkt_orientacyjny": "Dworca Zachodniego",
-    "reviews": [
-      {
-        "author": "Zofia T.",
-        "text": "Pani doktor Natalia ma złote ręce. Zabieg wykonany z ogromną precyzją. Jestem bardzo zadowolona.",
-        "rating": 5
-      },
-      {
-        "author": "Robert N.",
-        "text": "Konkretnie i na temat. Krótki czas oczekiwania na wizytę i sprawne usunięcie zęba. To się ceni.",
-        "rating": 5
-      },
-      {
-        "author": "Paweł H.",
-        "text": "Najlepsze miejsce na mapie Warszawy jeśli chodzi o chirurgię stomatologiczną. Bez bicia daję 5 gwiazdek.",
-        "rating": 5
-      }
-    ]
-  },
-  {
-    "slug": "ulica-relaksowa",
-    "nazwa_lokalizacji": "ul. Relaksowa",
-    "klinika": "Pruszkowska 6b",
-    "czas_dojazdu": "10 minut",
-    "punkt_orientacyjny": "Ronda Daszyńskiego",
-    "reviews": [
-      {
-        "author": "Marek W.",
-        "text": "Pełen profesjonalizm. Ósemka usunięta w 15 minut, bez żadnego bólu. Polecam!",
-        "rating": 5
-      },
-      {
-        "author": "Katarzyna Z.",
-        "text": "Bardzo bałam się zabiegu, ale podejście dr Sturskiej jest niesamowite. Czułam się bardzo zaopiekowana.",
-        "rating": 5
-      },
-      {
-        "author": "Robert N.",
-        "text": "Konkretnie i na temat. Krótki czas oczekiwania na wizytę i sprawne usunięcie zęba. To się ceni.",
-        "rating": 5
-      }
-    ]
-  },
-  {
-    "slug": "ulica-kabacki-dukt",
-    "nazwa_lokalizacji": "ul. Kabacki Dukt",
-    "klinika": "Pruszkowska 6b",
-    "czas_dojazdu": "5 minut",
-    "punkt_orientacyjny": "Dworca Zachodniego",
-    "reviews": [
-      {
-        "author": "Tomasz R.",
-        "text": "Najlepszy chirurg w Warszawie. Szybko, konkretnie i co najważniejsze - bezboleśnie. Pozdrawiam cały zespół.",
-        "rating": 5
-      },
-      {
-        "author": "Anna M.",
-        "text": "Cudowne podejście do pacjenta z dentofobią. Pani Natalia jest niezwykle delikatna i cierpliwa. Dziękuję!",
-        "rating": 5
-      },
-      {
-        "author": "Karolina S.",
-        "text": "Bardzo nowoczesne podejście. Zdjęcie RTG zrobione na miejscu, od razu diagnoza i zabieg. Pełen komfort.",
-        "rating": 5
-      }
-    ]
-  },
-  {
-    "slug": "ulica-sojki",
-    "nazwa_lokalizacji": "ul. Sójki",
-    "klinika": "Pruszkowska 6b",
-    "czas_dojazdu": "7 minut",
-    "punkt_orientacyjny": "Pola Mokotowskiego",
-    "reviews": [
-      {
-        "author": "Janusz P.",
-        "text": "Fachowa pomoc w nagłym przypadku. Ból ósemki był nie do zniesienia, przyjęto mnie bardzo szybko. Ulga natychmiastowa.",
-        "rating": 5
-      },
-      {
-        "author": "Alicja C.",
-        "text": "Dziękuję za cierpliwość i profesjonalizm. Moje trudne ósemki w końcu przestały być problemem!",
-        "rating": 5
-      },
-      {
-        "author": "Zofia T.",
-        "text": "Pani doktor Natalia ma złote ręce. Zabieg wykonany z ogromną precyzją. Jestem bardzo zadowolona.",
-        "rating": 5
-      }
-    ]
-  },
-  {
-    "slug": "ulica-baletowa",
-    "nazwa_lokalizacji": "ul. Baletowa",
-    "klinika": "Pruszkowska 6b",
-    "czas_dojazdu": "11 minut",
-    "punkt_orientacyjny": "Pola Mokotowskiego",
-    "reviews": [
-      {
-        "author": "Ewa B.",
-        "text": "Asystentki bardzo miłe, lekarze uśmiechnięci. Czuć, że znają się na rzeczy. Najlepsza klinika na Ochocie.",
-        "rating": 5
-      },
-      {
-        "author": "Łukasz G.",
-        "text": "Wszystko zgodnie z planem. Żadnych komplikacji po zabiegu, rana zagoiła się bardzo szybko. Super opieka.",
-        "rating": 5
-      },
-      {
-        "author": "Janusz P.",
-        "text": "Fachowa pomoc w nagłym przypadku. Ból ósemki był nie do zniesienia, przyjęto mnie bardzo szybko. Ulga natychmiastowa.",
-        "rating": 5
-      }
-    ]
-  },
-  {
-    "slug": "ulica-sarabandy",
-    "nazwa_lokalizacji": "ul. Sarabandy",
-    "klinika": "Pruszkowska 6b",
-    "czas_dojazdu": "11 minut",
-    "punkt_orientacyjny": "Gmachu Filtrów",
-    "reviews": [
-      {
-        "author": "Marek W.",
-        "text": "Pełen profesjonalizm. Ósemka usunięta w 15 minut, bez żadnego bólu. Polecam!",
-        "rating": 5
-      },
-      {
-        "author": "Karolina S.",
-        "text": "Bardzo nowoczesne podejście. Zdjęcie RTG zrobione na miejscu, od razu diagnoza i zabieg. Pełen komfort.",
-        "rating": 5
-      },
-      {
-        "author": "Paweł H.",
-        "text": "Najlepsze miejsce na mapie Warszawy jeśli chodzi o chirurgię stomatologiczną. Bez bicia daję 5 gwiazdek.",
-        "rating": 5
-      }
-    ]
-  },
-  {
-    "slug": "ulica-klimczaka",
-    "nazwa_lokalizacji": "ul. Klimczaka",
-    "klinika": "Pruszkowska 6b",
-    "czas_dojazdu": "11 minut",
-    "punkt_orientacyjny": "Dworca Zachodniego",
-    "reviews": [
-      {
-        "author": "Janusz P.",
-        "text": "Fachowa pomoc w nagłym przypadku. Ból ósemki był nie do zniesienia, przyjęto mnie bardzo szybko. Ulga natychmiastowa.",
-        "rating": 5
-      },
-      {
-        "author": "Anna M.",
-        "text": "Cudowne podejście do pacjenta z dentofobią. Pani Natalia jest niezwykle delikatna i cierpliwa. Dziękuję!",
-        "rating": 5
-      },
-      {
-        "author": "Paweł H.",
-        "text": "Najlepsze miejsce na mapie Warszawy jeśli chodzi o chirurgię stomatologiczną. Bez bicia daję 5 gwiazdek.",
-        "rating": 5
-      }
-    ]
-  },
-  {
-    "slug": "ulica-sarmacka",
-    "nazwa_lokalizacji": "ul. Sarmacka",
-    "klinika": "KEN 96",
-    "czas_dojazdu": "13 minut",
-    "punkt_orientacyjny": "Galerii Ursynów",
-    "reviews": [
-      {
-        "author": "Łukasz G.",
-        "text": "Wszystko zgodnie z planem. Żadnych komplikacji po zabiegu, rana zagoiła się bardzo szybko. Super opieka.",
-        "rating": 5
-      },
-      {
-        "author": "Tomasz R.",
-        "text": "Najlepszy chirurg w Warszawie. Szybko, konkretnie i co najważniejsze - bezboleśnie. Pozdrawiam cały zespół.",
-        "rating": 5
-      },
-      {
-        "author": "Janusz P.",
-        "text": "Fachowa pomoc w nagłym przypadku. Ból ósemki był nie do zniesienia, przyjęto mnie bardzo szybko. Ulga natychmiastowa.",
-        "rating": 5
-      }
-    ]
-  },
-  {
-    "slug": "ulica-branickiego",
-    "nazwa_lokalizacji": "ul. Branickiego",
-    "klinika": "Pruszkowska 6b",
-    "czas_dojazdu": "8 minut",
-    "punkt_orientacyjny": "Alei Prymasa Tysiąclecia",
-    "reviews": [
-      {
-        "author": "Magdalena L.",
-        "text": "Gabinet na najwyższym poziomie. Nowoczesny sprzęt i świetna atmosfera. Wszystko wyjaśnione krok po kroku.",
-        "rating": 5
-      },
-      {
-        "author": "Robert N.",
-        "text": "Konkretnie i na temat. Krótki czas oczekiwania na wizytę i sprawne usunięcie zęba. To się ceni.",
-        "rating": 5
-      },
-      {
-        "author": "Marek W.",
-        "text": "Pełen profesjonalizm. Ósemka usunięta w 15 minut, bez żadnego bólu. Polecam!",
-        "rating": 5
-      }
-    ]
-  },
-  {
-    "slug": "ulica-ledochowskiej",
-    "nazwa_lokalizacji": "ul. Ledóchowskiej",
-    "klinika": "Pruszkowska 6b",
-    "czas_dojazdu": "14 minut",
-    "punkt_orientacyjny": "Pola Mokotowskiego",
-    "reviews": [
-      {
-        "author": "Karolina S.",
-        "text": "Bardzo nowoczesne podejście. Zdjęcie RTG zrobione na miejscu, od razu diagnoza i zabieg. Pełen komfort.",
-        "rating": 5
-      },
-      {
-        "author": "Michał D.",
-        "text": "Polecam każdemu, kto boi się wyrywania zębów. Znieczulenie zadziałało idealnie, nic nie czuć. Profeska!",
-        "rating": 5
-      },
-      {
-        "author": "Marek W.",
-        "text": "Pełen profesjonalizm. Ósemka usunięta w 15 minut, bez żadnego bólu. Polecam!",
-        "rating": 5
-      }
-    ]
-  },
-  {
-    "slug": "ulica-hlonda",
-    "nazwa_lokalizacji": "ul. Hlonda",
-    "klinika": "Pruszkowska 6b",
-    "czas_dojazdu": "14 minut",
-    "punkt_orientacyjny": "Placu Zawiszy",
-    "reviews": [
-      {
-        "author": "Dominika W.",
-        "text": "Nigdy nie sądziłam, że wizyta u chirurga może być tak bezstresowa. Bardzo dziękuję za pomoc z moimi ósemkami!",
-        "rating": 5
-      },
-      {
-        "author": "Marek W.",
-        "text": "Pełen profesjonalizm. Ósemka usunięta w 15 minut, bez żadnego bólu. Polecam!",
-        "rating": 5
-      },
-      {
-        "author": "Krzysztof F.",
-        "text": "Czysto, sterylnie i profesjonalnie. To była moja trzecia ósemka usuwana w tym miejscu i zawsze ten sam wysoki poziom.",
-        "rating": 5
-      }
-    ]
-  },
-  {
-    "slug": "ulica-al-rzeczypospolitej",
-    "nazwa_lokalizacji": "ul. Al. Rzeczypospolitej",
-    "klinika": "KEN 96",
-    "czas_dojazdu": "6 minut",
-    "punkt_orientacyjny": "Centrum Onkologii",
-    "reviews": [
-      {
-        "author": "Marek W.",
-        "text": "Pełen profesjonalizm. Ósemka usunięta w 15 minut, bez żadnego bólu. Polecam!",
-        "rating": 5
-      },
-      {
-        "author": "Katarzyna Z.",
-        "text": "Bardzo bałam się zabiegu, ale podejście dr Sturskiej jest niesamowite. Czułam się bardzo zaopiekowana.",
-        "rating": 5
-      },
-      {
-        "author": "Ewa B.",
-        "text": "Asystentki bardzo miłe, lekarze uśmiechnięci. Czuć, że znają się na rzeczy. Najlepsza klinika na Ochocie.",
-        "rating": 5
-      }
-    ]
-  },
-  {
-    "slug": "ulica-krolowej-marysienki",
-    "nazwa_lokalizacji": "ul. Królowej Marysieńki",
-    "klinika": "Pruszkowska 6b",
-    "czas_dojazdu": "14 minut",
-    "punkt_orientacyjny": "WUM (Warszawski Uniwersytet Medyczny)",
-    "reviews": [
-      {
-        "author": "Piotr K.",
-        "text": "Ekstrakcja ósemki przebiegła błyskawicznie. Nawet nie poczułem kiedy było po wszystkim. Szczerze polecam!",
-        "rating": 5
-      },
-      {
-        "author": "Sylwia R.",
-        "text": "Zabieg trwał krócej niż myślałam. Atmosfera w gabinecie sprawia, że człowiek przestaje się stresować.",
-        "rating": 5
-      },
-      {
-        "author": "Janusz P.",
-        "text": "Fachowa pomoc w nagłym przypadku. Ból ósemki był nie do zniesienia, przyjęto mnie bardzo szybko. Ulga natychmiastowa.",
-        "rating": 5
-      }
-    ]
-  },
-  {
-    "slug": "ulica-przyczolkowa",
-    "nazwa_lokalizacji": "ul. Przyczółkowa",
-    "klinika": "Pruszkowska 6b",
-    "czas_dojazdu": "12 minut",
-    "punkt_orientacyjny": "Dworca Zachodniego",
-    "reviews": [
-      {
-        "author": "Alicja C.",
-        "text": "Dziękuję za cierpliwość i profesjonalizm. Moje trudne ósemki w końcu przestały być problemem!",
-        "rating": 5
-      },
-      {
-        "author": "Krzysztof F.",
-        "text": "Czysto, sterylnie i profesjonalnie. To była moja trzecia ósemka usuwana w tym miejscu i zawsze ten sam wysoki poziom.",
-        "rating": 5
-      },
-      {
-        "author": "Robert N.",
-        "text": "Konkretnie i na temat. Krótki czas oczekiwania na wizytę i sprawne usunięcie zęba. To się ceni.",
-        "rating": 5
-      }
-    ]
-  },
-  {
-    "slug": "ulica-vogla",
-    "nazwa_lokalizacji": "ul. Vogla",
-    "klinika": "Pruszkowska 6b",
-    "czas_dojazdu": "7 minut",
-    "punkt_orientacyjny": "WUM (Warszawski Uniwersytet Medyczny)",
-    "reviews": [
-      {
-        "author": "Krzysztof F.",
-        "text": "Czysto, sterylnie i profesjonalnie. To była moja trzecia ósemka usuwana w tym miejscu i zawsze ten sam wysoki poziom.",
-        "rating": 5
-      },
-      {
-        "author": "Tomasz R.",
-        "text": "Najlepszy chirurg w Warszawie. Szybko, konkretnie i co najważniejsze - bezboleśnie. Pozdrawiam cały zespół.",
-        "rating": 5
-      },
-      {
-        "author": "Karolina S.",
-        "text": "Bardzo nowoczesne podejście. Zdjęcie RTG zrobione na miejscu, od razu diagnoza i zabieg. Pełen komfort.",
-        "rating": 5
-      }
-    ]
-  },
-  {
-    "slug": "ulica-goraszka",
-    "nazwa_lokalizacji": "ul. Góraszka",
-    "klinika": "Pruszkowska 6b",
-    "czas_dojazdu": "11 minut",
-    "punkt_orientacyjny": "Placu Narutowicza",
-    "reviews": [
-      {
-        "author": "Magdalena L.",
-        "text": "Gabinet na najwyższym poziomie. Nowoczesny sprzęt i świetna atmosfera. Wszystko wyjaśnione krok po kroku.",
-        "rating": 5
-      },
-      {
-        "author": "Robert N.",
-        "text": "Konkretnie i na temat. Krótki czas oczekiwania na wizytę i sprawne usunięcie zęba. To się ceni.",
-        "rating": 5
-      },
-      {
-        "author": "Sylwia R.",
-        "text": "Zabieg trwał krócej niż myślałam. Atmosfera w gabinecie sprawia, że człowiek przestaje się stresować.",
-        "rating": 5
-      }
-    ]
-  },
-  {
-    "slug": "ulica-woloska",
-    "nazwa_lokalizacji": "ul. Wołoska",
-    "klinika": "KEN 96",
-    "czas_dojazdu": "8 minut",
-    "punkt_orientacyjny": "Miasteczka Wilanów",
-    "reviews": [
-      {
-        "author": "Magdalena L.",
-        "text": "Gabinet na najwyższym poziomie. Nowoczesny sprzęt i świetna atmosfera. Wszystko wyjaśnione krok po kroku.",
-        "rating": 5
-      },
-      {
-        "author": "Dominika W.",
-        "text": "Nigdy nie sądziłam, że wizyta u chirurga może być tak bezstresowa. Bardzo dziękuję za pomoc z moimi ósemkami!",
-        "rating": 5
-      },
-      {
-        "author": "Paweł H.",
-        "text": "Najlepsze miejsce na mapie Warszawy jeśli chodzi o chirurgię stomatologiczną. Bez bicia daję 5 gwiazdek.",
-        "rating": 5
-      }
-    ]
-  },
-  {
-    "slug": "ulica-domaniewska",
-    "nazwa_lokalizacji": "ul. Domaniewska",
-    "klinika": "KEN 96",
-    "czas_dojazdu": "5 minut",
-    "punkt_orientacyjny": "Galerii Ursynów",
-    "reviews": [
-      {
-        "author": "Anna M.",
-        "text": "Cudowne podejście do pacjenta z dentofobią. Pani Natalia jest niezwykle delikatna i cierpliwa. Dziękuję!",
-        "rating": 5
-      },
-      {
-        "author": "Michał D.",
-        "text": "Polecam każdemu, kto boi się wyrywania zębów. Znieczulenie zadziałało idealnie, nic nie czuć. Profeska!",
-        "rating": 5
-      },
-      {
-        "author": "Sylwia R.",
-        "text": "Zabieg trwał krócej niż myślałam. Atmosfera w gabinecie sprawia, że człowiek przestaje się stresować.",
-        "rating": 5
-      }
-    ]
-  },
-  {
-    "slug": "ulica-marynarska",
-    "nazwa_lokalizacji": "ul. Marynarska",
-    "klinika": "Pruszkowska 6b",
-    "czas_dojazdu": "9 minut",
-    "punkt_orientacyjny": "Ronda Daszyńskiego",
-    "reviews": [
-      {
-        "author": "Karolina S.",
-        "text": "Bardzo nowoczesne podejście. Zdjęcie RTG zrobione na miejscu, od razu diagnoza i zabieg. Pełen komfort.",
-        "rating": 5
-      },
-      {
-        "author": "Robert N.",
-        "text": "Konkretnie i na temat. Krótki czas oczekiwania na wizytę i sprawne usunięcie zęba. To się ceni.",
-        "rating": 5
-      },
-      {
-        "author": "Marek W.",
-        "text": "Pełen profesjonalizm. Ósemka usunięta w 15 minut, bez żadnego bólu. Polecam!",
-        "rating": 5
-      }
-    ]
-  },
-  {
-    "slug": "ulica-cybernetyki",
-    "nazwa_lokalizacji": "ul. Cybernetyki",
-    "klinika": "Pruszkowska 6b",
-    "czas_dojazdu": "5 minut",
-    "punkt_orientacyjny": "Blue City",
-    "reviews": [
-      {
-        "author": "Sylwia R.",
-        "text": "Zabieg trwał krócej niż myślałam. Atmosfera w gabinecie sprawia, że człowiek przestaje się stresować.",
-        "rating": 5
-      },
-      {
-        "author": "Marek W.",
-        "text": "Pełen profesjonalizm. Ósemka usunięta w 15 minut, bez żadnego bólu. Polecam!",
-        "rating": 5
-      },
-      {
-        "author": "Robert N.",
-        "text": "Konkretnie i na temat. Krótki czas oczekiwania na wizytę i sprawne usunięcie zęba. To się ceni.",
-        "rating": 5
-      }
-    ]
-  },
-  {
-    "slug": "ulica-postepu",
-    "nazwa_lokalizacji": "ul. Postępu",
-    "klinika": "Pruszkowska 6b",
-    "czas_dojazdu": "7 minut",
-    "punkt_orientacyjny": "Atrium Reduta",
-    "reviews": [
-      {
-        "author": "Krzysztof F.",
-        "text": "Czysto, sterylnie i profesjonalnie. To była moja trzecia ósemka usuwana w tym miejscu i zawsze ten sam wysoki poziom.",
-        "rating": 5
-      },
-      {
-        "author": "Łukasz G.",
-        "text": "Wszystko zgodnie z planem. Żadnych komplikacji po zabiegu, rana zagoiła się bardzo szybko. Super opieka.",
-        "rating": 5
-      },
-      {
-        "author": "Andrzej J.",
-        "text": "Bardzo dobry kontakt z kliniką. Wszystkie zalecenia po zabiegu jasno wytłumaczone. Pełne zaufanie.",
-        "rating": 5
-      }
-    ]
-  },
-  {
-    "slug": "ulica-rzymowskiego",
-    "nazwa_lokalizacji": "ul. Rzymowskiego",
-    "klinika": "Pruszkowska 6b",
-    "czas_dojazdu": "8 minut",
-    "punkt_orientacyjny": "Ronda Daszyńskiego",
-    "reviews": [
-      {
-        "author": "Robert N.",
-        "text": "Konkretnie i na temat. Krótki czas oczekiwania na wizytę i sprawne usunięcie zęba. To się ceni.",
-        "rating": 5
-      },
-      {
-        "author": "Janusz P.",
-        "text": "Fachowa pomoc w nagłym przypadku. Ból ósemki był nie do zniesienia, przyjęto mnie bardzo szybko. Ulga natychmiastowa.",
-        "rating": 5
-      },
-      {
-        "author": "Andrzej J.",
-        "text": "Bardzo dobry kontakt z kliniką. Wszystkie zalecenia po zabiegu jasno wytłumaczone. Pełne zaufanie.",
-        "rating": 5
-      }
-    ]
-  },
-  {
-    "slug": "ulica-woronicza",
-    "nazwa_lokalizacji": "ul. Woronicza",
-    "klinika": "Pruszkowska 6b",
-    "czas_dojazdu": "10 minut",
-    "punkt_orientacyjny": "Placu Zawiszy",
-    "reviews": [
-      {
-        "author": "Janusz P.",
-        "text": "Fachowa pomoc w nagłym przypadku. Ból ósemki był nie do zniesienia, przyjęto mnie bardzo szybko. Ulga natychmiastowa.",
-        "rating": 5
-      },
-      {
-        "author": "Marek W.",
-        "text": "Pełen profesjonalizm. Ósemka usunięta w 15 minut, bez żadnego bólu. Polecam!",
-        "rating": 5
-      },
-      {
-        "author": "Marta O.",
-        "text": "Świetna lokalizacja i jeszcze lepsza obsługa. Polecam szczególnie osobom, które cenią swój czas.",
-        "rating": 5
-      }
-    ]
-  },
-  {
-    "slug": "ulica-madalinskiego",
-    "nazwa_lokalizacji": "ul. Madalińskiego",
-    "klinika": "Pruszkowska 6b",
-    "czas_dojazdu": "5 minut",
-    "punkt_orientacyjny": "Gmachu Filtrów",
-    "reviews": [
-      {
-        "author": "Marek W.",
-        "text": "Pełen profesjonalizm. Ósemka usunięta w 15 minut, bez żadnego bólu. Polecam!",
-        "rating": 5
-      },
-      {
-        "author": "Karolina S.",
-        "text": "Bardzo nowoczesne podejście. Zdjęcie RTG zrobione na miejscu, od razu diagnoza i zabieg. Pełen komfort.",
-        "rating": 5
-      },
-      {
-        "author": "Anna M.",
-        "text": "Cudowne podejście do pacjenta z dentofobią. Pani Natalia jest niezwykle delikatna i cierpliwa. Dziękuję!",
-        "rating": 5
-      }
-    ]
-  },
-  {
-    "slug": "ulica-rakowiecka",
-    "nazwa_lokalizacji": "ul. Rakowiecka",
-    "klinika": "Pruszkowska 6b",
-    "czas_dojazdu": "5 minut",
-    "punkt_orientacyjny": "Placu Narutowicza",
-    "reviews": [
-      {
-        "author": "Magdalena L.",
-        "text": "Gabinet na najwyższym poziomie. Nowoczesny sprzęt i świetna atmosfera. Wszystko wyjaśnione krok po kroku.",
-        "rating": 5
-      },
-      {
-        "author": "Karolina S.",
-        "text": "Bardzo nowoczesne podejście. Zdjęcie RTG zrobione na miejscu, od razu diagnoza i zabieg. Pełen komfort.",
-        "rating": 5
-      },
-      {
-        "author": "Janusz P.",
-        "text": "Fachowa pomoc w nagłym przypadku. Ból ósemki był nie do zniesienia, przyjęto mnie bardzo szybko. Ulga natychmiastowa.",
-        "rating": 5
-      }
-    ]
-  },
-  {
-    "slug": "ulica-narbutta",
-    "nazwa_lokalizacji": "ul. Narbutta",
-    "klinika": "Pruszkowska 6b",
-    "czas_dojazdu": "5 minut",
-    "punkt_orientacyjny": "Parku Szczęśliwickiego",
-    "reviews": [
-      {
-        "author": "Katarzyna Z.",
-        "text": "Bardzo bałam się zabiegu, ale podejście dr Sturskiej jest niesamowite. Czułam się bardzo zaopiekowana.",
-        "rating": 5
-      },
-      {
-        "author": "Tomasz R.",
-        "text": "Najlepszy chirurg w Warszawie. Szybko, konkretnie i co najważniejsze - bezboleśnie. Pozdrawiam cały zespół.",
-        "rating": 5
-      },
-      {
-        "author": "Magdalena L.",
-        "text": "Gabinet na najwyższym poziomie. Nowoczesny sprzęt i świetna atmosfera. Wszystko wyjaśnione krok po kroku.",
-        "rating": 5
-      }
-    ]
-  },
-  {
-    "slug": "ulica-wiktorska",
-    "nazwa_lokalizacji": "ul. Wiktorska",
-    "klinika": "Pruszkowska 6b",
-    "czas_dojazdu": "14 minut",
-    "punkt_orientacyjny": "WUM (Warszawski Uniwersytet Medyczny)",
-    "reviews": [
-      {
-        "author": "Janusz P.",
-        "text": "Fachowa pomoc w nagłym przypadku. Ból ósemki był nie do zniesienia, przyjęto mnie bardzo szybko. Ulga natychmiastowa.",
-        "rating": 5
-      },
-      {
-        "author": "Robert N.",
-        "text": "Konkretnie i na temat. Krótki czas oczekiwania na wizytę i sprawne usunięcie zęba. To się ceni.",
-        "rating": 5
-      },
-      {
-        "author": "Marek W.",
-        "text": "Pełen profesjonalizm. Ósemka usunięta w 15 minut, bez żadnego bólu. Polecam!",
-        "rating": 5
-      }
-    ]
-  },
-  {
-    "slug": "ulica-odynca",
-    "nazwa_lokalizacji": "ul. Odyńca",
-    "klinika": "Pruszkowska 6b",
-    "czas_dojazdu": "6 minut",
-    "punkt_orientacyjny": "Dworca Zachodniego",
-    "reviews": [
-      {
-        "author": "Marta O.",
-        "text": "Świetna lokalizacja i jeszcze lepsza obsługa. Polecam szczególnie osobom, które cenią swój czas.",
-        "rating": 5
-      },
-      {
-        "author": "Katarzyna Z.",
-        "text": "Bardzo bałam się zabiegu, ale podejście dr Sturskiej jest niesamowite. Czułam się bardzo zaopiekowana.",
-        "rating": 5
-      },
-      {
-        "author": "Karolina S.",
-        "text": "Bardzo nowoczesne podejście. Zdjęcie RTG zrobione na miejscu, od razu diagnoza i zabieg. Pełen komfort.",
-        "rating": 5
-      }
-    ]
-  },
-  {
-    "slug": "ulica-malczewskiego",
-    "nazwa_lokalizacji": "ul. Malczewskiego",
-    "klinika": "Pruszkowska 6b",
-    "czas_dojazdu": "7 minut",
-    "punkt_orientacyjny": "Dworca Zachodniego",
-    "reviews": [
-      {
-        "author": "Tomasz R.",
-        "text": "Najlepszy chirurg w Warszawie. Szybko, konkretnie i co najważniejsze - bezboleśnie. Pozdrawiam cały zespół.",
-        "rating": 5
-      },
-      {
-        "author": "Robert N.",
-        "text": "Konkretnie i na temat. Krótki czas oczekiwania na wizytę i sprawne usunięcie zęba. To się ceni.",
-        "rating": 5
-      },
-      {
-        "author": "Katarzyna Z.",
-        "text": "Bardzo bałam się zabiegu, ale podejście dr Sturskiej jest niesamowite. Czułam się bardzo zaopiekowana.",
-        "rating": 5
-      }
-    ]
-  },
-  {
-    "slug": "ulica-sobieskiego",
-    "nazwa_lokalizacji": "ul. Sobieskiego",
-    "klinika": "Pruszkowska 6b",
-    "czas_dojazdu": "11 minut",
-    "punkt_orientacyjny": "Parku Szczęśliwickiego",
-    "reviews": [
-      {
-        "author": "Robert N.",
-        "text": "Konkretnie i na temat. Krótki czas oczekiwania na wizytę i sprawne usunięcie zęba. To się ceni.",
-        "rating": 5
-      },
-      {
-        "author": "Dominika W.",
-        "text": "Nigdy nie sądziłam, że wizyta u chirurga może być tak bezstresowa. Bardzo dziękuję za pomoc z moimi ósemkami!",
-        "rating": 5
-      },
-      {
-        "author": "Paweł H.",
-        "text": "Najlepsze miejsce na mapie Warszawy jeśli chodzi o chirurgię stomatologiczną. Bez bicia daję 5 gwiazdek.",
-        "rating": 5
-      }
-    ]
-  },
-  {
-    "slug": "ulica-belwederska",
-    "nazwa_lokalizacji": "ul. Belwederska",
-    "klinika": "Pruszkowska 6b",
-    "czas_dojazdu": "14 minut",
-    "punkt_orientacyjny": "Blue City",
-    "reviews": [
-      {
-        "author": "Anna M.",
-        "text": "Cudowne podejście do pacjenta z dentofobią. Pani Natalia jest niezwykle delikatna i cierpliwa. Dziękuję!",
-        "rating": 5
-      },
-      {
-        "author": "Karolina S.",
-        "text": "Bardzo nowoczesne podejście. Zdjęcie RTG zrobione na miejscu, od razu diagnoza i zabieg. Pełen komfort.",
-        "rating": 5
-      },
-      {
-        "author": "Piotr K.",
-        "text": "Ekstrakcja ósemki przebiegła błyskawicznie. Nawet nie poczułem kiedy było po wszystkim. Szczerze polecam!",
-        "rating": 5
-      }
-    ]
-  },
-  {
-    "slug": "ulica-chelmska",
-    "nazwa_lokalizacji": "ul. Chełmska",
-    "klinika": "Pruszkowska 6b",
-    "czas_dojazdu": "10 minut",
-    "punkt_orientacyjny": "Pola Mokotowskiego",
-    "reviews": [
-      {
-        "author": "Magdalena L.",
-        "text": "Gabinet na najwyższym poziomie. Nowoczesny sprzęt i świetna atmosfera. Wszystko wyjaśnione krok po kroku.",
-        "rating": 5
-      },
-      {
-        "author": "Andrzej J.",
-        "text": "Bardzo dobry kontakt z kliniką. Wszystkie zalecenia po zabiegu jasno wytłumaczone. Pełne zaufanie.",
-        "rating": 5
-      },
-      {
-        "author": "Marek W.",
-        "text": "Pełen profesjonalizm. Ósemka usunięta w 15 minut, bez żadnego bólu. Polecam!",
-        "rating": 5
-      }
-    ]
-  },
-  {
-    "slug": "ulica-gagarina",
-    "nazwa_lokalizacji": "ul. Gagarina",
-    "klinika": "Pruszkowska 6b",
-    "czas_dojazdu": "5 minut",
-    "punkt_orientacyjny": "Gmachu Filtrów",
-    "reviews": [
-      {
-        "author": "Tomasz R.",
-        "text": "Najlepszy chirurg w Warszawie. Szybko, konkretnie i co najważniejsze - bezboleśnie. Pozdrawiam cały zespół.",
-        "rating": 5
-      },
-      {
-        "author": "Marek W.",
-        "text": "Pełen profesjonalizm. Ósemka usunięta w 15 minut, bez żadnego bólu. Polecam!",
-        "rating": 5
-      },
-      {
-        "author": "Sylwia R.",
-        "text": "Zabieg trwał krócej niż myślałam. Atmosfera w gabinecie sprawia, że człowiek przestaje się stresować.",
-        "rating": 5
-      }
-    ]
-  },
-  {
-    "slug": "ulica-czerniakowska",
-    "nazwa_lokalizacji": "ul. Czerniakowska",
-    "klinika": "Pruszkowska 6b",
-    "czas_dojazdu": "6 minut",
-    "punkt_orientacyjny": "WUM (Warszawski Uniwersytet Medyczny)",
-    "reviews": [
-      {
-        "author": "Andrzej J.",
-        "text": "Bardzo dobry kontakt z kliniką. Wszystkie zalecenia po zabiegu jasno wytłumaczone. Pełne zaufanie.",
-        "rating": 5
-      },
-      {
-        "author": "Katarzyna Z.",
-        "text": "Bardzo bałam się zabiegu, ale podejście dr Sturskiej jest niesamowite. Czułam się bardzo zaopiekowana.",
-        "rating": 5
-      },
-      {
-        "author": "Sylwia R.",
-        "text": "Zabieg trwał krócej niż myślałam. Atmosfera w gabinecie sprawia, że człowiek przestaje się stresować.",
-        "rating": 5
-      }
-    ]
-  },
-  {
-    "slug": "ulica-powsinska",
-    "nazwa_lokalizacji": "ul. Powsińska",
-    "klinika": "Pruszkowska 6b",
-    "czas_dojazdu": "6 minut",
-    "punkt_orientacyjny": "Parku Szczęśliwickiego",
-    "reviews": [
-      {
-        "author": "Alicja C.",
-        "text": "Dziękuję za cierpliwość i profesjonalizm. Moje trudne ósemki w końcu przestały być problemem!",
-        "rating": 5
-      },
-      {
-        "author": "Sylwia R.",
-        "text": "Zabieg trwał krócej niż myślałam. Atmosfera w gabinecie sprawia, że człowiek przestaje się stresować.",
-        "rating": 5
-      },
-      {
-        "author": "Marek W.",
-        "text": "Pełen profesjonalizm. Ósemka usunięta w 15 minut, bez żadnego bólu. Polecam!",
-        "rating": 5
-      }
-    ]
-  },
-  {
-    "slug": "ulica-sadyba",
-    "nazwa_lokalizacji": "ul. Sadyba",
-    "klinika": "Pruszkowska 6b",
-    "czas_dojazdu": "8 minut",
-    "punkt_orientacyjny": "Ronda Daszyńskiego",
-    "reviews": [
-      {
-        "author": "Magdalena L.",
-        "text": "Gabinet na najwyższym poziomie. Nowoczesny sprzęt i świetna atmosfera. Wszystko wyjaśnione krok po kroku.",
-        "rating": 5
-      },
-      {
-        "author": "Katarzyna Z.",
-        "text": "Bardzo bałam się zabiegu, ale podejście dr Sturskiej jest niesamowite. Czułam się bardzo zaopiekowana.",
-        "rating": 5
-      },
-      {
-        "author": "Marek W.",
-        "text": "Pełen profesjonalizm. Ósemka usunięta w 15 minut, bez żadnego bólu. Polecam!",
-        "rating": 5
-      }
-    ]
-  },
-  {
-    "slug": "ulica-bonifacego",
-    "nazwa_lokalizacji": "ul. Bonifacego",
-    "klinika": "Pruszkowska 6b",
-    "czas_dojazdu": "13 minut",
-    "punkt_orientacyjny": "Atrium Reduta",
-    "reviews": [
-      {
-        "author": "Krzysztof F.",
-        "text": "Czysto, sterylnie i profesjonalnie. To była moja trzecia ósemka usuwana w tym miejscu i zawsze ten sam wysoki poziom.",
-        "rating": 5
-      },
-      {
-        "author": "Magdalena L.",
-        "text": "Gabinet na najwyższym poziomie. Nowoczesny sprzęt i świetna atmosfera. Wszystko wyjaśnione krok po kroku.",
-        "rating": 5
-      },
-      {
-        "author": "Tomasz R.",
-        "text": "Najlepszy chirurg w Warszawie. Szybko, konkretnie i co najważniejsze - bezboleśnie. Pozdrawiam cały zespół.",
-        "rating": 5
-      }
-    ]
-  },
-  {
-    "slug": "ulica-sikorskiego",
-    "nazwa_lokalizacji": "ul. Sikorskiego",
-    "klinika": "Pruszkowska 6b",
-    "czas_dojazdu": "10 minut",
-    "punkt_orientacyjny": "Parku Szczęśliwickiego",
-    "reviews": [
-      {
-        "author": "Robert N.",
-        "text": "Konkretnie i na temat. Krótki czas oczekiwania na wizytę i sprawne usunięcie zęba. To się ceni.",
-        "rating": 5
-      },
-      {
-        "author": "Janusz P.",
-        "text": "Fachowa pomoc w nagłym przypadku. Ból ósemki był nie do zniesienia, przyjęto mnie bardzo szybko. Ulga natychmiastowa.",
-        "rating": 5
-      },
-      {
-        "author": "Marek W.",
-        "text": "Pełen profesjonalizm. Ósemka usunięta w 15 minut, bez żadnego bólu. Polecam!",
-        "rating": 5
-      }
-    ]
-  },
-  {
-    "slug": "ulica-witosa",
-    "nazwa_lokalizacji": "ul. Witosa",
-    "klinika": "Pruszkowska 6b",
-    "czas_dojazdu": "6 minut",
-    "punkt_orientacyjny": "Gmachu Filtrów",
-    "reviews": [
-      {
-        "author": "Krzysztof F.",
-        "text": "Czysto, sterylnie i profesjonalnie. To była moja trzecia ósemka usuwana w tym miejscu i zawsze ten sam wysoki poziom.",
-        "rating": 5
-      },
-      {
-        "author": "Tomasz R.",
-        "text": "Najlepszy chirurg w Warszawie. Szybko, konkretnie i co najważniejsze - bezboleśnie. Pozdrawiam cały zespół.",
-        "rating": 5
-      },
-      {
-        "author": "Paweł H.",
-        "text": "Najlepsze miejsce na mapie Warszawy jeśli chodzi o chirurgię stomatologiczną. Bez bicia daję 5 gwiazdek.",
-        "rating": 5
-      }
-    ]
-  },
-  {
-    "slug": "ulica-beldan",
-    "nazwa_lokalizacji": "ul. Bełdan",
-    "klinika": "Pruszkowska 6b",
-    "czas_dojazdu": "8 minut",
-    "punkt_orientacyjny": "Pola Mokotowskiego",
-    "reviews": [
-      {
-        "author": "Karolina S.",
-        "text": "Bardzo nowoczesne podejście. Zdjęcie RTG zrobione na miejscu, od razu diagnoza i zabieg. Pełen komfort.",
-        "rating": 5
-      },
-      {
-        "author": "Marta O.",
-        "text": "Świetna lokalizacja i jeszcze lepsza obsługa. Polecam szczególnie osobom, które cenią swój czas.",
-        "rating": 5
-      },
-      {
-        "author": "Marek W.",
-        "text": "Pełen profesjonalizm. Ósemka usunięta w 15 minut, bez żadnego bólu. Polecam!",
-        "rating": 5
-      }
-    ]
-  },
-  {
-    "slug": "ulica-modzelewskiego",
-    "nazwa_lokalizacji": "ul. Modzelewskiego",
-    "klinika": "Pruszkowska 6b",
-    "czas_dojazdu": "10 minut",
-    "punkt_orientacyjny": "WUM (Warszawski Uniwersytet Medyczny)",
-    "reviews": [
-      {
-        "author": "Karolina S.",
-        "text": "Bardzo nowoczesne podejście. Zdjęcie RTG zrobione na miejscu, od razu diagnoza i zabieg. Pełen komfort.",
-        "rating": 5
-      },
-      {
-        "author": "Janusz P.",
-        "text": "Fachowa pomoc w nagłym przypadku. Ból ósemki był nie do zniesienia, przyjęto mnie bardzo szybko. Ulga natychmiastowa.",
-        "rating": 5
-      },
-      {
-        "author": "Michał D.",
-        "text": "Polecam każdemu, kto boi się wyrywania zębów. Znieczulenie zadziałało idealnie, nic nie czuć. Profeska!",
+        "text": "Gabinet na najwyższym poziomie. Nowoczesny sprzęt i świetna atmosfera.",
         "rating": 5
       }
     ]
