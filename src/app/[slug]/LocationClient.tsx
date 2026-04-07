@@ -7,6 +7,7 @@ import { motion } from 'framer-motion';
 const cardStyle = "bg-white/90 backdrop-blur-2xl border border-white/50 shadow-[0_32px_64px_-16px_rgba(0,0,0,0.08)] rounded-[48px]";
 const inputStyle = "w-full bg-slate-100/50 border-2 border-transparent focus:border-blue-500/20 focus:bg-white p-5 rounded-3xl outline-none transition-all duration-300 text-lg placeholder:text-slate-400 shadow-[inset_0_2px_4px_rgba(0,0,0,0.02)]";
 
+const IconVerify = () => <svg className="w-5 h-5 text-blue-500" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>;
 const Star = () => <svg className="w-4 h-4 text-amber-400" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" /></svg>;
 
 export default function LocationClient({ locationData }: { locationData: any }) {
@@ -48,6 +49,7 @@ export default function LocationClient({ locationData }: { locationData: any }) 
           phone: rawPhone, 
           slug: locationData.slug, 
           locationName,
+          // POPRAWKA: Wysyłamy timestamp, który Make.com odbierze
           timestamp: new Date().toLocaleString('pl-PL'),
         }),
       });
@@ -60,8 +62,8 @@ export default function LocationClient({ locationData }: { locationData: any }) 
       
       <div className={`fixed top-[-10%] left-[-10%] w-[50%] h-[50%] transition-colors duration-1000 blur-[120px] rounded-full z-0 ${formData.painLevel > 7 ? 'bg-red-100/30' : 'bg-blue-100/20'}`} />
 
-      <main className="relative z-10 w-full max-w-[1240px] mt-12 md:mt-24 text-left mx-auto">
-        <div className="grid lg:grid-cols-[1.2fr,0.8fr] gap-16 md:gap-24 items-start mb-24">
+      <main className="relative z-10 w-full max-w-[1140px] mt-12 md:mt-24 text-left">
+        <div className="grid lg:grid-cols-[1.1fr,0.9fr] gap-16 md:gap-24 items-start mb-32">
           
           <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} className="space-y-12">
             <div className="space-y-6">
@@ -70,11 +72,11 @@ export default function LocationClient({ locationData }: { locationData: any }) 
               </div>
               <h1 className="text-6xl md:text-[88px] font-black tracking-tight leading-[0.9] text-slate-900">
                 Bez bólu. <br />
-                <span className="text-slate-300 font-light italic text-[0.9em]">Bez stresu.</span>
+                <span className="text-slate-300 font-light italic">Bez stresu.</span>
               </h1>
-              <p className="text-xl md:text-2xl text-slate-400 font-medium leading-relaxed max-w-xl">
+              <p className="text-xl md:text-2xl text-slate-400 font-medium leading-relaxed max-w-lg">
                 Profesjonalne usuwanie ósemek. Lokalizacja: <strong>{locationName}</strong>. Zapraszamy do gabinetu przy <strong>ul. {locationData.klinika}</strong>, blisko <strong>{locationData.punkt_orientacyjny}</strong>. <br />
-                Dotrzesz do nas w <strong>{formattedTime}</strong>.
+                🚀 Dotrzesz do nas w <strong>{formattedTime}</strong>.
               </p>
             </div>
 
@@ -89,38 +91,23 @@ export default function LocationClient({ locationData }: { locationData: any }) 
               </div>
             </div>
 
-            <div className="space-y-8">
-                <div className="flex items-center gap-4">
-                    <div className="flex items-center gap-2 bg-blue-50 px-4 py-2 rounded-2xl border border-blue-100">
-                        <Star /><span className="font-black text-sm text-blue-700 underline tracking-tighter uppercase">4.9/5 Google Maps</span>
-                    </div>
-                    <div className="h-px flex-grow bg-slate-100" />
-                    <span className="text-[10px] font-black uppercase tracking-widest text-slate-300">Certyfikowana Klinika</span>
+            <div className="flex items-center gap-12 pt-4 opacity-50 grayscale hover:grayscale-0 transition-all duration-500">
+                <div className="space-y-2 leading-none">
+                    <div className="flex gap-1"><Star/><Star/><Star/><Star/><Star/></div>
+                    <p className="text-[10px] font-black uppercase tracking-tighter">4.9/5 Google Maps</p>
                 </div>
-                <div className="grid md:grid-cols-2 gap-6">
-                    {locationData.reviews?.slice(0, 2).map((rev: any, i: number) => (
-                    <motion.div key={i} className="p-6 rounded-[32px] bg-white border border-slate-50 shadow-sm relative">
-                        <div className="flex gap-1 mb-3 text-amber-400 scale-75 origin-left">
-                            {[...Array(5)].map((_, s) => <Star key={s} />)}
-                        </div>
-                        <p className="text-slate-500 italic text-sm leading-relaxed mb-4">"{rev.text}"</p>
-                        <div className="flex items-center gap-2">
-                            <div className="w-6 h-6 rounded-full bg-slate-100 text-slate-400 flex items-center justify-center font-black text-[8px]">{rev.author[0]}</div>
-                            <span className="font-black text-slate-900 text-[10px] uppercase tracking-widest">{rev.author}</span>
-                        </div>
-                    </motion.div>
-                    ))}
-                </div>
+                <div className="h-10 w-px bg-slate-200" />
+                <p className="text-[10px] font-black uppercase tracking-widest leading-tight">Certyfikowana <br/> klinika</p>
             </div>
           </motion.div>
 
-          <motion.div initial={{ opacity: 0, scale: 0.95 }} animate={{ opacity: 1, scale: 1 }} className={`${cardStyle} p-10 md:p-14 sticky top-12`}>
+          <motion.div initial={{ opacity: 0, scale: 0.95 }} animate={{ opacity: 1, scale: 1 }} className={`${cardStyle} p-10 md:p-14 relative overflow-hidden`}>
             {status === 'success' ? (
               <div className="text-center py-20">
                 <div className="w-20 h-20 bg-blue-600 rounded-full mx-auto flex items-center justify-center text-white text-3xl mb-8">✓</div>
-                <h2 className="text-3xl font-black uppercase tracking-tight text-slate-900 leading-tight">Zgłoszenie przyjęte</h2>
+                <h2 className="text-3xl font-black uppercase tracking-tight text-slate-900">Zgłoszenie przyjęte</h2>
                 <p className="text-slate-500 mt-4 leading-relaxed">
-                  Dziękujemy za kontakt. Skontaktujemy się z Tobą jak najszybciej w celu ustalenia terminu wizyty.
+                  Dziękujemy za kontakt. Skontaktujemy się z Tobą jak najszybciej w celu ustalenia dogodnego terminu wizyty.
                 </p>
               </div>
             ) : (
@@ -148,53 +135,48 @@ export default function LocationClient({ locationData }: { locationData: any }) 
           </motion.div>
         </div>
 
-        {/* SEKCJA FAQ */}
+        {/* --- SEKCJA OPINII PACJENTÓW --- */}
         <div className="mb-32 text-left">
           <div className="flex items-center gap-4 mb-16">
-            <h2 className="text-4xl font-black tracking-tight italic uppercase text-slate-900 leading-none">Częste pytania</h2>
+            <h2 className="text-4xl font-black tracking-tight italic uppercase leading-none text-slate-900">Opinie Pacjentów</h2>
             <div className="h-px flex-grow bg-slate-100" />
+            <div className="flex items-center gap-2 bg-slate-50 px-4 py-2 rounded-2xl border border-slate-100">
+              <Star /><span className="font-black text-sm text-slate-900">4.9/5 (347 opinii)</span>
+            </div>
           </div>
-          <div className="grid md:grid-cols-2 gap-12">
-            {[
-              {
-                q: "Czy usuwanie ósemki boli?",
-                a: "Zabieg jest całkowicie bezbolesny. Stosujemy nowoczesne znieczulenia miejscowe, które skutecznie eliminują jakikolwiek dyskomfort podczas ekstrakcji."
-              },
-              {
-                q: "Ile trwa zabieg?",
-                a: "Większość zabiegów usunięcia zębów mądrości w naszych gabinetach trwa od 15 do 40 minut, zależnie od stopnia skomplikowania przypadku."
-              },
-              {
-                q: "Jak przygotować się do wizyty?",
-                a: "Zalecamy zjedzenie lekkiego posiłku oraz zabranie aktualnego zdjęcia panoramicznego. Jeśli go nie posiadasz, wykonamy diagnostykę RTG na miejscu."
-              },
-              {
-                q: "Kiedy można wrócić do pracy?",
-                a: "Zazwyczaj pacjenci wracają do codziennych aktywności już następnego dnia. Przy bardziej złożonych zabiegach zalecamy 2-3 dni odpoczynku."
-              }
-            ].map((faq, i) => (
-              <div key={i} className="space-y-4">
-                <h4 className="text-lg font-black uppercase tracking-tight text-blue-600">{faq.q}</h4>
-                <p className="text-slate-500 leading-relaxed font-medium">{faq.a}</p>
-              </div>
+
+          <div className="grid md:grid-cols-3 gap-8">
+            {locationData.reviews?.map((rev: any, i: number) => (
+              <motion.div 
+                key={i}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: i * 0.1 }}
+                className="p-8 rounded-[40px] bg-white border border-slate-100 shadow-sm hover:shadow-xl transition-all duration-500 relative"
+              >
+                <div className="flex gap-1 mb-4 text-amber-400">
+                  {[...Array(5)].map((_, starI) => <Star key={starI} />)}
+                </div>
+                <p className="text-slate-500 italic mb-6 leading-relaxed">"{rev.text}"</p>
+                <div className="flex items-center gap-3">
+                  <div className="w-8 h-8 rounded-full bg-blue-100 text-blue-600 flex items-center justify-center font-black text-[10px]">
+                    {rev.author[0]}
+                  </div>
+                  <span className="font-black text-slate-900 text-xs uppercase tracking-widest">{rev.author}</span>
+                </div>
+              </motion.div>
             ))}
           </div>
         </div>
 
         <div className="mb-32 text-left">
-          <div className="flex items-center gap-4 mb-12">
+          <div className="flex items-center gap-4 mb-16">
             <h2 className="text-4xl font-black tracking-tight italic uppercase leading-none text-slate-900">Mapa Dojazdu</h2>
             <div className="h-px flex-grow bg-slate-100 rounded-full" />
           </div>
-          <div className="w-full h-[500px] rounded-[56px] overflow-hidden border-8 border-white shadow-2xl relative bg-slate-100">
-            <iframe 
-                width="100%" 
-                height="100%" 
-                style={{ border: 0 }} 
-                loading="lazy" 
-                allowFullScreen 
-                src={`https://maps.google.com/maps?q=${encodeURIComponent('Ochota na Uśmiech ' + locationData.klinika + ' Warszawa')}&t=&z=15&ie=UTF8&iwloc=&output=embed`}
-            />
+          <div className="w-full h-[500px] rounded-[56px] overflow-hidden border-8 border-white shadow-2xl relative bg-slate-50">
+            <iframe width="100%" height="100%" style={{ border: 0 }} loading="lazy" allowFullScreen src={`https://www.google.com/maps/embed/v1/search?key=TWOJ_API_KEY_JESLI_MASZ&q=${encodeURIComponent('Ochota na Uśmiech Warszawa ' + locationData.klinika)}`} />
           </div>
         </div>
       </main>
