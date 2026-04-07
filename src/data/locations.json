@@ -1,0 +1,26 @@
+[
+  {
+    "slug": "rakowiec",
+    "dzielnica": "na Rakowcu",
+    "nazwa_lokalizacji": "Osiedle Rakowiec",
+    "klinika": "Pruszkowska 6b",
+    "czas_dojazdu": "3 minuty",
+    "telefon": "22 823 20 40"
+  },
+  {
+    "slug": "dworzec-zachodni",
+    "dzielnica": "w okolicach Dworca Zachodniego",
+    "nazwa_lokalizacji": "Dworzec Zachodni",
+    "klinika": "Pruszkowska 6b",
+    "czas_dojazdu": "10 minut",
+    "telefon": "22 823 20 40"
+  },
+  {
+    "slug": "metro-imielin",
+    "dzielnica": "przy Metrze Imielin",
+    "nazwa_lokalizacji": "Stacja Metro Imielin",
+    "klinika": "Aleja KEN 96",
+    "czas_dojazdu": "5 minut pieszo",
+    "telefon": "22 644 52 92"
+  }
+]
