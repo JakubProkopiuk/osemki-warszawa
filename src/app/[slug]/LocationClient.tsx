@@ -7,7 +7,6 @@ import { motion } from 'framer-motion';
 const cardStyle = "bg-white/90 backdrop-blur-2xl border border-white/50 shadow-[0_32px_64px_-16px_rgba(0,0,0,0.08)] rounded-[48px]";
 const inputStyle = "w-full bg-slate-100/50 border-2 border-transparent focus:border-blue-500/20 focus:bg-white p-5 rounded-3xl outline-none transition-all duration-300 text-lg placeholder:text-slate-400 shadow-[inset_0_2px_4px_rgba(0,0,0,0.02)]";
 
-const IconVerify = () => <svg className="w-5 h-5 text-blue-500" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>;
 const Star = () => <svg className="w-4 h-4 text-amber-400" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" /></svg>;
 
 export default function LocationClient({ locationData }: { locationData: any }) {
@@ -19,7 +18,6 @@ export default function LocationClient({ locationData }: { locationData: any }) 
     ? { name: "lek. dent. Małgorzata Sturska", role: "Specjalista chirurgii szczękowo-twarzowej", img: "/doctors/sturska.jpg", locName: "Ochota" }
     : { name: "lek. dent. Natalia Kowalczyk-Zuchora", role: "Lekarz dentysta", img: "/doctors/kowalczyk.webp", locName: "Ursynów" };
 
-  const formattedTime = locationData.czas_dojazdu.replace('1 minuta', '1 minutę');
   const locationName = locationData.nazwa_lokalizacji === 'Rakowiec' ? 'Osiedle Rakowiec' : locationData.nazwa_lokalizacji;
 
   const handlePhoneChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -73,9 +71,10 @@ export default function LocationClient({ locationData }: { locationData: any }) 
                 Bez bólu. <br />
                 <span className="text-slate-300 font-light italic">Bez stresu.</span>
               </h1>
+              {/* POPRAWKA: Usunięta rakieta i zmieniony kod odpowiedzialny za czas */}
               <p className="text-xl md:text-2xl text-slate-400 font-medium leading-relaxed max-w-lg">
                 Profesjonalne usuwanie ósemek. Lokalizacja: <strong>{locationName}</strong>. Zapraszamy do gabinetu przy <strong>ul. {locationData.klinika}</strong>, blisko <strong>{locationData.punkt_orientacyjny}</strong>. <br />
-                🚀 Dotrzesz do nas w <strong>{formattedTime}</strong>.
+                Dotrzesz do nas w <strong>{locationData.czas_dojazdu}</strong>.
               </p>
             </div>
 
@@ -175,15 +174,7 @@ export default function LocationClient({ locationData }: { locationData: any }) 
             <div className="h-px flex-grow bg-slate-100 rounded-full" />
           </div>
           <div className="w-full h-[500px] rounded-[56px] overflow-hidden border-8 border-white shadow-2xl relative bg-slate-50">
-            {/* POPRAWKA: Mapa korzystająca z bezpłatnego URL bez API Key */}
-            <iframe 
-                width="100%" 
-                height="100%" 
-                style={{ border: 0 }} 
-                loading="lazy" 
-                allowFullScreen 
-                src={`https://maps.google.com/maps?q=${encodeURIComponent('Ochota na Uśmiech Warszawa ' + locationData.klinika)}&output=embed`} 
-            />
+            <iframe width="100%" height="100%" style={{ border: 0 }} loading="lazy" allowFullScreen src={`https://www.google.com/maps/embed/v1/search?key=TWOJ_API_KEY_JESLI_MASZ&q=${encodeURIComponent('Ochota na Uśmiech Warszawa ' + locationData.klinika)}`} />
           </div>
         </div>
       </main>
