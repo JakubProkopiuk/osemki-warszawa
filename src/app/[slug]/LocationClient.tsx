@@ -89,17 +89,33 @@ export default function LocationClient({ locationData }: { locationData: any }) 
               </div>
             </div>
 
-            <div className="flex items-center gap-12 pt-4 opacity-50 grayscale hover:grayscale-0 transition-all duration-500">
-                <div className="space-y-2 leading-none">
-                    <div className="flex gap-1"><Star/><Star/><Star/><Star/><Star/></div>
-                    <p className="text-[10px] font-black uppercase tracking-tighter">4.9/5 Google Maps</p>
+            {/* SEKCJA OPINII PRZENIESIONA TUTAJ - POD KARTĘ LEKARZA */}
+            <div className="space-y-8 pt-4">
+                <div className="flex items-center gap-4">
+                    <div className="flex items-center gap-2 bg-slate-50 px-4 py-2 rounded-2xl border border-slate-100">
+                        <Star /><span className="font-black text-sm text-slate-900 uppercase">4.9/5 Google Maps</span>
+                    </div>
+                    <div className="h-px flex-grow bg-slate-100" />
+                    <span className="text-[10px] font-black uppercase tracking-widest text-slate-300">Certyfikowana Klinika</span>
                 </div>
-                <div className="h-10 w-px bg-slate-200" />
-                <p className="text-[10px] font-black uppercase tracking-widest leading-tight">Certyfikowana <br/> klinika</p>
+                <div className="grid md:grid-cols-2 gap-6">
+                    {locationData.reviews?.slice(0, 2).map((rev: any, i: number) => (
+                    <motion.div key={i} className="p-6 rounded-[32px] bg-white border border-slate-100 shadow-sm relative">
+                        <div className="flex gap-1 mb-3 text-amber-400 scale-75 origin-left">
+                            {[...Array(5)].map((_, s) => <Star key={s} />)}
+                        </div>
+                        <p className="text-slate-500 italic text-sm leading-relaxed mb-4">"{rev.text}"</p>
+                        <div className="flex items-center gap-2">
+                            <div className="w-6 h-6 rounded-full bg-slate-100 text-slate-400 flex items-center justify-center font-black text-[8px]">{rev.author[0]}</div>
+                            <span className="font-black text-slate-900 text-[10px] uppercase tracking-widest">{rev.author}</span>
+                        </div>
+                    </motion.div>
+                    ))}
+                </div>
             </div>
           </motion.div>
 
-          <motion.div initial={{ opacity: 0, scale: 0.95 }} animate={{ opacity: 1, scale: 1 }} className={`${cardStyle} p-10 md:p-14 relative overflow-hidden`}>
+          <motion.div initial={{ opacity: 0, scale: 0.95 }} animate={{ opacity: 1, scale: 1 }} className={`${cardStyle} p-10 md:p-14 relative overflow-hidden sticky top-12`}>
             {status === 'success' ? (
               <div className="text-center py-20">
                 <div className="w-20 h-20 bg-blue-600 rounded-full mx-auto flex items-center justify-center text-white text-3xl mb-8">✓</div>
@@ -133,55 +149,53 @@ export default function LocationClient({ locationData }: { locationData: any }) 
           </motion.div>
         </div>
 
-        {/* --- SEKCJA OPINII PACJENTÓW --- */}
+        {/* SEKCJA FAQ */}
         <div className="mb-32 text-left">
           <div className="flex items-center gap-4 mb-16">
-            <h2 className="text-4xl font-black tracking-tight italic uppercase leading-none text-slate-900">Opinie Pacjentów</h2>
+            <h2 className="text-4xl font-black tracking-tight italic uppercase leading-none text-slate-900">Częste pytania</h2>
             <div className="h-px flex-grow bg-slate-100" />
-            <div className="flex items-center gap-2 bg-slate-50 px-4 py-2 rounded-2xl border border-slate-100">
-              <Star /><span className="font-black text-sm text-slate-900">4.9/5 (347 opinii)</span>
-            </div>
           </div>
-
-          <div className="grid md:grid-cols-3 gap-8">
-            {locationData.reviews?.map((rev: any, i: number) => (
-              <motion.div 
-                key={i}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: i * 0.1 }}
-                className="p-8 rounded-[40px] bg-white border border-slate-100 shadow-sm hover:shadow-xl transition-all duration-500 relative"
-              >
-                <div className="flex gap-1 mb-4 text-amber-400">
-                  {[...Array(5)].map((_, starI) => <Star key={starI} />)}
-                </div>
-                <p className="text-slate-500 italic mb-6 leading-relaxed">"{rev.text}"</p>
-                <div className="flex items-center gap-3">
-                  <div className="w-8 h-8 rounded-full bg-blue-100 text-blue-600 flex items-center justify-center font-black text-[10px]">
-                    {rev.author[0]}
-                  </div>
-                  <span className="font-black text-slate-900 text-xs uppercase tracking-widest">{rev.author}</span>
-                </div>
-              </motion.div>
+          <div className="grid md:grid-cols-2 gap-12">
+            {[
+              {
+                q: "Czy usuwanie ósemki boli?",
+                a: "Zabieg jest całkowicie bezbolesny. Stosujemy nowoczesne znieczulenia miejscowe, które skutecznie eliminują jakikolwiek dyskomfort podczas ekstrakcji."
+              },
+              {
+                q: "Ile trwa zabieg?",
+                a: "Większość zabiegów usunięcia zębów mądrości w naszych gabinetach trwa od 15 do 40 minut, zależnie od stopnia skomplikowania przypadku."
+              },
+              {
+                q: "Jak przygotować się do wizyty?",
+                a: "Zalecamy zjedzenie lekkiego posiłku oraz zabranie aktualnego zdjęcia panoramicznego. Jeśli go nie posiadasz, wykonamy diagnostykę RTG na miejscu."
+              },
+              {
+                q: "Kiedy można wrócić do pracy?",
+                a: "Zazwyczaj pacjenci wracają do codziennych aktywności już następnego dnia. Przy bardziej złożonych zabiegach zalecamy 2-3 dni odpoczynku."
+              }
+            ].map((faq, i) => (
+              <div key={i} className="space-y-4">
+                <h4 className="text-lg font-black uppercase tracking-tight text-blue-600">{faq.q}</h4>
+                <p className="text-slate-500 leading-relaxed font-medium">{faq.a}</p>
+              </div>
             ))}
           </div>
         </div>
 
+        {/* MAPA */}
         <div className="mb-32 text-left">
-          <div className="flex items-center gap-4 mb-16">
+          <div className="flex items-center gap-4 mb-12">
             <h2 className="text-4xl font-black tracking-tight italic uppercase leading-none text-slate-900">Mapa Dojazdu</h2>
             <div className="h-px flex-grow bg-slate-100 rounded-full" />
           </div>
           <div className="w-full h-[500px] rounded-[56px] overflow-hidden border-8 border-white shadow-2xl relative bg-slate-50">
-            {/* TO JEST TA JEDNA POPRAWIONA LINIJKA - DARMOWY LINK GOOGLE MAPS */}
             <iframe 
               width="100%" 
               height="100%" 
               style={{ border: 0 }} 
               loading="lazy" 
               allowFullScreen 
-              src={`https://maps.google.com/maps?q=${encodeURIComponent('Ochota na Uśmiech ' + locationData.klinika + ' Warszawa')}&t=&z=15&ie=UTF8&iwloc=&output=embed`} 
+              src={`https://maps.google.com/maps?q=...&output=embed?q=${encodeURIComponent('Ochota na Uśmiech Warszawa ' + locationData.klinika)}&output=embed`} 
             />
           </div>
         </div>
