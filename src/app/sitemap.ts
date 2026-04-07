@@ -2,24 +2,25 @@ import { MetadataRoute } from 'next';
 import locations from '../data/locations.json';
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  const baseUrl = 'https://www.osemki-warszawa.pl';
+  const baseUrl = 'https://www.osemki-warszawa.pl'; // Zmień na swoją realną domenę
 
-  // 1. Definiujemy stronę główną (najwyższy priorytet)
-  const mainPage = {
-    url: baseUrl,
-    lastModified: new Date(),
-    changeFrequency: 'weekly',
-    priority: 1.0,
-  } as const;
+  // 1. Dodajemy stronę główną
+  const routes = [
+    {
+      url: baseUrl,
+      lastModified: new Date(),
+      changeFrequency: 'daily' as const,
+      priority: 1,
+    },
+  ];
 
-  // 2. Automatycznie generujemy wpisy dla każdej lokalizacji z JSON-a
-  const locationPages = locations.map((loc) => ({
+  // 2. Dodajemy wszystkie 153 podstrony lokalizacji z JSON-a
+  const locationRoutes = locations.map((loc) => ({
     url: `${baseUrl}/${loc.slug}`,
     lastModified: new Date(),
-    changeFrequency: 'monthly',
+    changeFrequency: 'weekly' as const,
     priority: 0.8,
-  })) as MetadataRoute.Sitemap;
+  }));
 
-  // 3. Łączymy wszystko w jedną listę
-  return [mainPage, ...locationPages];
+  return [...routes, ...locationRoutes];
 }
