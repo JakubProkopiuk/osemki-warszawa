@@ -60,7 +60,7 @@ export default function LocationClient({ locationData }: { locationData: any }) 
       
       <div className={`fixed top-[-10%] left-[-10%] w-[50%] h-[50%] transition-colors duration-1000 blur-[120px] rounded-full z-0 ${formData.painLevel > 7 ? 'bg-red-100/30' : 'bg-blue-100/20'}`} />
 
-      <main className="relative z-10 w-full max-w-[1140px] mt-12 md:mt-24 text-left">
+      <main className="relative z-10 w-full max-w-[1240px] mt-12 md:mt-24 text-left mx-auto">
         <div className="grid lg:grid-cols-[1.1fr,0.9fr] gap-16 md:gap-24 items-start mb-32">
           
           <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} className="space-y-12">
@@ -89,7 +89,7 @@ export default function LocationClient({ locationData }: { locationData: any }) 
               </div>
             </div>
 
-            {/* SEKCJA OPINII PRZENIESIONA TUTAJ - POD KARTĘ LEKARZA */}
+            {/* SEKCJA OPINII: Ustawiono na 3 elementy (grid-cols-3) */}
             <div className="space-y-8 pt-4">
                 <div className="flex items-center gap-4">
                     <div className="flex items-center gap-2 bg-slate-50 px-4 py-2 rounded-2xl border border-slate-100">
@@ -98,16 +98,18 @@ export default function LocationClient({ locationData }: { locationData: any }) 
                     <div className="h-px flex-grow bg-slate-100" />
                     <span className="text-[10px] font-black uppercase tracking-widest text-slate-300">Certyfikowana Klinika</span>
                 </div>
-                <div className="grid md:grid-cols-2 gap-6">
-                    {locationData.reviews?.slice(0, 2).map((rev: any, i: number) => (
-                    <motion.div key={i} className="p-6 rounded-[32px] bg-white border border-slate-100 shadow-sm relative">
-                        <div className="flex gap-1 mb-3 text-amber-400 scale-75 origin-left">
-                            {[...Array(5)].map((_, s) => <Star key={s} />)}
+                <div className="grid md:grid-cols-3 gap-4">
+                    {locationData.reviews?.slice(0, 3).map((rev: any, i: number) => (
+                    <motion.div key={i} className="p-5 rounded-[24px] bg-white border border-slate-100 shadow-sm relative flex flex-col justify-between">
+                        <div>
+                            <div className="flex gap-1 mb-3 text-amber-400 scale-75 origin-left">
+                                {[...Array(5)].map((_, s) => <Star key={s} />)}
+                            </div>
+                            <p className="text-slate-500 italic text-xs leading-relaxed mb-4">"{rev.text}"</p>
                         </div>
-                        <p className="text-slate-500 italic text-sm leading-relaxed mb-4">"{rev.text}"</p>
-                        <div className="flex items-center gap-2">
-                            <div className="w-6 h-6 rounded-full bg-slate-100 text-slate-400 flex items-center justify-center font-black text-[8px]">{rev.author[0]}</div>
-                            <span className="font-black text-slate-900 text-[10px] uppercase tracking-widest">{rev.author}</span>
+                        <div className="flex items-center gap-2 mt-auto">
+                            <div className="w-6 h-6 rounded-full bg-slate-100 text-slate-400 flex items-center justify-center font-black text-[8px] shrink-0">{rev.author[0]}</div>
+                            <span className="font-black text-slate-900 text-[10px] uppercase tracking-widest truncate">{rev.author}</span>
                         </div>
                     </motion.div>
                     ))}
@@ -152,7 +154,7 @@ export default function LocationClient({ locationData }: { locationData: any }) 
         {/* SEKCJA FAQ */}
         <div className="mb-32 text-left">
           <div className="flex items-center gap-4 mb-16">
-            <h2 className="text-4xl font-black tracking-tight italic uppercase leading-none text-slate-900">Częste pytania</h2>
+            <h2 className="text-4xl font-black tracking-tight italic uppercase text-slate-900 leading-none">Częste pytania</h2>
             <div className="h-px flex-grow bg-slate-100" />
           </div>
           <div className="grid md:grid-cols-2 gap-12">
@@ -182,7 +184,7 @@ export default function LocationClient({ locationData }: { locationData: any }) 
           </div>
         </div>
 
-        {/* MAPA */}
+        {/* MAPA NAPRAWIONA */}
         <div className="mb-32 text-left">
           <div className="flex items-center gap-4 mb-12">
             <h2 className="text-4xl font-black tracking-tight italic uppercase leading-none text-slate-900">Mapa Dojazdu</h2>
@@ -195,7 +197,7 @@ export default function LocationClient({ locationData }: { locationData: any }) 
               style={{ border: 0 }} 
               loading="lazy" 
               allowFullScreen 
-              src={`https://maps.google.com/maps?q=...&output=embed?q=${encodeURIComponent('Ochota na Uśmiech Warszawa ' + locationData.klinika)}&output=embed`} 
+              src={`https://maps.google.com/maps?q=${encodeURIComponent('Ochota na Uśmiech Warszawa ' + locationData.klinika)}&t=&z=15&ie=UTF8&iwloc=&output=embed`} 
             />
           </div>
         </div>
