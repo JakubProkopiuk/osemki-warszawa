@@ -1,38 +1,75 @@
-import locations from '../../data/locations.json';
-import LocationClient from './LocationClient';
-import { Metadata } from 'next';
+'use client';
 
-// Funkcja generująca parametry dla statycznego budowania stron
-export async function generateStaticParams() {
-  return locations.map((location) => ({
-    slug: location.slug,
-  }));
-}
+import Link from 'next/link';
 
-// Funkcja generująca dynamiczne metadane (SEO)
-export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }): Promise<Metadata> {
-  const { slug } = await params;
-  const location = locations.find((l) => l.slug === slug);
-  
-  return {
-    title: `Usuwanie Ósemek Warszawa ${location?.nazwa_lokalizacji} | Ochota na Uśmiech`,
-    description: `Szukasz chirurga na ${location?.nazwa_lokalizacji}? Bezbolesne usuwanie ósemek. Sprawdź wolne terminy i dojedź do nas w ${location?.czas_dojazdu}.`,
-  };
-}
+export default function HomePage() {
+  return (
+    <div className="min-h-screen bg-[#FDFDFD] text-[#1A1C1E] font-sans antialiased">
+      {/* Dekoracyjne tło */}
+      <div className="fixed top-[-10%] right-[-10%] w-[60%] h-[60%] bg-blue-50/50 blur-[120px] rounded-full z-0" />
+      
+      <main className="relative z-10 max-w-[1140px] mx-auto pt-24 px-6 md:pt-40">
+        <div className="text-center space-y-8 mb-24">
+          <div className="inline-flex items-center gap-3 px-5 py-2.5 rounded-full bg-white border border-slate-100 shadow-sm text-blue-600 text-xs font-bold uppercase tracking-widest leading-none mx-auto">
+            Warszawskie Centrum Chirurgii Ósemek
+          </div>
+          <h1 className="text-6xl md:text-[100px] font-black tracking-tight leading-[0.85] text-slate-900">
+            Ochota na <br />
+            <span className="text-slate-300 font-light italic">Uśmiech.</span>
+          </h1>
+          <p className="text-xl md:text-2xl text-slate-400 font-medium leading-relaxed max-w-2xl mx-auto">
+            Dwa specjalistyczne gabinety w Warszawie. <br /> 
+            Precyzyjne usuwanie ósemek przez doświadczonych chirurgów.
+          </p>
+        </div>
 
-// Główna strona jako Server Component
-export default async function Page({ params }: { params: Promise<{ slug: string }> }) {
-  const { slug } = await params;
-  const locationData = locations.find((l) => l.slug === slug);
+        {/* Wybór Kliniki */}
+        <div className="grid md:grid-cols-2 gap-8 mb-32">
+          <Link href="/rakowiec" className="group relative overflow-hidden bg-white p-12 rounded-[48px] border border-slate-100 shadow-xl transition-all duration-500 hover:scale-[1.02]">
+            <div className="relative z-10 space-y-4">
+              <span className="text-blue-600 font-bold uppercase tracking-widest text-xs">Lokalizacja 01</span>
+              <h2 className="text-4xl font-black italic uppercase">Ochota</h2>
+              <p className="text-slate-400 font-medium">ul. Pruszkowska 6b<br />Warszawa Ochota</p>
+              <div className="pt-6 flex items-center gap-2 text-slate-900 font-bold uppercase tracking-widest text-sm">
+                Wybierz lokalizację <span className="group-hover:translate-x-2 transition-transform">→</span>
+              </div>
+            </div>
+            <div className="absolute top-0 right-0 w-32 h-32 bg-blue-50 rounded-bl-[100px] transition-all group-hover:w-40 group-hover:h-40" />
+          </Link>
 
-  if (!locationData) {
-    return (
-      <div className="min-h-screen flex items-center justify-center font-sans text-slate-400 uppercase tracking-widest">
-        Nie znaleziono lokalizacji
-      </div>
-    );
-  }
+          <Link href="/metro-imielin" className="group relative overflow-hidden bg-[#1A1C1E] p-12 rounded-[48px] shadow-2xl transition-all duration-500 hover:scale-[1.02]">
+            <div className="relative z-10 space-y-4">
+              <span className="text-blue-400 font-bold uppercase tracking-widest text-xs">Lokalizacja 02</span>
+              <h2 className="text-4xl font-black italic uppercase text-white">Ursynów</h2>
+              <p className="text-slate-500 font-medium text-white/60">al. KEN 96<br />Warszawa Ursynów</p>
+              <div className="pt-6 flex items-center gap-2 text-white font-bold uppercase tracking-widest text-sm">
+                Wybierz lokalizację <span className="group-hover:translate-x-2 transition-transform">→</span>
+              </div>
+            </div>
+            <div className="absolute top-0 right-0 w-32 h-32 bg-white/5 rounded-bl-[100px] transition-all group-hover:w-40 group-hover:h-40" />
+          </Link>
+        </div>
 
-  // Przekazujemy dane do komponentu klienckiego
-  return <LocationClient locationData={locationData} />;
+        {/* Sekcja Korzyści */}
+        <div className="grid md:grid-cols-3 gap-12 pb-24 border-t border-slate-100 pt-24 text-center">
+          <div>
+            <h3 className="font-black text-4xl mb-2">15 min</h3>
+            <p className="text-slate-400 font-medium uppercase tracking-widest text-xs">Średni czas zabiegu</p>
+          </div>
+          <div>
+            <h3 className="font-black text-4xl mb-2">100%</h3>
+            <p className="text-slate-400 font-medium uppercase tracking-widest text-xs">Bezbolesne metody</p>
+          </div>
+          <div>
+            <h3 className="font-black text-4xl mb-2">RTG/Tomograf</h3>
+            <p className="text-slate-400 font-medium uppercase tracking-widest text-xs">Pełna diagnostyka na miejscu</p>
+          </div>
+        </div>
+      </main>
+
+      <footer className="py-12 text-center text-slate-300 text-[10px] font-bold uppercase tracking-[0.5em] opacity-50">
+        © 2026 Ochota na Uśmiech | Designed for Excellence
+      </footer>
+    </div>
+  );
 }
