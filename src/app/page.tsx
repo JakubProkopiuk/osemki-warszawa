@@ -19,7 +19,7 @@ export default function HomePage() {
           
           <h1 className="text-6xl md:text-[100px] font-black tracking-tight leading-[0.85] text-slate-900">
             Ochota na <br />
-            <span className="text-slate-300 font-light italic">Uśmiech.</span>
+            <span className="text-slate-300 font-light italic text-[0.9em]">Uśmiech.</span>
           </h1>
           
           <p className="text-xl md:text-2xl text-slate-400 font-medium leading-relaxed max-w-2xl mx-auto">
@@ -28,39 +28,39 @@ export default function HomePage() {
           </p>
         </div>
 
-        {/* SEKCJA LOKALIZACJI */}
+        {/* SEKCJA LOKALIZACJI - POPRAWIONE LINKI I KLIKALNOŚĆ */}
         <div className="grid md:grid-cols-2 gap-8 mb-32">
           {/* Lokalizacja 01 - Ochota */}
-          <Link href="/rakowiec" className="group relative overflow-hidden bg-white p-12 rounded-[48px] border border-slate-100 shadow-xl transition-all duration-500 hover:scale-[1.02]">
+          <Link href="/ochota" className="group relative block overflow-hidden bg-white p-12 rounded-[48px] border border-slate-100 shadow-xl transition-all duration-500 hover:scale-[1.02] z-20 cursor-pointer">
             <div className="relative z-10 space-y-4">
               <span className="text-blue-600 font-bold uppercase tracking-widest text-xs">Lokalizacja 01</span>
-              <h2 className="text-4xl font-black italic uppercase">Ochota</h2>
-              <p className="text-slate-400 font-medium">ul. Pruszkowska 6b<br />Warszawa Ochota</p>
+              <h2 className="text-4xl font-black italic uppercase text-slate-900">Ochota</h2>
+              <p className="text-slate-400 font-medium leading-relaxed">ul. Pruszkowska 6b<br />Warszawa Ochota</p>
               <div className="pt-6 flex items-center gap-2 text-slate-900 font-bold uppercase tracking-widest text-sm">
-                Wybierz lokalizację <span className="group-hover:translate-x-2 transition-transform">→</span>
+                Wybierz lokalizację <span className="group-hover:translate-x-2 transition-transform duration-300">→</span>
               </div>
             </div>
-            <div className="absolute top-0 right-0 w-32 h-32 bg-blue-50 rounded-bl-[100px] transition-all group-hover:w-40 group-hover:h-40" />
+            <div className="absolute top-0 right-0 w-32 h-32 bg-blue-50 rounded-bl-[100px] transition-all group-hover:w-40 group-hover:h-40 z-0" />
           </Link>
 
           {/* Lokalizacja 02 - Ursynów */}
-          <Link href="/metro-imielin" className="group relative overflow-hidden bg-[#1A1C1E] p-12 rounded-[48px] shadow-2xl transition-all duration-500 hover:scale-[1.02]">
+          <Link href="/ursynow" className="group relative block overflow-hidden bg-[#1A1C1E] p-12 rounded-[48px] shadow-2xl transition-all duration-500 hover:scale-[1.02] z-20 cursor-pointer">
             <div className="relative z-10 space-y-4">
               <span className="text-blue-400 font-bold uppercase tracking-widest text-xs">Lokalizacja 02</span>
               <h2 className="text-4xl font-black italic uppercase text-white">Ursynów</h2>
-              <p className="text-slate-500 font-medium text-white/60">al. KEN 96<br />Warszawa Ursynów</p>
+              <p className="text-slate-500 font-medium text-white/60 leading-relaxed">al. KEN 96<br />Warszawa Ursynów</p>
               <div className="pt-6 flex items-center gap-2 text-white font-bold uppercase tracking-widest text-sm">
-                Wybierz lokalizację <span className="group-hover:translate-x-2 transition-transform">→</span>
+                Wybierz lokalizację <span className="group-hover:translate-x-2 transition-transform duration-300">→</span>
               </div>
             </div>
-            <div className="absolute top-0 right-0 w-32 h-32 bg-white/5 rounded-bl-[100px] transition-all group-hover:w-40 group-hover:h-40" />
+            <div className="absolute top-0 right-0 w-32 h-32 bg-white/5 rounded-bl-[100px] transition-all group-hover:w-40 group-hover:h-40 z-0" />
           </Link>
         </div>
 
         {/* SEKCJA: NASI EKSPERCI */}
         <div className="mb-32 text-left px-2">
           <div className="flex items-center gap-4 mb-16">
-            <h2 className="text-4xl font-black tracking-tight italic uppercase">Nasi Eksperci</h2>
+            <h2 className="text-4xl font-black tracking-tight italic uppercase text-slate-900">Nasi Eksperci</h2>
             <div className="h-[2px] flex-grow bg-slate-100 rounded-full" />
           </div>
           
@@ -86,6 +86,7 @@ export default function HomePage() {
                     alt={doc.name} 
                     fill 
                     className="object-cover grayscale group-hover:grayscale-0 transition-all duration-700"
+                    priority
                    />
                 </div>
                 <h3 className="text-xl font-black uppercase tracking-tight text-slate-900 mb-1">{doc.name}</h3>
@@ -99,16 +100,16 @@ export default function HomePage() {
         {/* STATYSTYKI / USP */}
         <div className="grid md:grid-cols-3 gap-12 pb-24 border-t border-slate-100 pt-24 text-center">
           <div>
-            <h3 className="font-black text-4xl mb-2">15 min</h3>
-            <p className="text-slate-400 font-medium uppercase tracking-widest text-xs">Średni czas zabiegu</p>
+            <h3 className="font-black text-4xl mb-2 text-slate-900">15 min</h3>
+            <p className="text-slate-400 font-bold uppercase tracking-widest text-[10px]">Średni czas zabiegu</p>
           </div>
           <div>
-            <h3 className="font-black text-4xl mb-2">100%</h3>
-            <p className="text-slate-400 font-medium uppercase tracking-widest text-xs">Bezbolesne metody</p>
+            <h3 className="font-black text-4xl mb-2 text-slate-900">100%</h3>
+            <p className="text-slate-400 font-bold uppercase tracking-widest text-[10px]">Bezbolesne metody</p>
           </div>
           <div>
-            <h3 className="font-black text-4xl mb-2">RTG / Tomograf</h3>
-            <p className="text-slate-400 font-medium uppercase tracking-widest text-xs">Pełna diagnostyka na miejscu</p>
+            <h3 className="font-black text-4xl mb-2 text-slate-900">RTG / Tomograf</h3>
+            <p className="text-slate-400 font-bold uppercase tracking-widest text-[10px]">Pełna diagnostyka na miejscu</p>
           </div>
         </div>
       </main>

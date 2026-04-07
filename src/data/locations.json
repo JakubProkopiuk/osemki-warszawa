@@ -7,13 +7,13 @@
     "punkt_orientacyjny": "Pola Mokotowskiego",
     "reviews": [
       {
-        "author": "Tomasz R.",
-        "text": "Najlepszy chirurg w Warszawie. Szybko, konkretnie i bezboleśnie.",
+        "author": "Marek W.",
+        "text": "Pełen profesjonalizm. Ósemka usunięta w 15 minut, bez żadnego bólu. Polecam!",
         "rating": 5
       },
       {
-        "author": "Marek W.",
-        "text": "Pełen profesjonalizm. Ósemka usunięta w 15 minut, bez żadnego bólu. Polecam!",
+        "author": "Tomasz R.",
+        "text": "Najlepszy chirurg w Warszawie. Szybko, konkretnie i bezboleśnie.",
         "rating": 5
       },
       {
@@ -27,9 +27,38 @@
     "slug": "rakowiec",
     "nazwa_lokalizacji": "Rakowiec",
     "klinika": "Pruszkowska 6b",
+    "czas_dojazdu": "1 minuty",
+    "punkt_orientacyjny": "Pola Mokotowskiego",
+    "reviews": [
+      {
+        "author": "Katarzyna Z.",
+        "text": "Bardzo bałam się zabiegu, ale dr Sturska ma niesamowite podejście.",
+        "rating": 5
+      },
+      {
+        "author": "Magdalena L.",
+        "text": "Gabinet na najwyższym poziomie. Nowoczesny sprzęt i świetna atmosfera.",
+        "rating": 5
+      },
+      {
+        "author": "Marek W.",
+        "text": "Pełen profesjonalizm. Ósemka usunięta w 15 minut, bez żadnego bólu. Polecam!",
+        "rating": 5
+      }
+    ]
+  },
+  {
+    "slug": "szczesliwice",
+    "nazwa_lokalizacji": "Szczęśliwice",
+    "klinika": "Pruszkowska 6b",
     "czas_dojazdu": "3 minuty",
     "punkt_orientacyjny": "Pola Mokotowskiego",
     "reviews": [
+      {
+        "author": "Magdalena L.",
+        "text": "Gabinet na najwyższym poziomie. Nowoczesny sprzęt i świetna atmosfera.",
+        "rating": 5
+      },
       {
         "author": "Tomasz R.",
         "text": "Najlepszy chirurg w Warszawie. Szybko, konkretnie i bezboleśnie.",
@@ -39,35 +68,6 @@
         "author": "Marek W.",
         "text": "Pełen profesjonalizm. Ósemka usunięta w 15 minut, bez żadnego bólu. Polecam!",
         "rating": 5
-      },
-      {
-        "author": "Magdalena L.",
-        "text": "Gabinet na najwyższym poziomie. Nowoczesny sprzęt i świetna atmosfera.",
-        "rating": 5
-      }
-    ]
-  },
-  {
-    "slug": "szczesliwice",
-    "nazwa_lokalizacji": "Szczęśliwice",
-    "klinika": "Pruszkowska 6b",
-    "czas_dojazdu": "1 minuty",
-    "punkt_orientacyjny": "Pola Mokotowskiego",
-    "reviews": [
-      {
-        "author": "Marek W.",
-        "text": "Pełen profesjonalizm. Ósemka usunięta w 15 minut, bez żadnego bólu. Polecam!",
-        "rating": 5
-      },
-      {
-        "author": "Magdalena L.",
-        "text": "Gabinet na najwyższym poziomie. Nowoczesny sprzęt i świetna atmosfera.",
-        "rating": 5
-      },
-      {
-        "author": "Katarzyna Z.",
-        "text": "Bardzo bałam się zabiegu, ale dr Sturska ma niesamowite podejście.",
-        "rating": 5
       }
     ]
   },
@@ -75,17 +75,17 @@
     "slug": "wlochy",
     "nazwa_lokalizacji": "Włochy",
     "klinika": "Pruszkowska 6b",
-    "czas_dojazdu": "3 minuty",
+    "czas_dojazdu": "1 minuty",
     "punkt_orientacyjny": "Pola Mokotowskiego",
     "reviews": [
       {
-        "author": "Magdalena L.",
-        "text": "Gabinet na najwyższym poziomie. Nowoczesny sprzęt i świetna atmosfera.",
+        "author": "Katarzyna Z.",
+        "text": "Bardzo bałam się zabiegu, ale dr Sturska ma niesamowite podejście.",
         "rating": 5
       },
       {
-        "author": "Katarzyna Z.",
-        "text": "Bardzo bałam się zabiegu, ale dr Sturska ma niesamowite podejście.",
+        "author": "Marek W.",
+        "text": "Pełen profesjonalizm. Ósemka usunięta w 15 minut, bez żadnego bólu. Polecam!",
         "rating": 5
       },
       {
@@ -103,8 +103,8 @@
     "punkt_orientacyjny": "Pola Mokotowskiego",
     "reviews": [
       {
-        "author": "Marek W.",
-        "text": "Pełen profesjonalizm. Ósemka usunięta w 15 minut, bez żadnego bólu. Polecam!",
+        "author": "Magdalena L.",
+        "text": "Gabinet na najwyższym poziomie. Nowoczesny sprzęt i świetna atmosfera.",
         "rating": 5
       },
       {
@@ -113,8 +113,8 @@
         "rating": 5
       },
       {
-        "author": "Magdalena L.",
-        "text": "Gabinet na najwyższym poziomie. Nowoczesny sprzęt i świetna atmosfera.",
+        "author": "Tomasz R.",
+        "text": "Najlepszy chirurg w Warszawie. Szybko, konkretnie i bezboleśnie.",
         "rating": 5
       }
     ]
@@ -127,11 +127,6 @@
     "punkt_orientacyjny": "Pola Mokotowskiego",
     "reviews": [
       {
-        "author": "Marek W.",
-        "text": "Pełen profesjonalizm. Ósemka usunięta w 15 minut, bez żadnego bólu. Polecam!",
-        "rating": 5
-      },
-      {
         "author": "Magdalena L.",
         "text": "Gabinet na najwyższym poziomie. Nowoczesny sprzęt i świetna atmosfera.",
         "rating": 5
@@ -140,6 +135,11 @@
         "author": "Katarzyna Z.",
         "text": "Bardzo bałam się zabiegu, ale dr Sturska ma niesamowite podejście.",
         "rating": 5
+      },
+      {
+        "author": "Marek W.",
+        "text": "Pełen profesjonalizm. Ósemka usunięta w 15 minut, bez żadnego bólu. Polecam!",
+        "rating": 5
       }
     ]
   },
@@ -147,17 +147,17 @@
     "slug": "ursus",
     "nazwa_lokalizacji": "Ursus",
     "klinika": "Pruszkowska 6b",
-    "czas_dojazdu": "1 minuty",
+    "czas_dojazdu": "3 minuty",
     "punkt_orientacyjny": "Pola Mokotowskiego",
     "reviews": [
       {
-        "author": "Marek W.",
-        "text": "Pełen profesjonalizm. Ósemka usunięta w 15 minut, bez żadnego bólu. Polecam!",
+        "author": "Tomasz R.",
+        "text": "Najlepszy chirurg w Warszawie. Szybko, konkretnie i bezboleśnie.",
         "rating": 5
       },
       {
-        "author": "Tomasz R.",
-        "text": "Najlepszy chirurg w Warszawie. Szybko, konkretnie i bezboleśnie.",
+        "author": "Marek W.",
+        "text": "Pełen profesjonalizm. Ósemka usunięta w 15 minut, bez żadnego bólu. Polecam!",
         "rating": 5
       },
       {
@@ -171,22 +171,22 @@
     "slug": "bemowo",
     "nazwa_lokalizacji": "Bemowo",
     "klinika": "Pruszkowska 6b",
-    "czas_dojazdu": "1 minuty",
+    "czas_dojazdu": "3 minuty",
     "punkt_orientacyjny": "Pola Mokotowskiego",
     "reviews": [
       {
-        "author": "Magdalena L.",
-        "text": "Gabinet na najwyższym poziomie. Nowoczesny sprzęt i świetna atmosfera.",
-        "rating": 5
-      },
-      {
-        "author": "Tomasz R.",
-        "text": "Najlepszy chirurg w Warszawie. Szybko, konkretnie i bezboleśnie.",
+        "author": "Katarzyna Z.",
+        "text": "Bardzo bałam się zabiegu, ale dr Sturska ma niesamowite podejście.",
         "rating": 5
       },
       {
         "author": "Marek W.",
         "text": "Pełen profesjonalizm. Ósemka usunięta w 15 minut, bez żadnego bólu. Polecam!",
+        "rating": 5
+      },
+      {
+        "author": "Tomasz R.",
+        "text": "Najlepszy chirurg w Warszawie. Szybko, konkretnie i bezboleśnie.",
         "rating": 5
       }
     ]
@@ -199,18 +199,18 @@
     "punkt_orientacyjny": "Pola Mokotowskiego",
     "reviews": [
       {
-        "author": "Katarzyna Z.",
-        "text": "Bardzo bałam się zabiegu, ale dr Sturska ma niesamowite podejście.",
+        "author": "Marek W.",
+        "text": "Pełen profesjonalizm. Ósemka usunięta w 15 minut, bez żadnego bólu. Polecam!",
+        "rating": 5
+      },
+      {
+        "author": "Tomasz R.",
+        "text": "Najlepszy chirurg w Warszawie. Szybko, konkretnie i bezboleśnie.",
         "rating": 5
       },
       {
         "author": "Magdalena L.",
         "text": "Gabinet na najwyższym poziomie. Nowoczesny sprzęt i świetna atmosfera.",
-        "rating": 5
-      },
-      {
-        "author": "Marek W.",
-        "text": "Pełen profesjonalizm. Ósemka usunięta w 15 minut, bez żadnego bólu. Polecam!",
         "rating": 5
       }
     ]
@@ -223,30 +223,6 @@
     "punkt_orientacyjny": "Metra Imielin",
     "reviews": [
       {
-        "author": "Marek W.",
-        "text": "Pełen profesjonalizm. Ósemka usunięta w 15 minut, bez żadnego bólu. Polecam!",
-        "rating": 5
-      },
-      {
-        "author": "Tomasz R.",
-        "text": "Najlepszy chirurg w Warszawie. Szybko, konkretnie i bezboleśnie.",
-        "rating": 5
-      },
-      {
-        "author": "Katarzyna Z.",
-        "text": "Bardzo bałam się zabiegu, ale dr Sturska ma niesamowite podejście.",
-        "rating": 5
-      }
-    ]
-  },
-  {
-    "slug": "mokotow",
-    "nazwa_lokalizacji": "Mokotów",
-    "klinika": "KEN 96",
-    "czas_dojazdu": "3 minuty",
-    "punkt_orientacyjny": "Metra Imielin",
-    "reviews": [
-      {
         "author": "Magdalena L.",
         "text": "Gabinet na najwyższym poziomie. Nowoczesny sprzęt i świetna atmosfera.",
         "rating": 5
@@ -257,15 +233,15 @@
         "rating": 5
       },
       {
-        "author": "Katarzyna Z.",
-        "text": "Bardzo bałam się zabiegu, ale dr Sturska ma niesamowite podejście.",
+        "author": "Tomasz R.",
+        "text": "Najlepszy chirurg w Warszawie. Szybko, konkretnie i bezboleśnie.",
         "rating": 5
       }
     ]
   },
   {
-    "slug": "wilanow",
-    "nazwa_lokalizacji": "Wilanów",
+    "slug": "mokotow",
+    "nazwa_lokalizacji": "Mokotów",
     "klinika": "KEN 96",
     "czas_dojazdu": "1 minuty",
     "punkt_orientacyjny": "Metra Imielin",
@@ -276,8 +252,32 @@
         "rating": 5
       },
       {
+        "author": "Katarzyna Z.",
+        "text": "Bardzo bałam się zabiegu, ale dr Sturska ma niesamowite podejście.",
+        "rating": 5
+      },
+      {
         "author": "Tomasz R.",
         "text": "Najlepszy chirurg w Warszawie. Szybko, konkretnie i bezboleśnie.",
+        "rating": 5
+      }
+    ]
+  },
+  {
+    "slug": "wilanow",
+    "nazwa_lokalizacji": "Wilanów",
+    "klinika": "KEN 96",
+    "czas_dojazdu": "3 minuty",
+    "punkt_orientacyjny": "Metra Imielin",
+    "reviews": [
+      {
+        "author": "Marek W.",
+        "text": "Pełen profesjonalizm. Ósemka usunięta w 15 minut, bez żadnego bólu. Polecam!",
+        "rating": 5
+      },
+      {
+        "author": "Magdalena L.",
+        "text": "Gabinet na najwyższym poziomie. Nowoczesny sprzęt i świetna atmosfera.",
         "rating": 5
       },
       {
@@ -295,8 +295,8 @@
     "punkt_orientacyjny": "Metra Imielin",
     "reviews": [
       {
-        "author": "Katarzyna Z.",
-        "text": "Bardzo bałam się zabiegu, ale dr Sturska ma niesamowite podejście.",
+        "author": "Magdalena L.",
+        "text": "Gabinet na najwyższym poziomie. Nowoczesny sprzęt i świetna atmosfera.",
         "rating": 5
       },
       {
@@ -315,41 +315,17 @@
     "slug": "natolin",
     "nazwa_lokalizacji": "Natolin",
     "klinika": "KEN 96",
-    "czas_dojazdu": "3 minuty",
+    "czas_dojazdu": "2 minuty",
     "punkt_orientacyjny": "Metra Imielin",
     "reviews": [
       {
-        "author": "Tomasz R.",
-        "text": "Najlepszy chirurg w Warszawie. Szybko, konkretnie i bezboleśnie.",
+        "author": "Marek W.",
+        "text": "Pełen profesjonalizm. Ósemka usunięta w 15 minut, bez żadnego bólu. Polecam!",
         "rating": 5
       },
       {
         "author": "Katarzyna Z.",
         "text": "Bardzo bałam się zabiegu, ale dr Sturska ma niesamowite podejście.",
-        "rating": 5
-      },
-      {
-        "author": "Marek W.",
-        "text": "Pełen profesjonalizm. Ósemka usunięta w 15 minut, bez żadnego bólu. Polecam!",
-        "rating": 5
-      }
-    ]
-  },
-  {
-    "slug": "stoklosy",
-    "nazwa_lokalizacji": "Stokłosy",
-    "klinika": "KEN 96",
-    "czas_dojazdu": "3 minuty",
-    "punkt_orientacyjny": "Metra Imielin",
-    "reviews": [
-      {
-        "author": "Marek W.",
-        "text": "Pełen profesjonalizm. Ósemka usunięta w 15 minut, bez żadnego bólu. Polecam!",
-        "rating": 5
-      },
-      {
-        "author": "Tomasz R.",
-        "text": "Najlepszy chirurg w Warszawie. Szybko, konkretnie i bezboleśnie.",
         "rating": 5
       },
       {
@@ -360,15 +336,39 @@
     ]
   },
   {
-    "slug": "piaseczno",
-    "nazwa_lokalizacji": "Piaseczno",
+    "slug": "stoklosy",
+    "nazwa_lokalizacji": "Stokłosy",
     "klinika": "KEN 96",
-    "czas_dojazdu": "3 minuty",
+    "czas_dojazdu": "1 minuty",
     "punkt_orientacyjny": "Metra Imielin",
     "reviews": [
       {
         "author": "Marek W.",
         "text": "Pełen profesjonalizm. Ósemka usunięta w 15 minut, bez żadnego bólu. Polecam!",
+        "rating": 5
+      },
+      {
+        "author": "Magdalena L.",
+        "text": "Gabinet na najwyższym poziomie. Nowoczesny sprzęt i świetna atmosfera.",
+        "rating": 5
+      },
+      {
+        "author": "Katarzyna Z.",
+        "text": "Bardzo bałam się zabiegu, ale dr Sturska ma niesamowite podejście.",
+        "rating": 5
+      }
+    ]
+  },
+  {
+    "slug": "piaseczno",
+    "nazwa_lokalizacji": "Piaseczno",
+    "klinika": "KEN 96",
+    "czas_dojazdu": "2 minuty",
+    "punkt_orientacyjny": "Metra Imielin",
+    "reviews": [
+      {
+        "author": "Tomasz R.",
+        "text": "Najlepszy chirurg w Warszawie. Szybko, konkretnie i bezboleśnie.",
         "rating": 5
       },
       {
@@ -387,12 +387,12 @@
     "slug": "ulica-grojecka",
     "nazwa_lokalizacji": "ul. Grójecka",
     "klinika": "Pruszkowska 6b",
-    "czas_dojazdu": "4 minut",
-    "punkt_orientacyjny": "Parku Szczęśliwickiego",
+    "czas_dojazdu": "8 minut",
+    "punkt_orientacyjny": "Hali Kopińskiej",
     "reviews": [
       {
-        "author": "Katarzyna Z.",
-        "text": "Bardzo bałam się zabiegu, ale dr Sturska ma niesamowite podejście.",
+        "author": "Tomasz R.",
+        "text": "Najlepszy chirurg w Warszawie. Szybko, konkretnie i bezboleśnie.",
         "rating": 5
       },
       {
@@ -401,8 +401,8 @@
         "rating": 5
       },
       {
-        "author": "Magdalena L.",
-        "text": "Gabinet na najwyższym poziomie. Nowoczesny sprzęt i świetna atmosfera.",
+        "author": "Katarzyna Z.",
+        "text": "Bardzo bałam się zabiegu, ale dr Sturska ma niesamowite podejście.",
         "rating": 5
       }
     ]
@@ -411,22 +411,22 @@
     "slug": "ulica-zwirki-i-wigury",
     "nazwa_lokalizacji": "ul. Żwirki i Wigury",
     "klinika": "Pruszkowska 6b",
-    "czas_dojazdu": "7 minut",
-    "punkt_orientacyjny": "Parku Szczęśliwickiego",
+    "czas_dojazdu": "4 minut",
+    "punkt_orientacyjny": "Hali Kopińskiej",
     "reviews": [
-      {
-        "author": "Katarzyna Z.",
-        "text": "Bardzo bałam się zabiegu, ale dr Sturska ma niesamowite podejście.",
-        "rating": 5
-      },
       {
         "author": "Marek W.",
         "text": "Pełen profesjonalizm. Ósemka usunięta w 15 minut, bez żadnego bólu. Polecam!",
         "rating": 5
       },
       {
-        "author": "Magdalena L.",
-        "text": "Gabinet na najwyższym poziomie. Nowoczesny sprzęt i świetna atmosfera.",
+        "author": "Katarzyna Z.",
+        "text": "Bardzo bałam się zabiegu, ale dr Sturska ma niesamowite podejście.",
+        "rating": 5
+      },
+      {
+        "author": "Tomasz R.",
+        "text": "Najlepszy chirurg w Warszawie. Szybko, konkretnie i bezboleśnie.",
         "rating": 5
       }
     ]
@@ -435,9 +435,14 @@
     "slug": "ulica-banacha",
     "nazwa_lokalizacji": "ul. Banacha",
     "klinika": "Pruszkowska 6b",
-    "czas_dojazdu": "8 minut",
-    "punkt_orientacyjny": "Parku Szczęśliwickiego",
+    "czas_dojazdu": "4 minut",
+    "punkt_orientacyjny": "Pola Mokotowskiego",
     "reviews": [
+      {
+        "author": "Magdalena L.",
+        "text": "Gabinet na najwyższym poziomie. Nowoczesny sprzęt i świetna atmosfera.",
+        "rating": 5
+      },
       {
         "author": "Marek W.",
         "text": "Pełen profesjonalizm. Ósemka usunięta w 15 minut, bez żadnego bólu. Polecam!",
@@ -446,11 +451,6 @@
       {
         "author": "Katarzyna Z.",
         "text": "Bardzo bałam się zabiegu, ale dr Sturska ma niesamowite podejście.",
-        "rating": 5
-      },
-      {
-        "author": "Tomasz R.",
-        "text": "Najlepszy chirurg w Warszawie. Szybko, konkretnie i bezboleśnie.",
         "rating": 5
       }
     ]
@@ -459,8 +459,8 @@
     "slug": "ulica-dickensa",
     "nazwa_lokalizacji": "ul. Dickensa",
     "klinika": "Pruszkowska 6b",
-    "czas_dojazdu": "4 minut",
-    "punkt_orientacyjny": "Placu Narutowicza",
+    "czas_dojazdu": "6 minut",
+    "punkt_orientacyjny": "Hali Kopińskiej",
     "reviews": [
       {
         "author": "Katarzyna Z.",
@@ -468,13 +468,13 @@
         "rating": 5
       },
       {
-        "author": "Tomasz R.",
-        "text": "Najlepszy chirurg w Warszawie. Szybko, konkretnie i bezboleśnie.",
+        "author": "Magdalena L.",
+        "text": "Gabinet na najwyższym poziomie. Nowoczesny sprzęt i świetna atmosfera.",
         "rating": 5
       },
       {
-        "author": "Magdalena L.",
-        "text": "Gabinet na najwyższym poziomie. Nowoczesny sprzęt i świetna atmosfera.",
+        "author": "Tomasz R.",
+        "text": "Najlepszy chirurg w Warszawie. Szybko, konkretnie i bezboleśnie.",
         "rating": 5
       }
     ]
@@ -483,12 +483,12 @@
     "slug": "ulica-korotynskiego",
     "nazwa_lokalizacji": "ul. Korotyńskiego",
     "klinika": "Pruszkowska 6b",
-    "czas_dojazdu": "8 minut",
-    "punkt_orientacyjny": "Atrium Reduta",
+    "czas_dojazdu": "6 minut",
+    "punkt_orientacyjny": "Pola Mokotowskiego",
     "reviews": [
       {
-        "author": "Magdalena L.",
-        "text": "Gabinet na najwyższym poziomie. Nowoczesny sprzęt i świetna atmosfera.",
+        "author": "Katarzyna Z.",
+        "text": "Bardzo bałam się zabiegu, ale dr Sturska ma niesamowite podejście.",
         "rating": 5
       },
       {
@@ -497,8 +497,8 @@
         "rating": 5
       },
       {
-        "author": "Tomasz R.",
-        "text": "Najlepszy chirurg w Warszawie. Szybko, konkretnie i bezboleśnie.",
+        "author": "Magdalena L.",
+        "text": "Gabinet na najwyższym poziomie. Nowoczesny sprzęt i świetna atmosfera.",
         "rating": 5
       }
     ]
@@ -507,14 +507,9 @@
     "slug": "ulica-bitwy-warszawskiej",
     "nazwa_lokalizacji": "ul. Bitwy Warszawskiej",
     "klinika": "Pruszkowska 6b",
-    "czas_dojazdu": "8 minut",
-    "punkt_orientacyjny": "Parku Szczęśliwickiego",
+    "czas_dojazdu": "4 minut",
+    "punkt_orientacyjny": "Placu Narutowicza",
     "reviews": [
-      {
-        "author": "Marek W.",
-        "text": "Pełen profesjonalizm. Ósemka usunięta w 15 minut, bez żadnego bólu. Polecam!",
-        "rating": 5
-      },
       {
         "author": "Magdalena L.",
         "text": "Gabinet na najwyższym poziomie. Nowoczesny sprzęt i świetna atmosfera.",
@@ -524,6 +519,11 @@
         "author": "Katarzyna Z.",
         "text": "Bardzo bałam się zabiegu, ale dr Sturska ma niesamowite podejście.",
         "rating": 5
+      },
+      {
+        "author": "Marek W.",
+        "text": "Pełen profesjonalizm. Ósemka usunięta w 15 minut, bez żadnego bólu. Polecam!",
+        "rating": 5
       }
     ]
   },
@@ -531,17 +531,17 @@
     "slug": "ulica-al-jerozolimskie",
     "nazwa_lokalizacji": "ul. Al. Jerozolimskie",
     "klinika": "Pruszkowska 6b",
-    "czas_dojazdu": "5 minut",
-    "punkt_orientacyjny": "Atrium Reduta",
+    "czas_dojazdu": "4 minut",
+    "punkt_orientacyjny": "Pola Mokotowskiego",
     "reviews": [
-      {
-        "author": "Katarzyna Z.",
-        "text": "Bardzo bałam się zabiegu, ale dr Sturska ma niesamowite podejście.",
-        "rating": 5
-      },
       {
         "author": "Marek W.",
         "text": "Pełen profesjonalizm. Ósemka usunięta w 15 minut, bez żadnego bólu. Polecam!",
+        "rating": 5
+      },
+      {
+        "author": "Katarzyna Z.",
+        "text": "Bardzo bałam się zabiegu, ale dr Sturska ma niesamowite podejście.",
         "rating": 5
       },
       {
@@ -555,17 +555,41 @@
     "slug": "ulica-al-ken",
     "nazwa_lokalizacji": "ul. Al. KEN",
     "klinika": "KEN 96",
-    "czas_dojazdu": "7 minut",
+    "czas_dojazdu": "6 minut",
     "punkt_orientacyjny": "Alei KEN",
     "reviews": [
+      {
+        "author": "Katarzyna Z.",
+        "text": "Bardzo bałam się zabiegu, ale dr Sturska ma niesamowite podejście.",
+        "rating": 5
+      },
       {
         "author": "Marek W.",
         "text": "Pełen profesjonalizm. Ósemka usunięta w 15 minut, bez żadnego bólu. Polecam!",
         "rating": 5
       },
       {
+        "author": "Magdalena L.",
+        "text": "Gabinet na najwyższym poziomie. Nowoczesny sprzęt i świetna atmosfera.",
+        "rating": 5
+      }
+    ]
+  },
+  {
+    "slug": "ulica-indiry-gandhi",
+    "nazwa_lokalizacji": "ul. Indiry Gandhi",
+    "klinika": "KEN 96",
+    "czas_dojazdu": "8 minut",
+    "punkt_orientacyjny": "Lasu Kabackiego",
+    "reviews": [
+      {
         "author": "Katarzyna Z.",
         "text": "Bardzo bałam się zabiegu, ale dr Sturska ma niesamowite podejście.",
+        "rating": 5
+      },
+      {
+        "author": "Magdalena L.",
+        "text": "Gabinet na najwyższym poziomie. Nowoczesny sprzęt i świetna atmosfera.",
         "rating": 5
       },
       {
@@ -576,11 +600,11 @@
     ]
   },
   {
-    "slug": "ulica-indiry-gandhi",
-    "nazwa_lokalizacji": "ul. Indiry Gandhi",
+    "slug": "ulica-cynamonowa",
+    "nazwa_lokalizacji": "ul. Cynamonowa",
     "klinika": "KEN 96",
-    "czas_dojazdu": "4 minut",
-    "punkt_orientacyjny": "Lasu Kabackiego",
+    "czas_dojazdu": "8 minut",
+    "punkt_orientacyjny": "Metra Imielin",
     "reviews": [
       {
         "author": "Marek W.",
@@ -590,30 +614,6 @@
       {
         "author": "Magdalena L.",
         "text": "Gabinet na najwyższym poziomie. Nowoczesny sprzęt i świetna atmosfera.",
-        "rating": 5
-      },
-      {
-        "author": "Katarzyna Z.",
-        "text": "Bardzo bałam się zabiegu, ale dr Sturska ma niesamowite podejście.",
-        "rating": 5
-      }
-    ]
-  },
-  {
-    "slug": "ulica-cynamonowa",
-    "nazwa_lokalizacji": "ul. Cynamonowa",
-    "klinika": "KEN 96",
-    "czas_dojazdu": "7 minut",
-    "punkt_orientacyjny": "Alei KEN",
-    "reviews": [
-      {
-        "author": "Marek W.",
-        "text": "Pełen profesjonalizm. Ósemka usunięta w 15 minut, bez żadnego bólu. Polecam!",
-        "rating": 5
-      },
-      {
-        "author": "Katarzyna Z.",
-        "text": "Bardzo bałam się zabiegu, ale dr Sturska ma niesamowite podejście.",
         "rating": 5
       },
       {
@@ -628,16 +628,16 @@
     "nazwa_lokalizacji": "ul. Dereniowa",
     "klinika": "Pruszkowska 6b",
     "czas_dojazdu": "6 minut",
-    "punkt_orientacyjny": "Atrium Reduta",
+    "punkt_orientacyjny": "Placu Narutowicza",
     "reviews": [
-      {
-        "author": "Magdalena L.",
-        "text": "Gabinet na najwyższym poziomie. Nowoczesny sprzęt i świetna atmosfera.",
-        "rating": 5
-      },
       {
         "author": "Katarzyna Z.",
         "text": "Bardzo bałam się zabiegu, ale dr Sturska ma niesamowite podejście.",
+        "rating": 5
+      },
+      {
+        "author": "Magdalena L.",
+        "text": "Gabinet na najwyższym poziomie. Nowoczesny sprzęt i świetna atmosfera.",
         "rating": 5
       },
       {
@@ -651,33 +651,14 @@
     "slug": "ulica-rosola",
     "nazwa_lokalizacji": "ul. Rosoła",
     "klinika": "KEN 96",
-    "czas_dojazdu": "5 minut",
-    "punkt_orientacyjny": "Galerii Ursynów",
+    "czas_dojazdu": "4 minut",
+    "punkt_orientacyjny": "Lasu Kabackiego",
     "reviews": [
       {
         "author": "Tomasz R.",
         "text": "Najlepszy chirurg w Warszawie. Szybko, konkretnie i bezboleśnie.",
         "rating": 5
       },
-      {
-        "author": "Katarzyna Z.",
-        "text": "Bardzo bałam się zabiegu, ale dr Sturska ma niesamowite podejście.",
-        "rating": 5
-      },
-      {
-        "author": "Marek W.",
-        "text": "Pełen profesjonalizm. Ósemka usunięta w 15 minut, bez żadnego bólu. Polecam!",
-        "rating": 5
-      }
-    ]
-  },
-  {
-    "slug": "ulica-pulawska",
-    "nazwa_lokalizacji": "ul. Puławska",
-    "klinika": "Pruszkowska 6b",
-    "czas_dojazdu": "7 minut",
-    "punkt_orientacyjny": "Atrium Reduta",
-    "reviews": [
       {
         "author": "Magdalena L.",
         "text": "Gabinet na najwyższym poziomie. Nowoczesny sprzęt i świetna atmosfera.",
@@ -687,10 +668,29 @@
         "author": "Katarzyna Z.",
         "text": "Bardzo bałam się zabiegu, ale dr Sturska ma niesamowite podejście.",
         "rating": 5
-      },
+      }
+    ]
+  },
+  {
+    "slug": "ulica-pulawska",
+    "nazwa_lokalizacji": "ul. Puławska",
+    "klinika": "Pruszkowska 6b",
+    "czas_dojazdu": "6 minut",
+    "punkt_orientacyjny": "Parku Szczęśliwickiego",
+    "reviews": [
       {
         "author": "Marek W.",
         "text": "Pełen profesjonalizm. Ósemka usunięta w 15 minut, bez żadnego bólu. Polecam!",
+        "rating": 5
+      },
+      {
+        "author": "Magdalena L.",
+        "text": "Gabinet na najwyższym poziomie. Nowoczesny sprzęt i świetna atmosfera.",
+        "rating": 5
+      },
+      {
+        "author": "Katarzyna Z.",
+        "text": "Bardzo bałam się zabiegu, ale dr Sturska ma niesamowite podejście.",
         "rating": 5
       }
     ]
@@ -700,30 +700,6 @@
     "nazwa_lokalizacji": "ul. Belgradzka",
     "klinika": "KEN 96",
     "czas_dojazdu": "6 minut",
-    "punkt_orientacyjny": "Galerii Ursynów",
-    "reviews": [
-      {
-        "author": "Magdalena L.",
-        "text": "Gabinet na najwyższym poziomie. Nowoczesny sprzęt i świetna atmosfera.",
-        "rating": 5
-      },
-      {
-        "author": "Katarzyna Z.",
-        "text": "Bardzo bałam się zabiegu, ale dr Sturska ma niesamowite podejście.",
-        "rating": 5
-      },
-      {
-        "author": "Marek W.",
-        "text": "Pełen profesjonalizm. Ósemka usunięta w 15 minut, bez żadnego bólu. Polecam!",
-        "rating": 5
-      }
-    ]
-  },
-  {
-    "slug": "ulica-wawozowa",
-    "nazwa_lokalizacji": "ul. Wąwozowa",
-    "klinika": "KEN 96",
-    "czas_dojazdu": "5 minut",
     "punkt_orientacyjny": "Alei KEN",
     "reviews": [
       {
@@ -732,13 +708,37 @@
         "rating": 5
       },
       {
+        "author": "Tomasz R.",
+        "text": "Najlepszy chirurg w Warszawie. Szybko, konkretnie i bezboleśnie.",
+        "rating": 5
+      },
+      {
         "author": "Magdalena L.",
         "text": "Gabinet na najwyższym poziomie. Nowoczesny sprzęt i świetna atmosfera.",
+        "rating": 5
+      }
+    ]
+  },
+  {
+    "slug": "ulica-wawozowa",
+    "nazwa_lokalizacji": "ul. Wąwozowa",
+    "klinika": "KEN 96",
+    "czas_dojazdu": "6 minut",
+    "punkt_orientacyjny": "Lasu Kabackiego",
+    "reviews": [
+      {
+        "author": "Katarzyna Z.",
+        "text": "Bardzo bałam się zabiegu, ale dr Sturska ma niesamowite podejście.",
         "rating": 5
       },
       {
         "author": "Marek W.",
         "text": "Pełen profesjonalizm. Ósemka usunięta w 15 minut, bez żadnego bólu. Polecam!",
+        "rating": 5
+      },
+      {
+        "author": "Tomasz R.",
+        "text": "Najlepszy chirurg w Warszawie. Szybko, konkretnie i bezboleśnie.",
         "rating": 5
       }
     ]

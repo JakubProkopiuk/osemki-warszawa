@@ -49,7 +49,6 @@ export default function LocationClient({ locationData }: { locationData: any }) 
           phone: rawPhone, 
           slug: locationData.slug, 
           locationName,
-          // POPRAWKA: Wysyłamy timestamp, który Make.com odbierze
           timestamp: new Date().toLocaleString('pl-PL'),
         }),
       });
@@ -176,7 +175,15 @@ export default function LocationClient({ locationData }: { locationData: any }) 
             <div className="h-px flex-grow bg-slate-100 rounded-full" />
           </div>
           <div className="w-full h-[500px] rounded-[56px] overflow-hidden border-8 border-white shadow-2xl relative bg-slate-50">
-            <iframe width="100%" height="100%" style={{ border: 0 }} loading="lazy" allowFullScreen src={`https://www.google.com/maps/embed/v1/search?key=TWOJ_API_KEY_JESLI_MASZ&q=${encodeURIComponent('Ochota na Uśmiech Warszawa ' + locationData.klinika)}`} />
+            {/* POPRAWKA: Mapa korzystająca z bezpłatnego URL bez API Key */}
+            <iframe 
+                width="100%" 
+                height="100%" 
+                style={{ border: 0 }} 
+                loading="lazy" 
+                allowFullScreen 
+                src={`https://maps.google.com/maps?q=${encodeURIComponent('Ochota na Uśmiech Warszawa ' + locationData.klinika)}&output=embed`} 
+            />
           </div>
         </div>
       </main>
