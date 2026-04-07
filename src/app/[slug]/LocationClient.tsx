@@ -1,16 +1,31 @@
 'use client';
 
 import { useState } from 'react';
+import Image from 'next/image';
 
 const cardStyle = "bg-white/[0.85] backdrop-blur-2xl border border-white shadow-[0_32px_80px_-20px_rgba(0,0,0,0.08)] rounded-[48px]";
 const inputStyle = "w-full bg-slate-100/50 border-2 border-transparent focus:border-blue-500/20 focus:bg-white p-5 rounded-3xl outline-none transition-all duration-300 text-lg placeholder:text-slate-400 shadow-[inset_0_2px_4px_rgba(0,0,0,0.02)]";
 
 const IconVerify = () => <svg className="w-5 h-5 text-blue-500" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>;
-const StarIcon = () => <svg className="w-4 h-4 text-amber-400" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" /></svg>;
 
 export default function LocationClient({ locationData }: { locationData: any }) {
   const [formData, setFormData] = useState({ name: '', phone: '', painLevel: 5 });
   const [status, setStatus] = useState<'idle' | 'loading' | 'success' | 'error'>('idle');
+
+  // LOGIKA PRZYPISANIA LEKARZA DO LOKALIZACJI
+  const isOchota = locationData.klinika.toLowerCase().includes('pruszkowska');
+  
+  const doctor = isOchota 
+    ? { 
+        name: "lek. dent. Małgorzata Sturska", 
+        role: "Specjalista chirurgii szczękowo-twarzowej", 
+        img: "/doctors/sturska.jpg" 
+      }
+    : { 
+        name: "lek. dent. Natalia Kowalczyk-Zuchora", 
+        role: "Lekarz dentysta", 
+        img: "/doctors/kowalczyk.webp" 
+      };
 
   const handlePhoneChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const val = e.target.value.replace(/\D/g, '').substring(0, 9);
@@ -30,13 +45,7 @@ export default function LocationClient({ locationData }: { locationData: any }) 
       const res = await fetch('https://hook.eu1.make.com/k73x9s65dxykfhry5uyodhl6bg2kvkx7', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ 
-          ...formData, 
-          phone: rawPhone, 
-          slug: locationData.slug, 
-          locationName: locationData.nazwa_lokalizacji,
-          timestamp: new Date().toLocaleString('pl-PL')
-        }),
+        body: JSON.stringify({ ...formData, phone: rawPhone, slug: locationData.slug, locationName: locationData.nazwa_lokalizacji }),
       });
       if (res.ok) setStatus('success'); else setStatus('error');
     } catch { setStatus('error'); }
@@ -44,9 +53,7 @@ export default function LocationClient({ locationData }: { locationData: any }) 
 
   return (
     <div className="min-h-screen bg-[#FDFDFD] text-[#1A1C1E] font-sans antialiased flex flex-col items-center p-4 md:p-8 relative overflow-x-hidden">
-      
       <div className={`fixed top-[-10%] left-[-10%] w-[50%] h-[50%] transition-colors duration-700 blur-[120px] rounded-full z-0 ${formData.painLevel > 7 ? 'bg-red-100/40' : 'bg-blue-100/30'}`} />
-      <div className="fixed bottom-[-10%] right-[-10%] w-[40%] h-[40%] bg-emerald-50/40 blur-[120px] rounded-full z-0" />
 
       <main className="relative z-10 w-full max-w-[1140px] mt-12 md:mt-24 text-left">
         <div className="grid lg:grid-cols-[1.1fr,0.9fr] gap-16 md:gap-24 items-center mb-32">
@@ -66,13 +73,22 @@ export default function LocationClient({ locationData }: { locationData: any }) 
               </p>
             </div>
 
-            <div className="flex flex-col md:flex-row items-center gap-6 p-8 rounded-[40px] bg-slate-50/50 border border-slate-100 transition-all hover:bg-white hover:shadow-xl duration-500">
-              <div className="h-24 w-24 rounded-full bg-blue-600 flex items-center justify-center text-white text-3xl font-black ring-4 ring-white shadow-lg shrink-0">ON</div>
+            {/* KARTA LEKARZA DOPASOWANA DO GABINETU */}
+            <div className="flex flex-col md:flex-row items-center gap-8 p-8 rounded-[40px] bg-white border border-slate-100 shadow-xl transition-all hover:shadow-2xl duration-500">
+              <div className="h-24 w-24 rounded-3xl overflow-hidden relative shrink-0 shadow-lg ring-4 ring-slate-50 bg-slate-50">
+                <Image 
+                  src={doctor.img} 
+                  alt={doctor.name} 
+                  fill 
+                  className="object-cover"
+                  sizes="96px"
+                />
+              </div>
               <div className="text-center md:text-left">
-                <h4 className="text-xl font-black text-slate-900 uppercase tracking-tight">Zespół Chirurgiczny</h4>
-                <p className="text-slate-500 font-medium leading-relaxed italic">
-                  Specjaliści chirurgii stomatologicznej i szczękowej. <br />
-                  Bezbolesne usuwanie ósemek w komfortowych warunkach.
+                <h4 className="text-xl font-black text-slate-900 uppercase tracking-tight">{doctor.name}</h4>
+                <p className="text-blue-600 font-bold text-xs uppercase tracking-widest mb-2">{doctor.role}</p>
+                <p className="text-slate-400 font-medium leading-relaxed italic text-sm">
+                  Twój chirurg w lokalizacji {isOchota ? 'Ochota' : 'Ursynów'}.
                 </p>
               </div>
             </div>
@@ -91,7 +107,6 @@ export default function LocationClient({ locationData }: { locationData: any }) 
                   <h2 className="text-2xl font-black uppercase tracking-tighter text-slate-900">Zarezerwuj termin</h2>
                   <p className="text-slate-400 text-sm font-medium mt-1">Wybierzemy najszybszą godzinę wizyty</p>
                 </div>
-
                 <div className="space-y-6">
                   <div className="space-y-2">
                     <label className="text-[10px] font-black uppercase tracking-widest text-slate-300 ml-1 block">Twoje Imię</label>
@@ -109,30 +124,11 @@ export default function LocationClient({ locationData }: { locationData: any }) 
                     <input type="range" min="1" max="10" step="1" value={formData.painLevel} onChange={(e) => setFormData({...formData, painLevel: parseInt(e.target.value)})} className="w-full h-1.5 bg-slate-100 rounded-lg appearance-none cursor-pointer accent-blue-600" />
                   </div>
                 </div>
-
                 <button type="submit" disabled={status === 'loading'} className="relative overflow-hidden w-full bg-[#1A1C1E] text-white font-bold text-xl py-6 rounded-3xl transition-all duration-500 hover:bg-blue-600 shadow-2xl active:scale-[0.98] group">
                    <span className="relative z-10 uppercase tracking-[0.2em]">{status === 'loading' ? 'Wysyłanie...' : 'Potwierdzam zgłoszenie'}</span>
-                   <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/10 to-transparent -translate-x-full group-hover:animate-[shimmer_1.5s_infinite]" />
                 </button>
               </form>
             )}
-          </div>
-        </div>
-
-        <div className="mb-32 relative overflow-hidden p-12 md:p-20 rounded-[56px] bg-[#1A1C1E] text-white shadow-[0_50px_100px_-20px_rgba(0,0,0,0.4)] text-left">
-          <div className="absolute top-0 right-0 w-96 h-96 bg-blue-600/20 blur-[100px] rounded-full" />
-          <h2 className="text-4xl font-black mb-16 tracking-tight relative z-10 italic underline underline-offset-8 decoration-blue-600 uppercase">Częste pytania</h2>
-          <div className="grid md:grid-cols-2 gap-16 relative z-10">
-            <div className="space-y-4">
-              <h3 className="text-xl font-bold text-blue-400 tracking-tight">Czy zabieg jest bolesny?</h3>
-              <p className="text-slate-400 text-lg leading-relaxed">Dzięki nowoczesnemu znieczuleniu miejscowemu zabieg jest całkowicie bezbolesny. Po usunięciu ósemki otrzymasz od nas pełną instrukcję postępowania.</p>
-            </div>
-            <div className="space-y-4">
-              <h3 className="text-xl font-bold text-blue-400 tracking-tight">Czy muszę mieć zdjęcie?</h3>
-              <p className="text-slate-400 text-lg leading-relaxed">
-                Nie, wszystko zrobimy na miejscu. Posiadamy nowoczesną pracownię radiologiczną bezpośrednio w gabinecie przy <strong>ul. {locationData.klinika}</strong>.
-              </p>
-            </div>
           </div>
         </div>
 
@@ -153,30 +149,11 @@ export default function LocationClient({ locationData }: { locationData: any }) 
             ></iframe>
           </div>
         </div>
-
       </main>
 
-      <footer className="mt-20 pb-12 text-slate-300 text-[10px] font-bold uppercase tracking-[0.5em] opacity-50">
+      <footer className="mt-20 pb-12 text-slate-300 text-[10px] font-bold uppercase tracking-[0.5em] opacity-50 text-center">
         © 2026 Ochota na Uśmiech | Designed for Excellence
       </footer>
-
-      <style jsx global>{`
-        @keyframes shimmer { 100% { transform: translateX(100%); } }
-        input[type='range']::-webkit-slider-thumb {
-          appearance: none;
-          width: 24px;
-          height: 24px;
-          background: #2563eb;
-          border: 4px solid white;
-          border-radius: 50%;
-          box-shadow: 0 8px 20px rgba(37,99,235,0.3);
-          cursor: pointer;
-          transition: transform 0.2s;
-        }
-        input[type='range']::-webkit-slider-thumb:active {
-          transform: scale(1.2);
-        }
-      `}</style>
     </div>
   );
 }

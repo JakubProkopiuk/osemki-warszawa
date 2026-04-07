@@ -6,6 +6,7 @@ import Image from 'next/image';
 export default function HomePage() {
   return (
     <div className="min-h-screen bg-[#FDFDFD] text-[#1A1C1E] font-sans antialiased">
+      {/* Dynamiczne tło rozproszone */}
       <div className="fixed top-[-10%] right-[-10%] w-[60%] h-[60%] bg-blue-50/50 blur-[120px] rounded-full z-0" />
       
       <main className="relative z-10 max-w-[1140px] mx-auto pt-24 px-6 md:pt-40">
@@ -27,8 +28,9 @@ export default function HomePage() {
           </p>
         </div>
 
-        {/* LOKALIZACJE */}
+        {/* SEKCJA LOKALIZACJI */}
         <div className="grid md:grid-cols-2 gap-8 mb-32">
+          {/* Lokalizacja 01 - Ochota */}
           <Link href="/rakowiec" className="group relative overflow-hidden bg-white p-12 rounded-[48px] border border-slate-100 shadow-xl transition-all duration-500 hover:scale-[1.02]">
             <div className="relative z-10 space-y-4">
               <span className="text-blue-600 font-bold uppercase tracking-widest text-xs">Lokalizacja 01</span>
@@ -41,6 +43,7 @@ export default function HomePage() {
             <div className="absolute top-0 right-0 w-32 h-32 bg-blue-50 rounded-bl-[100px] transition-all group-hover:w-40 group-hover:h-40" />
           </Link>
 
+          {/* Lokalizacja 02 - Ursynów */}
           <Link href="/metro-imielin" className="group relative overflow-hidden bg-[#1A1C1E] p-12 rounded-[48px] shadow-2xl transition-all duration-500 hover:scale-[1.02]">
             <div className="relative z-10 space-y-4">
               <span className="text-blue-400 font-bold uppercase tracking-widest text-xs">Lokalizacja 02</span>
@@ -54,7 +57,7 @@ export default function HomePage() {
           </Link>
         </div>
 
-        {/* SEKCCJA: NASI EKSPERCI */}
+        {/* SEKCJA: NASI EKSPERCI */}
         <div className="mb-32 text-left px-2">
           <div className="flex items-center gap-4 mb-16">
             <h2 className="text-4xl font-black tracking-tight italic uppercase">Nasi Eksperci</h2>
@@ -73,7 +76,7 @@ export default function HomePage() {
                 name: "lek. dent. Natalia Kowalczyk-Zuchora",
                 role: "Lekarz dentysta",
                 desc: "Zapewnia profesjonalną opiekę stomatologiczną w gabinecie na Ursynowie, dbając o komfort i bezpieczeństwo pacjentów.",
-                img: "/doctors/Natalia_Kowalczyk-Zuchora-zdjecie.webp"
+                img: "/doctors/kowalczyk.webp"
               }
             ].map((doc, i) => (
               <div key={i} className="group p-8 rounded-[40px] bg-white border border-slate-100 shadow-sm hover:shadow-2xl transition-all duration-500">
@@ -83,9 +86,7 @@ export default function HomePage() {
                     alt={doc.name} 
                     fill 
                     className="object-cover grayscale group-hover:grayscale-0 transition-all duration-700"
-                    onError={(e) => { e.currentTarget.style.display = 'none' }}
                    />
-                   <div className="absolute inset-0 flex items-center justify-center text-slate-200 font-bold text-xs uppercase tracking-tighter">Dr</div>
                 </div>
                 <h3 className="text-xl font-black uppercase tracking-tight text-slate-900 mb-1">{doc.name}</h3>
                 <p className="text-blue-600 font-bold text-xs uppercase tracking-widest mb-4">{doc.role}</p>
@@ -95,6 +96,7 @@ export default function HomePage() {
           </div>
         </div>
 
+        {/* STATYSTYKI / USP */}
         <div className="grid md:grid-cols-3 gap-12 pb-24 border-t border-slate-100 pt-24 text-center">
           <div>
             <h3 className="font-black text-4xl mb-2">15 min</h3>
