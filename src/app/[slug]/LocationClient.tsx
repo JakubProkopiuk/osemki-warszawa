@@ -78,7 +78,6 @@ export default function LocationClient({ locationData }: { locationData: any }) 
             </div>
           </div>
 
-          {/* Formularz powraca na swoje miejsce po prawej stronie! */}
           <div className={`${cardStyle} p-10 md:p-14 transition-transform duration-500 hover:scale-[1.01] w-full`}>
             {status === 'success' ? (
               <div className="text-center py-20 animate-in zoom-in duration-500">
@@ -155,6 +154,26 @@ export default function LocationClient({ locationData }: { locationData: any }) 
             </div>
           </div>
         </div>
+
+        {/* SEKCCJA MAPY */}
+        <div className="mb-32 text-left">
+          <div className="flex items-center gap-4 mb-16">
+            <h2 className="text-4xl font-black tracking-tight italic uppercase">Jak dojechać</h2>
+            <div className="h-[2px] flex-grow bg-slate-100 rounded-full" />
+          </div>
+          <div className="w-full h-[450px] rounded-[56px] overflow-hidden border-4 border-white shadow-[0_32px_80px_-20px_rgba(0,0,0,0.1)] relative bg-slate-50">
+            <iframe
+              width="100%"
+              height="100%"
+              style={{ border: 0, filter: 'contrast(1.05) saturate(1.1)' }}
+              loading="lazy"
+              allowFullScreen
+              referrerPolicy="no-referrer-when-downgrade"
+              src={`https://maps.google.com/maps?q=${encodeURIComponent('Ochota na Uśmiech ' + locationData.klinika + ' Warszawa')}&t=m&z=15&output=embed`}
+            ></iframe>
+          </div>
+        </div>
+
       </main>
 
       <footer className="mt-20 pb-12 text-slate-300 text-[10px] font-bold uppercase tracking-[0.5em] opacity-50">
