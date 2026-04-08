@@ -60,7 +60,7 @@ export default function LocationClient({ locationData }: { locationData: any }) 
       
       <div className={`fixed top-[-10%] left-[-10%] w-[50%] h-[50%] transition-colors duration-1000 blur-[120px] rounded-full z-0 ${formData.painLevel > 7 ? 'bg-red-100/30' : 'bg-blue-100/20'}`} />
 
-      <main className="relative z-10 w-full max-w-[1240px] mt-12 md:mt-24 text-left mx-auto">
+      <main className="relative z-10 w-full max-w-[1140px] mt-12 md:mt-24 text-left mx-auto">
         <div className="grid lg:grid-cols-[1.1fr,0.9fr] gap-16 md:gap-24 items-start mb-32">
           
           <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} className="space-y-12">
@@ -70,9 +70,9 @@ export default function LocationClient({ locationData }: { locationData: any }) 
               </div>
               <h1 className="text-6xl md:text-[88px] font-black tracking-tight leading-[0.9] text-slate-900">
                 Bez bólu. <br />
-                <span className="text-slate-300 font-light italic">Bez stresu.</span>
+                <span className="text-slate-400 font-light italic">Bez stresu.</span>
               </h1>
-              <p className="text-xl md:text-2xl text-slate-400 font-medium leading-relaxed max-w-lg">
+              <p className="text-xl md:text-2xl text-slate-500 font-medium leading-relaxed max-w-lg">
                 Profesjonalne usuwanie ósemek. Lokalizacja: <strong>{locationName}</strong>. Zapraszamy do gabinetu przy <strong>ul. {locationData.klinika}</strong>, blisko <strong>{locationData.punkt_orientacyjny}</strong>. <br />
                 Dotrzesz do nas w <strong>{formattedTime}</strong>.
               </p>
@@ -80,23 +80,22 @@ export default function LocationClient({ locationData }: { locationData: any }) 
 
             <div className="flex flex-col md:flex-row items-center gap-8 p-8 rounded-[40px] bg-white border border-slate-100 shadow-xl relative overflow-hidden group">
               <div className="h-24 w-24 rounded-3xl overflow-hidden relative shrink-0 shadow-lg ring-4 ring-slate-50">
-                <Image src={doctor.img} alt={doctor.name} fill className="object-cover" />
+                <Image src={doctor.img} alt={doctor.name} fill className="object-cover" priority />
               </div>
               <div className="relative z-10 text-center md:text-left">
-                <h4 className="text-xl font-black text-slate-900 uppercase tracking-tight">{doctor.name}</h4>
+                <h3 className="text-xl font-black text-slate-900 uppercase tracking-tight">{doctor.name}</h3>
                 <p className="text-blue-600 font-bold text-xs uppercase tracking-widest mb-2">{doctor.role}</p>
-                <p className="text-slate-400 font-medium leading-relaxed italic text-sm">Twój lekarz prowadzący w lokalizacji {doctor.locName}.</p>
+                <p className="text-slate-500 font-medium leading-relaxed italic text-sm">Twój lekarz prowadzący w lokalizacji {doctor.locName}.</p>
               </div>
             </div>
 
-            {/* SEKCJA OPINII: Ustawiono na 3 elementy (grid-cols-3) */}
             <div className="space-y-8 pt-4">
                 <div className="flex items-center gap-4">
                     <div className="flex items-center gap-2 bg-slate-50 px-4 py-2 rounded-2xl border border-slate-100">
                         <Star /><span className="font-black text-sm text-slate-900 uppercase">4.9/5 Google Maps</span>
                     </div>
                     <div className="h-px flex-grow bg-slate-100" />
-                    <span className="text-[10px] font-black uppercase tracking-widest text-slate-300">Certyfikowana Klinika</span>
+                    <span className="text-[10px] font-black uppercase tracking-widest text-slate-400">Certyfikowana Klinika</span>
                 </div>
                 <div className="grid md:grid-cols-3 gap-4">
                     {locationData.reviews?.slice(0, 3).map((rev: any, i: number) => (
@@ -108,7 +107,7 @@ export default function LocationClient({ locationData }: { locationData: any }) 
                             <p className="text-slate-500 italic text-xs leading-relaxed mb-4">"{rev.text}"</p>
                         </div>
                         <div className="flex items-center gap-2 mt-auto">
-                            <div className="w-6 h-6 rounded-full bg-slate-100 text-slate-400 flex items-center justify-center font-black text-[8px] shrink-0">{rev.author[0]}</div>
+                            <div className="w-6 h-6 rounded-full bg-slate-100 text-slate-500 flex items-center justify-center font-black text-[8px] shrink-0">{rev.author[0]}</div>
                             <span className="font-black text-slate-900 text-[10px] uppercase tracking-widest truncate">{rev.author}</span>
                         </div>
                     </motion.div>
@@ -130,17 +129,17 @@ export default function LocationClient({ locationData }: { locationData: any }) 
               <form onSubmit={handleSubmit} className="space-y-10">
                 <div className="text-left leading-tight">
                   <h2 className="text-2xl font-black uppercase tracking-tight text-slate-900">Zarezerwuj termin</h2>
-                  <p className="text-slate-400 text-sm mt-2 font-medium">Oddzwonimy z najszybszą godziną wizyty.</p>
+                  <p className="text-slate-500 text-sm mt-2 font-medium">Oddzwonimy z najszybszą godziną wizyty.</p>
                 </div>
                 <div className="space-y-6">
-                  <input type="text" required placeholder="Imię" value={formData.name} onChange={handleNameChange} className={inputStyle} />
-                  <input type="tel" required placeholder="Telefon (000-000-000)" value={formData.phone} onChange={handlePhoneChange} className={`${inputStyle} font-mono tracking-wider`} />
+                  <input type="text" aria-label="Imię" required placeholder="Imię" value={formData.name} onChange={handleNameChange} className={inputStyle} />
+                  <input type="tel" aria-label="Telefon" required placeholder="Telefon (000-000-000)" value={formData.phone} onChange={handlePhoneChange} className={`${inputStyle} font-mono tracking-wider`} />
                   <div className="space-y-4 pt-4">
                     <div className="flex justify-between items-end">
-                      <label className="text-[10px] font-black uppercase tracking-widest text-slate-300 ml-1 block leading-none">Poziom bólu</label>
+                      <label className="text-[10px] font-black uppercase tracking-widest text-slate-400 ml-1 block leading-none">Poziom bólu</label>
                       <span className={`text-5xl font-black transition-colors leading-none ${formData.painLevel > 7 ? 'text-red-500' : 'text-blue-600'}`}>{formData.painLevel}</span>
                     </div>
-                    <input type="range" min="1" max="10" step="1" value={formData.painLevel} onChange={(e) => setFormData({...formData, painLevel: parseInt(e.target.value)})} className="w-full h-1.5 bg-slate-100 rounded-lg appearance-none cursor-pointer accent-blue-600" />
+                    <input type="range" aria-label="Poziom bólu" min="1" max="10" step="1" value={formData.painLevel} onChange={(e) => setFormData({...formData, painLevel: parseInt(e.target.value)})} className="w-full h-1.5 bg-slate-100 rounded-lg appearance-none cursor-pointer accent-blue-600" />
                   </div>
                 </div>
                 <button type="submit" disabled={status === 'loading'} className="w-full bg-[#1A1C1E] text-white font-black text-lg py-6 rounded-3xl transition-all duration-300 hover:bg-blue-600 uppercase tracking-widest shadow-2xl active:scale-95">
@@ -151,7 +150,6 @@ export default function LocationClient({ locationData }: { locationData: any }) 
           </motion.div>
         </div>
 
-        {/* SEKCJA FAQ */}
         <div className="mb-32 text-left">
           <div className="flex items-center gap-4 mb-16">
             <h2 className="text-4xl font-black tracking-tight italic uppercase text-slate-900 leading-none">Częste pytania</h2>
@@ -177,14 +175,13 @@ export default function LocationClient({ locationData }: { locationData: any }) 
               }
             ].map((faq, i) => (
               <div key={i} className="space-y-4">
-                <h4 className="text-lg font-black uppercase tracking-tight text-blue-600">{faq.q}</h4>
+                <h3 className="text-lg font-black uppercase tracking-tight text-blue-600">{faq.q}</h3>
                 <p className="text-slate-500 leading-relaxed font-medium">{faq.a}</p>
               </div>
             ))}
           </div>
         </div>
 
-        {/* MAPA NAPRAWIONA */}
         <div className="mb-32 text-left">
           <div className="flex items-center gap-4 mb-12">
             <h2 className="text-4xl font-black tracking-tight italic uppercase leading-none text-slate-900">Mapa Dojazdu</h2>
@@ -197,13 +194,14 @@ export default function LocationClient({ locationData }: { locationData: any }) 
               style={{ border: 0 }} 
               loading="lazy" 
               allowFullScreen 
-              src={`https://maps.google.com/maps?q=${encodeURIComponent('Ochota na Uśmiech Warszawa ' + locationData.klinika)}&t=&z=15&ie=UTF8&iwloc=&output=embed`} 
+              title={`Mapa dojazdu do gabinetu na ul. ${locationData.klinika}`}
+              src={`https://maps.google.com/maps?q=...&output=embed?q=${encodeURIComponent('Ochota na Uśmiech Warszawa ' + locationData.klinika)}&output=embed`} 
             />
           </div>
         </div>
       </main>
 
-      <footer className="mt-32 pb-12 text-slate-300 text-[10px] font-black uppercase tracking-[0.6em] opacity-30 text-center">
+      <footer className="mt-32 pb-12 text-slate-400 text-[10px] font-black uppercase tracking-[0.6em] opacity-30 text-center">
         © 2026 Ochota na Uśmiech | Designed for Excellence
       </footer>
     </div>
