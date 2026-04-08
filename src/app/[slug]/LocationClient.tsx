@@ -195,7 +195,7 @@ export default function LocationClient({ locationData }: { locationData: any }) 
               loading="lazy" 
               allowFullScreen 
               title={`Mapa dojazdu do gabinetu na ul. ${locationData.klinika}`}
-              src={`https://maps.google.com/maps?q=...&output=embed?q=${encodeURIComponent('Ochota na Uśmiech Warszawa ' + locationData.klinika)}&output=embed`} 
+              src={`https://maps.google.com/maps?q=${encodeURIComponent('Ochota na Uśmiech Warszawa ' + locationData.klinika)}&t=&z=15&ie=UTF8&iwloc=&output=embed`} 
             />
           </div>
         </div>
