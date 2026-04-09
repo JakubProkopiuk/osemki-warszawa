@@ -41,6 +41,9 @@ export default function LocationClient({ locationData }: { locationData: Locatio
 
   const formattedTime = locationData.czas_dojazdu.replace('1 minuta', '1 minutę');
   const locationName = locationData.nazwa_lokalizacji === 'Rakowiec' ? 'Osiedle Rakowiec' : locationData.nazwa_lokalizacji;
+  const parkingText = locationData.parking && (locationData.parking.includes('SPPN') || locationData.parking.includes('Płatnego'))
+    ? 'Zawsze znajdziesz wolne miejsce – strefa SPPN gwarantuje stałą rotację aut tuż pod samym gabinetem.'
+    : locationData.parking;
 
   const handleTileSelect = (field: string, value: string) => {
     setFormData({ ...formData, [field]: value });
@@ -113,9 +116,9 @@ export default function LocationClient({ locationData }: { locationData: Locatio
                       <span className="text-blue-500 text-lg">🚌</span> <strong>Dojazd:</strong> {locationData.komunikacja}
                     </div>
                   )}
-                  {locationData.parking && (
+                  {parkingText && (
                     <div className="flex items-center gap-3 text-sm text-slate-600 bg-slate-50 px-4 py-2 rounded-xl w-fit border border-slate-100">
-                      <span className="text-blue-500 text-lg">🅿️</span> <strong>Parking:</strong> {locationData.parking}
+                      <span className="text-blue-500 text-lg">🅿️</span> <strong>Parking:</strong> {parkingText}
                     </div>
                   )}
                 </div>
@@ -147,8 +150,8 @@ export default function LocationClient({ locationData }: { locationData: Locatio
                     </div>
                     <div className="h-px flex-grow bg-slate-100" />
                 </div>
-                <div className="grid md:grid-cols-2 gap-4">
-                    {locationData.reviews?.slice(0, 2).map((rev: Review, i: number) => (
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    {locationData.reviews?.slice(0, 4).map((rev: Review, i: number) => (
                     <motion.div key={i} className="p-6 rounded-[24px] bg-white border border-slate-100 shadow-sm relative flex flex-col justify-between">
                         <div>
                             <div className="flex gap-1 mb-3 text-amber-400 scale-75 origin-left">
@@ -215,22 +218,23 @@ export default function LocationClient({ locationData }: { locationData: Locatio
                 </motion.div>
 
               ) : step === 2 ? (
-                <motion.div key="step2" initial={{ opacity: 0, x: 20 }} animate={{ opacity: 1, x: 0 }} exit={{ opacity: 0, x: -20 }} className="space-y-10">
-                  <div>
-                    <h2 className="text-2xl font-black uppercase tracking-tight text-slate-900">Jak oceniasz dyskomfort?</h2>
-                    <p className="text-slate-500 text-sm mt-2 font-medium">To pomoże nam ustalić priorytet wizyty.</p>
+                <motion.div key="step2" initial={{ opacity: 0, x: 20 }} animate={{ opacity: 1, x: 0 }} exit={{ opacity: 0, x: -20 }} className="space-y-6">
+                  <h2 className="text-2xl font-black uppercase tracking-tight text-slate-900">Której ósemki dotyczy problem?</h2>
+                  <p className="text-slate-500 text-sm font-medium">Dzięki temu szybciej dobierzemy właściwy typ konsultacji.</p>
+                  <div className="space-y-3">
+                    <button onClick={() => handleTileSelect('painLevel', 'Górnej')} className={`${tileStyle} border-slate-100 group-hover:border-blue-200`}>
+                      <span className="text-2xl">🦷</span> <span className="font-bold text-slate-700 text-sm">Górnej</span>
+                    </button>
+                    <button onClick={() => handleTileSelect('painLevel', 'Dolnej')} className={`${tileStyle} border-slate-100 group-hover:border-blue-200`}>
+                      <span className="text-2xl">🦷</span> <span className="font-bold text-slate-700 text-sm">Dolnej</span>
+                    </button>
+                    <button onClick={() => handleTileSelect('painLevel', 'Obu / Kilku')} className={`${tileStyle} border-slate-100 group-hover:border-blue-200`}>
+                      <span className="text-2xl">🦷</span> <span className="font-bold text-slate-700 text-sm">Obu / Kilku</span>
+                    </button>
+                    <button onClick={() => handleTileSelect('painLevel', 'Nie jestem pewien')} className={`${tileStyle} border-slate-100 group-hover:border-slate-300`}>
+                      <span className="text-2xl">❓</span> <span className="font-bold text-slate-700 text-sm">Nie jestem pewien</span>
+                    </button>
                   </div>
-                  <div className="space-y-6">
-                    <div className="flex justify-between items-end">
-                      <span className="text-[10px] font-black uppercase tracking-widest text-slate-400 leading-none">Skala 1-10</span>
-                      <span className={`text-6xl font-black transition-colors leading-none ${formData.painLevel > 7 ? 'text-red-500' : 'text-blue-600'}`}>{formData.painLevel}</span>
-                    </div>
-                    <input type="range" min="1" max="10" step="1" value={formData.painLevel} onChange={(e) => setFormData({...formData, painLevel: parseInt(e.target.value)})} className="w-full h-2 bg-slate-100 rounded-lg appearance-none cursor-pointer accent-blue-600" />
-                    <div className="flex justify-between text-[10px] font-black uppercase tracking-widest text-slate-400">
-                      <span>Lekki</span><span className="text-red-400">Pilne!</span>
-                    </div>
-                  </div>
-                  <button onClick={() => setStep(3)} className="w-full bg-[#1A1C1E] text-white font-black py-5 rounded-2xl transition-transform active:scale-95 uppercase tracking-widest text-sm shadow-xl hover:bg-blue-600">Przejdź dalej</button>
                 </motion.div>
 
               ) : step === 3 ? (
@@ -299,10 +303,10 @@ export default function LocationClient({ locationData }: { locationData: Locatio
           </div>
           <div className="grid md:grid-cols-2 gap-12">
             {[
-              { q: "Czy usuwanie ósemki boli?", a: "Zabieg jest całkowicie bezbolesny. Stosujemy nowoczesne znieczulenia, które eliminują dyskomfort." },
-              { q: "Ile trwa zabieg?", a: "Większość zabiegów usunięcia zębów mądrości trwa u nas od 15 do 40 minut." },
-              { q: "Jak przygotować się do wizyty?", a: "Zalecamy zjedzenie lekkiego posiłku. Jeśli nie masz RTG, wykonamy je na miejscu." },
-              { q: "Kiedy można wrócić do pracy?", a: "Zazwyczaj już następnego dnia. Przy bardziej złożonych zabiegach zalecamy 2 dni odpoczynku." }
+              { q: "Czy otrzymam zwolnienie lekarskie (L4)?", a: "Oczywiście. Po każdym zabiegu chirurgicznym wystawiamy zwolnienie L4 na okres od 2 do 5 dni, w zależności od stopnia skomplikowania ekstrakcji." },
+              { q: "Ile dokładnie potrwa zabieg?", a: "Górne ósemki usuwamy często w 15 minut. Dolne, zatrzymane zęby wymagają więcej uwagi, ale rezerwujemy na wizytę wystarczająco dużo czasu, by wszystko odbyło się bez pośpiechu." },
+              { q: "Co jeśli ząb jest zatrzymany lub blisko nerwu?", a: "Posiadamy na miejscu zaawansowany tomograf 3D (CBCT). Przed zabiegiem dokładnie mapujemy przebieg nerwów, co gwarantuje 100% bezpieczeństwa." },
+              { q: "Czy wycena przed zabiegiem jest wiążąca?", a: "Tak. Nie mamy 'ukrytych kosztów'. Przed podaniem znieczulenia poznasz dokładną cenę zabiegu na podstawie zdjęcia RTG." }
             ].map((faq, i) => (
               <div key={i} className="space-y-4">
                 <h3 className="text-lg font-black uppercase tracking-tight text-blue-600">{faq.q}</h3>
