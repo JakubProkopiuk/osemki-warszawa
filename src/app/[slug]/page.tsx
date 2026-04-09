@@ -9,8 +9,10 @@ type LocationData = {
   klinika: string;
   czas_dojazdu: string;
   punkt_orientacyjny: string; // To jest nasz klucz do unikalności SEO
+  komunikacja?: string;
+  parking?: string;
   dzielnica?: string;
-  reviews?: any[];
+  reviews?: Array<{ author: string; text: string; rating: number }>;
 };
 
 // 2. GENEROWANIE METADANYCH DLA GOOGLE (Dynamiczne SEO)

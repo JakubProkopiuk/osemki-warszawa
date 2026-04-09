@@ -10,7 +10,19 @@ const tileStyle = "w-full text-left p-6 rounded-3xl border-2 transition-all dura
 
 const Star = () => <svg className="w-4 h-4 text-amber-400" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" /></svg>;
 
-export default function LocationClient({ locationData }: { locationData: any }) {
+type Review = { author: string; text: string; rating: number };
+type LocationData = {
+  slug: string;
+  nazwa_lokalizacji: string;
+  klinika: string;
+  czas_dojazdu: string;
+  punkt_orientacyjny?: string;
+  komunikacja?: string;
+  parking?: string;
+  reviews?: Review[];
+};
+
+export default function LocationClient({ locationData }: { locationData: LocationData }) {
   const [step, setStep] = useState(1);
   const [formData, setFormData] = useState({
     reason: '',
@@ -84,7 +96,7 @@ export default function LocationClient({ locationData }: { locationData: any }) 
               
               {/* NOWY H1 - Zoptymalizowany pod Local SEO */}
               <h1 className="text-5xl md:text-[72px] font-black tracking-tight leading-[0.95] text-slate-900">
-                Usuwanie ósemek blisko <br />
+                Bezbolesne usuwanie ósemek blisko <br />
                 <span className="text-blue-600 italic">{locationName}.</span>
               </h1>
               
@@ -128,16 +140,21 @@ export default function LocationClient({ locationData }: { locationData: any }) 
                     <div className="flex items-center gap-2 bg-slate-50 px-4 py-2 rounded-2xl border border-slate-100">
                         <Star /><span className="font-black text-sm text-slate-900 uppercase">4.9/5 Google Maps</span>
                     </div>
+                    <div className="hidden md:block h-6 w-px bg-slate-200" />
+                    <div className="flex items-center gap-2 bg-slate-50 px-4 py-2 rounded-2xl border border-slate-100">
+                        <span className="text-blue-500 text-sm">🛡️</span>
+                        <span className="font-black text-sm text-slate-900 uppercase">Ponad 10 000 bezpiecznie usuniętych ósemek</span>
+                    </div>
                     <div className="h-px flex-grow bg-slate-100" />
                 </div>
                 <div className="grid md:grid-cols-2 gap-4">
-                    {locationData.reviews?.slice(0, 2).map((rev: any, i: number) => (
+                    {locationData.reviews?.slice(0, 2).map((rev: Review, i: number) => (
                     <motion.div key={i} className="p-6 rounded-[24px] bg-white border border-slate-100 shadow-sm relative flex flex-col justify-between">
                         <div>
                             <div className="flex gap-1 mb-3 text-amber-400 scale-75 origin-left">
                                 {[...Array(rev.rating || 5)].map((_, s) => <Star key={s} />)}
                             </div>
-                            <p className="text-slate-600 font-medium text-sm leading-relaxed mb-4">"{rev.text}"</p>
+                            <p className="text-slate-600 font-medium text-sm leading-relaxed mb-4">&quot;{rev.text}&quot;</p>
                         </div>
                         <div className="flex items-center gap-2 mt-auto">
                             <span className="font-black text-slate-400 text-[10px] uppercase tracking-widest">{rev.author}</span>
@@ -236,13 +253,13 @@ export default function LocationClient({ locationData }: { locationData: any }) 
                   <p className="text-slate-500 text-sm font-medium">Chcemy przygotować się do Twojej wizyty.</p>
                   <div className="space-y-3">
                     <button onClick={() => handleTileSelect('biggestFear', 'Ból')} className={`${tileStyle} border-slate-100 group-hover:border-blue-200`}>
-                      <span className="text-2xl">💉</span> <span className="font-bold text-slate-700 text-sm">Boję się bólu (Znieczulenie komputerowe)</span>
+                      <span className="text-2xl">💉</span> <span className="font-bold text-slate-700 text-sm">Boję się bólu (Bezbolesne i mocne znieczulenie)</span>
                     </button>
                     <button onClick={() => handleTileSelect('biggestFear', 'Gojenie')} className={`${tileStyle} border-slate-100 group-hover:border-blue-200`}>
                       <span className="text-2xl">⏳</span> <span className="font-bold text-slate-700 text-sm">Czas gojenia i powrót do pracy</span>
                     </button>
                     <button onClick={() => handleTileSelect('biggestFear', 'Koszty')} className={`${tileStyle} border-slate-100 group-hover:border-blue-200`}>
-                      <span className="text-2xl">💰</span> <span className="font-bold text-slate-700 text-sm">Nie znam całkowitych kosztów</span>
+                      <span className="text-2xl">💰</span> <span className="font-bold text-slate-700 text-sm">Koszty (Brak ukrytych opłat, jasny cennik)</span>
                     </button>
                   </div>
                 </motion.div>
@@ -250,8 +267,8 @@ export default function LocationClient({ locationData }: { locationData: any }) 
               ) : (
                 <motion.div key="step5" initial={{ opacity: 0, x: 20 }} animate={{ opacity: 1, x: 0 }} exit={{ opacity: 0, x: -20 }} className="space-y-8">
                   <div>
-                    <h2 className="text-2xl font-black uppercase tracking-tight text-slate-900">Diagnoza gotowa.</h2>
-                    <p className="text-slate-500 text-sm mt-2 font-medium">Zostaw numer. Znamy Twój przypadek, oddzwonimy w 15 minut z propozycją terminu.</p>
+                    <h2 className="text-2xl font-black uppercase tracking-tight text-slate-900">Świetnie! Twój przypadek kwalifikuje się do bezbolesnego zabiegu.</h2>
+                    <p className="text-slate-500 text-sm mt-2 font-medium">Zostaw numer. Nasz koordynator oddzwoni do Ciebie w 15 minut z propozycją najbliższego terminu.</p>
                   </div>
                   <form onSubmit={handleSubmit} className="space-y-5">
                     <input type="text" aria-label="Imię" required placeholder="Twoje Imię" value={formData.name} onChange={(e) => setFormData({...formData, name: e.target.value})} className={inputStyle} />
@@ -262,9 +279,10 @@ export default function LocationClient({ locationData }: { locationData: any }) 
                     </button>
                     
                     {/* Trust Badges - Redukcja FUD */}
-                    <div className="flex justify-center gap-6 pt-5 border-t border-slate-100 mt-6">
-                      <div className="flex items-center gap-2 text-[9px] font-black uppercase tracking-widest text-slate-400"><span className="text-blue-500 text-sm">🔒</span> Bezpieczne dane</div>
-                      <div className="flex items-center gap-2 text-[9px] font-black uppercase tracking-widest text-slate-400"><span className="text-blue-500 text-sm">📞</span> Bez spamu</div>
+                    <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 pt-5 border-t border-slate-100 mt-6">
+                      <div className="flex items-center justify-center gap-2 text-[10px] font-black uppercase tracking-widest text-slate-400"><span className="text-blue-500 text-sm">🔒</span> Bezpieczne dane</div>
+                      <div className="flex items-center justify-center gap-2 text-[10px] font-black uppercase tracking-widest text-slate-400"><span className="text-blue-500 text-sm">💰</span> Wycena przed zabiegiem</div>
+                      <div className="flex items-center justify-center gap-2 text-[10px] font-black uppercase tracking-widest text-slate-400"><span className="text-blue-500 text-sm">⏱️</span> Szybkie terminy</div>
                     </div>
                   </form>
                 </motion.div>
