@@ -2,27 +2,31 @@
 
 import { useState } from 'react';
 import Image from 'next/image';
+import Link from 'next/link';
 import { motion, AnimatePresence } from 'framer-motion';
+import {
+  Activity,
+  Camera,
+  ChevronRight,
+  Clock,
+  FileCheck,
+  Shield,
+  Stethoscope,
+  Wallet,
+  type LucideIcon,
+} from 'lucide-react';
+import locations from '../../data/locations.json';
 
-const cardStyle = 'bg-white border border-slate-100 shadow-xl rounded-3xl';
+const cardStyle = 'bg-white border border-slate-200 shadow-xl rounded-3xl';
 const inputStyle =
-  'w-full bg-white border border-slate-200 focus:border-sky-600 p-4 rounded-2xl outline-none transition-all duration-300 text-base placeholder:text-slate-400';
+  'w-full bg-white border border-slate-300 focus:border-amber-500 p-4 rounded-2xl outline-none transition-all duration-300 text-base placeholder:text-slate-400';
 const tileStyle =
-  'w-full text-left p-6 rounded-2xl border-2 border-slate-200 bg-white transition-all duration-300 hover:border-sky-500 hover:shadow-md flex items-center justify-between group';
+  'w-full text-left p-5 rounded-2xl border-2 border-slate-200 bg-white transition-all duration-300 hover:border-amber-500 hover:shadow-md flex items-center justify-between group';
 
 const Star = () => (
   <svg className="w-4 h-4 text-amber-400" fill="currentColor" viewBox="0 0 20 20" aria-hidden="true">
     <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
   </svg>
-);
-
-const ChevronIndicator = () => (
-  <div className="flex items-center gap-2">
-    <span className="h-5 w-5 rounded-full border-2 border-slate-300 group-hover:border-sky-500 transition-colors" />
-    <svg className="w-4 h-4 text-slate-400 group-hover:text-sky-600 transition-colors" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2" aria-hidden="true">
-      <path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7" />
-    </svg>
-  </div>
 );
 
 type Review = { author: string; text: string; rating: number };
@@ -44,6 +48,13 @@ type FormDataState = {
   biggestFear: string;
   name: string;
   phone: string;
+};
+
+type QuizOption = {
+  label: string;
+  value: string;
+  icon: LucideIcon;
+  description?: string;
 };
 
 export default function LocationClient({ locationData }: { locationData: LocationData }) {
@@ -69,10 +80,84 @@ export default function LocationClient({ locationData }: { locationData: Locatio
       ? 'Zawsze znajdziesz wolne miejsce – strefa SPPN gwarantuje stałą rotację aut tuż pod samym gabinetem.'
       : locationData.parking;
 
+  const relatedLocations = (() => {
+    const sameClinic = (locations as LocationData[]).filter(
+      (loc) => loc.klinika === locationData.klinika && loc.slug !== locationData.slug,
+    );
+
+    const hash = locationData.slug
+      .split('')
+      .reduce((acc, char) => (acc * 31 + char.charCodeAt(0)) >>> 0, 7);
+
+    const shuffled = [...sameClinic].sort((a, b) => {
+      const aKey =
+        a.slug.split('').reduce((acc, c) => (acc * 33 + c.charCodeAt(0)) >>> 0, hash) ^
+        hash;
+      const bKey =
+        b.slug.split('').reduce((acc, c) => (acc * 33 + c.charCodeAt(0)) >>> 0, hash) ^
+        hash;
+      return aKey - bKey;
+    });
+
+    return shuffled.slice(0, 5);
+  })();
+
   const handleTileSelect = (field: keyof FormDataState, value: string) => {
     setFormData((prev) => ({ ...prev, [field]: value }));
     setTimeout(() => setStep((prev) => prev + 1), 250);
   };
+
+  const optionListVariants = {
+    hidden: {},
+    visible: {
+      transition: {
+        staggerChildren: 0.08,
+        delayChildren: 0.05,
+      },
+    },
+  };
+
+  const optionItemVariants = {
+    hidden: { opacity: 0, y: 10 },
+    visible: { opacity: 1, y: 0 },
+  };
+
+  const renderOptions = (field: keyof FormDataState, options: QuizOption[]) => (
+    <motion.div
+      layout
+      className="space-y-3"
+      variants={optionListVariants}
+      initial="hidden"
+      animate="visible"
+    >
+      {options.map((option) => {
+        const Icon = option.icon;
+        return (
+          <motion.button
+            key={option.value}
+            variants={optionItemVariants}
+            transition={{ duration: 0.3, ease: 'easeOut' }}
+            onClick={() => handleTileSelect(field, option.value)}
+            className={tileStyle}
+          >
+            <span className="flex items-start gap-3 text-slate-800">
+              <Icon className="w-6 h-6 text-amber-500 shrink-0" />
+              <span>
+                <span className="font-semibold block">{option.label}</span>
+                {option.description && (
+                  <span className="text-xs text-slate-500 font-medium">{option.description}</span>
+                )}
+              </span>
+            </span>
+            <span className="flex items-center gap-2">
+              <span className="h-5 w-5 rounded-full border-2 border-slate-300 group-hover:border-amber-500 transition-colors" />
+              <ChevronRight className="w-4 h-4 text-slate-400 group-hover:text-amber-500 transition-colors" />
+            </span>
+          </motion.button>
+        );
+      })}
+    </motion.div>
+  );
 
   const handlePhoneChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const val = e.target.value.replace(/\D/g, '').substring(0, 9);
@@ -120,13 +205,13 @@ export default function LocationClient({ locationData }: { locationData: Locatio
         <div className="grid lg:grid-cols-[1.1fr,0.9fr] gap-14 md:gap-20 items-start mb-28">
           <motion.div initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} className="space-y-8">
             <div className="space-y-5">
-              <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white border border-slate-200 shadow-sm text-sky-700 text-[11px] font-semibold uppercase tracking-wider leading-none">
-                <span className="w-2 h-2 bg-sky-700 rounded-full" /> Bezpieczna chirurgia {doctor.locName}
+              <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-gradient-to-r from-slate-900 to-slate-800 border border-slate-700 shadow-sm text-amber-400 text-[11px] font-semibold uppercase tracking-wider leading-none">
+                <Shield className="w-3.5 h-3.5" /> Bezpieczna chirurgia {doctor.locName}
               </div>
 
               <h1 className="text-4xl md:text-[62px] font-extrabold tracking-tight leading-[0.97] text-slate-900">
                 Bezbolesne usuwanie ósemek blisko <br />
-                <span className="text-sky-700 italic">{locationName}.</span>
+                <span className="text-slate-800 italic">{locationName}.</span>
               </h1>
 
               <p className="text-lg text-slate-500 font-medium leading-relaxed max-w-xl">
@@ -138,12 +223,12 @@ export default function LocationClient({ locationData }: { locationData: Locatio
                 <div className="flex flex-col gap-3 pt-2">
                   {locationData.komunikacja && (
                     <div className="flex items-center gap-3 text-sm text-slate-600 bg-white px-4 py-2 rounded-xl w-fit border border-slate-200">
-                      <strong className="text-sky-700">Dojazd:</strong> {locationData.komunikacja}
+                      <strong className="text-slate-900">Dojazd:</strong> {locationData.komunikacja}
                     </div>
                   )}
                   {parkingText && (
                     <div className="flex items-center gap-3 text-sm text-slate-600 bg-white px-4 py-2 rounded-xl w-fit border border-slate-200">
-                      <strong className="text-sky-700">Parking:</strong> {parkingText}
+                      <strong className="text-slate-900">Parking:</strong> {parkingText}
                     </div>
                   )}
                 </div>
@@ -156,8 +241,8 @@ export default function LocationClient({ locationData }: { locationData: Locatio
               </div>
               <div className="text-center md:text-left">
                 <h3 className="text-xl font-bold text-slate-900 tracking-tight">{doctor.name}</h3>
-                <p className="text-sky-700 font-semibold text-xs uppercase tracking-widest mb-1">{doctor.role}</p>
-                <div className="inline-flex items-center px-3 py-1 rounded-full text-[11px] font-semibold bg-sky-50 text-sky-700 border border-sky-100 mb-2">
+                <p className="text-slate-800 font-semibold text-xs uppercase tracking-widest mb-1">{doctor.role}</p>
+                <div className="inline-flex items-center px-3 py-1 rounded-full text-[11px] font-semibold bg-amber-50 text-amber-700 border border-amber-200 mb-2">
                   Certyfikowany Chirurg
                 </div>
                 <p className="text-slate-500 font-medium leading-relaxed text-sm">Lekarz prowadzący w placówce na ul. {locationData.klinika}</p>
@@ -194,15 +279,15 @@ export default function LocationClient({ locationData }: { locationData: Locatio
             </div>
           </motion.div>
 
-          <motion.div initial={{ opacity: 0, scale: 0.98 }} animate={{ opacity: 1, scale: 1 }} className={`${cardStyle} p-8 md:p-10 sticky top-10`}>
+          <motion.div layout initial={{ opacity: 0, scale: 0.98 }} animate={{ opacity: 1, scale: 1 }} className={`${cardStyle} p-8 md:p-10 sticky top-10`}>
             {status !== 'success' && (
               <div className="mb-8">
                 <div className="flex justify-between text-[11px] font-semibold uppercase tracking-wider text-slate-500 mb-3">
                   <span>Krok {step} z 5</span>
-                  <span className="text-sky-700">{step * 20}%</span>
+                  <span className="text-slate-900">{step * 20}%</span>
                 </div>
                 <div className="h-1 w-full bg-slate-200 rounded-full overflow-hidden">
-                  <motion.div className="h-full bg-sky-600" initial={{ width: 0 }} animate={{ width: `${step * 20}%` }} transition={{ duration: 0.4, ease: 'easeInOut' }} />
+                  <motion.div className="h-full bg-amber-500" initial={{ width: 0 }} animate={{ width: `${step * 20}%` }} transition={{ duration: 0.4, ease: 'easeInOut' }} />
                 </div>
               </div>
             )}
@@ -210,89 +295,73 @@ export default function LocationClient({ locationData }: { locationData: Locatio
             <AnimatePresence mode="wait">
               {status === 'success' ? (
                 <motion.div key="success" initial={{ opacity: 0, y: 14 }} animate={{ opacity: 1, y: 0 }} className="text-center py-8">
-                  <div className="w-16 h-16 bg-sky-700 rounded-2xl mx-auto flex items-center justify-center text-white text-3xl mb-6">✓</div>
+                  <div className="w-16 h-16 bg-gradient-to-br from-amber-400 to-amber-500 rounded-2xl mx-auto flex items-center justify-center text-slate-900 text-3xl mb-6">✓</div>
                   <h2 className="text-2xl font-bold tracking-tight text-slate-900 mb-3">Zgłoszenie w systemie</h2>
                   <p className="text-slate-600 font-medium leading-relaxed">
                     Dziękujemy. Przeanalizujemy Twoje odpowiedzi i oddzwonimy z propozycją dogodnego, bezpiecznego terminu.
                   </p>
                 </motion.div>
               ) : step === 1 ? (
-                <motion.div key="step1" initial={{ opacity: 0, x: 18 }} animate={{ opacity: 1, x: 0 }} exit={{ opacity: 0, x: -18 }} className="space-y-6">
+                <motion.div key="step1" layout initial={{ opacity: 0, x: 18 }} animate={{ opacity: 1, x: 0 }} exit={{ opacity: 0, x: -18 }} className="space-y-6">
                   <h2 className="text-2xl font-bold tracking-tight text-slate-900">Z czym do nas trafiasz?</h2>
-                  <div className="space-y-3">
-                    <button onClick={() => handleTileSelect('reason', 'Ból / Stan zapalny')} className={tileStyle}>
-                      <span className="font-semibold text-slate-700">Ból / stan zapalny</span>
-                      <ChevronIndicator />
-                    </button>
-                    <button onClick={() => handleTileSelect('reason', 'Zalecenie ortodonty')} className={tileStyle}>
-                      <span className="font-semibold text-slate-700">Zalecenie ortodonty</span>
-                      <ChevronIndicator />
-                    </button>
-                    <button onClick={() => handleTileSelect('reason', 'Konsultacja')} className={tileStyle}>
-                      <span className="font-semibold text-slate-700">Konsultacja</span>
-                      <ChevronIndicator />
-                    </button>
-                  </div>
+                  {renderOptions('reason', [
+                    { label: 'Ból / stan zapalny', value: 'Ból / Stan zapalny', icon: Activity },
+                    { label: 'Zalecenie ortodonty', value: 'Zalecenie ortodonty', icon: Stethoscope },
+                    { label: 'Konsultacja', value: 'Konsultacja', icon: Shield },
+                  ])}
                 </motion.div>
               ) : step === 2 ? (
-                <motion.div key="step2" initial={{ opacity: 0, x: 18 }} animate={{ opacity: 1, x: 0 }} exit={{ opacity: 0, x: -18 }} className="space-y-6">
+                <motion.div key="step2" layout initial={{ opacity: 0, x: 18 }} animate={{ opacity: 1, x: 0 }} exit={{ opacity: 0, x: -18 }} className="space-y-6">
                   <h2 className="text-2xl font-bold tracking-tight text-slate-900">Której ósemki dotyczy problem?</h2>
                   <p className="text-slate-500 text-sm font-medium">Dzięki temu szybciej dobierzemy właściwy typ konsultacji.</p>
-                  <div className="space-y-3">
-                    <button onClick={() => handleTileSelect('toothArea', 'Górnej')} className={tileStyle}>
-                      <span className="font-semibold text-slate-700">Górnej</span>
-                      <ChevronIndicator />
-                    </button>
-                    <button onClick={() => handleTileSelect('toothArea', 'Dolnej')} className={tileStyle}>
-                      <span className="font-semibold text-slate-700">Dolnej</span>
-                      <ChevronIndicator />
-                    </button>
-                    <button onClick={() => handleTileSelect('toothArea', 'Obu / Kilku')} className={tileStyle}>
-                      <span className="font-semibold text-slate-700">Obu / Kilku</span>
-                      <ChevronIndicator />
-                    </button>
-                    <button onClick={() => handleTileSelect('toothArea', 'Nie jestem pewien')} className={tileStyle}>
-                      <span className="font-semibold text-slate-700">Nie jestem pewien</span>
-                      <ChevronIndicator />
-                    </button>
-                  </div>
+                  {renderOptions('toothArea', [
+                    {
+                      label: 'Górnej',
+                      value: 'Górnej',
+                      icon: Stethoscope,
+                      description: '(Zazwyczaj szybki i przewidywalny zabieg)',
+                    },
+                    {
+                      label: 'Dolnej',
+                      value: 'Dolnej',
+                      icon: Stethoscope,
+                      description: '(Wymaga precyzyjnej diagnostyki 3D przed zabiegiem)',
+                    },
+                    {
+                      label: 'Obu / Kilku',
+                      value: 'Obu / Kilku',
+                      icon: Activity,
+                      description: '(Kompleksowe rozwiązanie podczas jednej wizyty)',
+                    },
+                    {
+                      label: 'Nie jestem pewien',
+                      value: 'Nie jestem pewien',
+                      icon: Shield,
+                      description: '(Lekarz oceni sytuację na podstawie zdjęcia RTG)',
+                    },
+                  ])}
                 </motion.div>
               ) : step === 3 ? (
-                <motion.div key="step3" initial={{ opacity: 0, x: 18 }} animate={{ opacity: 1, x: 0 }} exit={{ opacity: 0, x: -18 }} className="space-y-6">
+                <motion.div key="step3" layout initial={{ opacity: 0, x: 18 }} animate={{ opacity: 1, x: 0 }} exit={{ opacity: 0, x: -18 }} className="space-y-6">
                   <h2 className="text-2xl font-bold tracking-tight text-slate-900">Masz aktualne RTG?</h2>
                   <p className="text-slate-500 text-sm font-medium">Zdjęcie pantomograficzne jest wymagane do bezpiecznej kwalifikacji.</p>
-                  <div className="space-y-3">
-                    <button onClick={() => handleTileSelect('hasRTG', 'Tak')} className={tileStyle}>
-                      <span className="font-semibold text-slate-700">Tak, mam aktualne zdjęcie</span>
-                      <ChevronIndicator />
-                    </button>
-                    <button onClick={() => handleTileSelect('hasRTG', 'Nie, chcę zrobić')} className={tileStyle}>
-                      <span className="font-semibold text-slate-700">Nie, wykonam zdjęcie na miejscu</span>
-                      <ChevronIndicator />
-                    </button>
-                  </div>
+                  {renderOptions('hasRTG', [
+                    { label: 'Tak, mam aktualne zdjęcie', value: 'Tak', icon: FileCheck },
+                    { label: 'Nie, wykonam zdjęcie na miejscu', value: 'Nie, chcę zrobić', icon: Camera },
+                  ])}
                 </motion.div>
               ) : step === 4 ? (
-                <motion.div key="step4" initial={{ opacity: 0, x: 18 }} animate={{ opacity: 1, x: 0 }} exit={{ opacity: 0, x: -18 }} className="space-y-6">
+                <motion.div key="step4" layout initial={{ opacity: 0, x: 18 }} animate={{ opacity: 1, x: 0 }} exit={{ opacity: 0, x: -18 }} className="space-y-6">
                   <h2 className="text-2xl font-bold tracking-tight text-slate-900">Twoja główna obawa?</h2>
                   <p className="text-slate-500 text-sm font-medium">Dzięki temu przygotujemy plan wizyty dopasowany do Twoich potrzeb.</p>
-                  <div className="space-y-3">
-                    <button onClick={() => handleTileSelect('biggestFear', 'Ból')} className={tileStyle}>
-                      <span className="font-semibold text-slate-700">Boję się bólu (bezbolesne i mocne znieczulenie)</span>
-                      <ChevronIndicator />
-                    </button>
-                    <button onClick={() => handleTileSelect('biggestFear', 'Gojenie')} className={tileStyle}>
-                      <span className="font-semibold text-slate-700">Czas gojenia i powrót do pracy</span>
-                      <ChevronIndicator />
-                    </button>
-                    <button onClick={() => handleTileSelect('biggestFear', 'Koszty')} className={tileStyle}>
-                      <span className="font-semibold text-slate-700">Koszty (brak ukrytych opłat, jasny cennik)</span>
-                      <ChevronIndicator />
-                    </button>
-                  </div>
+                  {renderOptions('biggestFear', [
+                    { label: 'Boję się bólu (bezbolesne i mocne znieczulenie)', value: 'Ból', icon: Shield },
+                    { label: 'Czas gojenia i powrót do pracy', value: 'Gojenie', icon: Clock },
+                    { label: 'Koszty (brak ukrytych opłat, jasny cennik)', value: 'Koszty', icon: Wallet },
+                  ])}
                 </motion.div>
               ) : (
-                <motion.div key="step5" initial={{ opacity: 0, x: 18 }} animate={{ opacity: 1, x: 0 }} exit={{ opacity: 0, x: -18 }} className="space-y-8">
+                <motion.div key="step5" layout initial={{ opacity: 0, x: 18 }} animate={{ opacity: 1, x: 0 }} exit={{ opacity: 0, x: -18 }} className="space-y-8">
                   <div>
                     <h2 className="text-2xl font-bold tracking-tight text-slate-900">Świetnie! Twój przypadek kwalifikuje się do bezbolesnego zabiegu.</h2>
                     <p className="text-slate-500 text-sm mt-2 font-medium">Zostaw numer. Nasz koordynator oddzwoni do Ciebie w 15 minut z propozycją najbliższego terminu.</p>
@@ -301,7 +370,11 @@ export default function LocationClient({ locationData }: { locationData: Locatio
                     <input type="text" aria-label="Imię" required placeholder="Twoje imię" value={formData.name} onChange={(e) => setFormData((prev) => ({ ...prev, name: e.target.value }))} className={inputStyle} />
                     <input type="tel" aria-label="Telefon" required placeholder="Telefon (000-000-000)" value={formData.phone} onChange={handlePhoneChange} className={`${inputStyle} font-mono tracking-wider`} />
 
-                    <button type="submit" disabled={status === 'loading'} className="w-full bg-sky-700 text-white font-semibold text-base py-4 mt-2 rounded-2xl transition-all duration-300 hover:bg-sky-600 shadow-lg active:scale-[0.99]">
+                    <button
+                      type="submit"
+                      disabled={status === 'loading'}
+                      className="w-full bg-gradient-to-r from-amber-400 to-amber-500 text-slate-900 font-semibold text-base py-4 mt-2 rounded-2xl transition-all duration-300 hover:from-amber-500 hover:to-amber-600 shadow-lg active:scale-[0.99]"
+                    >
                       {status === 'loading' ? 'Wysyłanie...' : 'Sprawdź termin'}
                     </button>
 
@@ -317,6 +390,15 @@ export default function LocationClient({ locationData }: { locationData: Locatio
           </motion.div>
         </div>
 
+        <div className="bg-amber-50 border border-amber-200 rounded-2xl p-6 flex items-center gap-4 mb-12">
+          <Clock className="w-6 h-6 text-amber-600 shrink-0" />
+          <p className="text-amber-900 font-medium text-sm md:text-base">
+            <strong>Ważne:</strong> W tym tygodniu w placówce na ul. {locationData.klinika} mamy jeszcze{' '}
+            <span className="font-bold underline">3 wolne terminy</span> na zabiegi chirurgiczne. Wypełnij formularz
+            powyżej, aby zarezerwować miejsce.
+          </p>
+        </div>
+
         <div className="mb-28 text-left">
           <div className="flex items-center gap-4 mb-10">
             <h2 className="text-3xl md:text-4xl font-extrabold tracking-tight italic text-slate-900 leading-none">Częste pytania</h2>
@@ -326,25 +408,42 @@ export default function LocationClient({ locationData }: { locationData: Locatio
             {[
               {
                 q: 'Czy otrzymam zwolnienie lekarskie (L4)?',
-                a: 'Oczywiście. Po każdym zabiegu chirurgicznym wystawiamy zwolnienie L4 na okres od 2 do 5 dni, w zależności od stopnia skomplikowania ekstrakcji.',
+                a: 'Stosujemy zaawansowane znieczulenie miejscowe, dzięki czemu sam zabieg jest całkowicie bezbolesny. Czujesz jedynie delikatny dotyk, bez żadnego dyskomfortu.',
               },
               {
-                q: 'Ile dokładnie potrwa zabieg?',
-                a: 'Górne ósemki usuwamy często w 15 minut. Dolne, zatrzymane zęby wymagają więcej uwagi, ale rezerwujemy na wizytę wystarczająco dużo czasu, by wszystko odbyło się bez pośpiechu.',
+                q: 'Czy muszę mieć skierowanie lub RTG?',
+                a: 'Nie potrzebujesz skierowania. Jeśli nie posiadasz aktualnego zdjęcia pantomograficznego, wykonamy precyzyjną diagnostykę w naszym gabinecie przed zabiegiem.',
               },
               {
-                q: 'Co jeśli ząb jest zatrzymany lub blisko nerwu?',
-                a: 'Posiadamy na miejscu zaawansowany tomograf 3D (CBCT). Przed zabiegiem dokładnie mapujemy przebieg nerwów, co gwarantuje 100% bezpieczeństwa.',
+                q: 'Co po zabiegu? Czy dostanę zwolnienie?',
+                a: 'Większość pacjentów wraca do normalnych obowiązków już następnego dnia. W razie potrzeby wystawiamy elektroniczne zwolnienie lekarskie (e-ZLA) na czas rekonwalescencji.',
               },
               {
-                q: 'Czy wycena przed zabiegiem jest wiążąca?',
-                a: "Tak. Nie mamy 'ukrytych kosztów'. Przed podaniem znieczulenia poznasz dokładną cenę zabiegu na podstawie zdjęcia RTG.",
+                q: 'Jakie są koszty usunięcia ósemki?',
+                a: 'Wycena zależy od ułożenia zęba w kości (od 400 do 800 zł). Dokładną i wiążącą cenę podajemy po analizie zdjęcia RTG, przed podaniem znieczulenia.',
               },
             ].map((faq, i) => (
               <div key={i} className="space-y-3">
-                <h3 className="text-lg font-bold tracking-tight text-sky-700">{faq.q}</h3>
+                <h3 className="text-lg font-bold tracking-tight text-slate-900">{faq.q}</h3>
                 <p className="text-slate-500 leading-relaxed font-medium">{faq.a}</p>
               </div>
+            ))}
+          </div>
+        </div>
+
+        <div className="mb-20 text-left">
+          <h2 className="text-2xl md:text-3xl font-extrabold tracking-tight text-slate-900 mb-6">
+            Obsługujemy również pacjentów z pobliskich lokalizacji
+          </h2>
+          <div className="flex flex-wrap gap-3">
+            {relatedLocations.map((loc) => (
+              <Link
+                key={loc.slug}
+                href={`/${loc.slug}`}
+                className="inline-flex items-center rounded-full px-4 py-2 text-sm font-semibold border border-slate-300 bg-white text-slate-800 hover:border-amber-500 hover:text-slate-900 transition-colors"
+              >
+                {`Usuwanie ósemek - ${loc.nazwa_lokalizacji}`}
+              </Link>
             ))}
           </div>
         </div>
