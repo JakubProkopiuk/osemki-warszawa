@@ -317,6 +317,7 @@ export default function LocationClient({ locationData }: { locationData: Locatio
         </div>
 
         {/* Mapa */}
+        {/* Mapa 2 */}
         <div className="mb-32 text-left">
           <div className="flex items-center gap-4 mb-12">
             <h2 className="text-4xl font-black tracking-tight italic uppercase leading-none text-slate-900">Mapa Dojazdu</h2>
