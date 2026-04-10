@@ -13,7 +13,6 @@ const geistMono = Geist_Mono({
   subsets: ["latin"],
 });
 
-// TUTAJ DODAŁEM TWÓJ KOD WERYFIKACYJNY GOOGLE
 export const metadata: Metadata = {
   title: 'Usuwanie Ósemek Warszawa | Ochota na Uśmiech',
   description: 'Profesjonalne i bezbolesne usuwanie zębów mądrości w Warszawie. Najnowocześniejsza chirurgia stomatologiczna.',
@@ -32,6 +31,9 @@ export default function RootLayout({
       lang="pl"
       className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
     >
+      <head>
+        <link rel="preconnect" href="https://maps.google.com" />
+      </head>
       <body className="min-h-full flex flex-col">
         {children}
         <Analytics />

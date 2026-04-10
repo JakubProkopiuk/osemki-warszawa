@@ -1,0 +1,12 @@
+User-agent: *
+Allow: /
+
+User-agent: Googlebot
+Crawl-delay: 2
+Allow: /
+
+User-agent: Googlebot-Image
+Disallow: /ulica-*
+Disallow: /osiedle-*
+Allow: /ochota
+Allow: /ursynow

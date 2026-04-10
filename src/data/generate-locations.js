@@ -1,4 +1,4 @@
-const fs = require('fs');
+import fs from 'node:fs';
 
 const config = {
   ochota: {
@@ -85,7 +85,7 @@ const ursynowStreets = [
 let locations = [];
 
 // 1. GENERUJEMY DZIELNICE/OSIEDLA (Super blisko: Czas 1-4 minuty)
-Object.entries(config).forEach(([key, val]) => {
+Object.entries(config).forEach(([, val]) => {
   val.areas.forEach(area => {
     locations.push({
       slug: generateSlug(area),

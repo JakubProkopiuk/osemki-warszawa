@@ -6,10 +6,14 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "eslint"
+    "lint": "eslint",
+    "seo:audit": "node scripts/seo-audit.mjs",
+    "data:enrich": "node scripts/enrich-locations.mjs",
+    "data:validate": "node scripts/validate-locations.mjs"
   },
   "dependencies": {
     "@vercel/analytics": "^2.0.1",
+    "date-fns": "^4.1.0",
     "framer-motion": "^12.38.0",
     "lucide-react": "^1.8.0",
     "next": "16.2.2",

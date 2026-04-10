@@ -84,8 +84,8 @@ export default function HomePage() {
                 desc: "Zapewnia profesjonalną opiekę stomatologiczną w gabinecie na Ursynowie, dbając o komfort i bezpieczeństwo pacjentów.",
                 img: "/doctors/kowalczyk.webp"
               }
-            ].map((doc, i) => (
-              <div key={i} className="group p-8 rounded-[40px] bg-white border border-slate-100 shadow-sm hover:shadow-2xl transition-all duration-500">
+            ].map((doc) => (
+              <div key={doc.name} className="group p-8 rounded-[40px] bg-white border border-slate-100 shadow-sm hover:shadow-2xl transition-all duration-500">
                 <div className="relative w-24 h-24 rounded-3xl overflow-hidden mb-6 bg-slate-50 ring-4 ring-white group-hover:scale-105 transition-transform duration-500">
                    <Image 
                     src={doc.img} 
@@ -124,37 +124,35 @@ export default function HomePage() {
             <h2 className="text-3xl font-extrabold tracking-tight text-slate-900">Obsługiwane Lokalizacje</h2>
           </div>
 
-          <div className="grid md:grid-cols-2 gap-8">
-            <div className="bg-white border border-slate-100 rounded-3xl p-6 shadow-sm">
-              <h3 className="text-lg font-bold text-slate-900 mb-4">Wybierz gabinet: Ochota (ul. Pruszkowska)</h3>
-              <div className="max-h-[400px] overflow-y-auto custom-scrollbar space-y-1 pr-2">
-                {ochotaLocations.map((loc) => (
-                  <Link
-                    key={loc.slug}
-                    href={`/${loc.slug}`}
-                    className="block text-sm text-slate-500 hover:text-amber-600 transition-colors"
-                  >
-                    {`Usuwanie ósemek ${loc.nazwa_lokalizacji}`}
-                  </Link>
-                ))}
-              </div>
-            </div>
+          <details className="group bg-white border border-slate-200 rounded-3xl shadow-sm [&_summary::-webkit-details-marker]:hidden">
+            <summary className="flex items-center justify-between p-6 cursor-pointer text-lg font-bold text-slate-900">
+              <span>Rozwiń pełną listę obsługiwanych rejonów i ulic...</span>
+              <ChevronRight className="w-5 h-5 text-slate-400 group-open:rotate-90 transition-transform" />
+            </summary>
 
-            <div className="bg-white border border-slate-100 rounded-3xl p-6 shadow-sm">
-              <h3 className="text-lg font-bold text-slate-900 mb-4">Wybierz gabinet: Ursynów (al. KEN)</h3>
-              <div className="max-h-[400px] overflow-y-auto custom-scrollbar space-y-1 pr-2">
-                {ursynowLocations.map((loc) => (
-                  <Link
-                    key={loc.slug}
-                    href={`/${loc.slug}`}
-                    className="block text-sm text-slate-500 hover:text-amber-600 transition-colors"
-                  >
-                    {`Usuwanie ósemek ${loc.nazwa_lokalizacji}`}
-                  </Link>
-                ))}
+            <div className="grid md:grid-cols-2 gap-8 p-6 border-t border-slate-100">
+              <div>
+                <h3 className="text-sm font-bold text-slate-900 uppercase tracking-wider mb-4">Klinika Ochota</h3>
+                <div className="space-y-2">
+                  {ochotaLocations.map((loc) => (
+                    <Link key={loc.slug} href={`/${loc.slug}`} className="block text-xs text-slate-500 hover:text-amber-600 transition-colors">
+                      Usuwanie ósemek {loc.nazwa_lokalizacji}
+                    </Link>
+                  ))}
+                </div>
+              </div>
+              <div>
+                <h3 className="text-sm font-bold text-slate-900 uppercase tracking-wider mb-4">Klinika Ursynów</h3>
+                <div className="space-y-2">
+                  {ursynowLocations.map((loc) => (
+                    <Link key={loc.slug} href={`/${loc.slug}`} className="block text-xs text-slate-500 hover:text-amber-600 transition-colors">
+                      Usuwanie ósemek {loc.nazwa_lokalizacji}
+                    </Link>
+                  ))}
+                </div>
               </div>
             </div>
-          </div>
+          </details>
         </div>
       </main>
 

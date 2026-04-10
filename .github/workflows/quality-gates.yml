@@ -1,0 +1,35 @@
+name: Quality Gates
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  validate-build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Validate location data
+        run: npm run data:validate
+
+      - name: Run SEO audit
+        run: npm run seo:audit
+
+      - name: Lint
+        run: npm run lint
+
+      - name: Build
+        run: npm run build

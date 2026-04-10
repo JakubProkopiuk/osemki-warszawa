@@ -17,6 +17,10 @@ import {
   type LucideIcon,
 } from 'lucide-react';
 import locations from '../../data/locations.json';
+import Breadcrumb, { type BreadcrumbItem } from '@/components/Breadcrumb';
+import { getClinicProfile, type LocationRecord } from '@/lib/clinic';
+import { getProcedureCount } from '@/lib/utils';
+import { useMobileExitIntent } from '@/hooks/useMobileExitIntent';
 
 const cardStyle = 'bg-white border border-slate-200 shadow-xl rounded-3xl';
 const inputStyle =
@@ -60,6 +64,10 @@ type QuizOption = {
 
 export default function LocationClient({ locationData }: { locationData: LocationData }) {
   const [step, setStep] = useState(1);
+  const [isAnalyzing, setIsAnalyzing] = useState(false);
+  const [step2Feedback, setStep2Feedback] = useState<string | null>(null);
+  const [fearFeedback, setFearFeedback] = useState<string | null>(null);
+  const [showExitBar, setShowExitBar] = useState(false);
   const [formData, setFormData] = useState<FormDataState>({
     reason: '',
     toothArea: '',
@@ -69,8 +77,11 @@ export default function LocationClient({ locationData }: { locationData: Locatio
     phone: '',
   });
   const [status, setStatus] = useState<'idle' | 'loading' | 'success' | 'error'>('idle');
+  const [phoneError, setPhoneError] = useState<string | null>(null);
 
   const isOchota = locationData.klinika.toLowerCase().includes('pruszkowska');
+  const clinicProfile = getClinicProfile(locationData.klinika);
+  const procedureCount = getProcedureCount(new Date(clinicProfile.openingDate));
   const doctor = isOchota
     ? { name: 'lek. dent. Małgorzata Sturska', role: 'Specjalista chirurgii', img: '/doctors/sturska.jpg', locName: 'Ochota' }
     : { name: 'lek. dent. Natalia Kowalczyk-Zuchora', role: 'Lekarz dentysta', img: '/doctors/kowalczyk.webp', locName: 'Ursynów' };
@@ -82,7 +93,7 @@ export default function LocationClient({ locationData }: { locationData: Locatio
       : locationData.parking;
 
   const relatedLocations = (() => {
-    const sameClinic = (locations as LocationData[]).filter(
+    const sameClinic = (locations as LocationRecord[]).filter(
       (loc) => loc.klinika === locationData.klinika && loc.slug !== locationData.slug,
     );
 
@@ -103,10 +114,60 @@ export default function LocationClient({ locationData }: { locationData: Locatio
     return shuffled.slice(0, 4);
   })();
 
+  const experimentVariant = locationData.slug.charCodeAt(0) % 2 === 0 ? 'A' : 'B';
+
   const handleTileSelect = (field: keyof FormDataState, value: string) => {
     setFormData((prev) => ({ ...prev, [field]: value }));
+
+    if (field === 'toothArea') {
+      setStep2Feedback('Dobra decyzja — im więcej wiemy na tym etapie, tym precyzyjniejsza kwalifikacja.');
+      setTimeout(() => {
+        setStep2Feedback(null);
+        setStep((prev) => prev + 1);
+      }, 1200);
+      return;
+    }
+
+    if (field === 'hasRTG') {
+      setIsAnalyzing(true);
+      setTimeout(() => {
+        setIsAnalyzing(false);
+        setStep((prev) => prev + 1);
+      }, 1500);
+      return;
+    }
+
+    if (field === 'biggestFear') {
+      const message =
+        value === 'Ból'
+          ? 'Mądrzy pacjenci pytają o znieczulenie. Dobry wybór.'
+          : value === 'Gojenie'
+            ? 'Planowanie powrotu do pracy to oznaka odpowiedzialności.'
+            : 'Transparentność cenowa to Twoje prawo. Mamy to.';
+      setFearFeedback(message);
+      setTimeout(() => {
+        setFearFeedback(null);
+        setStep((prev) => prev + 1);
+      }, 1500);
+      return;
+    }
+
     setTimeout(() => setStep((prev) => prev + 1), 250);
   };
+
+  useMobileExitIntent(() => setShowExitBar(true));
+
+  const breadcrumbItems: BreadcrumbItem[] = [
+    { name: 'Strona główna', href: '/' },
+    {
+      name: clinicProfile.hubName,
+      href: `/${clinicProfile.hubSlug}`,
+    },
+    {
+      name: locationName,
+      href: `/${locationData.slug}`,
+    },
+  ];
 
   const optionListVariants = {
     hidden: {},
@@ -166,15 +227,27 @@ export default function LocationClient({ locationData }: { locationData: Locatio
     if (!matched) return;
     const formatted = !matched[2] ? matched[1] : `${matched[1]}-${matched[2]}${matched[3] ? `-${matched[3]}` : ''}`;
     setFormData((prev) => ({ ...prev, phone: formatted }));
+    if (phoneError) {
+      setPhoneError(null);
+    }
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    setPhoneError(null);
     const rawPhone = formData.phone.replace(/-/g, '');
     if (rawPhone.length !== 9) {
-      alert('Proszę podać poprawny numer (9 cyfr)');
+      setPhoneError('Podaj poprawny numer telefonu (9 cyfr).');
       return;
     }
+
+    const leadScore =
+      (formData.reason === 'Ból / Stan zapalny' ? 40 : 20) +
+      (formData.toothArea === 'Dolnej' ? 20 : formData.toothArea === 'Obu / Kilku' ? 18 : 10) +
+      (formData.hasRTG === 'Tak' ? 20 : 10) +
+      (formData.biggestFear === 'Koszty' ? 10 : 15);
+
+    const leadPriority = leadScore >= 80 ? 'high' : leadScore >= 60 ? 'medium' : 'low';
 
     setStatus('loading');
     try {
@@ -188,6 +261,9 @@ export default function LocationClient({ locationData }: { locationData: Locatio
           locationName,
           clinic: locationData.klinika,
           timestamp: new Date().toLocaleString('pl-PL'),
+          experimentVariant,
+          leadScore,
+          leadPriority,
         }),
       });
       if (res.ok) {
@@ -206,6 +282,7 @@ export default function LocationClient({ locationData }: { locationData: Locatio
         <div className="grid lg:grid-cols-[1.1fr,0.9fr] gap-14 md:gap-20 items-start mb-28">
           <motion.div initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} className="space-y-8">
             <div className="space-y-5">
+              <Breadcrumb items={breadcrumbItems} />
               <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-gradient-to-r from-slate-900 to-slate-800 border border-slate-700 shadow-sm text-amber-400 text-[11px] font-semibold uppercase tracking-wider leading-none">
                 <Shield className="w-3.5 h-3.5" /> Bezpieczna chirurgia {doctor.locName}
               </div>
@@ -267,7 +344,7 @@ export default function LocationClient({ locationData }: { locationData: Locatio
 
             <div className="flex flex-col md:flex-row items-center gap-6 p-7 rounded-3xl bg-white border border-slate-100 shadow-xl">
               <div className="h-24 w-24 rounded-2xl overflow-hidden relative shrink-0 shadow-sm ring-2 ring-slate-100">
-                <Image src={doctor.img} alt={doctor.name} fill className="object-cover" priority />
+                <Image src={doctor.img} alt={doctor.name} fill className="object-cover" loading="lazy" />
               </div>
               <div className="text-center md:text-left">
                 <h3 className="text-xl font-bold text-slate-900 tracking-tight">{doctor.name}</h3>
@@ -275,9 +352,6 @@ export default function LocationClient({ locationData }: { locationData: Locatio
                 <div className="inline-flex items-center px-3 py-1 rounded-full text-[11px] font-semibold bg-amber-50 text-amber-700 border border-amber-200 mb-2">
                   Certyfikowany Chirurg
                 </div>
-                <p className="flex items-center gap-1 text-[10px] text-slate-400 font-semibold uppercase tracking-wider mt-2">
-                  <Shield className="w-3 h-3 text-sky-600" /> Zweryfikowany lekarz (NIL)
-                </p>
                 <p className="text-slate-500 font-medium leading-relaxed text-sm">Lekarz prowadzący w placówce na ul. {locationData.klinika}</p>
               </div>
             </div>
@@ -290,17 +364,17 @@ export default function LocationClient({ locationData }: { locationData: Locatio
                 </div>
                 <div className="hidden md:block h-6 w-px bg-slate-200" />
                 <div className="flex items-center gap-2 bg-white px-4 py-2 rounded-xl border border-slate-200 shadow-sm">
-                  <span className="font-bold text-sm text-slate-900 uppercase">Ponad 10 000 bezpiecznie usuniętych ósemek</span>
+                  <span className="font-bold text-sm text-slate-900 uppercase">Ponad {procedureCount.toLocaleString('pl-PL')} bezpiecznie usuniętych ósemek</span>
                 </div>
               </div>
 
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                {locationData.reviews?.slice(0, 4).map((rev, i) => (
-                  <motion.div key={i} className="p-5 rounded-2xl bg-white border border-slate-100 shadow-sm flex flex-col justify-between">
+                {locationData.reviews?.slice(0, 4).map((rev) => (
+                  <motion.div key={`${rev.author}-${rev.text.slice(0, 20)}`} className="p-5 rounded-2xl bg-white border border-slate-100 shadow-sm flex flex-col justify-between">
                     <div>
                       <div className="flex gap-1 mb-3 text-amber-400 scale-75 origin-left">
                         {[...Array(rev.rating || 5)].map((_, s) => (
-                          <Star key={s} />
+                          <Star key={`${rev.author}-star-${s}`} />
                         ))}
                       </div>
                       <p className="text-slate-600 font-medium text-sm leading-relaxed mb-4">&quot;{rev.text}&quot;</p>
@@ -373,6 +447,19 @@ export default function LocationClient({ locationData }: { locationData: Locatio
                       description: '(Lekarz oceni sytuację na podstawie zdjęcia RTG)',
                     },
                   ])}
+                  <AnimatePresence>
+                    {step2Feedback && (
+                      <motion.p
+                        key="step2-feedback"
+                        initial={{ opacity: 0, y: 10 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        exit={{ opacity: 0, y: -10 }}
+                        className="text-sm font-semibold text-slate-700"
+                      >
+                        {step2Feedback}
+                      </motion.p>
+                    )}
+                  </AnimatePresence>
                 </motion.div>
               ) : step === 3 ? (
                 <motion.div key="step3" layout initial={{ opacity: 0, x: 18 }} animate={{ opacity: 1, x: 0 }} exit={{ opacity: 0, x: -18 }} className="space-y-6">
@@ -382,6 +469,20 @@ export default function LocationClient({ locationData }: { locationData: Locatio
                     { label: 'Tak, mam aktualne zdjęcie', value: 'Tak', icon: FileCheck },
                     { label: 'Nie, wykonam zdjęcie na miejscu', value: 'Nie, chcę zrobić', icon: Camera },
                   ])}
+                  <AnimatePresence>
+                    {isAnalyzing && (
+                      <motion.div
+                        key="analysis"
+                        initial={{ opacity: 0, y: 10 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        exit={{ opacity: 0, y: -10 }}
+                        className="rounded-2xl border border-slate-200 bg-white p-4"
+                      >
+                        <p className="text-sm font-semibold text-slate-900">✓ Twoje odpowiedzi zostały wstępnie przeanalizowane.</p>
+                        <p className="text-sm text-amber-500 font-semibold">Zostały 2 kroki do bezpłatnej wyceny.</p>
+                      </motion.div>
+                    )}
+                  </AnimatePresence>
                 </motion.div>
               ) : step === 4 ? (
                 <motion.div key="step4" layout initial={{ opacity: 0, x: 18 }} animate={{ opacity: 1, x: 0 }} exit={{ opacity: 0, x: -18 }} className="space-y-6">
@@ -392,6 +493,19 @@ export default function LocationClient({ locationData }: { locationData: Locatio
                     { label: 'Czas gojenia i powrót do pracy', value: 'Gojenie', icon: Clock },
                     { label: 'Koszty (brak ukrytych opłat, jasny cennik)', value: 'Koszty', icon: Wallet },
                   ])}
+                  <AnimatePresence>
+                    {fearFeedback && (
+                      <motion.p
+                        key="fear-feedback"
+                        initial={{ opacity: 0, y: 10 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        exit={{ opacity: 0, y: -10 }}
+                        className="text-sm font-semibold text-slate-700"
+                      >
+                        {fearFeedback}
+                      </motion.p>
+                    )}
+                  </AnimatePresence>
                 </motion.div>
               ) : (
                 <motion.div key="step5" layout initial={{ opacity: 0, x: 18 }} animate={{ opacity: 1, x: 0 }} exit={{ opacity: 0, x: -18 }} className="space-y-8">
@@ -407,17 +521,40 @@ export default function LocationClient({ locationData }: { locationData: Locatio
                       </>
                     ) : (
                       <>
-                        <h2 className="text-2xl font-bold tracking-tight text-slate-900">Świetnie! Kwalifikujesz się do bezbolesnego zabiegu.</h2>
-                        <p className="text-slate-500 text-sm mt-2 font-medium">
-                          Zostaw numer telefonu. Nasz koordynator oddzwoni do Ciebie wkrótce z propozycją dogodnego i
-                          bezpiecznego terminu.
-                        </p>
+                        {experimentVariant === 'A' ? (
+                          <>
+                            <h2 className="text-2xl font-bold tracking-tight text-slate-900">Świetnie! Kwalifikujesz się do bezbolesnego zabiegu.</h2>
+                            <p className="text-slate-500 text-sm mt-2 font-medium">
+                              Zostaw numer telefonu. Nasz koordynator oddzwoni do Ciebie wkrótce z propozycją dogodnego i
+                              bezpiecznego terminu.
+                            </p>
+                          </>
+                        ) : (
+                          <>
+                            <h2 className="text-2xl font-bold tracking-tight text-slate-900">Masz już komplet — możemy przejść do bezpłatnej wyceny.</h2>
+                            <p className="text-slate-500 text-sm mt-2 font-medium">
+                              Zostaw numer telefonu. Skontaktujemy się dzisiaj (w godzinach pracy) i wspólnie wybierzemy
+                              najbliższy dostępny termin.
+                            </p>
+                          </>
+                        )}
                       </>
                     )}
                   </div>
                   <form onSubmit={handleSubmit} className="space-y-4">
                     <input type="text" aria-label="Imię" required placeholder="Twoje imię" value={formData.name} onChange={(e) => setFormData((prev) => ({ ...prev, name: e.target.value }))} className={inputStyle} />
-                    <input type="tel" aria-label="Telefon" required placeholder="Telefon (000-000-000)" value={formData.phone} onChange={handlePhoneChange} className={`${inputStyle} font-mono tracking-wider`} />
+                    <input type="tel" aria-label="Telefon" required placeholder="Twój numer – oddzwonimy w ciągu 2h" value={formData.phone} onChange={handlePhoneChange} className={`${inputStyle} font-mono tracking-wider`} />
+                    <p className="text-xs text-slate-400 mt-1">📵 Bez spamu. Tylko 1 rozmowa od koordynatora.</p>
+                    {phoneError && (
+                      <p className="text-xs text-red-600 font-medium" role="alert">
+                        {phoneError}
+                      </p>
+                    )}
+                    {status === 'error' && (
+                      <p className="text-xs text-red-600 font-medium" role="alert">
+                        Nie udało się wysłać zgłoszenia. Spróbuj ponownie za chwilę lub zadzwoń bezpośrednio.
+                      </p>
+                    )}
 
                     <button
                       type="submit"
@@ -471,8 +608,8 @@ export default function LocationClient({ locationData }: { locationData: Locatio
                 q: 'Jakie są koszty usunięcia ósemki?',
                 a: 'Koszt zabiegu jest zawsze ustalany indywidualnie na podstawie zdjęcia RTG i stopnia skomplikowania. Gwarantujemy jednak pełną przejrzystość – dokładną i ostateczną wycenę, bez żadnych "ukrytych kosztów", poznasz zawsze przed podaniem znieczulenia.',
               },
-            ].map((faq, i) => (
-              <div key={i} className="space-y-3">
+            ].map((faq) => (
+              <div key={faq.q} className="space-y-3">
                 <h3 className="text-lg font-bold tracking-tight text-slate-900">{faq.q}</h3>
                 <p className="text-slate-500 leading-relaxed font-medium">{faq.a}</p>
               </div>
@@ -510,11 +647,35 @@ export default function LocationClient({ locationData }: { locationData: Locatio
               loading="lazy"
               allowFullScreen
               title="Mapa dojazdu"
-              src={`http://googleusercontent.com/maps.google.com/?q=${encodeURIComponent('Ochota na Uśmiech Warszawa ' + locationData.klinika)}&t=&z=15&ie=UTF8&iwloc=B&output=embed`}
+              src={`https://maps.google.com/maps?q=${encodeURIComponent('Ochota na Uśmiech Warszawa ' + locationData.klinika)}&t=&z=15&ie=UTF8&iwloc=B&output=embed`}
             />
           </div>
         </div>
       </main>
+
+      <AnimatePresence>
+        {showExitBar && (
+          <motion.div
+            initial={{ y: 100 }}
+            animate={{ y: 0 }}
+            exit={{ y: 100 }}
+            className="fixed bottom-0 left-0 right-0 bg-amber-500 text-slate-900 p-4 z-50"
+          >
+            <div className="max-w-[1140px] mx-auto flex items-center justify-between gap-4">
+              <div>
+                <p className="font-bold">Nie jesteś pewny?</p>
+                <p className="text-sm">Zadzwoń – odpowiemy na każde pytanie.</p>
+              </div>
+              <a
+                href={`tel:${clinicProfile.phone}`}
+                className="bg-slate-900 text-white px-4 py-2 rounded-lg text-sm font-bold whitespace-nowrap"
+              >
+                Zadzwoń teraz
+              </a>
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
 
       <footer className="mt-20 pb-10 text-slate-400 text-[10px] font-semibold uppercase tracking-[0.5em] text-center">
         © 2026 Ochota na Uśmiech
