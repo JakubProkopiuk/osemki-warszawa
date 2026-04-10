@@ -2,18 +2,28 @@
 
 import Link from 'next/link';
 import Image from 'next/image';
+import { ChevronRight, MapPin, Search } from 'lucide-react';
+import locations from '../data/locations.json';
+
+type LocationItem = {
+  slug: string;
+  nazwa_lokalizacji: string;
+  klinika: string;
+};
 
 export default function HomePage() {
+  const allLocations = locations as LocationItem[];
+  const ochotaLocations = allLocations.filter((loc) => loc.klinika.includes('Pruszkowska'));
+  const ursynowLocations = allLocations.filter((loc) => loc.klinika.includes('KEN'));
+
   return (
     <div className="min-h-screen bg-[#FDFDFD] text-[#1A1C1E] font-sans antialiased">
-      {/* Dynamiczne tło rozproszone */}
-      <div className="fixed top-[-10%] right-[-10%] w-[60%] h-[60%] bg-blue-50/50 blur-[120px] rounded-full z-0" />
+      <div className="fixed top-[-10%] right-[-10%] w-[60%] h-[60%] bg-amber-100/20 blur-[120px] rounded-full z-0" />
       
       <main className="relative z-10 max-w-[1140px] mx-auto pt-24 px-6 md:pt-40">
-        
-        {/* HERO SECTION */}
         <div className="text-center space-y-8 mb-24">
-          <div className="inline-flex items-center gap-3 px-5 py-2.5 rounded-full bg-white border border-slate-100 shadow-sm text-blue-600 text-xs font-bold uppercase tracking-widest leading-none mx-auto">
+          <div className="inline-flex items-center gap-3 px-5 py-2.5 rounded-full bg-white border border-slate-100 shadow-sm text-amber-500 text-xs font-bold uppercase tracking-widest leading-none mx-auto">
+            <MapPin className="w-3.5 h-3.5" />
             Warszawskie Centrum Chirurgii Ósemek
           </div>
           
@@ -28,36 +38,32 @@ export default function HomePage() {
           </p>
         </div>
 
-        {/* SEKCJA LOKALIZACJI - POPRAWIONE LINKI I KLIKALNOŚĆ */}
         <div className="grid md:grid-cols-2 gap-8 mb-32">
-          {/* Lokalizacja 01 - Ochota */}
           <Link href="/ochota" className="group relative block overflow-hidden bg-white p-12 rounded-[48px] border border-slate-100 shadow-xl transition-all duration-500 hover:scale-[1.02] z-20 cursor-pointer">
             <div className="relative z-10 space-y-4">
-              <span className="text-blue-600 font-bold uppercase tracking-widest text-xs">Lokalizacja 01</span>
+              <span className="text-amber-500 font-bold uppercase tracking-widest text-xs">Lokalizacja 01</span>
               <h2 className="text-4xl font-black italic uppercase text-slate-900">Ochota</h2>
               <p className="text-slate-400 font-medium leading-relaxed">ul. Pruszkowska 6b<br />Warszawa Ochota</p>
               <div className="pt-6 flex items-center gap-2 text-slate-900 font-bold uppercase tracking-widest text-sm">
-                Wybierz lokalizację <span className="group-hover:translate-x-2 transition-transform duration-300">→</span>
+                Wybierz lokalizację <ChevronRight className="w-4 h-4 group-hover:translate-x-1 transition-transform duration-300" />
               </div>
             </div>
-            <div className="absolute top-0 right-0 w-32 h-32 bg-blue-50 rounded-bl-[100px] transition-all group-hover:w-40 group-hover:h-40 z-0" />
+            <div className="absolute top-0 right-0 w-32 h-32 bg-amber-100/30 rounded-bl-[100px] transition-all group-hover:w-40 group-hover:h-40 z-0" />
           </Link>
 
-          {/* Lokalizacja 02 - Ursynów */}
-          <Link href="/ursynow" className="group relative block overflow-hidden bg-[#1A1C1E] p-12 rounded-[48px] shadow-2xl transition-all duration-500 hover:scale-[1.02] z-20 cursor-pointer">
+          <Link href="/ursynow" className="group relative block overflow-hidden bg-slate-900 p-12 rounded-[48px] shadow-2xl transition-all duration-500 hover:scale-[1.02] z-20 cursor-pointer">
             <div className="relative z-10 space-y-4">
-              <span className="text-blue-400 font-bold uppercase tracking-widest text-xs">Lokalizacja 02</span>
+              <span className="text-amber-500 font-bold uppercase tracking-widest text-xs">Lokalizacja 02</span>
               <h2 className="text-4xl font-black italic uppercase text-white">Ursynów</h2>
               <p className="text-slate-500 font-medium text-white/60 leading-relaxed">al. KEN 96<br />Warszawa Ursynów</p>
               <div className="pt-6 flex items-center gap-2 text-white font-bold uppercase tracking-widest text-sm">
-                Wybierz lokalizację <span className="group-hover:translate-x-2 transition-transform duration-300">→</span>
+                Wybierz lokalizację <ChevronRight className="w-4 h-4 group-hover:translate-x-1 transition-transform duration-300" />
               </div>
             </div>
             <div className="absolute top-0 right-0 w-32 h-32 bg-white/5 rounded-bl-[100px] transition-all group-hover:w-40 group-hover:h-40 z-0" />
           </Link>
         </div>
 
-        {/* SEKCJA: NASI EKSPERCI */}
         <div className="mb-32 text-left px-2">
           <div className="flex items-center gap-4 mb-16">
             <h2 className="text-4xl font-black tracking-tight italic uppercase text-slate-900">Nasi Eksperci</h2>
@@ -86,18 +92,17 @@ export default function HomePage() {
                     alt={doc.name} 
                     fill 
                     className="object-cover grayscale group-hover:grayscale-0 transition-all duration-700"
-                    priority
+                    loading="lazy"
                    />
                 </div>
                 <h3 className="text-xl font-black uppercase tracking-tight text-slate-900 mb-1">{doc.name}</h3>
-                <p className="text-blue-600 font-bold text-xs uppercase tracking-widest mb-4">{doc.role}</p>
+                <p className="text-amber-600 font-bold text-xs uppercase tracking-widest mb-4">{doc.role}</p>
                 <p className="text-slate-400 font-medium leading-relaxed text-sm">{doc.desc}</p>
               </div>
             ))}
           </div>
         </div>
 
-        {/* STATYSTYKI / USP */}
         <div className="grid md:grid-cols-3 gap-12 pb-24 border-t border-slate-100 pt-24 text-center">
           <div>
             <h3 className="font-black text-4xl mb-2 text-slate-900">15 min</h3>
@@ -110,6 +115,45 @@ export default function HomePage() {
           <div>
             <h3 className="font-black text-4xl mb-2 text-slate-900">RTG / Tomograf</h3>
             <p className="text-slate-400 font-bold uppercase tracking-widest text-[10px]">Pełna diagnostyka na miejscu</p>
+          </div>
+        </div>
+
+        <div className="mb-24">
+          <div className="flex items-center gap-3 mb-10">
+            <Search className="w-6 h-6 text-amber-500" />
+            <h2 className="text-3xl font-extrabold tracking-tight text-slate-900">Obsługiwane Lokalizacje</h2>
+          </div>
+
+          <div className="grid md:grid-cols-2 gap-8">
+            <div className="bg-white border border-slate-100 rounded-3xl p-6 shadow-sm">
+              <h3 className="text-lg font-bold text-slate-900 mb-4">Wybierz gabinet: Ochota (ul. Pruszkowska)</h3>
+              <div className="max-h-[400px] overflow-y-auto custom-scrollbar space-y-1 pr-2">
+                {ochotaLocations.map((loc) => (
+                  <Link
+                    key={loc.slug}
+                    href={`/${loc.slug}`}
+                    className="block text-sm text-slate-500 hover:text-amber-600 transition-colors"
+                  >
+                    {`Usuwanie ósemek ${loc.nazwa_lokalizacji}`}
+                  </Link>
+                ))}
+              </div>
+            </div>
+
+            <div className="bg-white border border-slate-100 rounded-3xl p-6 shadow-sm">
+              <h3 className="text-lg font-bold text-slate-900 mb-4">Wybierz gabinet: Ursynów (al. KEN)</h3>
+              <div className="max-h-[400px] overflow-y-auto custom-scrollbar space-y-1 pr-2">
+                {ursynowLocations.map((loc) => (
+                  <Link
+                    key={loc.slug}
+                    href={`/${loc.slug}`}
+                    className="block text-sm text-slate-500 hover:text-amber-600 transition-colors"
+                  >
+                    {`Usuwanie ósemek ${loc.nazwa_lokalizacji}`}
+                  </Link>
+                ))}
+              </div>
+            </div>
           </div>
         </div>
       </main>

@@ -7,6 +7,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import {
   Activity,
   Camera,
+  CheckCircle2,
   ChevronRight,
   Clock,
   FileCheck,
@@ -99,7 +100,7 @@ export default function LocationClient({ locationData }: { locationData: Locatio
       return aKey - bKey;
     });
 
-    return shuffled.slice(0, 5);
+    return shuffled.slice(0, 4);
   })();
 
   const handleTileSelect = (field: keyof FormDataState, value: string) => {
@@ -233,6 +234,35 @@ export default function LocationClient({ locationData }: { locationData: Locatio
                   )}
                 </div>
               )}
+
+              <div className="bg-white border border-slate-200 rounded-2xl p-5 mt-4">
+                <h2 className="text-lg font-bold tracking-tight text-slate-900 mb-3">
+                  Dlaczego pacjenci z {locationName} wybierają naszą klinikę?
+                </h2>
+                <ul className="space-y-2">
+                  {isOchota
+                    ? [
+                        'Szybki dojazd komunikacją z Dworca Zachodniego',
+                        'Miejsca parkingowe z dużą rotacją aut tuż pod gabinetem',
+                        'Zaawansowane i w pełni bezbolesne znieczulenia chirurgiczne',
+                      ].map((point) => (
+                        <li key={point} className="flex items-start gap-2 text-sm text-slate-600 font-medium">
+                          <CheckCircle2 className="w-4 h-4 text-amber-500 mt-0.5 shrink-0" />
+                          <span>{point}</span>
+                        </li>
+                      ))
+                    : [
+                        'Bezpośrednie sąsiedztwo stacji Metro Ursynów',
+                        'Prywatny, darmowy parking dla pacjentów',
+                        'Nowoczesna diagnostyka 3D (CBCT) na miejscu',
+                      ].map((point) => (
+                        <li key={point} className="flex items-start gap-2 text-sm text-slate-600 font-medium">
+                          <CheckCircle2 className="w-4 h-4 text-amber-500 mt-0.5 shrink-0" />
+                          <span>{point}</span>
+                        </li>
+                      ))}
+                </ul>
+              </div>
             </div>
 
             <div className="flex flex-col md:flex-row items-center gap-6 p-7 rounded-3xl bg-white border border-slate-100 shadow-xl">
@@ -245,6 +275,9 @@ export default function LocationClient({ locationData }: { locationData: Locatio
                 <div className="inline-flex items-center px-3 py-1 rounded-full text-[11px] font-semibold bg-amber-50 text-amber-700 border border-amber-200 mb-2">
                   Certyfikowany Chirurg
                 </div>
+                <p className="flex items-center gap-1 text-[10px] text-slate-400 font-semibold uppercase tracking-wider mt-2">
+                  <Shield className="w-3 h-3 text-sky-600" /> Zweryfikowany lekarz (NIL)
+                </p>
                 <p className="text-slate-500 font-medium leading-relaxed text-sm">Lekarz prowadzący w placówce na ul. {locationData.klinika}</p>
               </div>
             </div>
@@ -363,8 +396,24 @@ export default function LocationClient({ locationData }: { locationData: Locatio
               ) : (
                 <motion.div key="step5" layout initial={{ opacity: 0, x: 18 }} animate={{ opacity: 1, x: 0 }} exit={{ opacity: 0, x: -18 }} className="space-y-8">
                   <div>
-                    <h2 className="text-2xl font-bold tracking-tight text-slate-900">Świetnie! Twój przypadek kwalifikuje się do bezbolesnego zabiegu.</h2>
-                    <p className="text-slate-500 text-sm mt-2 font-medium">Zostaw numer. Nasz koordynator oddzwoni do Ciebie w 15 minut z propozycją najbliższego terminu.</p>
+                    {formData.reason === 'Ból / Stan zapalny' ? (
+                      <>
+                        <h2 className="text-2xl font-bold tracking-tight text-slate-900">🚨 Zgłoszenie bólowe przyjęte (Priorytet)</h2>
+                        <p className="text-slate-500 text-sm mt-2 font-medium">
+                          Rozumiemy, jak trudny jest ból zęba. Nadaliśmy Twojemu zgłoszeniu najwyższy priorytet.
+                          Skontaktujemy się z Tobą najszybciej jak to możliwe (w godzinach pracy kliniki), aby
+                          znaleźć ratunkowy termin.
+                        </p>
+                      </>
+                    ) : (
+                      <>
+                        <h2 className="text-2xl font-bold tracking-tight text-slate-900">Świetnie! Kwalifikujesz się do bezbolesnego zabiegu.</h2>
+                        <p className="text-slate-500 text-sm mt-2 font-medium">
+                          Zostaw numer telefonu. Nasz koordynator oddzwoni do Ciebie wkrótce z propozycją dogodnego i
+                          bezpiecznego terminu.
+                        </p>
+                      </>
+                    )}
                   </div>
                   <form onSubmit={handleSubmit} className="space-y-4">
                     <input type="text" aria-label="Imię" required placeholder="Twoje imię" value={formData.name} onChange={(e) => setFormData((prev) => ({ ...prev, name: e.target.value }))} className={inputStyle} />
@@ -407,7 +456,7 @@ export default function LocationClient({ locationData }: { locationData: Locatio
           <div className="grid md:grid-cols-2 gap-10">
             {[
               {
-                q: 'Czy otrzymam zwolnienie lekarskie (L4)?',
+                q: 'Czy zabieg będzie bolesny?',
                 a: 'Stosujemy zaawansowane znieczulenie miejscowe, dzięki czemu sam zabieg jest całkowicie bezbolesny. Czujesz jedynie delikatny dotyk, bez żadnego dyskomfortu.',
               },
               {
@@ -415,12 +464,12 @@ export default function LocationClient({ locationData }: { locationData: Locatio
                 a: 'Nie potrzebujesz skierowania. Jeśli nie posiadasz aktualnego zdjęcia pantomograficznego, wykonamy precyzyjną diagnostykę w naszym gabinecie przed zabiegiem.',
               },
               {
-                q: 'Co po zabiegu? Czy dostanę zwolnienie?',
+                q: 'Co po zabiegu? Czy dostanę zwolnienie (L4)?',
                 a: 'Większość pacjentów wraca do normalnych obowiązków już następnego dnia. W razie potrzeby wystawiamy elektroniczne zwolnienie lekarskie (e-ZLA) na czas rekonwalescencji.',
               },
               {
                 q: 'Jakie są koszty usunięcia ósemki?',
-                a: 'Wycena zależy od ułożenia zęba w kości (od 400 do 800 zł). Dokładną i wiążącą cenę podajemy po analizie zdjęcia RTG, przed podaniem znieczulenia.',
+                a: 'Koszt zabiegu jest zawsze ustalany indywidualnie na podstawie zdjęcia RTG i stopnia skomplikowania. Gwarantujemy jednak pełną przejrzystość – dokładną i ostateczną wycenę, bez żadnych "ukrytych kosztów", poznasz zawsze przed podaniem znieczulenia.',
               },
             ].map((faq, i) => (
               <div key={i} className="space-y-3">
@@ -442,7 +491,7 @@ export default function LocationClient({ locationData }: { locationData: Locatio
                 href={`/${loc.slug}`}
                 className="inline-flex items-center rounded-full px-4 py-2 text-sm font-semibold border border-slate-300 bg-white text-slate-800 hover:border-amber-500 hover:text-slate-900 transition-colors"
               >
-                {`Usuwanie ósemek - ${loc.nazwa_lokalizacji}`}
+                {`Usuwanie ósemek ${loc.nazwa_lokalizacji}`}
               </Link>
             ))}
           </div>
@@ -461,7 +510,7 @@ export default function LocationClient({ locationData }: { locationData: Locatio
               loading="lazy"
               allowFullScreen
               title="Mapa dojazdu"
-              src={`https://maps.google.com/maps?q=${encodeURIComponent('Ochota na Uśmiech Warszawa ' + locationData.klinika)}&t=&z=15&ie=UTF8&iwloc=&output=embed`}
+              src={`http://googleusercontent.com/maps.google.com/?q=${encodeURIComponent('Ochota na Uśmiech Warszawa ' + locationData.klinika)}&t=&z=15&ie=UTF8&iwloc=B&output=embed`}
             />
           </div>
         </div>
