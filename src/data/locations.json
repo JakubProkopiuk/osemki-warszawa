@@ -2,7 +2,7 @@
   {
     "slug": "ochota",
     "nazwa_lokalizacji": "Ochota",
-    "klinika": "Pruszkowska 6b",
+    "klinika": "ul. Pruszkowska 6b",
     "czas_dojazdu": "w samym sercu Twojej dzielnicy",
     "punkt_orientacyjny": "Hala Kopińska",
     "komunikacja": "Autobusy: 128, 175, 504 oraz tramwaje: 7, 9, 15.",
@@ -49,7 +49,7 @@
   {
     "slug": "ursynow",
     "nazwa_lokalizacji": "Ursynów",
-    "klinika": "KEN 96",
+    "klinika": "al. KEN 96",
     "czas_dojazdu": "w samym sercu Twojej dzielnicy",
     "punkt_orientacyjny": "Metro Ursynów",
     "komunikacja": "Autobusy: 136, 179, 193 oraz Metro M1 do stacji Ursynów.",
@@ -4796,7 +4796,7 @@
   {
     "slug": "ulica-nowoursynowska",
     "nazwa_lokalizacji": "ul. Nowoursynowska",
-    "klinika": "KEN 96",
+    "klinika": "al. KEN 96",
     "czas_dojazdu": "20 minut",
     "punkt_orientacyjny": "Park Kultury w Powsinie",
     "komunikacja": "Autobusy: 136, 138 lub Metro M1 do stacji Ursynów.",
@@ -6535,7 +6535,7 @@
   {
     "slug": "ulica-pasaz-ursynowski",
     "nazwa_lokalizacji": "ul. Pasaż Ursynowski",
-    "klinika": "KEN 96",
+    "klinika": "al. KEN 96",
     "czas_dojazdu": "16 minut",
     "punkt_orientacyjny": "Pałac w Wilanowie",
     "komunikacja": "Autobusy: 192, 217 oraz Metro M1 do stacji Ursynów.",
@@ -6582,7 +6582,7 @@
   {
     "slug": "osiedle-szczesliwice",
     "nazwa_lokalizacji": "Osiedle Szczęśliwice",
-    "klinika": "Pruszkowska 6b",
+    "klinika": "ul. Pruszkowska 6b",
     "czas_dojazdu": "7 minut",
     "punkt_orientacyjny": "Rondo Daszyńskiego",
     "komunikacja": "Autobusy: 128, 175 oraz tramwaje: 9, 24.",
@@ -6629,7 +6629,7 @@
   {
     "slug": "osiedle-rakowiec",
     "nazwa_lokalizacji": "Osiedle Rakowiec",
-    "klinika": "Pruszkowska 6b",
+    "klinika": "ul. Pruszkowska 6b",
     "czas_dojazdu": "35 minut",
     "punkt_orientacyjny": "Dworzec Zachodni",
     "komunikacja": "Autobusy: 136, 186 i tramwaje: 10, 11.",
@@ -7663,7 +7663,7 @@
   {
     "slug": "osiedle-stara-ochota",
     "nazwa_lokalizacji": "Osiedle Stara Ochota",
-    "klinika": "Pruszkowska 6b",
+    "klinika": "ul. Pruszkowska 6b",
     "czas_dojazdu": "11 minut",
     "punkt_orientacyjny": "Stacja PKP Warszawa Zachodnia",
     "komunikacja": "Autobusy: 128, 175 oraz tramwaje: 9, 24.",
@@ -7757,7 +7757,7 @@
   {
     "slug": "osiedle-imielin",
     "nazwa_lokalizacji": "Osiedle Imielin",
-    "klinika": "KEN 96",
+    "klinika": "al. KEN 96",
     "czas_dojazdu": "12 minut",
     "punkt_orientacyjny": "Metro Wilanowska",
     "komunikacja": "Autobusy: 217, 319 oraz Metro M1 do stacji Ursynów.",
@@ -8274,7 +8274,7 @@
   {
     "slug": "osiedle-natolin-polnocny",
     "nazwa_lokalizacji": "Osiedle Natolin Północny",
-    "klinika": "KEN 96",
+    "klinika": "al. KEN 96",
     "czas_dojazdu": "12 minut",
     "punkt_orientacyjny": "Galeria Mokotów",
     "komunikacja": "Autobusy: 136, 138 lub Metro M1 do stacji Ursynów.",
@@ -8321,7 +8321,7 @@
   {
     "slug": "osiedle-kabaty-lesne",
     "nazwa_lokalizacji": "Osiedle Kabaty Leśne",
-    "klinika": "KEN 96",
+    "klinika": "al. KEN 96",
     "czas_dojazdu": "15 minut",
     "punkt_orientacyjny": "Metro Ursynów",
     "komunikacja": "Autobusy: 192, 217 oraz Metro M1 do stacji Ursynów.",
@@ -8368,7 +8368,7 @@
   {
     "slug": "osiedle-ursynow-centrum",
     "nazwa_lokalizacji": "Osiedle Ursynów Centrum",
-    "klinika": "KEN 96",
+    "klinika": "al. KEN 96",
     "czas_dojazdu": "21 minut",
     "punkt_orientacyjny": "Pałac w Wilanowie",
     "komunikacja": "Autobusy: 136, 138 lub Metro M1 do stacji Ursynów.",
@@ -8838,7 +8838,7 @@
   {
     "slug": "osiedle-natolin-wschodni",
     "nazwa_lokalizacji": "Osiedle Natolin Wschodni",
-    "klinika": "KEN 96",
+    "klinika": "al. KEN 96",
     "czas_dojazdu": "16 minut",
     "punkt_orientacyjny": "Metro Wilanowska",
     "komunikacja": "Autobusy: 193, 503 lub Metro M1 do stacji Ursynów.",
@@ -8885,7 +8885,7 @@
   {
     "slug": "osiedle-zielony-ursynow",
     "nazwa_lokalizacji": "Osiedle Zielony Ursynów",
-    "klinika": "KEN 96",
+    "klinika": "al. KEN 96",
     "czas_dojazdu": "7 minut",
     "punkt_orientacyjny": "Metro Wilanowska",
     "komunikacja": "Autobusy: 174, 185 lub Metro M1 do stacji Ursynów.",
@@ -9637,8 +9637,8 @@
   {
     "slug": "metro-ursynow",
     "nazwa_lokalizacji": "Metro Ursynów",
-    "klinika": "KEN 96",
-    "czas_dojazdu": "21 minut",
+    "klinika": "al. KEN 96",
+    "czas_dojazdu": "1 min",
     "punkt_orientacyjny": "Las Kabacki",
     "komunikacja": "Autobusy: 217, 319 oraz Metro M1 do stacji Ursynów.",
     "parking": "Pacjenci mogą korzystać z darmowego parkingu bezpośrednio przy wejściu do kliniki.",
@@ -9684,7 +9684,7 @@
   {
     "slug": "metro-stoklosy",
     "nazwa_lokalizacji": "Metro Stokłosy",
-    "klinika": "KEN 96",
+    "klinika": "al. KEN 96",
     "czas_dojazdu": "34 minuty",
     "punkt_orientacyjny": "Las Kabacki",
     "komunikacja": "Autobusy: 148, 165 oraz Metro M1 do stacji Ursynów.",
@@ -9731,7 +9731,7 @@
   {
     "slug": "metro-imielin",
     "nazwa_lokalizacji": "Metro Imielin",
-    "klinika": "KEN 96",
+    "klinika": "al. KEN 96",
     "czas_dojazdu": "14 minut",
     "punkt_orientacyjny": "Pałac w Wilanowie",
     "komunikacja": "Autobusy: 174, 185 lub Metro M1 do stacji Ursynów.",
@@ -9778,7 +9778,7 @@
   {
     "slug": "metro-natolin",
     "nazwa_lokalizacji": "Metro Natolin",
-    "klinika": "KEN 96",
+    "klinika": "al. KEN 96",
     "czas_dojazdu": "17 minut",
     "punkt_orientacyjny": "Las Kabacki",
     "komunikacja": "Autobusy: 217, 319 oraz Metro M1 do stacji Ursynów.",
@@ -9825,7 +9825,7 @@
   {
     "slug": "metro-kabaty",
     "nazwa_lokalizacji": "Metro Kabaty",
-    "klinika": "KEN 96",
+    "klinika": "al. KEN 96",
     "czas_dojazdu": "15 minut",
     "punkt_orientacyjny": "SGGW",
     "komunikacja": "Autobusy: 148, 165 oraz Metro M1 do stacji Ursynów.",
@@ -17768,7 +17768,7 @@
   {
     "slug": "osiedle-ochota-filtry-poludnie",
     "nazwa_lokalizacji": "Osiedle Ochota Filtry Południe",
-    "klinika": "Pruszkowska 6b",
+    "klinika": "ul. Pruszkowska 6b",
     "czas_dojazdu": "6 minut",
     "punkt_orientacyjny": "Hala Kopińska",
     "komunikacja": "Autobusy: 189, 191 i tramwaje: 22, 24.",
@@ -18708,7 +18708,7 @@
   {
     "slug": "osiedle-ursynow-kabaty-centrum",
     "nazwa_lokalizacji": "Osiedle Ursynów Kabaty Centrum",
-    "klinika": "KEN 96",
+    "klinika": "al. KEN 96",
     "czas_dojazdu": "6 minut",
     "punkt_orientacyjny": "Las Kabacki",
     "komunikacja": "Autobusy: 193, 503 lub Metro M1 do stacji Ursynów.",
@@ -18755,7 +18755,7 @@
   {
     "slug": "osiedle-ursynow-natolin-zachod",
     "nazwa_lokalizacji": "Osiedle Ursynów Natolin Zachód",
-    "klinika": "KEN 96",
+    "klinika": "al. KEN 96",
     "czas_dojazdu": "15 minut",
     "punkt_orientacyjny": "Metro Ursynów",
     "komunikacja": "Autobusy: 217, 319 oraz Metro M1 do stacji Ursynów.",

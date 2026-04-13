@@ -20,13 +20,12 @@ import locations from '../../data/locations.json';
 import Breadcrumb, { type BreadcrumbItem } from '@/components/Breadcrumb';
 import { getClinicProfile, type LocationRecord } from '@/lib/clinic';
 import { getProcedureCount } from '@/lib/utils';
-import { useMobileExitIntent } from '@/hooks/useMobileExitIntent';
 
 const cardStyle = 'bg-white border border-slate-200 shadow-xl rounded-3xl';
 const inputStyle =
   'w-full bg-white border border-slate-300 focus:border-amber-500 p-4 rounded-2xl outline-none transition-all duration-300 text-base placeholder:text-slate-400';
 const tileStyle =
-  'w-full text-left p-5 rounded-2xl border-2 border-slate-200 bg-white transition-all duration-300 hover:border-amber-500 hover:shadow-md flex items-center justify-between group';
+  'w-full text-left p-6 rounded-2xl border-2 border-slate-100 bg-white transition-all duration-300 hover:border-amber-500 hover:bg-amber-50/30 hover:-translate-y-1 hover:shadow-xl flex items-start gap-4 group cursor-pointer';
 
 const Star = () => (
   <svg className="w-4 h-4 text-amber-400" fill="currentColor" viewBox="0 0 20 20" aria-hidden="true">
@@ -67,7 +66,6 @@ export default function LocationClient({ locationData }: { locationData: Locatio
   const [isAnalyzing, setIsAnalyzing] = useState(false);
   const [step2Feedback, setStep2Feedback] = useState<string | null>(null);
   const [fearFeedback, setFearFeedback] = useState<string | null>(null);
-  const [showExitBar, setShowExitBar] = useState(false);
   const [formData, setFormData] = useState<FormDataState>({
     reason: '',
     toothArea: '',
@@ -93,25 +91,24 @@ export default function LocationClient({ locationData }: { locationData: Locatio
       : locationData.parking;
 
   const relatedLocations = (() => {
-    const sameClinic = (locations as LocationRecord[]).filter(
-      (loc) => loc.klinika === locationData.klinika && loc.slug !== locationData.slug,
+    const all = locations as LocationRecord[];
+    const firstSlugToken = locationData.slug.split('-')[0];
+    const isCentralHub = locationData.slug.startsWith('metro-');
+    const blockedTownTokens = ['iwiczna', 'zalesie', 'piaseczno'];
+    const isAllowed = (slug: string) =>
+      !isCentralHub || !blockedTownTokens.some((token) => slug.includes(token));
+
+    const sameClinic = all.filter(
+      (loc) =>
+        loc.slug !== locationData.slug &&
+        loc.klinika === locationData.klinika &&
+        isAllowed(loc.slug),
     );
 
-    const hash = locationData.slug
-      .split('')
-      .reduce((acc, char) => (acc * 31 + char.charCodeAt(0)) >>> 0, 7);
+    const districtFirst = sameClinic.filter((loc) => loc.slug.split('-')[0] === firstSlugToken);
+    const fallback = sameClinic.filter((loc) => loc.slug.split('-')[0] !== firstSlugToken);
 
-    const shuffled = [...sameClinic].sort((a, b) => {
-      const aKey =
-        a.slug.split('').reduce((acc, c) => (acc * 33 + c.charCodeAt(0)) >>> 0, hash) ^
-        hash;
-      const bKey =
-        b.slug.split('').reduce((acc, c) => (acc * 33 + c.charCodeAt(0)) >>> 0, hash) ^
-        hash;
-      return aKey - bKey;
-    });
-
-    return shuffled.slice(0, 4);
+    return [...districtFirst, ...fallback].slice(0, 6);
   })();
 
   const experimentVariant = locationData.slug.charCodeAt(0) % 2 === 0 ? 'A' : 'B';
@@ -154,8 +151,6 @@ export default function LocationClient({ locationData }: { locationData: Locatio
 
     setTimeout(() => setStep((prev) => prev + 1), 250);
   };
-
-  useMobileExitIntent(() => setShowExitBar(true));
 
   const breadcrumbItems: BreadcrumbItem[] = [
     { name: 'Strona główna', href: '/' },
@@ -202,7 +197,7 @@ export default function LocationClient({ locationData }: { locationData: Locatio
             onClick={() => handleTileSelect(field, option.value)}
             className={tileStyle}
           >
-            <span className="flex items-start gap-3 text-slate-800">
+            <span className="flex items-start gap-3 text-slate-800 min-w-0">
               <Icon className="w-6 h-6 text-amber-500 shrink-0" />
               <span>
                 <span className="font-semibold block">{option.label}</span>
@@ -211,10 +206,7 @@ export default function LocationClient({ locationData }: { locationData: Locatio
                 )}
               </span>
             </span>
-            <span className="flex items-center gap-2">
-              <span className="h-5 w-5 rounded-full border-2 border-slate-300 group-hover:border-amber-500 transition-colors" />
-              <ChevronRight className="w-4 h-4 text-slate-400 group-hover:text-amber-500 transition-colors" />
-            </span>
+            <ChevronRight className="w-4 h-4 text-slate-400 group-hover:text-amber-500 transition-colors ml-auto shrink-0 mt-1" />
           </motion.button>
         );
       })}
@@ -516,7 +508,7 @@ export default function LocationClient({ locationData }: { locationData: Locatio
                         <p className="text-slate-500 text-sm mt-2 font-medium">
                           Rozumiemy, jak trudny jest ból zęba. Nadaliśmy Twojemu zgłoszeniu najwyższy priorytet.
                           Skontaktujemy się z Tobą najszybciej jak to możliwe (w godzinach pracy kliniki), aby
-                          znaleźć ratunkowy termin.
+                          znaleźć ratunkowy termin. RTG i diagnostykę wykonamy na miejscu.
                         </p>
                       </>
                     ) : (
@@ -617,23 +609,6 @@ export default function LocationClient({ locationData }: { locationData: Locatio
           </div>
         </div>
 
-        <div className="mb-20 text-left">
-          <h2 className="text-2xl md:text-3xl font-extrabold tracking-tight text-slate-900 mb-6">
-            Obsługujemy również pacjentów z pobliskich lokalizacji
-          </h2>
-          <div className="flex flex-wrap gap-3">
-            {relatedLocations.map((loc) => (
-              <Link
-                key={loc.slug}
-                href={`/${loc.slug}`}
-                className="inline-flex items-center rounded-full px-4 py-2 text-sm font-semibold border border-slate-300 bg-white text-slate-800 hover:border-amber-500 hover:text-slate-900 transition-colors"
-              >
-                {`Usuwanie ósemek ${loc.nazwa_lokalizacji}`}
-              </Link>
-            ))}
-          </div>
-        </div>
-
         <div className="mb-28 text-left">
           <div className="flex items-center gap-4 mb-10">
             <h2 className="text-3xl md:text-4xl font-extrabold tracking-tight italic text-slate-900 leading-none">Mapa dojazdu</h2>
@@ -651,31 +626,24 @@ export default function LocationClient({ locationData }: { locationData: Locatio
             />
           </div>
         </div>
-      </main>
 
-      <AnimatePresence>
-        {showExitBar && (
-          <motion.div
-            initial={{ y: 100 }}
-            animate={{ y: 0 }}
-            exit={{ y: 100 }}
-            className="fixed bottom-0 left-0 right-0 bg-amber-500 text-slate-900 p-4 z-50"
-          >
-            <div className="max-w-[1140px] mx-auto flex items-center justify-between gap-4">
-              <div>
-                <p className="font-bold">Nie jesteś pewny?</p>
-                <p className="text-sm">Zadzwoń – odpowiemy na każde pytanie.</p>
-              </div>
-              <a
-                href={`tel:${clinicProfile.phone}`}
-                className="bg-slate-900 text-white px-4 py-2 rounded-lg text-sm font-bold whitespace-nowrap"
+        <div className="mb-20 text-left border-t border-slate-200 pt-6">
+          <p className="text-xs uppercase tracking-wider text-slate-500 mb-3">
+            Pobliskie lokalizacje
+          </p>
+          <div className="flex flex-wrap gap-2">
+            {relatedLocations.map((loc) => (
+              <Link
+                key={loc.slug}
+                href={`/${loc.slug}`}
+                className="inline-flex items-center rounded-full px-3 py-1.5 text-xs font-medium border border-slate-200 bg-white text-slate-600 hover:border-amber-400 hover:text-slate-900 transition-colors"
               >
-                Zadzwoń teraz
-              </a>
-            </div>
-          </motion.div>
-        )}
-      </AnimatePresence>
+                {`Usuwanie ósemek ${loc.nazwa_lokalizacji}`}
+              </Link>
+            ))}
+          </div>
+        </div>
+      </main>
 
       <footer className="mt-20 pb-10 text-slate-400 text-[10px] font-semibold uppercase tracking-[0.5em] text-center">
         © 2026 Ochota na Uśmiech
