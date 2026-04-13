@@ -1,20 +1,14 @@
 import { notFound } from 'next/navigation';
 import LocationClient from './LocationClient';
 import locations from '../../data/locations.json';
+import { generateMedicalSchema } from '@/lib/generateSchema';
+import { getClinicProfile, getLocationSearchVolume, type LocationRecord } from '@/lib/clinic';
+import { getCanonical } from '@/lib/getCanonical';
 
 export const revalidate = 2_592_000;
 export const dynamicParams = true;
 
-type LocationData = {
-  slug: string;
-  nazwa_lokalizacji: string;
-  klinika: string;
-  czas_dojazdu: string;
-  punkt_orientacyjny?: string;
-  komunikacja?: string;
-  parking?: string;
-  reviews?: Array<{ author: string; text: string; rating: number }>;
-};
+type LocationData = LocationRecord;
 
 const allLocations = locations as LocationData[];
 
@@ -26,7 +20,7 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
 
   const isOchota = location.klinika.includes('Pruszkowska');
   const dzielnicaGlowna = isOchota ? 'Ochota' : 'Ursynów';
-  const canonical = `https://www.osemki-warszawa.pl/${location.slug}`;
+  const canonical = getCanonical(location, allLocations);
   const landmark = location.punkt_orientacyjny ?? `okolicy ${dzielnicaGlowna}`;
   const travelTime = location.czas_dojazdu || 'kilkanaście minut';
   
@@ -48,7 +42,11 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
 }
 
 export async function generateStaticParams() {
-  return allLocations.map((loc) => ({
+  const topLocations = [...allLocations]
+    .sort((a, b) => getLocationSearchVolume(b) - getLocationSearchVolume(a))
+    .slice(0, 200);
+
+  return topLocations.map((loc) => ({
     slug: loc.slug,
   }));
 }
@@ -60,6 +58,14 @@ export default async function LocationPage({ params }: { params: Promise<{ slug:
   if (!locationData) {
     return notFound();
   }
+
+  const clinicProfile = getClinicProfile(locationData.klinika);
+  const enrichedLocation: LocationData = {
+    ...locationData,
+    hubSlug: locationData.hubSlug ?? clinicProfile.hubSlug,
+    hubName: locationData.hubName ?? clinicProfile.hubName,
+    displayName: locationData.displayName ?? locationData.nazwa_lokalizacji,
+  };
 
   const isPruszkowska = locationData.klinika.toLowerCase().includes('pruszkowska');
   const clinicName = isPruszkowska
@@ -92,36 +98,17 @@ export default async function LocationPage({ params }: { params: Promise<{ slug:
     },
   ];
 
-  const schema = {
-    '@context': 'https://schema.org',
-    '@graph': [
-      {
-        '@type': 'MedicalClinic',
-        '@id': `https://www.osemki-warszawa.pl/${locationData.slug}#clinic`,
-        name: clinicName,
-        address: {
-          '@type': 'PostalAddress',
-          streetAddress: clinicAddress,
-          addressLocality: 'Warszawa',
-          addressCountry: 'PL',
-        },
-        areaServed: locationData.nazwa_lokalizacji,
-        url: `https://www.osemki-warszawa.pl/${locationData.slug}`,
-      },
-      {
-        '@type': 'FAQPage',
-        '@id': `https://www.osemki-warszawa.pl/${locationData.slug}#faq`,
-        mainEntity: faqItems.map((item) => ({
-          '@type': 'Question',
-          name: item.question,
-          acceptedAnswer: {
-            '@type': 'Answer',
-            text: item.answer,
-          },
-        })),
-      },
-    ],
-  };
+  const schema = generateMedicalSchema(
+    {
+      ...enrichedLocation,
+      faq: faqItems.map((item) => ({ question: item.question, answer: item.answer })),
+    },
+    {
+      ...clinicProfile,
+      clinicName: clinicName,
+      address: clinicAddress,
+    },
+  );
 
   return (
     <>
@@ -129,7 +116,7 @@ export default async function LocationPage({ params }: { params: Promise<{ slug:
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }}
       />
-      <LocationClient locationData={locationData} />
+      <LocationClient locationData={enrichedLocation} />
     </>
   );
 }
