@@ -111,9 +111,7 @@ export default function LocationClient({ locationData }: { locationData: Locatio
     return [...districtFirst, ...fallback].slice(0, 6);
   })();
 
-  // Keep canonical https URL string present for SEO audit compatibility.
-  const mapEmbedFallback = `https://maps.google.com/maps?q=${encodeURIComponent('Ochota na Uśmiech Warszawa ' + locationData.klinika)}&t=&z=15&ie=UTF8&iwloc=B&output=embed`;
-  const mapEmbedSrc = `http://googleusercontent.com/maps.google.com/?q=${encodeURIComponent('Ochota na Uśmiech Warszawa ' + locationData.klinika)}&t=&z=15&ie=UTF8&iwloc=B&output=embed`;
+  const mapEmbedSrc = `https://maps.google.com/maps?q=${encodeURIComponent('Ochota na Uśmiech Warszawa ' + locationData.klinika)}&t=&z=15&ie=UTF8&iwloc=&output=embed`;
 
   const experimentVariant = locationData.slug.charCodeAt(0) % 2 === 0 ? 'A' : 'B';
   const breadcrumbItems: BreadcrumbItem[] = [
@@ -532,8 +530,8 @@ export default function LocationClient({ locationData }: { locationData: Locatio
                   </div>
                   <form onSubmit={handleSubmit} className="space-y-4">
                     <input type="text" aria-label="Imię" required placeholder="Twoje imię" value={formData.name} onChange={(e) => setFormData((prev) => ({ ...prev, name: e.target.value }))} className={inputStyle} />
-                    <input type="tel" aria-label="Telefon" required placeholder="Twój numer – oddzwonimy w ciągu 2h" value={formData.phone} onChange={handlePhoneChange} className={`${inputStyle} font-mono tracking-wider`} />
-                    <p className="text-xs text-slate-400 mt-1">📵 Bez spamu. Tylko 1 rozmowa od koordynatora.</p>
+                    <input type="tel" aria-label="Telefon" required placeholder="Twój numer telefonu" value={formData.phone} onChange={handlePhoneChange} className={`${inputStyle} font-mono tracking-wider`} />
+                    <p className="flex items-center gap-1.5 text-xs text-slate-400 mt-2 font-medium"><Shield className="w-3.5 h-3.5 text-emerald-500" /> Twoje dane są szyfrowane. Zadzwonimy tylko raz, aby ustalić termin.</p>
                     {phoneError && (
                       <p className="text-xs text-red-600 font-medium" role="alert">
                         {phoneError}
@@ -548,7 +546,7 @@ export default function LocationClient({ locationData }: { locationData: Locatio
                     <button
                       type="submit"
                       disabled={status === 'loading'}
-                      className="w-full bg-gradient-to-r from-amber-400 to-amber-500 text-slate-900 font-semibold text-base py-4 mt-2 rounded-2xl transition-all duration-300 hover:from-amber-500 hover:to-amber-600 shadow-lg active:scale-[0.99]"
+                      className="w-full bg-gradient-to-b from-amber-400 to-amber-500 text-amber-950 font-bold text-lg py-4 mt-4 rounded-2xl shadow-[0_8px_20px_-6px_rgba(245,158,11,0.4)] transition-all duration-300 hover:shadow-[0_12px_25px_-6px_rgba(245,158,11,0.6)] hover:-translate-y-0.5 active:translate-y-0"
                     >
                       {status === 'loading' ? 'Wysyłanie...' : 'Sprawdź termin'}
                     </button>
@@ -619,7 +617,7 @@ export default function LocationClient({ locationData }: { locationData: Locatio
               loading="lazy"
               allowFullScreen
               title="Mapa dojazdu"
-              src={mapEmbedSrc || mapEmbedFallback}
+              src={mapEmbedSrc}
             />
           </div>
         </div>
