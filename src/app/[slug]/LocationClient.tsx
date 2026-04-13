@@ -17,9 +17,6 @@ import {
   type LucideIcon,
 } from 'lucide-react';
 import locations from '../../data/locations.json';
-import Breadcrumb, { type BreadcrumbItem } from '@/components/Breadcrumb';
-import { getClinicProfile, type LocationRecord } from '@/lib/clinic';
-import { getProcedureCount } from '@/lib/utils';
 
 const cardStyle = 'bg-white border border-slate-200 shadow-xl rounded-3xl';
 const inputStyle =
@@ -78,8 +75,6 @@ export default function LocationClient({ locationData }: { locationData: Locatio
   const [phoneError, setPhoneError] = useState<string | null>(null);
 
   const isOchota = locationData.klinika.toLowerCase().includes('pruszkowska');
-  const clinicProfile = getClinicProfile(locationData.klinika);
-  const procedureCount = getProcedureCount(new Date(clinicProfile.openingDate));
   const doctor = isOchota
     ? { name: 'lek. dent. Małgorzata Sturska', role: 'Specjalista chirurgii', img: '/doctors/sturska.jpg', locName: 'Ochota' }
     : { name: 'lek. dent. Natalia Kowalczyk-Zuchora', role: 'Lekarz dentysta', img: '/doctors/kowalczyk.webp', locName: 'Ursynów' };
@@ -91,7 +86,7 @@ export default function LocationClient({ locationData }: { locationData: Locatio
       : locationData.parking;
 
   const relatedLocations = (() => {
-    const all = locations as LocationRecord[];
+    const all = locations as LocationData[];
     const firstSlugToken = locationData.slug.split('-')[0];
     const isCentralHub = locationData.slug.startsWith('metro-');
     const blockedTownTokens = ['iwiczna', 'zalesie', 'piaseczno'];
@@ -151,18 +146,6 @@ export default function LocationClient({ locationData }: { locationData: Locatio
 
     setTimeout(() => setStep((prev) => prev + 1), 250);
   };
-
-  const breadcrumbItems: BreadcrumbItem[] = [
-    { name: 'Strona główna', href: '/' },
-    {
-      name: clinicProfile.hubName,
-      href: `/${clinicProfile.hubSlug}`,
-    },
-    {
-      name: locationName,
-      href: `/${locationData.slug}`,
-    },
-  ];
 
   const optionListVariants = {
     hidden: {},
@@ -274,7 +257,6 @@ export default function LocationClient({ locationData }: { locationData: Locatio
         <div className="grid lg:grid-cols-[1.1fr,0.9fr] gap-14 md:gap-20 items-start mb-28">
           <motion.div initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} className="space-y-8">
             <div className="space-y-5">
-              <Breadcrumb items={breadcrumbItems} />
               <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-gradient-to-r from-slate-900 to-slate-800 border border-slate-700 shadow-sm text-amber-400 text-[11px] font-semibold uppercase tracking-wider leading-none">
                 <Shield className="w-3.5 h-3.5" /> Bezpieczna chirurgia {doctor.locName}
               </div>
@@ -356,7 +338,7 @@ export default function LocationClient({ locationData }: { locationData: Locatio
                 </div>
                 <div className="hidden md:block h-6 w-px bg-slate-200" />
                 <div className="flex items-center gap-2 bg-white px-4 py-2 rounded-xl border border-slate-200 shadow-sm">
-                  <span className="font-bold text-sm text-slate-900 uppercase">Ponad {procedureCount.toLocaleString('pl-PL')} bezpiecznie usuniętych ósemek</span>
+                  <span className="font-bold text-sm text-slate-900 uppercase">Ponad 10 000 bezpiecznie usuniętych ósemek</span>
                 </div>
               </div>
 
