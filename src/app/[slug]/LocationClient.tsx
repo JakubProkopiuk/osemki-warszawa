@@ -1,21 +1,10 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, type ReactNode } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { motion, AnimatePresence } from 'framer-motion';
-import {
-  Activity,
-  Camera,
-  CheckCircle2,
-  ChevronRight,
-  Clock,
-  FileCheck,
-  Shield,
-  Stethoscope,
-  Wallet,
-  type LucideIcon,
-} from 'lucide-react';
+import { CheckCircle2, Clock, FileCheck, Shield, ShieldCheck } from 'lucide-react';
 import locations from '../../data/locations.json';
 import Breadcrumb, { type BreadcrumbItem } from '@/components/Breadcrumb';
 import { getClinicProfile, type LocationRecord } from '@/lib/clinic';
@@ -24,8 +13,6 @@ import { getProcedureCount } from '@/lib/utils';
 const cardStyle = 'bg-white border border-slate-200 shadow-xl rounded-3xl';
 const inputStyle =
   'w-full bg-white border border-slate-300 focus:border-amber-500 p-4 rounded-2xl outline-none transition-all duration-300 text-base placeholder:text-slate-400';
-const tileStyle =
-  'w-full text-left p-6 rounded-2xl border-2 border-slate-100 bg-white transition-all duration-300 hover:border-amber-500 hover:bg-amber-50/30 hover:-translate-y-1 hover:shadow-xl flex items-start gap-4 group cursor-pointer';
 
 const Star = () => (
   <svg className="w-4 h-4 text-amber-400" fill="currentColor" viewBox="0 0 20 20" aria-hidden="true">
@@ -54,17 +41,50 @@ type FormDataState = {
   phone: string;
 };
 
-type QuizOption = {
-  label: string;
+type QuizCard = {
   value: string;
-  icon: LucideIcon;
-  description?: string;
+  label: string;
+  desc: string;
+  urgent?: boolean;
+  icon: ReactNode;
+  badge?: string;
 };
+
+const OptionCard = ({
+  card,
+  onClick,
+  selected = false,
+}: {
+  card: QuizCard;
+  onClick: () => void;
+  selected?: boolean;
+}) => (
+  <button
+    onClick={onClick}
+    className={`group w-full text-left p-4 rounded-2xl border-2 bg-white transition-all duration-150 hover:border-amber-400 hover:bg-amber-50/40 flex flex-col gap-2 ${
+      selected ? 'border-amber-400 bg-amber-50/40' : 'border-slate-200'
+    }`}
+  >
+    <div className={`w-9 h-9 rounded-xl flex items-center justify-center ${card.urgent ? 'bg-red-50' : 'bg-amber-50'}`}>
+      <span className={`[&>svg]:w-[18px] [&>svg]:h-[18px] [&>svg]:stroke-[1.8] ${card.urgent ? '[&>svg]:stroke-red-500' : '[&>svg]:stroke-amber-600'}`}>
+        {card.icon}
+      </span>
+    </div>
+    <div>
+      <p className="text-[14px] font-semibold text-slate-900 leading-snug">{card.label}</p>
+      <p className="text-[11px] text-slate-400 mt-0.5 leading-relaxed">{card.desc}</p>
+    </div>
+    {card.badge && (
+      <span className="text-[10px] font-semibold px-2 py-0.5 rounded-full bg-red-50 text-red-700 w-fit">
+        {card.badge}
+      </span>
+    )}
+  </button>
+);
 
 export default function LocationClient({ locationData }: { locationData: LocationData }) {
   const [step, setStep] = useState(1);
   const [isAnalyzing, setIsAnalyzing] = useState(false);
-  const [step2Feedback, setStep2Feedback] = useState<string | null>(null);
   const [fearFeedback, setFearFeedback] = useState<string | null>(null);
   const [formData, setFormData] = useState<FormDataState>({
     reason: '',
@@ -124,11 +144,7 @@ export default function LocationClient({ locationData }: { locationData: Locatio
     setFormData((prev) => ({ ...prev, [field]: value }));
 
     if (field === 'toothArea') {
-      setStep2Feedback('Dobra decyzja — im więcej wiemy na tym etapie, tym precyzyjniejsza kwalifikacja.');
-      setTimeout(() => {
-        setStep2Feedback(null);
-        setStep((prev) => prev + 1);
-      }, 1200);
+      setTimeout(() => setStep((prev) => prev + 1), 250);
       return;
     }
 
@@ -158,55 +174,6 @@ export default function LocationClient({ locationData }: { locationData: Locatio
 
     setTimeout(() => setStep((prev) => prev + 1), 250);
   };
-
-  const optionListVariants = {
-    hidden: {},
-    visible: {
-      transition: {
-        staggerChildren: 0.08,
-        delayChildren: 0.05,
-      },
-    },
-  };
-
-  const optionItemVariants = {
-    hidden: { opacity: 0, y: 10 },
-    visible: { opacity: 1, y: 0 },
-  };
-
-  const renderOptions = (field: keyof FormDataState, options: QuizOption[]) => (
-    <motion.div
-      layout
-      className="space-y-3"
-      variants={optionListVariants}
-      initial="hidden"
-      animate="visible"
-    >
-      {options.map((option) => {
-        const Icon = option.icon;
-        return (
-          <motion.button
-            key={option.value}
-            variants={optionItemVariants}
-            transition={{ duration: 0.3, ease: 'easeOut' }}
-            onClick={() => handleTileSelect(field, option.value)}
-            className={tileStyle}
-          >
-            <span className="flex items-start gap-3 text-slate-800 min-w-0">
-              <Icon className="w-6 h-6 text-amber-500 shrink-0" />
-              <span>
-                <span className="font-semibold block">{option.label}</span>
-                {option.description && (
-                  <span className="text-xs text-slate-500 font-medium">{option.description}</span>
-                )}
-              </span>
-            </span>
-            <ChevronRight className="w-4 h-4 text-slate-400 group-hover:text-amber-500 transition-colors ml-auto shrink-0 mt-1" />
-          </motion.button>
-        );
-      })}
-    </motion.div>
-  );
 
   const handlePhoneChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const val = e.target.value.replace(/\D/g, '').substring(0, 9);
@@ -345,13 +312,13 @@ export default function LocationClient({ locationData }: { locationData: Locatio
 
             <div className="space-y-5">
               <div className="flex items-center gap-4">
-                <div className="flex items-center gap-2 bg-white px-4 py-2 rounded-xl border border-slate-200 shadow-sm">
+                <div className="flex items-center gap-2 bg-white px-4 py-2 rounded-xl border border-slate-100 shadow-sm">
                   <Star />
-                  <span className="font-bold text-sm text-slate-900 uppercase">4.9/5 Google Maps</span>
+                  <span className="font-semibold text-sm text-slate-800">4.9/5 Google Maps</span>
                 </div>
                 <div className="hidden md:block h-6 w-px bg-slate-200" />
-                <div className="flex items-center gap-2 bg-white px-4 py-2 rounded-xl border border-slate-200 shadow-sm">
-                  <span className="font-bold text-sm text-slate-900 uppercase">Ponad {procedureCount.toLocaleString('pl-PL')} bezpiecznie usuniętych ósemek</span>
+                <div className="flex items-center gap-2 bg-white px-4 py-2 rounded-xl border border-slate-100 shadow-sm">
+                  <span className="font-semibold text-sm text-slate-800">Ponad {procedureCount.toLocaleString('pl-PL')} bezpiecznie usuniętych ósemek</span>
                 </div>
               </div>
 
@@ -366,7 +333,7 @@ export default function LocationClient({ locationData }: { locationData: Locatio
                       </div>
                       <p className="text-slate-600 font-medium text-sm leading-relaxed mb-4">&quot;{rev.text}&quot;</p>
                     </div>
-                    <span className="font-semibold text-slate-400 text-[11px] uppercase tracking-wider">{rev.author}</span>
+                    <span className="font-medium text-slate-400 text-[12px]">{rev.author}</span>
                   </motion.div>
                 ))}
               </div>
@@ -375,14 +342,20 @@ export default function LocationClient({ locationData }: { locationData: Locatio
 
           <motion.div layout initial={{ opacity: 0, scale: 0.98 }} animate={{ opacity: 1, scale: 1 }} className={`${cardStyle} p-8 md:p-10 sticky top-10`}>
             {status !== 'success' && (
-              <div className="mb-8">
-                <div className="flex justify-between text-[11px] font-semibold uppercase tracking-wider text-slate-500 mb-3">
-                  <span>Krok {step} z 5</span>
-                  <span className="text-slate-900">{step * 20}%</span>
+              <div className="flex items-center justify-between mb-6">
+                <div className="flex items-center gap-1.5">
+                  {[1, 2, 3, 4, 5].map((i) => (
+                    <div
+                      key={i}
+                      className={`h-2 rounded-full transition-all duration-300 ${
+                        i < step ? 'w-2 bg-green-400' : i === step ? 'w-5 bg-amber-500' : 'w-2 bg-slate-200'
+                      }`}
+                    />
+                  ))}
                 </div>
-                <div className="h-1 w-full bg-slate-200 rounded-full overflow-hidden">
-                  <motion.div className="h-full bg-amber-500" initial={{ width: 0 }} animate={{ width: `${step * 20}%` }} transition={{ duration: 0.4, ease: 'easeInOut' }} />
-                </div>
+                <span className="text-[11px] font-semibold uppercase tracking-widest text-slate-400">
+                  Krok {step} z 5
+                </span>
               </div>
             )}
 
@@ -396,142 +369,302 @@ export default function LocationClient({ locationData }: { locationData: Locatio
                   </p>
                 </motion.div>
               ) : step === 1 ? (
-                <motion.div key="step1" layout initial={{ opacity: 0, x: 18 }} animate={{ opacity: 1, x: 0 }} exit={{ opacity: 0, x: -18 }} className="space-y-6">
-                  <h2 className="text-2xl font-bold tracking-tight text-slate-900">Z czym do nas trafiasz?</h2>
-                  {renderOptions('reason', [
-                    { label: 'Ból / stan zapalny', value: 'Ból / Stan zapalny', icon: Activity },
-                    { label: 'Zalecenie ortodonty', value: 'Zalecenie ortodonty', icon: Stethoscope },
-                    { label: 'Konsultacja', value: 'Konsultacja', icon: Shield },
-                  ])}
+                <motion.div key="step1" layout initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -10 }} className="space-y-5">
+                  <div>
+                    <h2 className="text-xl font-bold text-slate-900 mb-1">Co Cię do nas sprowadza?</h2>
+                    <p className="text-sm text-slate-400">Dostosujemy termin i plan wizyty do Twojej sytuacji.</p>
+                  </div>
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                    <OptionCard
+                      card={{
+                        value: 'Ból / Stan zapalny',
+                        label: 'Ból lub stan zapalny',
+                        desc: 'Szybki priorytetowy termin',
+                        urgent: true,
+                        badge: 'Pilne',
+                        icon: (
+                          <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z" strokeLinecap="round" strokeLinejoin="round" />
+                          </svg>
+                        ),
+                      }}
+                      selected={formData.reason === 'Ból / Stan zapalny'}
+                      onClick={() => handleTileSelect('reason', 'Ból / Stan zapalny')}
+                    />
+                    <OptionCard
+                      card={{
+                        value: 'Zalecenie ortodonty',
+                        label: 'Zalecenie ortodonty',
+                        desc: 'Planowy zabieg chirurgiczny',
+                        icon: (
+                          <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <circle cx="12" cy="12" r="3" />
+                            <path d="M19.07 4.93a10 10 0 0 1 0 14.14M4.93 4.93a10 10 0 0 0 0 14.14" strokeLinecap="round" />
+                          </svg>
+                        ),
+                      }}
+                      selected={formData.reason === 'Zalecenie ortodonty'}
+                      onClick={() => handleTileSelect('reason', 'Zalecenie ortodonty')}
+                    />
+                  </div>
+                  <OptionCard
+                    card={{
+                      value: 'Konsultacja',
+                      label: 'Konsultacja / nie jestem pewien',
+                      desc: 'Lekarz oceni sytuację i zaproponuje dalsze kroki',
+                      icon: (
+                        <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                          <circle cx="12" cy="8" r="4" strokeLinecap="round" />
+                          <path d="M4 20c0-4 3.6-7 8-7s8 3 8 7" strokeLinecap="round" />
+                        </svg>
+                      ),
+                    }}
+                    selected={formData.reason === 'Konsultacja'}
+                    onClick={() => handleTileSelect('reason', 'Konsultacja')}
+                  />
                 </motion.div>
               ) : step === 2 ? (
-                <motion.div key="step2" layout initial={{ opacity: 0, x: 18 }} animate={{ opacity: 1, x: 0 }} exit={{ opacity: 0, x: -18 }} className="space-y-6">
-                  <h2 className="text-2xl font-bold tracking-tight text-slate-900">Której ósemki dotyczy problem?</h2>
-                  <p className="text-slate-500 text-sm font-medium">Dzięki temu szybciej dobierzemy właściwy typ konsultacji.</p>
-                  {renderOptions('toothArea', [
-                    {
-                      label: 'Górnej',
-                      value: 'Górnej',
-                      icon: Stethoscope,
-                      description: '(Zazwyczaj szybki i przewidywalny zabieg)',
-                    },
-                    {
-                      label: 'Dolnej',
-                      value: 'Dolnej',
-                      icon: Stethoscope,
-                      description: '(Wymaga precyzyjnej diagnostyki 3D przed zabiegiem)',
-                    },
-                    {
-                      label: 'Obu / Kilku',
-                      value: 'Obu / Kilku',
-                      icon: Activity,
-                      description: '(Kompleksowe rozwiązanie podczas jednej wizyty)',
-                    },
-                    {
-                      label: 'Nie jestem pewien',
-                      value: 'Nie jestem pewien',
-                      icon: Shield,
-                      description: '(Lekarz oceni sytuację na podstawie zdjęcia RTG)',
-                    },
-                  ])}
+                <motion.div key="step2" layout initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -10 }} className="space-y-5">
+                  <div>
+                    <h2 className="text-xl font-bold text-slate-900 mb-1">Która ósemka sprawia problem?</h2>
+                    <p className="text-sm text-slate-400">Precyzyjniejsza informacja = szybsza kwalifikacja.</p>
+                  </div>
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                    <OptionCard
+                      card={{
+                        value: 'Górnej',
+                        label: 'Górna',
+                        desc: 'Zazwyczaj szybki, przewidywalny zabieg',
+                        icon: (
+                          <svg viewBox="0 0 24 24" fill="none">
+                            <path d="M12 3v18M8 7l4-4 4 4" strokeLinecap="round" strokeLinejoin="round" />
+                          </svg>
+                        ),
+                      }}
+                      selected={formData.toothArea === 'Górnej'}
+                      onClick={() => handleTileSelect('toothArea', 'Górnej')}
+                    />
+                    <OptionCard
+                      card={{
+                        value: 'Dolnej',
+                        label: 'Dolna',
+                        desc: 'Wymaga diagnostyki 3D — wykonujemy na miejscu',
+                        urgent: true,
+                        icon: (
+                          <svg viewBox="0 0 24 24" fill="none">
+                            <path d="M12 3v18M8 17l4 4 4-4" strokeLinecap="round" strokeLinejoin="round" />
+                          </svg>
+                        ),
+                      }}
+                      selected={formData.toothArea === 'Dolnej'}
+                      onClick={() => handleTileSelect('toothArea', 'Dolnej')}
+                    />
+                    <OptionCard
+                      card={{
+                        value: 'Obu / Kilku',
+                        label: 'Obie / kilka',
+                        desc: 'Kompleksowe rozwiązanie podczas jednej wizyty',
+                        icon: (
+                          <svg viewBox="0 0 24 24" fill="none">
+                            <path d="M12 3v18M8 7l4-4 4 4M8 17l4 4 4-4" strokeLinecap="round" strokeLinejoin="round" />
+                          </svg>
+                        ),
+                      }}
+                      selected={formData.toothArea === 'Obu / Kilku'}
+                      onClick={() => handleTileSelect('toothArea', 'Obu / Kilku')}
+                    />
+                    <OptionCard
+                      card={{
+                        value: 'Nie jestem pewien',
+                        label: 'Nie jestem pewien',
+                        desc: 'Lekarz oceni na podstawie RTG',
+                        icon: (
+                          <svg viewBox="0 0 24 24" fill="none">
+                            <circle cx="12" cy="12" r="9" />
+                            <path d="M12 8v4M12 16h.01" strokeLinecap="round" />
+                          </svg>
+                        ),
+                      }}
+                      selected={formData.toothArea === 'Nie jestem pewien'}
+                      onClick={() => handleTileSelect('toothArea', 'Nie jestem pewien')}
+                    />
+                  </div>
                   <AnimatePresence>
-                    {step2Feedback && (
-                      <motion.p
-                        key="step2-feedback"
-                        initial={{ opacity: 0, y: 10 }}
+                    {formData.toothArea && (
+                      <motion.div
+                        initial={{ opacity: 0, y: 6 }}
                         animate={{ opacity: 1, y: 0 }}
-                        exit={{ opacity: 0, y: -10 }}
-                        className="text-sm font-semibold text-slate-700"
+                        exit={{ opacity: 0 }}
+                        className="flex items-center gap-2 text-[13px] font-medium text-green-700 bg-green-50 border border-green-200 rounded-xl px-4 py-2.5"
                       >
-                        {step2Feedback}
-                      </motion.p>
+                        <CheckCircle2 className="w-4 h-4 shrink-0" />
+                        Dobra decyzja — im więcej wiemy teraz, tym precyzyjniejsza kwalifikacja.
+                      </motion.div>
                     )}
                   </AnimatePresence>
                 </motion.div>
               ) : step === 3 ? (
-                <motion.div key="step3" layout initial={{ opacity: 0, x: 18 }} animate={{ opacity: 1, x: 0 }} exit={{ opacity: 0, x: -18 }} className="space-y-6">
-                  <h2 className="text-2xl font-bold tracking-tight text-slate-900">Masz aktualne RTG?</h2>
-                  <p className="text-slate-500 text-sm font-medium">Zdjęcie pantomograficzne jest wymagane do bezpiecznej kwalifikacji.</p>
-                  {renderOptions('hasRTG', [
-                    { label: 'Tak, mam aktualne zdjęcie', value: 'Tak', icon: FileCheck },
-                    { label: 'Nie, wykonam zdjęcie na miejscu', value: 'Nie, chcę zrobić', icon: Camera },
-                  ])}
+                <motion.div key="step3" layout initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -10 }} className="space-y-5">
+                  <div>
+                    <h2 className="text-xl font-bold text-slate-900 mb-1">Masz aktualne RTG?</h2>
+                    <p className="text-sm text-slate-400">Nie masz? Nie szkodzi — wykonamy diagnostykę na miejscu.</p>
+                  </div>
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                    <OptionCard
+                      card={{
+                        value: 'Tak',
+                        label: 'Tak, mam zdjęcie',
+                        desc: 'Aktualne RTG lub CBCT',
+                        icon: (
+                          <svg viewBox="0 0 24 24" fill="none">
+                            <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" strokeLinecap="round" strokeLinejoin="round" />
+                            <polyline points="14 2 14 8 20 8" />
+                            <line x1="16" y1="13" x2="8" y2="13" />
+                          </svg>
+                        ),
+                      }}
+                      selected={formData.hasRTG === 'Tak'}
+                      onClick={() => handleTileSelect('hasRTG', 'Tak')}
+                    />
+                    <OptionCard
+                      card={{
+                        value: 'Nie, chcę zrobić',
+                        label: 'Nie mam RTG',
+                        desc: 'Wykonamy pełną diagnostykę u nas',
+                        icon: (
+                          <svg viewBox="0 0 24 24" fill="none">
+                            <rect x="3" y="3" width="18" height="18" rx="2" />
+                            <circle cx="8.5" cy="8.5" r="1.5" />
+                            <polyline points="21 15 16 10 5 21" />
+                          </svg>
+                        ),
+                      }}
+                      selected={formData.hasRTG === 'Nie, chcę zrobić'}
+                      onClick={() => handleTileSelect('hasRTG', 'Nie, chcę zrobić')}
+                    />
+                  </div>
                   <AnimatePresence>
                     {isAnalyzing && (
                       <motion.div
                         key="analysis"
-                        initial={{ opacity: 0, y: 10 }}
+                        initial={{ opacity: 0, y: 8 }}
                         animate={{ opacity: 1, y: 0 }}
                         exit={{ opacity: 0, y: -10 }}
-                        className="rounded-2xl border border-slate-200 bg-white p-4"
+                        className="rounded-xl border border-amber-200 bg-amber-50 p-4"
                       >
                         <p className="text-sm font-semibold text-slate-900">✓ Twoje odpowiedzi zostały wstępnie przeanalizowane.</p>
-                        <p className="text-sm text-amber-500 font-semibold">Zostały 2 kroki do bezpłatnej wyceny.</p>
+                        <p className="text-sm text-amber-600 font-semibold mt-0.5">Zostały 2 kroki do bezpłatnej wyceny.</p>
                       </motion.div>
                     )}
                   </AnimatePresence>
                 </motion.div>
               ) : step === 4 ? (
-                <motion.div key="step4" layout initial={{ opacity: 0, x: 18 }} animate={{ opacity: 1, x: 0 }} exit={{ opacity: 0, x: -18 }} className="space-y-6">
-                  <h2 className="text-2xl font-bold tracking-tight text-slate-900">Twoja główna obawa?</h2>
-                  <p className="text-slate-500 text-sm font-medium">Dzięki temu przygotujemy plan wizyty dopasowany do Twoich potrzeb.</p>
-                  {renderOptions('biggestFear', [
-                    { label: 'Boję się bólu (bezbolesne i mocne znieczulenie)', value: 'Ból', icon: Shield },
-                    { label: 'Czas gojenia i powrót do pracy', value: 'Gojenie', icon: Clock },
-                    { label: 'Koszty (brak ukrytych opłat, jasny cennik)', value: 'Koszty', icon: Wallet },
-                  ])}
+                <motion.div key="step4" layout initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -10 }} className="space-y-5">
+                  <div>
+                    <h2 className="text-xl font-bold text-slate-900 mb-1">Co Cię najbardziej niepokoi?</h2>
+                    <p className="text-sm text-slate-400">Przygotujemy plan wizyty dokładnie pod Twoje obawy.</p>
+                  </div>
+                  <div className="flex flex-col gap-3">
+                    {[
+                      {
+                        value: 'Ból',
+                        label: 'Boję się bólu przy zabiegu',
+                        desc: 'Stosujemy zaawansowane znieczulenie — zabieg całkowicie bezbolesny',
+                        icon: (
+                          <svg viewBox="0 0 24 24" fill="none">
+                            <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z" strokeLinecap="round" strokeLinejoin="round" />
+                          </svg>
+                        ),
+                      },
+                      {
+                        value: 'Gojenie',
+                        label: 'Czas gojenia i powrót do pracy',
+                        desc: 'Większość pacjentów wraca do obowiązków następnego dnia',
+                        icon: (
+                          <svg viewBox="0 0 24 24" fill="none">
+                            <circle cx="12" cy="12" r="9" />
+                            <polyline points="12 7 12 12 15 15" strokeLinecap="round" />
+                          </svg>
+                        ),
+                      },
+                      {
+                        value: 'Koszty',
+                        label: 'Koszty i ukryte opłaty',
+                        desc: 'Pełna wycena przed zabiegiem — zero niespodzianek',
+                        icon: (
+                          <svg viewBox="0 0 24 24" fill="none">
+                            <rect x="1" y="4" width="22" height="16" rx="2" strokeLinejoin="round" />
+                            <line x1="1" y1="10" x2="23" y2="10" />
+                          </svg>
+                        ),
+                      },
+                    ].map((opt) => (
+                      <OptionCard
+                        key={opt.value}
+                        card={{ ...opt }}
+                        selected={formData.biggestFear === opt.value}
+                        onClick={() => handleTileSelect('biggestFear', opt.value)}
+                      />
+                    ))}
+                  </div>
                   <AnimatePresence>
                     {fearFeedback && (
-                      <motion.p
-                        key="fear-feedback"
-                        initial={{ opacity: 0, y: 10 }}
+                      <motion.div
+                        initial={{ opacity: 0, y: 6 }}
                         animate={{ opacity: 1, y: 0 }}
-                        exit={{ opacity: 0, y: -10 }}
-                        className="text-sm font-semibold text-slate-700"
+                        exit={{ opacity: 0 }}
+                        className="flex items-center gap-2 text-[13px] font-medium text-green-700 bg-green-50 border border-green-200 rounded-xl px-4 py-2.5"
                       >
+                        <CheckCircle2 className="w-4 h-4 shrink-0" />
                         {fearFeedback}
-                      </motion.p>
+                      </motion.div>
                     )}
                   </AnimatePresence>
                 </motion.div>
               ) : (
-                <motion.div key="step5" layout initial={{ opacity: 0, x: 18 }} animate={{ opacity: 1, x: 0 }} exit={{ opacity: 0, x: -18 }} className="space-y-8">
-                  <div>
-                    {formData.reason === 'Ból / Stan zapalny' ? (
-                      <>
-                        <h2 className="text-2xl font-bold tracking-tight text-slate-900">🚨 Zgłoszenie bólowe przyjęte (Priorytet)</h2>
-                        <p className="text-slate-500 text-sm mt-2 font-medium">
-                          Rozumiemy, jak trudny jest ból zęba. Nadaliśmy Twojemu zgłoszeniu najwyższy priorytet.
-                          Skontaktujemy się z Tobą najszybciej jak to możliwe (w godzinach pracy kliniki), aby
-                          znaleźć ratunkowy termin. RTG i diagnostykę wykonamy na miejscu.
-                        </p>
-                      </>
-                    ) : (
-                      <>
-                        {experimentVariant === 'A' ? (
-                          <>
-                            <h2 className="text-2xl font-bold tracking-tight text-slate-900">Świetnie! Kwalifikujesz się do bezbolesnego zabiegu.</h2>
-                            <p className="text-slate-500 text-sm mt-2 font-medium">
-                              Zostaw numer telefonu. Nasz koordynator oddzwoni do Ciebie wkrótce z propozycją dogodnego i
-                              bezpiecznego terminu.
-                            </p>
-                          </>
-                        ) : (
-                          <>
-                            <h2 className="text-2xl font-bold tracking-tight text-slate-900">Masz już komplet — możemy przejść do bezpłatnej wyceny.</h2>
-                            <p className="text-slate-500 text-sm mt-2 font-medium">
-                              Zostaw numer telefonu. Skontaktujemy się dzisiaj (w godzinach pracy) i wspólnie wybierzemy
-                              najbliższy dostępny termin.
-                            </p>
-                          </>
-                        )}
-                      </>
-                    )}
+                <motion.div key="step5" layout initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -10 }} className="space-y-5">
+                  <div className="bg-slate-900 rounded-2xl p-5 flex items-start gap-3">
+                    <div className="w-2.5 h-2.5 rounded-full bg-amber-400 mt-1 shrink-0" />
+                    <div>
+                      <h2 className="text-[15px] font-semibold text-slate-100 leading-snug mb-1">
+                        {formData.reason === 'Ból / Stan zapalny'
+                          ? 'Zgłoszenie priorytetowe przyjęte'
+                          : 'Twój przypadek kwalifikuje się do wizyty'}
+                      </h2>
+                      <p className="text-[12px] text-slate-400 leading-relaxed">
+                        {formData.reason === 'Ból / Stan zapalny'
+                          ? 'Nadaliśmy najwyższy priorytet. Oddzwonimy najszybciej jak to możliwe w godzinach pracy kliniki.'
+                          : 'Zostaw kontakt — koordynator oddzwoni w ciągu 2h z propozycją terminu.'}
+                      </p>
+                    </div>
                   </div>
-                  <form onSubmit={handleSubmit} className="space-y-4">
-                    <input type="text" aria-label="Imię" required placeholder="Twoje imię" value={formData.name} onChange={(e) => setFormData((prev) => ({ ...prev, name: e.target.value }))} className={inputStyle} />
-                    <input type="tel" aria-label="Telefon" required placeholder="Twój numer telefonu" value={formData.phone} onChange={handlePhoneChange} className={`${inputStyle} font-mono tracking-wider`} />
-                    <p className="flex items-center gap-1.5 text-xs text-slate-400 mt-2 font-medium"><Shield className="w-3.5 h-3.5 text-emerald-500" /> Twoje dane są szyfrowane. Zadzwonimy tylko raz, aby ustalić termin.</p>
+
+                  <form onSubmit={handleSubmit} className="space-y-3">
+                    <div className="flex flex-col gap-1">
+                      <label className="text-[11px] font-semibold uppercase tracking-wider text-slate-400">Imię</label>
+                      <input
+                        type="text"
+                        required
+                        placeholder="np. Marek"
+                        value={formData.name}
+                        onChange={(e) => setFormData((prev) => ({ ...prev, name: e.target.value }))}
+                        className={inputStyle}
+                      />
+                    </div>
+                    <div className="flex flex-col gap-1">
+                      <label className="text-[11px] font-semibold uppercase tracking-wider text-slate-400">Telefon</label>
+                      <input
+                        type="tel"
+                        required
+                        placeholder="Twój numer telefonu"
+                        value={formData.phone}
+                        onChange={handlePhoneChange}
+                        className={`${inputStyle} font-mono tracking-wider`}
+                      />
+                      <p className="flex items-center gap-1.5 text-xs text-slate-400 mt-2 font-medium">
+                        <Shield className="w-3.5 h-3.5 text-emerald-500" /> Twoje dane są szyfrowane. Zadzwonimy tylko raz, aby ustalić termin.
+                      </p>
+                    </div>
                     {phoneError && (
                       <p className="text-xs text-red-600 font-medium" role="alert">
                         {phoneError}
@@ -548,13 +681,20 @@ export default function LocationClient({ locationData }: { locationData: Locatio
                       disabled={status === 'loading'}
                       className="w-full bg-gradient-to-b from-amber-400 to-amber-500 text-amber-950 font-bold text-lg py-4 mt-4 rounded-2xl shadow-[0_8px_20px_-6px_rgba(245,158,11,0.4)] transition-all duration-300 hover:shadow-[0_12px_25px_-6px_rgba(245,158,11,0.6)] hover:-translate-y-0.5 active:translate-y-0"
                     >
-                      {status === 'loading' ? 'Wysyłanie...' : 'Sprawdź termin'}
+                      {status === 'loading' ? 'Wysyłanie...' : 'Zarezerwuj bezpłatną konsultację →'}
                     </button>
 
-                    <div className="grid grid-cols-1 sm:grid-cols-3 gap-2 pt-4 border-t border-slate-100 mt-5">
-                      <div className="text-center text-[11px] font-semibold tracking-wide text-slate-500">[ Bezpieczne dane ]</div>
-                      <div className="text-center text-[11px] font-semibold tracking-wide text-slate-500">[ Wycena przed zabiegiem ]</div>
-                      <div className="text-center text-[11px] font-semibold tracking-wide text-slate-500">[ Szybkie terminy ]</div>
+                    <div className="grid grid-cols-3 gap-2 pt-3 border-t border-slate-100">
+                      {[
+                        { icon: <ShieldCheck className="w-3.5 h-3.5" />, label: 'Dane szyfrowane' },
+                        { icon: <FileCheck className="w-3.5 h-3.5" />, label: 'Wycena przed zabiegiem' },
+                        { icon: <Clock className="w-3.5 h-3.5" />, label: 'Szybkie terminy' },
+                      ].map((t) => (
+                        <div key={t.label} className="flex flex-col items-center gap-1 bg-slate-50 border border-slate-100 rounded-xl p-2.5 text-center">
+                          <span className="text-slate-400 [&>svg]:w-3.5 [&>svg]:h-3.5">{t.icon}</span>
+                          <span className="text-[10px] text-slate-400 leading-tight">{t.label}</span>
+                        </div>
+                      ))}
                     </div>
                   </form>
                 </motion.div>
@@ -563,7 +703,7 @@ export default function LocationClient({ locationData }: { locationData: Locatio
           </motion.div>
         </div>
 
-        <div className="bg-amber-50 border border-amber-200 rounded-2xl p-6 flex items-center gap-4 mb-12">
+        <div className="bg-amber-50 border border-amber-100 rounded-2xl p-5 flex items-start gap-3 mb-12">
           <Clock className="w-6 h-6 text-amber-600 shrink-0" />
           <p className="text-amber-900 font-medium text-sm md:text-base">
             <strong>Ważne:</strong> W tym tygodniu w placówce na ul. {locationData.klinika} mamy jeszcze{' '}
