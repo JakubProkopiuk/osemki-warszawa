@@ -2,7 +2,7 @@
 
 import Link from 'next/link';
 import Image from 'next/image';
-import { ChevronRight, MapPin, Search } from 'lucide-react';
+import { Award, ChevronRight, Gem, MapPin, Search, ShieldCheck } from 'lucide-react';
 import locations from '../data/locations.json';
 
 type LocationItem = {
@@ -29,7 +29,7 @@ export default function HomePage() {
           
           <h1 className="text-6xl md:text-[100px] font-black tracking-tight leading-[0.85] text-slate-900">
             Ochota na <br />
-            <span className="text-slate-300 font-light italic text-[0.9em]">Uśmiech.</span>
+            <span className="text-slate-300 font-light italic text-[0.9em]">Uśmiech</span>
           </h1>
           
           <p className="text-xl md:text-2xl text-slate-400 font-medium leading-relaxed max-w-2xl mx-auto">
@@ -66,7 +66,7 @@ export default function HomePage() {
 
         <div className="mb-32 text-left px-2">
           <div className="flex items-center gap-4 mb-16">
-            <h2 className="text-4xl font-black tracking-tight italic uppercase text-slate-900">Nasi Eksperci</h2>
+            <h2 className="text-4xl font-black tracking-tight italic text-slate-900">Nasi Eksperci</h2>
             <div className="h-[2px] flex-grow bg-slate-100 rounded-full" />
           </div>
           
@@ -95,7 +95,7 @@ export default function HomePage() {
                     loading="lazy"
                    />
                 </div>
-                <h3 className="text-xl font-black uppercase tracking-tight text-slate-900 mb-1">{doc.name}</h3>
+                <h3 className="text-[17px] font-bold tracking-tight text-slate-900 mb-1">{doc.name}</h3>
                 <p className="text-amber-600 font-bold text-xs uppercase tracking-widest mb-4">{doc.role}</p>
                 <p className="text-slate-400 font-medium leading-relaxed text-sm">{doc.desc}</p>
               </div>
@@ -103,18 +103,33 @@ export default function HomePage() {
           </div>
         </div>
 
-        <div className="grid md:grid-cols-3 gap-12 pb-24 border-t border-slate-100 pt-24 text-center">
-          <div>
-            <h3 className="font-black text-4xl mb-2 text-slate-900">15 min</h3>
-            <p className="text-slate-400 font-bold uppercase tracking-widest text-[10px]">Średni czas zabiegu</p>
+        <div className="grid md:grid-cols-3 gap-8 pb-24 border-t border-slate-100 pt-24 text-center">
+          <div className="flex flex-col items-center gap-3">
+            <div className="w-10 h-10 rounded-xl bg-amber-50 flex items-center justify-center">
+              <Award className="w-5 h-5 text-amber-600" />
+            </div>
+            <div>
+              <h3 className="font-black text-4xl mb-1 text-slate-900">10+ lat</h3>
+              <p className="text-slate-400 font-bold uppercase tracking-widest text-[10px]">Doświadczenia klinicznego</p>
+            </div>
           </div>
-          <div>
-            <h3 className="font-black text-4xl mb-2 text-slate-900">100%</h3>
-            <p className="text-slate-400 font-bold uppercase tracking-widest text-[10px]">Bezbolesne metody</p>
+          <div className="flex flex-col items-center gap-3">
+            <div className="w-10 h-10 rounded-xl bg-amber-50 flex items-center justify-center">
+              <ShieldCheck className="w-5 h-5 text-amber-600" />
+            </div>
+            <div>
+              <h3 className="font-black text-4xl mb-1 text-slate-900">10 000+</h3>
+              <p className="text-slate-400 font-bold uppercase tracking-widest text-[10px]">Przeprowadzonych zabiegów</p>
+            </div>
           </div>
-          <div>
-            <h3 className="font-black text-4xl mb-2 text-slate-900">RTG / Tomograf</h3>
-            <p className="text-slate-400 font-bold uppercase tracking-widest text-[10px]">Pełna diagnostyka na miejscu</p>
+          <div className="flex flex-col items-center gap-3">
+            <div className="w-10 h-10 rounded-xl bg-amber-50 flex items-center justify-center">
+              <Gem className="w-5 h-5 text-amber-600" />
+            </div>
+            <div>
+              <h3 className="font-black text-3xl mb-1 text-slate-900">Standard Premium</h3>
+              <p className="text-slate-400 font-bold uppercase tracking-widest text-[10px]">Najwyższa jakość opieki</p>
+            </div>
           </div>
         </div>
 

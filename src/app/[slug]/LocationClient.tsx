@@ -4,7 +4,7 @@ import { useState, type ReactNode } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { motion, AnimatePresence } from 'framer-motion';
-import { CheckCircle2, Clock, FileCheck, Shield, ShieldCheck } from 'lucide-react';
+import { Activity, CheckCircle2, Clock, FileCheck, MapPin, Shield, ShieldCheck } from 'lucide-react';
 import locations from '../../data/locations.json';
 import Breadcrumb, { type BreadcrumbItem } from '@/components/Breadcrumb';
 import { getClinicProfile, type LocationRecord } from '@/lib/clinic';
@@ -13,6 +13,8 @@ import { getProcedureCount } from '@/lib/utils';
 const cardStyle = 'bg-white border border-slate-200 shadow-xl rounded-3xl';
 const inputStyle =
   'w-full bg-white border border-slate-300 focus:border-amber-500 p-4 rounded-2xl outline-none transition-all duration-300 text-base placeholder:text-slate-400';
+const tileStyle =
+  'w-full text-left p-5 rounded-2xl border-2 border-slate-200 bg-white transition-all duration-300 hover:border-amber-500 hover:shadow-md flex items-start justify-between group gap-3';
 
 const Star = () => (
   <svg className="w-4 h-4 text-amber-400" fill="currentColor" viewBox="0 0 20 20" aria-hidden="true">
@@ -59,21 +61,19 @@ const OptionCard = ({
   onClick: () => void;
   selected?: boolean;
 }) => (
-  <button
-    onClick={onClick}
-    className={`group w-full text-left p-4 rounded-2xl border-2 bg-white transition-all duration-150 hover:border-amber-400 hover:bg-amber-50/40 flex flex-col gap-2 ${
-      selected ? 'border-amber-400 bg-amber-50/40' : 'border-slate-200'
-    }`}
-  >
-    <div className={`w-9 h-9 rounded-xl flex items-center justify-center ${card.urgent ? 'bg-red-50' : 'bg-amber-50'}`}>
-      <span className={`[&>svg]:w-[18px] [&>svg]:h-[18px] [&>svg]:stroke-[1.8] ${card.urgent ? '[&>svg]:stroke-red-500' : '[&>svg]:stroke-amber-600'}`}>
+    <button
+      onClick={onClick}
+      className={`${tileStyle} flex-col ${selected ? 'border-amber-400 bg-amber-50/40' : ''}`}
+    >
+      <div className={`w-9 h-9 rounded-xl flex items-center justify-center ${card.urgent ? 'bg-red-50' : 'bg-amber-50'}`}>
+      <span className={`[&>svg]:w-5 [&>svg]:h-5 [&>svg]:mt-0.5 [&>svg]:stroke-[1.8] ${card.urgent ? '[&>svg]:stroke-red-500' : '[&>svg]:stroke-amber-600'}`}>
         {card.icon}
       </span>
-    </div>
-    <div>
-      <p className="text-[14px] font-semibold text-slate-900 leading-snug">{card.label}</p>
-      <p className="text-[11px] text-slate-400 mt-0.5 leading-relaxed">{card.desc}</p>
-    </div>
+      </div>
+      <div>
+      <p className="font-semibold block text-[15px] leading-snug text-slate-900">{card.label}</p>
+      <p className="text-[12px] text-slate-400 font-medium leading-relaxed mt-0.5">{card.desc}</p>
+      </div>
     {card.badge && (
       <span className="text-[10px] font-semibold px-2 py-0.5 rounded-full bg-red-50 text-red-700 w-fit">
         {card.badge}
@@ -243,7 +243,7 @@ export default function LocationClient({ locationData }: { locationData: Locatio
 
               <h1 className="text-4xl md:text-[62px] font-extrabold tracking-tight leading-[0.97] text-slate-900">
                 Bezbolesne usuwanie ósemek blisko <br />
-                <span className="text-slate-800 italic">{locationName}.</span>
+                <span className="text-slate-800 italic">{locationName}</span>
               </h1>
 
               <p className="text-lg text-slate-500 font-medium leading-relaxed max-w-xl">
@@ -266,33 +266,57 @@ export default function LocationClient({ locationData }: { locationData: Locatio
                 </div>
               )}
 
-              <div className="bg-white border border-slate-200 rounded-2xl p-5 mt-4">
-                <h2 className="text-lg font-bold tracking-tight text-slate-900 mb-3">
+              <div className="bg-white border border-slate-200 rounded-2xl p-6 mt-4">
+                <h2 className="text-base font-semibold tracking-tight text-slate-900 mb-5">
                   Dlaczego pacjenci z {locationName} wybierają naszą klinikę?
                 </h2>
-                <ul className="space-y-2">
-                  {isOchota
-                    ? [
-                        'Szybki dojazd komunikacją z Dworca Zachodniego',
-                        'Miejsca parkingowe z dużą rotacją aut tuż pod gabinetem',
-                        'Zaawansowane i w pełni bezbolesne znieczulenia chirurgiczne',
-                      ].map((point) => (
-                        <li key={point} className="flex items-start gap-2 text-sm text-slate-600 font-medium">
-                          <CheckCircle2 className="w-4 h-4 text-amber-500 mt-0.5 shrink-0" />
-                          <span>{point}</span>
-                        </li>
-                      ))
-                    : [
-                        'Bezpośrednie sąsiedztwo stacji Metro Ursynów',
-                        'Prywatny, darmowy parking dla pacjentów',
-                        'Nowoczesna diagnostyka 3D (CBCT) na miejscu',
-                      ].map((point) => (
-                        <li key={point} className="flex items-start gap-2 text-sm text-slate-600 font-medium">
-                          <CheckCircle2 className="w-4 h-4 text-amber-500 mt-0.5 shrink-0" />
-                          <span>{point}</span>
-                        </li>
-                      ))}
-                </ul>
+                <div className="grid grid-cols-3 gap-3">
+                  <div className="flex flex-col gap-2 bg-slate-50 rounded-xl p-4">
+                    <div className="w-8 h-8 rounded-lg bg-amber-100 flex items-center justify-center shrink-0">
+                      <MapPin className="w-4 h-4 text-amber-700" />
+                    </div>
+                    <p className="text-[13px] font-semibold text-slate-900 leading-snug">
+                      {locationData.czas_dojazdu} od kliniki
+                    </p>
+                    <p className="text-[11px] text-slate-400 leading-relaxed">
+                      {locationData.komunikacja
+                        ? locationData.komunikacja
+                        : isOchota
+                          ? 'Dojazd z Dworca Zachodniego i centrum'
+                          : 'Metro M1 + linie autobusowe'}
+                    </p>
+                  </div>
+                  <div className="flex flex-col gap-2 bg-slate-50 rounded-xl p-4">
+                    <div className="w-8 h-8 rounded-lg bg-amber-100 flex items-center justify-center shrink-0">
+                      <svg className="w-4 h-4 text-amber-700" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
+                        <rect x="1" y="3" width="15" height="13" rx="2" />
+                        <path d="M16 8h4l3 3v5h-7V8z" />
+                        <circle cx="5.5" cy="18.5" r="2.5" />
+                        <circle cx="18.5" cy="18.5" r="2.5" />
+                      </svg>
+                    </div>
+                    <p className="text-[13px] font-semibold text-slate-900 leading-snug">
+                      {isOchota ? 'Rotacyjny parking SPPN' : 'Bezpłatny parking'}
+                    </p>
+                    <p className="text-[11px] text-slate-400 leading-relaxed">
+                      {parkingText ??
+                        (isOchota
+                          ? 'Zawsze wolne miejsce tuż pod gabinetem'
+                          : 'Prywatny parking dla pacjentów kliniki')}
+                    </p>
+                  </div>
+                  <div className="flex flex-col gap-2 bg-slate-50 rounded-xl p-4">
+                    <div className="w-8 h-8 rounded-lg bg-amber-100 flex items-center justify-center shrink-0">
+                      <Activity className="w-4 h-4 text-amber-700" />
+                    </div>
+                    <p className="text-[13px] font-semibold text-slate-900 leading-snug">
+                      Diagnostyka CBCT 3D na miejscu
+                    </p>
+                    <p className="text-[11px] text-slate-400 leading-relaxed">
+                      Tomograf stożkowy bez dodatkowej wizyty — wynik przed zabiegiem
+                    </p>
+                  </div>
+                </div>
               </div>
             </div>
 
@@ -312,13 +336,13 @@ export default function LocationClient({ locationData }: { locationData: Locatio
 
             <div className="space-y-5">
               <div className="flex items-center gap-4">
-                <div className="flex items-center gap-2 bg-white px-4 py-2 rounded-xl border border-slate-100 shadow-sm">
+                <div className="flex items-center gap-2 bg-white px-4 py-2 rounded-xl border border-slate-100">
                   <Star />
-                  <span className="font-semibold text-sm text-slate-800">4.9/5 Google Maps</span>
+                  <span className="font-semibold text-[13px] text-slate-800">4.9/5 Google Maps</span>
                 </div>
                 <div className="hidden md:block h-6 w-px bg-slate-200" />
-                <div className="flex items-center gap-2 bg-white px-4 py-2 rounded-xl border border-slate-100 shadow-sm">
-                  <span className="font-semibold text-sm text-slate-800">Ponad {procedureCount.toLocaleString('pl-PL')} bezpiecznie usuniętych ósemek</span>
+                <div className="flex items-center gap-2 bg-white px-4 py-2 rounded-xl border border-slate-100">
+                  <span className="font-semibold text-[13px] text-slate-800">Ponad {procedureCount.toLocaleString('pl-PL')} bezpiecznie usuniętych ósemek</span>
                 </div>
               </div>
 
@@ -333,7 +357,7 @@ export default function LocationClient({ locationData }: { locationData: Locatio
                       </div>
                       <p className="text-slate-600 font-medium text-sm leading-relaxed mb-4">&quot;{rev.text}&quot;</p>
                     </div>
-                    <span className="font-medium text-slate-400 text-[12px]">{rev.author}</span>
+                    <span className="font-medium text-slate-400 text-[12px] tracking-wide">{rev.author}</span>
                   </motion.div>
                 ))}
               </div>
@@ -348,7 +372,11 @@ export default function LocationClient({ locationData }: { locationData: Locatio
                     <div
                       key={i}
                       className={`h-2 rounded-full transition-all duration-300 ${
-                        i < step ? 'w-2 bg-green-400' : i === step ? 'w-5 bg-amber-500' : 'w-2 bg-slate-200'
+                        i < step
+                          ? 'w-2 bg-emerald-400'
+                          : i === step
+                            ? 'w-5 bg-amber-500'
+                            : 'w-2 bg-slate-200'
                       }`}
                     />
                   ))}
@@ -371,8 +399,8 @@ export default function LocationClient({ locationData }: { locationData: Locatio
               ) : step === 1 ? (
                 <motion.div key="step1" layout initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -10 }} className="space-y-5">
                   <div>
-                    <h2 className="text-xl font-bold text-slate-900 mb-1">Co Cię do nas sprowadza?</h2>
-                    <p className="text-sm text-slate-400">Dostosujemy termin i plan wizyty do Twojej sytuacji.</p>
+                    <h2 className="text-[20px] font-bold tracking-tight text-slate-900 mb-1">Co Cię do nas sprowadza?</h2>
+                    <p className="text-slate-400 text-[13px] font-medium leading-relaxed">Dostosujemy termin i plan wizyty do Twojej sytuacji.</p>
                   </div>
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                     <OptionCard
@@ -426,8 +454,8 @@ export default function LocationClient({ locationData }: { locationData: Locatio
               ) : step === 2 ? (
                 <motion.div key="step2" layout initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -10 }} className="space-y-5">
                   <div>
-                    <h2 className="text-xl font-bold text-slate-900 mb-1">Która ósemka sprawia problem?</h2>
-                    <p className="text-sm text-slate-400">Precyzyjniejsza informacja = szybsza kwalifikacja.</p>
+                    <h2 className="text-[20px] font-bold tracking-tight text-slate-900 mb-1">Która ósemka sprawia problem?</h2>
+                    <p className="text-slate-400 text-[13px] font-medium leading-relaxed">Precyzyjniejsza informacja = szybsza kwalifikacja.</p>
                   </div>
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                     <OptionCard
@@ -506,8 +534,8 @@ export default function LocationClient({ locationData }: { locationData: Locatio
               ) : step === 3 ? (
                 <motion.div key="step3" layout initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -10 }} className="space-y-5">
                   <div>
-                    <h2 className="text-xl font-bold text-slate-900 mb-1">Masz aktualne RTG?</h2>
-                    <p className="text-sm text-slate-400">Nie masz? Nie szkodzi — wykonamy diagnostykę na miejscu.</p>
+                    <h2 className="text-[20px] font-bold tracking-tight text-slate-900 mb-1">Masz aktualne RTG?</h2>
+                    <p className="text-slate-400 text-[13px] font-medium leading-relaxed">Nie masz? Nie szkodzi — wykonamy diagnostykę na miejscu.</p>
                   </div>
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                     <OptionCard
@@ -561,8 +589,8 @@ export default function LocationClient({ locationData }: { locationData: Locatio
               ) : step === 4 ? (
                 <motion.div key="step4" layout initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -10 }} className="space-y-5">
                   <div>
-                    <h2 className="text-xl font-bold text-slate-900 mb-1">Co Cię najbardziej niepokoi?</h2>
-                    <p className="text-sm text-slate-400">Przygotujemy plan wizyty dokładnie pod Twoje obawy.</p>
+                    <h2 className="text-[20px] font-bold tracking-tight text-slate-900 mb-1">Co Cię najbardziej niepokoi?</h2>
+                    <p className="text-slate-400 text-[13px] font-medium leading-relaxed">Przygotujemy plan wizyty dokładnie pod Twoje obawy.</p>
                   </div>
                   <div className="flex flex-col gap-3">
                     {[
@@ -679,20 +707,20 @@ export default function LocationClient({ locationData }: { locationData: Locatio
                     <button
                       type="submit"
                       disabled={status === 'loading'}
-                      className="w-full bg-gradient-to-b from-amber-400 to-amber-500 text-amber-950 font-bold text-lg py-4 mt-4 rounded-2xl shadow-[0_8px_20px_-6px_rgba(245,158,11,0.4)] transition-all duration-300 hover:shadow-[0_12px_25px_-6px_rgba(245,158,11,0.6)] hover:-translate-y-0.5 active:translate-y-0"
+                      className="w-full bg-amber-500 hover:bg-amber-600 active:scale-[0.99] text-slate-900 font-semibold text-[15px] py-4 mt-2 rounded-2xl transition-all duration-200"
                     >
                       {status === 'loading' ? 'Wysyłanie...' : 'Zarezerwuj bezpłatną konsultację →'}
                     </button>
 
-                    <div className="grid grid-cols-3 gap-2 pt-3 border-t border-slate-100">
+                    <div className="grid grid-cols-3 gap-2 pt-4 border-t border-slate-100 mt-5">
                       {[
                         { icon: <ShieldCheck className="w-3.5 h-3.5" />, label: 'Dane szyfrowane' },
                         { icon: <FileCheck className="w-3.5 h-3.5" />, label: 'Wycena przed zabiegiem' },
                         { icon: <Clock className="w-3.5 h-3.5" />, label: 'Szybkie terminy' },
                       ].map((t) => (
-                        <div key={t.label} className="flex flex-col items-center gap-1 bg-slate-50 border border-slate-100 rounded-xl p-2.5 text-center">
-                          <span className="text-slate-400 [&>svg]:w-3.5 [&>svg]:h-3.5">{t.icon}</span>
-                          <span className="text-[10px] text-slate-400 leading-tight">{t.label}</span>
+                        <div key={t.label} className="flex flex-col items-center gap-1.5 bg-slate-50 border border-slate-100 rounded-xl p-3 text-center">
+                          <span className="text-slate-400">{t.icon}</span>
+                          <span className="text-[10px] text-slate-400 font-medium leading-tight">{t.label}</span>
                         </div>
                       ))}
                     </div>
