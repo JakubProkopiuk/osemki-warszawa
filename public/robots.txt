@@ -8,5 +8,4 @@ Allow: /
 User-agent: Googlebot-Image
 Disallow: /ulica-*
 Disallow: /osiedle-*
-Allow: /ochota
 Allow: /ursynow

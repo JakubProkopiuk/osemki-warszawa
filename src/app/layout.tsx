@@ -14,8 +14,9 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: 'Usuwanie Ósemek Warszawa | Ochota na Uśmiech',
-  description: 'Profesjonalne i bezbolesne usuwanie zębów mądrości w Warszawie. Najnowocześniejsza chirurgia stomatologiczna.',
+  title: 'Ósemki Ursynów | Szybka kwalifikacja bólu ósemki',
+  description:
+    'Lokalna kwalifikacja problemów z ósemkami na Ursynowie. Sprawdź, czy sensowna jest konsultacja chirurgiczna, RTG lub pilniejszy kontakt telefoniczny.',
   verification: {
     google: '_vO5_sjty4HV81TiSXbD7Tuu5opYlFzhJimN4ZnF1Ks',
   },

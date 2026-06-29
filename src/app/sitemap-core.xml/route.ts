@@ -11,11 +11,6 @@ export function GET() {
     <priority>1.0</priority>
   </url>
   <url>
-    <loc>${BASE_URL}/ochota</loc>
-    <changefreq>weekly</changefreq>
-    <priority>0.9</priority>
-  </url>
-  <url>
     <loc>${BASE_URL}/ursynow</loc>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
@@ -26,4 +21,3 @@ export function GET() {
     headers: { 'Content-Type': 'application/xml; charset=utf-8' },
   });
 }
-

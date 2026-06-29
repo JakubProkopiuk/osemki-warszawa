@@ -31,8 +31,8 @@ export type ClinicProfile = {
 
 const CLINIC_PROFILES: Record<'pruszkowska' | 'ken', ClinicProfile> = {
   pruszkowska: {
-    clinicName: 'Ochota na Uśmiech – Pruszkowska 6b',
-    address: 'ul. Pruszkowska 6b, 02-118 Warszawa',
+    clinicName: 'Archiwalna lokalizacja',
+    address: 'Warszawa',
     phone: '+48221234567',
     doctorName: 'lek. dent. Małgorzata Sturska',
     doctorSpecialty: 'Oral and Maxillofacial Surgery',
@@ -43,7 +43,7 @@ const CLINIC_PROFILES: Record<'pruszkowska' | 'ken', ClinicProfile> = {
     longitude: 20.9692,
   },
   ken: {
-    clinicName: 'Ochota na Uśmiech – KEN 96',
+    clinicName: 'Partnerski gabinet stomatologiczny – Ursynów',
     address: 'al. KEN 96, 02-777 Warszawa',
     phone: '+48229876543',
     doctorName: 'lek. dent. Natalia Kowalczyk-Zuchora',

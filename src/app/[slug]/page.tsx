@@ -11,6 +11,12 @@ export const dynamicParams = true;
 type LocationData = LocationRecord;
 
 const allLocations = locations as LocationData[];
+const INDEXED_URSYNOW_LOCATION_LIMIT = 60;
+const indexedUrsynowLocations = [...allLocations]
+  .filter((loc) => loc.klinika.includes('KEN'))
+  .sort((a, b) => getLocationSearchVolume(b) - getLocationSearchVolume(a))
+  .slice(0, INDEXED_URSYNOW_LOCATION_LIMIT);
+const indexedUrsynowSlugs = new Set(indexedUrsynowLocations.map((loc) => loc.slug));
 
 export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }) {
   const resolvedParams = await params;
@@ -18,23 +24,63 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
 
   if (!location) return { title: 'Lokalizacja nie znaleziona' };
 
-  const isOchota = location.klinika.includes('Pruszkowska');
-  const dzielnicaGlowna = isOchota ? 'Ochota' : 'Ursynów';
+  if (location.klinika.toLowerCase().includes('pruszkowska')) {
+    return {
+      title: 'Lokalizacja niedostępna',
+      robots: {
+        index: false,
+        follow: false,
+      },
+    };
+  }
+
+  if (!indexedUrsynowSlugs.has(location.slug)) {
+    return {
+      title: `Kwalifikacja ósemki ${location.nazwa_lokalizacji}`,
+      robots: {
+        index: false,
+        follow: true,
+      },
+      alternates: {
+        canonical: getCanonical(location, allLocations),
+      },
+    };
+  }
+
   const canonical = getCanonical(location, allLocations);
-  const landmark = location.punkt_orientacyjny ?? `okolicy ${dzielnicaGlowna}`;
   const travelTime = location.czas_dojazdu || 'kilkanaście minut';
   
+  if (location.slug === 'ursynow') {
+    return {
+      title: 'Boli ósemka na Ursynowie? Szybka kwalifikacja online',
+      description:
+        'Sprawdź w 30 sekund, czy przy bólu ósemki na Ursynowie warto umówić konsultację chirurgiczną, RTG lub pilniejszy kontakt telefoniczny.',
+      alternates: {
+        canonical,
+      },
+      openGraph: {
+        title: 'Boli ósemka na Ursynowie? Szybka kwalifikacja online',
+        description:
+          'Krótka kwalifikacja problemu z ósemką: objawy, RTG, pilność kontaktu i kolejny sensowny krok.',
+        url: canonical,
+        siteName: 'Ósemki Ursynów',
+        locale: 'pl_PL',
+        type: 'website',
+      },
+    };
+  }
+
   return {
-    title: `Usuwanie Ósemek ${location.nazwa_lokalizacji} | Bezboleśnie | Chirurgia ${dzielnicaGlowna}`,
-    description: `Boli Cię ząb mądrości w okolicy: ${location.nazwa_lokalizacji}? Profesjonalna chirurgia blisko ${landmark}. Sprawdź wolne terminy i dotrzyj do nas w ${travelTime}!`,
+    title: `Boli ósemka ${location.nazwa_lokalizacji}? Kwalifikacja Ursynów`,
+    description: `Boli Cię ząb mądrości w okolicy: ${location.nazwa_lokalizacji}? Sprawdź, czy sensowna jest konsultacja, RTG lub pilniejszy kontakt z gabinetem na Ursynowie. Dojazd: ${travelTime}.`,
     alternates: {
       canonical,
     },
     openGraph: {
       title: `Chirurgiczne Usuwanie Ósemek - ${location.nazwa_lokalizacji}`,
-      description: `Bezbolesne zabiegi blisko ${location.punkt_orientacyjny}. Zapisz się już dziś!`,
+      description: `Kwalifikacja problemu z ósemką blisko ${location.punkt_orientacyjny}.`,
       url: canonical,
-      siteName: 'Ochota na Uśmiech',
+      siteName: 'Ósemki Ursynów',
       locale: 'pl_PL',
       type: 'website',
     },
@@ -42,11 +88,7 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
 }
 
 export async function generateStaticParams() {
-  const topLocations = [...allLocations]
-    .sort((a, b) => getLocationSearchVolume(b) - getLocationSearchVolume(a))
-    .slice(0, 200);
-
-  return topLocations.map((loc) => ({
+  return indexedUrsynowLocations.map((loc) => ({
     slug: loc.slug,
   }));
 }
@@ -59,6 +101,10 @@ export default async function LocationPage({ params }: { params: Promise<{ slug:
     return notFound();
   }
 
+  if (locationData.klinika.toLowerCase().includes('pruszkowska')) {
+    return notFound();
+  }
+
   const clinicProfile = getClinicProfile(locationData.klinika);
   const enrichedLocation: LocationData = {
     ...locationData,
@@ -67,34 +113,29 @@ export default async function LocationPage({ params }: { params: Promise<{ slug:
     displayName: locationData.displayName ?? locationData.nazwa_lokalizacji,
   };
 
-  const isPruszkowska = locationData.klinika.toLowerCase().includes('pruszkowska');
-  const clinicName = isPruszkowska
-    ? 'Ochota na Uśmiech - Ochota'
-    : 'Ochota na Uśmiech - Ursynów';
-  const clinicAddress = isPruszkowska
-    ? 'ul. Pruszkowska 6b, Warszawa'
-    : 'al. KEN 96, Warszawa';
+  const clinicName = 'Partnerski gabinet stomatologiczny - Ursynów';
+  const clinicAddress = 'al. KEN 96, Warszawa';
 
   const faqItems = [
     {
       question: 'Czy zabieg będzie bolesny?',
       answer:
-        'Stosujemy zaawansowane znieczulenie miejscowe, dzięki czemu sam zabieg jest całkowicie bezbolesny. Czujesz jedynie delikatny dotyk, bez żadnego dyskomfortu.',
+        'Podczas konsultacji lekarz omawia znieczulenie miejscowe i przebieg wizyty. Celem jest zaplanowanie leczenia w możliwie komfortowych warunkach.',
     },
     {
       question: 'Czy muszę mieć skierowanie lub RTG?',
       answer:
-        'Nie potrzebujesz skierowania. Jeśli nie posiadasz aktualnego zdjęcia pantomograficznego, wykonamy precyzyjną diagnostykę w naszym gabinecie przed zabiegiem.',
+        'Skierowanie zwykle nie jest konieczne. Jeśli nie masz aktualnego zdjęcia, podczas kontaktu ustalimy, czy diagnostyka będzie potrzebna.',
     },
     {
       question: 'Co po zabiegu? Czy dostanę zwolnienie (L4)?',
       answer:
-        'Większość pacjentów wraca do normalnych obowiązków już następnego dnia. W razie potrzeby wystawiamy elektroniczne zwolnienie lekarskie (e-ZLA) na czas rekonwalescencji.',
+        'Powrót do codziennych obowiązków zależy od sytuacji klinicznej i zakresu zabiegu. Zalecenia są omawiane indywidualnie po konsultacji.',
     },
     {
       question: 'Jakie są koszty usunięcia ósemki?',
       answer:
-        'Koszt zabiegu jest zawsze ustalany indywidualnie na podstawie zdjęcia RTG i stopnia skomplikowania. Gwarantujemy jednak pełną przejrzystość – dokładną i ostateczną wycenę, bez żadnych "ukrytych kosztów", poznasz zawsze przed podaniem znieczulenia.',
+        'Koszt jest ustalany indywidualnie na podstawie konsultacji, diagnostyki i stopnia trudności. Przed decyzją pacjent otrzymuje informację o dalszym planie.',
     },
   ];
 
