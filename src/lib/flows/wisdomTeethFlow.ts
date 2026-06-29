@@ -7,7 +7,7 @@ export const wisdomTeethFlow: FlowConfig = {
   location: 'Ursynów',
   webhookUrl: 'https://hook.eu1.make.com/k73x9s65dxykfhry5uyodhl6bg2kvkx7',
   intro: {
-    eyebrow: 'Clinical Triage',
+    eyebrow: 'Szybka kwalifikacja',
     title: 'Boli ósemka na Ursynowie?',
     localTitle: (localArea) => `Boli ósemka w okolicy ${localArea}?`,
     description:
@@ -146,18 +146,18 @@ export const wisdomTeethFlow: FlowConfig = {
       id: 'lead_capture',
       type: 'lead',
       eyebrow: 'ostatni krok',
-      question: 'Gdzie możemy oddzwonić z informacją, jaki kolejny krok ma sens?',
-      helper: 'To nie jest zobowiązanie do zabiegu. Kontakt odbywa się po wysłaniu formularza.',
+      question: 'Zostaw numer. Oddzwonimy i powiemy, co dalej.',
+      helper: 'Kontaktujemy się od poniedziałku do piątku w godzinach 9:00-20:00.',
     },
   ],
   finalMessages: {
     high: {
-      title: 'Zgłoszenie oznaczone jako pilniejsze',
+      title: 'Zgłoszenie priorytetowe przyjęte',
       body:
         'Zgłoszenie oznaczymy jako priorytetowe. Koordynator oddzwoni w pierwszej kolejności w godzinach pracy: pon-pt 9:00-20:00.',
     },
     medium: {
-      title: 'Zgłoszenie przyjęte',
+      title: 'Zgłoszenie zapisane',
       body:
         'Koordynator oddzwoni w wybranym terminie lub w najbliższym dostępnym oknie kontaktu w godzinach pracy: pon-pt 9:00-20:00.',
     },

@@ -53,7 +53,7 @@ const checks = [
       !schemaSource.includes('address'),
   },
   {
-    name: 'Clinical Triage flow wired on slug',
+    name: 'Conversational qualification flow wired on slug',
     pass: clientSource.includes('<ConversationalFlow') && clientSource.includes('wisdomTeethFlow'),
   },
   {
@@ -71,7 +71,7 @@ const checks = [
       scoringSource.includes("urgentLabel: urgencyBand === 'high' ? 'PILNE' : null"),
   },
   {
-    name: 'Wisdom teeth flow uses Clinical Triage variant',
+    name: 'Wisdom teeth flow uses expected conversion variant',
     pass:
       wisdomTeethFlowSource.includes("variant: 'clinical_triage'") &&
       wisdomTeethFlowSource.includes('Co się dzieje z ósemką?'),
