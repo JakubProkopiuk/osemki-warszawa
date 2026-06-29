@@ -32,9 +32,7 @@ export default function RootLayout({
       lang="pl"
       className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
     >
-      <head>
-        <link rel="preconnect" href="https://maps.google.com" />
-      </head>
+      <head />
       <body className="min-h-full flex flex-col">
         {children}
         <Analytics />

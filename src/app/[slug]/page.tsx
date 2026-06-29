@@ -113,9 +113,6 @@ export default async function LocationPage({ params }: { params: Promise<{ slug:
     displayName: locationData.displayName ?? locationData.nazwa_lokalizacji,
   };
 
-  const clinicName = 'Partnerski gabinet stomatologiczny - Ursynów';
-  const clinicAddress = 'al. KEN 96, Warszawa';
-
   const faqItems = [
     {
       question: 'Czy zabieg będzie bolesny?',
@@ -139,17 +136,10 @@ export default async function LocationPage({ params }: { params: Promise<{ slug:
     },
   ];
 
-  const schema = generateMedicalSchema(
-    {
-      ...enrichedLocation,
-      faq: faqItems.map((item) => ({ question: item.question, answer: item.answer })),
-    },
-    {
-      ...clinicProfile,
-      clinicName: clinicName,
-      address: clinicAddress,
-    },
-  );
+  const schema = generateMedicalSchema({
+    ...enrichedLocation,
+    faq: faqItems.map((item) => ({ question: item.question, answer: item.answer })),
+  });
 
   return (
     <>

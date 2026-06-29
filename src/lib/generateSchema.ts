@@ -1,23 +1,20 @@
-import type { ClinicProfile, LocationRecord } from './clinic';
-import { getLocationCoordinates } from './clinic';
+import type { LocationRecord } from './clinic';
 
-export function generateMedicalSchema(location: LocationRecord, clinic: ClinicProfile) {
+export function generateMedicalSchema(location: LocationRecord) {
   const url = `https://www.osemki-warszawa.pl/${location.slug}`;
-  const reviewCount = 127 + (location.slug.charCodeAt(0) % 15);
-  const coords = getLocationCoordinates(location);
   const faq =
     location.faq && location.faq.length > 0
       ? location.faq
       : [
           {
-            question: 'Czy zabieg będzie bolesny?',
+            question: 'Czy formularz oznacza zapis na zabieg?',
             answer:
-              'Stosujemy zaawansowane znieczulenie miejscowe, dzięki czemu sam zabieg jest bezbolesny.',
+              'Nie. Formularz służy wyłącznie do kwalifikacji zgłoszenia i kontaktu zwrotnego. Decyzja o leczeniu zapada po konsultacji.',
           },
           {
             question: 'Czy muszę mieć skierowanie lub RTG?',
             answer:
-              'Nie potrzebujesz skierowania. Jeśli nie masz aktualnego zdjęcia, wykonamy diagnostykę na miejscu.',
+              'Skierowanie zwykle nie jest konieczne. Jeśli nie masz aktualnego zdjęcia, podczas kontaktu ustalimy, czy diagnostyka będzie potrzebna.',
           },
         ];
 
@@ -25,43 +22,40 @@ export function generateMedicalSchema(location: LocationRecord, clinic: ClinicPr
     '@context': 'https://schema.org',
     '@graph': [
       {
-        '@type': ['MedicalClinic', 'LocalBusiness'],
-        '@id': `${url}#clinic`,
-        name: clinic.clinicName,
-        description: `Chirurgiczne usuwanie ósemek dla lokalizacji ${location.nazwa_lokalizacji}.`,
+        '@type': 'WebSite',
+        '@id': 'https://www.osemki-warszawa.pl/#website',
+        name: 'Ósemki Ursynów',
+        url: 'https://www.osemki-warszawa.pl/',
+        inLanguage: 'pl-PL',
+      },
+      {
+        '@type': 'MedicalWebPage',
+        '@id': `${url}#webpage`,
         url,
-        telephone: clinic.phone,
-        priceRange: 'zł zł',
-        geo: {
-          '@type': 'GeoCoordinates',
-          latitude: coords.lat,
-          longitude: coords.lng,
+        name: `Kwalifikacja problemu z ósemką - ${location.nazwa_lokalizacji}`,
+        description:
+          'Niezależna kwalifikacja online dla osób z problemem ósemki w rejonie Ursynowa. Formularz nie jest zapisem na zabieg i nie zastępuje konsultacji lekarskiej.',
+        inLanguage: 'pl-PL',
+        isPartOf: {
+          '@id': 'https://www.osemki-warszawa.pl/#website',
         },
+        about: {
+          '@id': `${url}#service`,
+        },
+      },
+      {
+        '@type': 'Service',
+        '@id': `${url}#service`,
+        name: 'Kwalifikacja online problemu z ósemką',
+        serviceType: 'Online lead qualification',
         areaServed: {
-          '@type': 'GeoCircle',
-          geoMidpoint: {
-            '@type': 'GeoCoordinates',
-            latitude: coords.lat,
-            longitude: coords.lng,
-          },
-          geoRadius: '2000',
+          '@type': 'Place',
+          name: 'rejon Metra Ursynów',
         },
-        medicalSpecialty: 'Oral and Maxillofacial Surgery',
-        availableService: {
-          '@type': 'MedicalProcedure',
-          procedureType: 'SurgicalProcedure',
-          name: 'Chirurgiczne usuwanie zębów mądrości',
-        },
-        employee: {
-          '@type': 'Physician',
-          name: clinic.doctorName,
-          medicalSpecialty: clinic.doctorSpecialty,
-        },
-        aggregateRating: {
-          '@type': 'AggregateRating',
-          ratingValue: 4.9,
-          bestRating: 5,
-          reviewCount,
+        provider: {
+          '@type': 'Organization',
+          name: 'Ósemki Ursynów',
+          url: 'https://www.osemki-warszawa.pl/',
         },
       },
       {
@@ -89,8 +83,8 @@ export function generateMedicalSchema(location: LocationRecord, clinic: ClinicPr
           {
             '@type': 'ListItem',
             position: 2,
-            name: clinic.hubName,
-            item: `https://www.osemki-warszawa.pl/${clinic.hubSlug}`,
+            name: 'Ursynów',
+            item: 'https://www.osemki-warszawa.pl/ursynow',
           },
           {
             '@type': 'ListItem',

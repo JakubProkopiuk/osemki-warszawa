@@ -11,7 +11,7 @@ export const wisdomTeethFlow: FlowConfig = {
     title: 'Boli ósemka na Ursynowie?',
     localTitle: (localArea) => `Boli ósemka w okolicy ${localArea}?`,
     description:
-      'Odpowiedz na kilka pytań i sprawdź, czy warto zacząć od konsultacji, RTG albo pilniejszego kontaktu.',
+      'Odpowiedz na kilka pytań i sprawdź, czy warto zacząć od konsultacji, RTG albo kontaktu z koordynatorem.',
     cta: 'Rozpocznij kwalifikację',
   },
   steps: [
@@ -134,7 +134,7 @@ export const wisdomTeethFlow: FlowConfig = {
       type: 'choice',
       eyebrow: '7 / kontakt',
       question: 'Kiedy najlepiej do Ciebie zadzwonić?',
-      helper: 'Wybierz najwygodniejszy moment na rozmowę.',
+      helper: 'Zgłoszenia obsługujemy telefonicznie od poniedziałku do piątku w godzinach 9:00-20:00.',
       options: [
         { value: 'Jak najszybciej', label: 'Jak najszybciej', urgent: true },
         { value: 'Dziś', label: 'Dziś' },
@@ -147,24 +147,24 @@ export const wisdomTeethFlow: FlowConfig = {
       type: 'lead',
       eyebrow: 'ostatni krok',
       question: 'Gdzie możemy oddzwonić z informacją, jaki kolejny krok ma sens?',
-      helper: 'To nie jest zobowiązanie do zabiegu.',
+      helper: 'To nie jest zobowiązanie do zabiegu. Kontakt odbywa się po wysłaniu formularza.',
     },
   ],
   finalMessages: {
     high: {
       title: 'Zgłoszenie oznaczone jako pilniejsze',
       body:
-        'Na podstawie odpowiedzi warto potraktować sprawę priorytetowo. Oddzwonimy z informacją, jaki kolejny krok ma sens: konsultacja, RTG albo pilniejszy termin.',
+        'Zgłoszenie oznaczymy jako priorytetowe. Koordynator oddzwoni w pierwszej kolejności w godzinach pracy: pon-pt 9:00-20:00.',
     },
     medium: {
       title: 'Zgłoszenie przyjęte',
       body:
-        'Twoje odpowiedzi wskazują, że konsultacja może być sensownym kolejnym krokiem. Oddzwonimy i pomożemy ustalić, czy potrzebne będzie RTG lub wizyta.',
+        'Koordynator oddzwoni w wybranym terminie lub w najbliższym dostępnym oknie kontaktu w godzinach pracy: pon-pt 9:00-20:00.',
     },
     low: {
       title: 'Dziękujemy, zgłoszenie zapisane',
       body:
-        'Nie wygląda to na sytuację bardzo pilną, ale warto sprawdzić temat, jeśli objawy wracają albo masz zalecenie od ortodonty.',
+        'Nie wygląda to na sytuację bardzo pilną, ale warto sprawdzić temat, jeśli objawy wracają albo masz zalecenie od ortodonty. Kontakt odbywa się w godzinach pracy: pon-pt 9:00-20:00.',
     },
   },
 };
