@@ -12,8 +12,9 @@ type LocationData = LocationRecord;
 
 const allLocations = locations as LocationData[];
 const INDEXED_URSYNOW_LOCATION_LIMIT = 60;
+const isUrsynowLocation = (loc: LocationData) => loc.hubSlug === 'ursynow';
 const indexedUrsynowLocations = [...allLocations]
-  .filter((loc) => loc.klinika.includes('KEN'))
+  .filter(isUrsynowLocation)
   .sort((a, b) => getLocationSearchVolume(b) - getLocationSearchVolume(a))
   .slice(0, INDEXED_URSYNOW_LOCATION_LIMIT);
 const indexedUrsynowSlugs = new Set(indexedUrsynowLocations.map((loc) => loc.slug));
@@ -24,7 +25,7 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
 
   if (!location) return { title: 'Lokalizacja nie znaleziona' };
 
-  if (location.klinika.toLowerCase().includes('pruszkowska')) {
+  if (!isUrsynowLocation(location)) {
     return {
       title: 'Lokalizacja niedostępna',
       robots: {
@@ -54,7 +55,7 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
     return {
       title: 'Boli ósemka na Ursynowie? Szybka kwalifikacja online',
       description:
-        'Sprawdź w 30 sekund, czy przy bólu ósemki na Ursynowie warto umówić konsultację chirurgiczną, RTG lub pilniejszy kontakt telefoniczny.',
+        'Sprawdź w 30 sekund, czy przy bólu ósemki na Ursynowie warto umówić konsultację chirurgiczną, RTG lub pilniejszy kontakt zwrotny.',
       alternates: {
         canonical,
       },
@@ -101,11 +102,11 @@ export default async function LocationPage({ params }: { params: Promise<{ slug:
     return notFound();
   }
 
-  if (locationData.klinika.toLowerCase().includes('pruszkowska')) {
+  if (!isUrsynowLocation(locationData)) {
     return notFound();
   }
 
-  const clinicProfile = getClinicProfile(locationData.klinika);
+  const clinicProfile = getClinicProfile();
   const enrichedLocation: LocationData = {
     ...locationData,
     hubSlug: locationData.hubSlug ?? clinicProfile.hubSlug,

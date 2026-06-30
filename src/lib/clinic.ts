@@ -6,7 +6,6 @@ export type LocationRecord = {
   punkt_orientacyjny?: string;
   komunikacja?: string;
   parking?: string;
-  reviews?: Array<{ author: string; text: string; rating: number }>;
   faq?: Array<{ question: string; answer: string }>;
   lat?: number;
   lng?: number;
@@ -18,10 +17,6 @@ export type LocationRecord = {
 
 export type ClinicProfile = {
   clinicName: string;
-  address: string;
-  phone: string;
-  doctorName: string;
-  doctorSpecialty: string;
   hubSlug: string;
   hubName: string;
   openingDate: string;
@@ -29,38 +24,17 @@ export type ClinicProfile = {
   longitude: number;
 };
 
-const CLINIC_PROFILES: Record<'pruszkowska' | 'ken', ClinicProfile> = {
-  pruszkowska: {
-    clinicName: 'Archiwalna lokalizacja',
-    address: 'Warszawa',
-    phone: '+48221234567',
-    doctorName: 'lek. dent. Małgorzata Sturska',
-    doctorSpecialty: 'Oral and Maxillofacial Surgery',
-    hubSlug: 'ochota',
-    hubName: 'Ochota',
-    openingDate: '2016-01-01',
-    latitude: 52.2092,
-    longitude: 20.9692,
-  },
-  ken: {
-    clinicName: 'Partnerski gabinet stomatologiczny – Ursynów',
-    address: 'rejon Metra Ursynów, Warszawa',
-    phone: '',
-    doctorName: 'Koordynator zgłoszeń',
-    doctorSpecialty: 'Lead qualification coordination',
-    hubSlug: 'ursynow',
-    hubName: 'Ursynów',
-    openingDate: '2018-01-01',
-    latitude: 52.1509,
-    longitude: 21.0485,
-  },
+const URSYNOW_PROFILE: ClinicProfile = {
+  clinicName: 'Ósemki Ursynów',
+  hubSlug: 'ursynow',
+  hubName: 'Ursynów',
+  openingDate: '2018-01-01',
+  latitude: 52.1509,
+  longitude: 21.0485,
 };
 
-export function getClinicProfile(clinicLabel: string): ClinicProfile {
-  if (clinicLabel.toLowerCase().includes('pruszkowska')) {
-    return CLINIC_PROFILES.pruszkowska;
-  }
-  return CLINIC_PROFILES.ken;
+export function getClinicProfile(): ClinicProfile {
+  return URSYNOW_PROFILE;
 }
 
 const hashSlug = (slug: string) =>
@@ -71,7 +45,7 @@ export function getLocationCoordinates(location: LocationRecord): { lat: number;
     return { lat: location.lat, lng: location.lng };
   }
 
-  const clinic = getClinicProfile(location.klinika);
+  const clinic = getClinicProfile();
   const hash = hashSlug(location.slug);
   const latOffset = ((hash % 400) - 200) / 10000;
   const lngOffset = ((((hash / 400) | 0) % 400) - 200) / 10000;

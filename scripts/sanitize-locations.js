@@ -1,5 +1,12 @@
-import fs from 'node:fs';
-import path from 'node:path';
+/* eslint-disable @typescript-eslint/no-require-imports */
+const fs = require('node:fs');
+const path = require('node:path');
+
+const URSYNOW_CLINIC_LABEL = 'rejon Metra Ursynów';
+const ORGANIZATION_COPY =
+  'Szczegóły organizacyjne wizyty są potwierdzane podczas kontaktu zwrotnego.';
+const TRANSPORT_COPY =
+  'Najwygodniejsza organizacja wizyty jest ustalana podczas kontaktu zwrotnego.';
 
 const candidatePaths = [
   path.join(process.cwd(), 'data', 'locations.json'),
@@ -21,7 +28,23 @@ const normalize = (value = '') =>
     .replace(/ł/g, 'l');
 
 const ursynowKeywords = ['ursynow', 'kabaty', 'natolin', 'imielin', 'stoklosy'];
-const ochotaKeywords = ['ochota', 'szczesliwice', 'rakowiec'];
+const blockedAreaKeywords = [
+  'piaseczno',
+  'konstancin',
+  'lesznowola',
+  'iwiczna',
+  'jozefoslaw',
+  'ustanow',
+  'zalesie',
+  'mokotow',
+  'wilanow',
+  'sadyba',
+  'wierzbno',
+  'powsin',
+  'zawady',
+  'sluzewiec',
+  'sluzewiecka',
+];
 const maxTimePatterns = [/40\s*min/i, /45\s*min/i, /50\s*min/i, />/];
 const farVillagePattern =
   /(gmina|wies|wieś|kolonia|folwark|przysi[oó]lek|osada|za[sś]cianek|maly|mały|duzy|duży)/i;
@@ -30,28 +53,34 @@ const raw = fs.readFileSync(locationsPath, 'utf-8');
 const locations = JSON.parse(raw);
 
 const sanitized = locations
-  .map((location) => {
+  .filter((location) => {
     const slug = normalize(location.slug);
     const name = normalize(location.nazwa_lokalizacji);
-    const haystack = `${slug} ${name}`;
+    const hubSlug = normalize(location.hubSlug);
+    const hubName = normalize(location.hubName);
+    const clinic = normalize(location.klinika);
+    const haystack = `${slug} ${name} ${hubSlug} ${hubName} ${clinic}`;
 
-    if ((slug.includes('metro') && slug.includes('ursynow')) || haystack.includes('metro ursynow')) {
-      return {
-        ...location,
-        czas_dojazdu: '1 min',
-        klinika: 'al. KEN 96',
-      };
-    }
+    if (blockedAreaKeywords.some((keyword) => haystack.includes(keyword))) return false;
 
-    if (ursynowKeywords.some((keyword) => haystack.includes(keyword))) {
-      return { ...location, klinika: 'al. KEN 96' };
-    }
+    return hubSlug === 'ursynow' || ursynowKeywords.some((keyword) => haystack.includes(keyword));
+  })
+  .map((location) => {
+    const safeLocation = { ...location };
+    delete safeLocation.reviews;
+    delete safeLocation.faq;
 
-    if (ochotaKeywords.some((keyword) => haystack.includes(keyword))) {
-      return { ...location, klinika: 'ul. Pruszkowska 6b' };
-    }
-
-    return location;
+    return {
+      ...safeLocation,
+      klinika: URSYNOW_CLINIC_LABEL,
+      czas_dojazdu: 'zależnie od lokalizacji',
+      punkt_orientacyjny: location.punkt_orientacyjny || 'Metro Ursynów',
+      komunikacja: TRANSPORT_COPY,
+      parking: ORGANIZATION_COPY,
+      hubSlug: 'ursynow',
+      hubName: 'Ursynów',
+      displayName: location.displayName || location.nazwa_lokalizacji,
+    };
   })
   .filter((location) => {
     const travelTime = String(location.czas_dojazdu || '');

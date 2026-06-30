@@ -93,7 +93,7 @@ const checks = [
     pass:
       !sitemapIndexSource.includes('/sitemap-ochota.xml') &&
       sitemapIndexSource.includes('/sitemap-ursynow.xml') &&
-      sitemapUrsynowSource.includes("loc.klinika.includes('KEN')") &&
+      sitemapUrsynowSource.includes("loc.hubSlug === 'ursynow'") &&
       sitemapUrsynowSource.includes('INDEXED_URSYNOW_LOCATION_LIMIT'),
   },
   {

@@ -3,11 +3,12 @@
 import { useState } from 'react';
 import { AnimatePresence, motion } from 'framer-motion';
 import {
-  Activity,
   AlertTriangle,
   ArrowRight,
   CheckCircle2,
   ChevronLeft,
+  Clock,
+  FileCheck,
   LockKeyhole,
   MapPin,
   ShieldCheck,
@@ -33,7 +34,7 @@ const CALLBACK_HOURS = 'pon-pt 9:00-20:00';
 const PARTNER_LOCATION_COPY = 'gabinecie stomatologicznym w okolicy Metra Ursynów';
 
 const getPainFeedback = (painScore: number) => {
-  if (painScore >= 7) return 'Przy takim bólu oznaczymy zgłoszenie jako pilniejsze.';
+  if (painScore >= 7) return 'Przy takim bólu oznaczymy zgłoszenie jako priorytetowe.';
   if (painScore >= 4) return 'To już poziom, przy którym konsultacja może mieć sens.';
   return 'Wygląda na mniej pilne, ale warto sprawdzić kontekst.';
 };
@@ -46,7 +47,7 @@ const formatPhone = (value: string) => {
 };
 
 const getUrgencyCopy = (result: LeadScoringResult) => {
-  if (result.urgencyBand === 'high') return 'Pilniejszy kontakt';
+  if (result.urgencyBand === 'high') return 'Zgłoszenie priorytetowe';
   if (result.urgencyBand === 'medium') return 'Kontakt planowy';
   return 'Spokojna kwalifikacja';
 };
@@ -54,30 +55,33 @@ const getUrgencyCopy = (result: LeadScoringResult) => {
 const getUrgencyTone = (result: LeadScoringResult) => {
   if (result.urgencyBand === 'high') {
     return {
-      glow: 'shadow-red-500/20',
-      bar: 'from-red-400 via-rose-300 to-orange-200',
-      badge: 'border-red-300/25 bg-red-400/10 text-red-100',
-      soft: 'border-red-300/20 bg-red-400/10 text-red-100',
-      dot: 'bg-red-300',
+      accent: 'emerald',
+      bar: 'from-emerald-500 via-amber-400 to-rose-400',
+      badge: 'border-amber-300 bg-amber-50 text-amber-800',
+      soft: 'border-amber-200 bg-amber-50 text-amber-900',
+      ring: 'ring-amber-100',
+      button: 'bg-emerald-600 hover:bg-emerald-700 text-white shadow-emerald-600/20',
     };
   }
 
   if (result.urgencyBand === 'medium') {
     return {
-      glow: 'shadow-cyan-500/20',
-      bar: 'from-cyan-300 via-sky-300 to-emerald-200',
-      badge: 'border-cyan-300/25 bg-cyan-300/10 text-cyan-100',
-      soft: 'border-cyan-300/20 bg-cyan-300/10 text-cyan-100',
-      dot: 'bg-cyan-300',
+      accent: 'cyan',
+      bar: 'from-emerald-500 via-cyan-400 to-sky-400',
+      badge: 'border-cyan-200 bg-cyan-50 text-cyan-800',
+      soft: 'border-cyan-100 bg-cyan-50 text-cyan-900',
+      ring: 'ring-cyan-100',
+      button: 'bg-emerald-600 hover:bg-emerald-700 text-white shadow-emerald-600/20',
     };
   }
 
   return {
-    glow: 'shadow-slate-900/40',
-    bar: 'from-slate-300 via-cyan-200 to-slate-100',
-    badge: 'border-white/15 bg-white/8 text-slate-200',
-    soft: 'border-white/10 bg-white/[0.045] text-slate-200',
-    dot: 'bg-slate-300',
+    accent: 'emerald',
+    bar: 'from-emerald-500 via-teal-400 to-cyan-400',
+    badge: 'border-emerald-200 bg-emerald-50 text-emerald-800',
+    soft: 'border-emerald-100 bg-emerald-50 text-emerald-900',
+    ring: 'ring-emerald-100',
+    button: 'bg-emerald-600 hover:bg-emerald-700 text-white shadow-emerald-600/20',
   };
 };
 
@@ -85,40 +89,37 @@ const getPainTone = (painScore: number) => {
   if (painScore >= 7) {
     return {
       label: 'zgłoszenie priorytetowe',
-      text: 'text-rose-100',
-      glow: 'shadow-rose-500/20',
-      segment: 'bg-gradient-to-r from-rose-400 to-amber-200',
-      panel: 'border-rose-300/20 bg-rose-400/10',
+      text: 'text-amber-800',
+      segment: 'bg-gradient-to-r from-amber-400 to-rose-400',
+      panel: 'border-amber-200 bg-amber-50',
     };
   }
 
   if (painScore >= 4) {
     return {
       label: 'warto skonsultować',
-      text: 'text-cyan-100',
-      glow: 'shadow-cyan-500/15',
-      segment: 'bg-gradient-to-r from-cyan-300 to-amber-200',
-      panel: 'border-cyan-300/20 bg-cyan-300/10',
+      text: 'text-cyan-800',
+      segment: 'bg-gradient-to-r from-emerald-500 to-cyan-400',
+      panel: 'border-cyan-100 bg-cyan-50',
     };
   }
 
   return {
     label: 'spokojna kwalifikacja',
-    text: 'text-slate-200',
-    glow: 'shadow-slate-950/30',
-    segment: 'bg-gradient-to-r from-slate-300 to-cyan-200',
-    panel: 'border-white/10 bg-white/[0.045]',
+    text: 'text-emerald-800',
+    segment: 'bg-gradient-to-r from-emerald-500 to-teal-400',
+    panel: 'border-emerald-100 bg-emerald-50',
   };
 };
 
 const getOptionAccent = (value: string, urgent?: boolean) => {
-  if (urgent) return 'from-rose-400/25 via-amber-300/15 to-transparent';
-  if (value.includes('ortodont')) return 'from-violet-300/20 via-cyan-200/10 to-transparent';
+  if (urgent) return 'from-amber-50 via-white to-rose-50';
+  if (value.includes('ortodont')) return 'from-cyan-50 via-white to-violet-50';
   if (value.includes('RTG') || value.includes('Mam') || value.includes('skierowanie')) {
-    return 'from-cyan-300/20 via-sky-300/10 to-transparent';
+    return 'from-emerald-50 via-white to-cyan-50';
   }
-  if (value.includes('Nie wiem')) return 'from-slate-300/16 via-cyan-200/8 to-transparent';
-  return 'from-cyan-300/16 via-emerald-200/8 to-transparent';
+  if (value.includes('Nie wiem')) return 'from-slate-50 via-white to-cyan-50';
+  return 'from-emerald-50 via-white to-white';
 };
 
 export default function ConversationalFlow({
@@ -309,103 +310,110 @@ export default function ConversationalFlow({
     : `Oddzwonimy w wybranym terminie lub w najbliższym dostępnym oknie kontaktu w godzinach pracy: ${CALLBACK_HOURS}.`;
 
   return (
-    <div className="relative min-h-screen overflow-hidden bg-[#02070a] text-white antialiased">
-      <div className="absolute inset-0 bg-[radial-gradient(circle_at_12%_8%,rgba(34,211,238,0.30),transparent_28%),radial-gradient(circle_at_83%_18%,rgba(244,63,94,0.22),transparent_24%),radial-gradient(circle_at_42%_82%,rgba(14,165,233,0.12),transparent_34%),linear-gradient(135deg,#02070a_0%,#061018_46%,#030507_100%)]" />
-      <div className="absolute inset-0 opacity-35 [background-image:linear-gradient(rgba(148,163,184,0.07)_1px,transparent_1px),linear-gradient(90deg,rgba(148,163,184,0.07)_1px,transparent_1px)] [background-size:42px_42px]" />
-      <div className="absolute left-1/2 top-1/2 h-[46rem] w-[46rem] -translate-x-1/2 -translate-y-1/2 rounded-full border border-cyan-200/10 bg-cyan-300/[0.015] blur-[1px]" />
-      <motion.div
-        aria-hidden="true"
-        className="pointer-events-none absolute right-[7%] top-[14%] hidden h-72 w-72 rounded-[38%_62%_46%_54%] border border-cyan-200/15 bg-cyan-200/[0.035] shadow-2xl shadow-cyan-500/10 backdrop-blur-sm lg:block"
-        animate={{ y: [0, -14, 0], rotate: [0, 3, 0] }}
-        transition={{ duration: 9, repeat: Infinity, ease: 'easeInOut' }}
-      >
-        <div className="absolute inset-10 rounded-[45%_55%_42%_58%] border border-white/10 bg-gradient-to-br from-cyan-200/18 via-white/5 to-transparent" />
-        <div className="absolute left-16 top-14 h-20 w-20 rounded-full bg-cyan-200/20 blur-2xl" />
-        <div className="absolute bottom-12 right-12 h-24 w-24 rounded-full bg-rose-300/10 blur-2xl" />
-      </motion.div>
+    <div className="relative min-h-screen overflow-hidden bg-[#f7fbf8] text-slate-950 antialiased">
+      <div className="absolute inset-x-0 top-0 h-2 bg-emerald-700" />
+      <div className="absolute inset-0 bg-[radial-gradient(circle_at_14%_20%,rgba(16,185,129,0.13),transparent_32%),radial-gradient(circle_at_86%_8%,rgba(20,184,166,0.16),transparent_30%),linear-gradient(180deg,#ffffff_0%,#f7fbf8_52%,#eef8f4_100%)]" />
+      <div className="absolute right-[-12rem] top-24 hidden h-[34rem] w-[34rem] rounded-full bg-emerald-100 lg:block" />
+      <div className="absolute right-[8rem] top-40 hidden h-[21rem] w-[21rem] rounded-full border-[10px] border-emerald-700 bg-white shadow-2xl shadow-emerald-900/10 lg:block" />
 
-      <main className="relative z-10 mx-auto flex min-h-screen w-full max-w-7xl flex-col px-4 py-4 md:px-8 md:py-7">
+      <main className="relative z-10 mx-auto flex min-h-screen w-full max-w-7xl flex-col px-4 py-5 md:px-8 md:py-7">
         <header className="flex items-center justify-between gap-3">
           <div className="flex items-center gap-3">
-            <div className="relative flex h-10 w-10 items-center justify-center overflow-hidden rounded-2xl border border-cyan-200/20 bg-cyan-200/10 shadow-lg shadow-cyan-500/10 sm:h-11 sm:w-11">
-              <span className="text-base font-black tracking-tighter text-cyan-100 sm:text-lg">8U</span>
-              <div className="absolute inset-x-0 bottom-0 h-px bg-cyan-200/50" />
+            <div className="relative flex h-11 w-11 items-center justify-center overflow-hidden rounded-xl bg-emerald-700 shadow-lg shadow-emerald-700/20">
+              <span className="text-base font-black tracking-tighter text-white">8U</span>
+              <div className="absolute bottom-0 left-0 h-1 w-full bg-cyan-300" />
             </div>
             <div>
-              <p className="text-[11px] font-black uppercase tracking-[0.28em] text-cyan-200 sm:text-xs sm:tracking-[0.34em]">Ósemki Ursynów</p>
+              <p className="text-sm font-black leading-none tracking-tight text-slate-950">Ósemki Ursynów</p>
               <p className="mt-1 hidden text-xs font-semibold text-slate-500 sm:block">
-                Krótki wywiad kwalifikacyjny przed kontaktem w godzinach {CALLBACK_HOURS}
+                Kwalifikacja online, kontakt {CALLBACK_HOURS}
               </p>
             </div>
           </div>
 
-          <div className="flex items-center gap-1.5 rounded-full border border-white/10 bg-white/[0.045] px-2.5 py-2 text-[11px] font-bold text-slate-300 backdrop-blur-xl sm:gap-2 sm:px-3 sm:text-xs">
-            <MapPin className="h-3.5 w-3.5 text-cyan-200" />
+          <div className="flex items-center gap-1.5 rounded-full border border-emerald-100 bg-white px-3 py-2 text-xs font-bold text-slate-700 shadow-sm">
+            <MapPin className="h-3.5 w-3.5 text-emerald-700" />
             {isLocalEntry ? localArea : 'Ursynów'}
           </div>
         </header>
 
-        <section className="grid flex-1 items-start gap-5 py-4 sm:py-6 lg:grid-cols-[0.86fr,1.14fr] lg:items-center lg:gap-8 md:py-8">
-          <aside className="hidden lg:block">
-            <div className="mb-6 inline-flex items-center gap-2 rounded-full border border-cyan-300/20 bg-cyan-300/10 px-3 py-2 text-xs font-black uppercase tracking-widest text-cyan-100 shadow-lg shadow-cyan-500/10">
+        <section className="grid flex-1 items-start gap-6 py-6 lg:grid-cols-[0.92fr,1.08fr] lg:items-center lg:gap-10 md:py-10">
+          <aside className="order-1 lg:order-none">
+            <div className="mb-5 inline-flex items-center gap-2 rounded-full border border-emerald-200 bg-white px-3 py-2 text-xs font-black uppercase tracking-widest text-emerald-800 shadow-sm">
               <ShieldCheck className="h-4 w-4" />
               {config.intro.eyebrow}
             </div>
 
-            <h1 className="max-w-xl text-6xl font-black leading-[0.88] tracking-[-0.055em] text-white xl:text-7xl">
+            <h1 className="max-w-2xl text-5xl font-black leading-[0.92] tracking-[-0.055em] text-slate-950 sm:text-6xl xl:text-7xl">
               {isLocalEntry ? config.intro.localTitle(localArea) : config.intro.title}
             </h1>
 
-            <p className="mt-6 max-w-lg text-lg font-medium leading-relaxed text-slate-300">
+            <p className="mt-5 max-w-xl text-lg font-medium leading-relaxed text-slate-700 sm:text-xl">
               {config.intro.description}
             </p>
 
-            <div className="relative mt-8 max-w-lg overflow-hidden rounded-[2rem] border border-white/10 bg-white/[0.045] p-5 shadow-2xl shadow-cyan-500/5 backdrop-blur-xl">
-              <div className="absolute inset-0 bg-[radial-gradient(circle_at_24%_20%,rgba(103,232,249,0.20),transparent_30%),radial-gradient(circle_at_84%_78%,rgba(251,113,133,0.14),transparent_28%)]" />
-              <div className="relative grid grid-cols-[0.8fr,1.2fr] items-center gap-5">
-                <div className="relative h-36">
-                  <motion.div
-                    className="absolute left-3 top-2 h-28 w-28 rounded-[48%_52%_42%_58%] border border-cyan-200/25 bg-cyan-100/[0.07] shadow-2xl shadow-cyan-500/20"
-                    animate={{ y: [0, -8, 0], rotate: [0, 5, 0] }}
-                    transition={{ duration: 8, repeat: Infinity, ease: 'easeInOut' }}
-                  />
-                  <div className="absolute left-12 top-12 h-16 w-16 rounded-full bg-cyan-200/25 blur-2xl" />
-                  <div className="absolute bottom-2 right-6 h-14 w-14 rounded-full bg-rose-300/15 blur-xl" />
-                </div>
-                <div>
-                  <p className="text-xs font-black uppercase tracking-widest text-cyan-200">Nowoczesna kwalifikacja</p>
-                  <p className="mt-2 text-sm font-semibold leading-relaxed text-slate-300">
-                    Kilka prostych odpowiedzi pomaga ustalić, czy warto zacząć od konsultacji, RTG lub szybszego kontaktu.
-                  </p>
-                </div>
-              </div>
-            </div>
-
-            <div className="mt-8 grid max-w-lg grid-cols-3 gap-3">
+            <div className="mt-7 flex flex-wrap gap-2.5">
               {[
-                ['01', 'Objawy'],
-                ['02', 'Pilność'],
-                ['03', 'Kontakt'],
-              ].map(([number, label]) => (
-                <div key={number} className="rounded-3xl border border-white/10 bg-white/[0.045] p-4 backdrop-blur-xl">
-                  <p className="text-[11px] font-black text-cyan-200">{number}</p>
-                  <p className="mt-2 text-sm font-black text-white">{label}</p>
-                </div>
+                'Kontakt pon-pt 9:00-20:00',
+                'Okolice Metra Ursynów',
+                'Bez zobowiązania do zabiegu',
+                'Kwalifikacja online',
+              ].map((chip) => (
+                <span key={chip} className="rounded-full border border-emerald-100 bg-white px-4 py-2 text-xs font-bold text-slate-700 shadow-sm">
+                  {chip}
+                </span>
               ))}
             </div>
 
-            <div className={`mt-5 max-w-lg rounded-[2rem] border bg-white/[0.045] p-5 shadow-2xl backdrop-blur-xl ${urgencyTone.glow}`}>
-              <div className="mb-5 flex items-center justify-between gap-4">
+            <div className="mt-8 grid max-w-xl gap-4 sm:grid-cols-[0.95fr,1.05fr]">
+              <div className="relative min-h-64 overflow-hidden rounded-[2rem] border border-emerald-100 bg-white p-6 shadow-xl shadow-emerald-900/5">
+                <div className="absolute -right-16 -top-16 h-40 w-40 rounded-full bg-emerald-100" />
+                <div className="absolute bottom-6 right-8 h-20 w-20 rounded-full bg-cyan-100 blur-xl" />
+                <div className="relative flex h-44 items-center justify-center">
+                  <motion.div
+                    className="relative h-36 w-36 rounded-[46%_54%_42%_58%] border-[7px] border-emerald-700 bg-gradient-to-br from-white via-emerald-50 to-cyan-50 shadow-2xl shadow-emerald-900/10"
+                    animate={{ y: [0, -8, 0], rotate: [0, 4, 0] }}
+                    transition={{ duration: 8, repeat: Infinity, ease: 'easeInOut' }}
+                  >
+                    <div className="absolute left-10 top-8 h-10 w-10 rounded-full bg-cyan-200/70 blur-sm" />
+                    <div className="absolute bottom-8 right-8 h-12 w-12 rounded-full bg-emerald-200/70 blur-sm" />
+                  </motion.div>
+                </div>
+                <p className="relative text-xs font-black uppercase tracking-widest text-emerald-800">Nowoczesna kwalifikacja</p>
+                <p className="relative mt-2 text-sm font-semibold leading-relaxed text-slate-600">
+                  Prosty wywiad pomaga ustalić, czy potrzebna może być konsultacja, RTG lub szybszy kontakt.
+                </p>
+              </div>
+
+              <div className="grid gap-3">
+                {[
+                  { icon: <FileCheck className="h-4 w-4" />, title: 'Najpierw odpowiedzi', text: 'Bez długiego formularza na start.' },
+                  { icon: <Clock className="h-4 w-4" />, title: 'Kontakt w godzinach pracy', text: CALLBACK_HOURS },
+                  { icon: <ShieldCheck className="h-4 w-4" />, title: 'Bez rezerwacji zabiegu', text: 'To tylko prośba o kontakt.' },
+                ].map((item) => (
+                  <div key={item.title} className="rounded-2xl border border-emerald-100 bg-white p-4 shadow-sm">
+                    <div className="mb-3 flex h-9 w-9 items-center justify-center rounded-xl bg-emerald-50 text-emerald-700">
+                      {item.icon}
+                    </div>
+                    <p className="text-sm font-black text-slate-950">{item.title}</p>
+                    <p className="mt-1 text-sm font-medium leading-relaxed text-slate-500">{item.text}</p>
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            <div className="mt-5 max-w-xl rounded-[1.5rem] border border-emerald-100 bg-white/90 p-5 shadow-sm backdrop-blur">
+              <div className="mb-4 flex items-center justify-between gap-4">
                 <div>
-                  <p className="text-xs font-black uppercase tracking-widest text-slate-500">Twoje odpowiedzi</p>
-                  <p className="mt-1 text-sm font-semibold text-slate-300">Pomagają przygotować kontakt zwrotny</p>
+                  <p className="text-xs font-black uppercase tracking-widest text-slate-400">Twoje odpowiedzi</p>
+                  <p className="mt-1 text-sm font-semibold text-slate-700">Pomagają przygotować kontakt zwrotny</p>
                 </div>
                 <span className={`rounded-full border px-3 py-1.5 text-xs font-black ${urgencyTone.badge}`}>
                   {getUrgencyCopy(scoring)}
                 </span>
               </div>
 
-              <div className="mb-5 overflow-hidden rounded-full bg-white/10">
+              <div className="mb-4 overflow-hidden rounded-full bg-slate-100">
                 <motion.div
                   className={`h-2 rounded-full bg-gradient-to-r ${urgencyTone.bar}`}
                   animate={{ width: `${Math.min(scoring.leadScore, 100)}%` }}
@@ -415,18 +423,18 @@ export default function ConversationalFlow({
 
               <div className="flex flex-wrap gap-2">
                 {isUrgent && (
-                  <span className="rounded-full border border-rose-400/40 bg-rose-950/40 px-3 py-1.5 text-[11px] font-black uppercase tracking-widest text-rose-400">
+                  <span className="rounded-full border border-rose-200 bg-rose-50 px-3 py-1.5 text-[11px] font-black uppercase tracking-widest text-rose-600">
                     Pilne
                   </span>
                 )}
                 {summary.length > 0 ? (
                   summary.map((item) => (
-                    <span key={item.label} className="rounded-full border border-white/5 bg-slate-800 px-3 py-1.5 text-[11px] font-bold text-slate-300">
-                      <span className="text-slate-500">{item.label}:</span> {item.value}
+                    <span key={item.label} className="rounded-full border border-slate-100 bg-slate-50 px-3 py-1.5 text-[11px] font-bold text-slate-600">
+                      <span className="text-slate-400">{item.label}:</span> {item.value}
                     </span>
                   ))
                 ) : (
-                  <div className="rounded-full border border-dashed border-white/10 bg-slate-800 px-4 py-2 text-xs font-semibold leading-relaxed text-slate-500">
+                  <div className="rounded-full border border-dashed border-slate-200 bg-slate-50 px-4 py-2 text-xs font-semibold leading-relaxed text-slate-400">
                     Odpowiedzi pojawią się tutaj w trakcie kwalifikacji.
                   </div>
                 )}
@@ -434,40 +442,15 @@ export default function ConversationalFlow({
             </div>
           </aside>
 
-          <div className="mx-auto w-full max-w-3xl">
-            <div className="mb-4 lg:hidden">
-              <div className="mb-3 inline-flex items-center gap-2 rounded-full border border-cyan-300/20 bg-cyan-300/10 px-3 py-2 text-[11px] font-black uppercase tracking-widest text-cyan-100">
-                <ShieldCheck className="h-4 w-4" />
-                {config.intro.eyebrow}
-              </div>
-              <h1 className="text-4xl font-black leading-[0.92] tracking-[-0.055em] text-white sm:text-5xl">
-                {isLocalEntry ? config.intro.localTitle(localArea) : config.intro.title}
-              </h1>
-              <p className="mt-3 text-sm font-medium leading-relaxed text-slate-400 sm:text-base">
-                Odpowiedz na kilka pytań. Na końcu poprosimy tylko o numer do kontaktu.
-              </p>
-              <div className="mt-4 flex flex-wrap gap-2">
-                {isUrgent && (
-                  <span className="rounded-full border border-rose-400/40 bg-rose-950/40 px-3 py-1.5 text-[11px] font-black uppercase tracking-widest text-rose-400">
-                    Pilne
-                  </span>
-                )}
-                {summary.map((item) => (
-                  <span key={item.label} className="rounded-full border border-white/5 bg-slate-800 px-3 py-1.5 text-[11px] font-bold text-slate-300">
-                    <span className="text-slate-500">{item.label}:</span> {item.value}
-                  </span>
-                ))}
-              </div>
-            </div>
-
-            <div className={`relative overflow-hidden rounded-[1.65rem] border border-white/10 bg-[#071118]/88 p-4 shadow-2xl backdrop-blur-2xl sm:rounded-[2.4rem] sm:p-6 md:p-8 ${urgencyTone.glow}`}>
-              <div className="absolute inset-x-8 top-0 h-px bg-gradient-to-r from-transparent via-cyan-200/45 to-transparent" />
-              <div className="absolute -right-20 -top-20 h-56 w-56 rounded-full bg-cyan-300/10 blur-3xl" />
+          <div className="order-2 mx-auto w-full max-w-3xl lg:order-none">
+            <div className={`relative overflow-hidden rounded-[1.75rem] border border-emerald-100 bg-white p-4 shadow-2xl shadow-emerald-900/10 sm:rounded-[2rem] sm:p-6 md:p-8 ${urgencyTone.ring} ring-1`}>
+              <div className="absolute -right-24 -top-24 h-56 w-56 rounded-full bg-emerald-50" />
+              <div className="absolute right-14 top-10 h-20 w-20 rounded-full bg-cyan-100 blur-2xl" />
 
               <div className="relative mb-5 sm:mb-7">
                 <div className="mb-4 flex items-center justify-between gap-4">
-                  <div className="flex items-center gap-2 text-xs font-black uppercase tracking-widest text-slate-500">
-                    <span className={`h-2 w-2 rounded-full ${urgencyTone.dot}`} />
+                  <div className="flex items-center gap-2 text-xs font-black uppercase tracking-widest text-slate-400">
+                    <span className="h-2 w-2 rounded-full bg-emerald-500" />
                     <span>{status === 'success' ? 'Gotowe' : currentStep.eyebrow}</span>
                   </div>
                   <span className={`rounded-full border px-3 py-1.5 text-xs font-black ${urgencyTone.badge}`}>
@@ -477,7 +460,7 @@ export default function ConversationalFlow({
 
                 <div className="flex gap-1.5">
                   {visibleSteps.map((step, index) => (
-                    <div key={step.id} className="h-1.5 flex-1 overflow-hidden rounded-full bg-white/10">
+                    <div key={step.id} className="h-1.5 flex-1 overflow-hidden rounded-full bg-slate-100">
                       <motion.div
                         className={`h-full rounded-full bg-gradient-to-r ${urgencyTone.bar}`}
                         animate={{ width: index <= safeStepIndex || status === 'success' ? '100%' : '0%' }}
@@ -495,20 +478,20 @@ export default function ConversationalFlow({
                     initial={{ opacity: 0, y: 18, scale: 0.98 }}
                     animate={{ opacity: 1, y: 0, scale: 1 }}
                     exit={{ opacity: 0, y: -18, scale: 0.98 }}
-                    className="relative py-10 text-center"
+                    className="relative py-8 text-center sm:py-10"
                   >
                     <motion.div
                       initial={{ scale: 0.72, rotate: -10 }}
                       animate={{ scale: 1, rotate: 0 }}
                       transition={{ type: 'spring', stiffness: 230, damping: 14 }}
-                      className="mx-auto mb-7 flex h-20 w-20 items-center justify-center rounded-full border border-emerald-300/25 bg-emerald-400/10 text-emerald-200 shadow-2xl shadow-emerald-500/15"
+                      className="mx-auto mb-7 flex h-20 w-20 items-center justify-center rounded-full border border-emerald-200 bg-emerald-50 text-emerald-700 shadow-2xl shadow-emerald-900/10"
                     >
                       <CheckCircle2 className="h-10 w-10" />
                     </motion.div>
-                    <h2 className="mx-auto max-w-lg text-4xl font-black leading-tight tracking-[-0.035em] text-white">
+                    <h2 className="mx-auto max-w-lg text-4xl font-black leading-tight tracking-[-0.035em] text-slate-950">
                       {finalMessage.title}
                     </h2>
-                    <p className="mx-auto mt-5 max-w-md text-base font-medium leading-relaxed text-slate-300">
+                    <p className="mx-auto mt-5 max-w-md text-base font-medium leading-relaxed text-slate-600">
                       {successBody}
                     </p>
                     <div className="mx-auto mt-8 grid max-w-xl gap-3 sm:grid-cols-3">
@@ -517,11 +500,11 @@ export default function ConversationalFlow({
                         ['2', 'Sprawdzimy odpowiedzi'],
                         ['3', 'Oddzwonimy w godzinach pracy'],
                       ].map(([number, label]) => (
-                        <div key={label} className="rounded-2xl border border-white/10 bg-white/[0.035] p-4 text-left">
-                          <span className="mb-3 flex h-8 w-8 items-center justify-center rounded-xl border border-emerald-300/20 bg-emerald-300/10 text-xs font-black text-emerald-100">
+                        <div key={label} className="rounded-2xl border border-emerald-100 bg-emerald-50/60 p-4 text-left">
+                          <span className="mb-3 flex h-8 w-8 items-center justify-center rounded-xl bg-white text-xs font-black text-emerald-700 shadow-sm">
                             {number}
                           </span>
-                          <p className="text-sm font-bold leading-snug text-slate-200">{label}</p>
+                          <p className="text-sm font-bold leading-snug text-slate-700">{label}</p>
                         </div>
                       ))}
                     </div>
@@ -550,18 +533,18 @@ export default function ConversationalFlow({
 
                     <div className="mb-6 sm:mb-8">
                       <div className="mb-3 flex items-center gap-3 sm:mb-4">
-                        <div className="flex h-10 w-10 items-center justify-center rounded-2xl border border-cyan-200/15 bg-cyan-200/10 text-sm font-black text-cyan-100">
+                        <div className="flex h-10 w-10 items-center justify-center rounded-2xl bg-emerald-50 text-sm font-black text-emerald-700 ring-1 ring-emerald-100">
                           {safeStepIndex + 1}
                         </div>
-                        <div className="text-xs font-black uppercase tracking-[0.26em] text-slate-500">
+                        <div className="text-xs font-black uppercase tracking-[0.22em] text-slate-400">
                           Krok {safeStepIndex + 1} z {visibleSteps.length}
                         </div>
                       </div>
-                      <h2 className="max-w-2xl text-3xl font-black leading-[0.98] tracking-[-0.04em] text-white sm:text-5xl">
+                      <h2 className="max-w-2xl text-3xl font-black leading-[0.98] tracking-[-0.04em] text-slate-950 sm:text-5xl">
                         {currentStep.question}
                       </h2>
                       {currentStep.helper && (
-                        <p className="mt-3 max-w-xl text-sm font-medium leading-relaxed text-slate-400 sm:mt-4 sm:text-base">
+                        <p className="mt-3 max-w-xl text-sm font-medium leading-relaxed text-slate-500 sm:mt-4 sm:text-base">
                           {currentStep.helper}
                         </p>
                       )}
@@ -575,51 +558,50 @@ export default function ConversationalFlow({
                           const accent = getOptionAccent(option.value, option.urgent);
 
                           return (
-                          <button
-                            key={option.value}
-                            type="button"
-                            onClick={() => handleChoice(option.value, option.feedback)}
-                            className={`group relative overflow-hidden rounded-[1.35rem] border p-4 text-left transition-all duration-200 hover:-translate-y-0.5 hover:shadow-2xl active:scale-95 sm:p-5 ${
-                              isSelected
-                                ? option.urgent
-                                  ? 'border-rose-300/70 bg-rose-400/15 shadow-rose-500/20'
-                                  : 'border-cyan-200/70 bg-cyan-300/12 shadow-cyan-500/20'
-                                : option.urgent
-                                ? 'border-red-300/25 bg-red-400/[0.075] hover:border-red-200/60 hover:shadow-red-500/15'
-                                : 'border-white/10 bg-white/[0.035] hover:border-cyan-200/45 hover:bg-white/[0.07] hover:shadow-cyan-500/10'
-                            }`}
-                          >
-                            <div className={`absolute inset-0 bg-gradient-to-br ${accent} opacity-60 transition group-hover:opacity-100`} />
-                            <div className="absolute inset-y-0 left-0 w-1 bg-gradient-to-b from-cyan-200/0 via-cyan-200/45 to-cyan-200/0 opacity-0 transition group-hover:opacity-100" />
-                            <div className="relative flex items-start justify-between gap-4">
-                              <div className="flex gap-4">
-                                <span
-                                  className={`mt-0.5 flex h-8 w-8 shrink-0 items-center justify-center rounded-xl border text-xs font-black shadow-lg ${
-                                    option.urgent
-                                      ? 'border-red-200/25 bg-red-300/10 text-red-100 shadow-rose-500/10'
-                                      : 'border-cyan-200/15 bg-cyan-200/10 text-cyan-100 shadow-cyan-500/10'
-                                  }`}
-                                >
-                                  {index + 1}
-                                </span>
-                                <span>
-                                  <span className="block text-lg font-black leading-tight text-white">{option.label}</span>
-                                  {option.description && (
-                                    <span className="mt-1.5 block text-sm font-medium leading-relaxed text-slate-400">
-                                      {option.description}
-                                    </span>
-                                  )}
-                                  {option.urgent && (
-                                    <span className="mt-3 inline-flex items-center gap-1.5 rounded-full border border-red-300/20 bg-red-400/10 px-2.5 py-1 text-[11px] font-black uppercase tracking-widest text-red-100">
-                                      <AlertTriangle className="h-3 w-3" />
-                                      sygnał pilniejszy
-                                    </span>
-                                  )}
-                                </span>
+                            <button
+                              key={option.value}
+                              type="button"
+                              onClick={() => handleChoice(option.value, option.feedback)}
+                              className={`group relative overflow-hidden rounded-[1.25rem] border p-4 text-left shadow-sm transition-all duration-200 hover:-translate-y-0.5 hover:shadow-lg active:scale-95 sm:p-5 ${
+                                isSelected
+                                  ? option.urgent
+                                    ? 'border-amber-300 bg-amber-50 ring-2 ring-amber-100'
+                                    : 'border-emerald-300 bg-emerald-50 ring-2 ring-emerald-100'
+                                  : option.urgent
+                                    ? 'border-amber-200 bg-gradient-to-br from-amber-50 via-white to-rose-50 hover:border-amber-300'
+                                    : 'border-slate-200 bg-white hover:border-emerald-200'
+                              }`}
+                            >
+                              <div className={`absolute inset-0 bg-gradient-to-br ${accent} opacity-70 transition group-hover:opacity-100`} />
+                              <div className="relative flex items-start justify-between gap-4">
+                                <div className="flex gap-4">
+                                  <span
+                                    className={`mt-0.5 flex h-8 w-8 shrink-0 items-center justify-center rounded-xl border text-xs font-black shadow-sm ${
+                                      option.urgent
+                                        ? 'border-amber-200 bg-white text-amber-700'
+                                        : 'border-emerald-100 bg-emerald-50 text-emerald-700'
+                                    }`}
+                                  >
+                                    {index + 1}
+                                  </span>
+                                  <span>
+                                    <span className="block text-lg font-black leading-tight text-slate-950">{option.label}</span>
+                                    {option.description && (
+                                      <span className="mt-1.5 block text-sm font-medium leading-relaxed text-slate-500">
+                                        {option.description}
+                                      </span>
+                                    )}
+                                    {option.urgent && (
+                                      <span className="mt-3 inline-flex items-center gap-1.5 rounded-full border border-amber-200 bg-white px-2.5 py-1 text-[11px] font-black uppercase tracking-widest text-amber-700">
+                                        <AlertTriangle className="h-3 w-3" />
+                                        sygnał pilniejszy
+                                      </span>
+                                    )}
+                                  </span>
+                                </div>
+                                <ArrowRight className="mt-1 h-5 w-5 shrink-0 text-slate-300 transition group-hover:translate-x-1 group-hover:text-emerald-700" />
                               </div>
-                              <ArrowRight className="mt-1 h-5 w-5 shrink-0 text-slate-600 transition group-hover:translate-x-1 group-hover:text-cyan-100" />
-                            </div>
-                          </button>
+                            </button>
                           );
                         })}
                       </div>
@@ -627,13 +609,13 @@ export default function ConversationalFlow({
 
                     {currentStep.type === 'slider' && (
                       <div className="space-y-5">
-                        <div className={`rounded-[1.8rem] border p-5 shadow-2xl sm:p-6 ${painTone.panel} ${painTone.glow}`}>
+                        <div className={`rounded-[1.5rem] border p-5 shadow-sm sm:p-6 ${painTone.panel}`}>
                           <div className="mb-6 flex items-end justify-between gap-5">
                             <div>
-                              <p className="text-xs font-black uppercase tracking-widest text-slate-500">Skala bólu</p>
+                              <p className="text-xs font-black uppercase tracking-widest text-slate-400">Skala bólu</p>
                               <p className={`mt-2 text-sm font-black uppercase tracking-widest ${painTone.text}`}>{painTone.label}</p>
                             </div>
-                            <span className="text-7xl font-black tracking-[-0.06em] text-white">{answers.pain_score}</span>
+                            <span className="text-7xl font-black tracking-[-0.06em] text-slate-950">{answers.pain_score}</span>
                           </div>
 
                           <div className="mb-5 grid grid-cols-10 gap-1.5">
@@ -641,7 +623,7 @@ export default function ConversationalFlow({
                               <div
                                 key={index}
                                 className={`h-2 rounded-full transition-all duration-200 ${
-                                  index < answers.pain_score ? painTone.segment : 'bg-white/10'
+                                  index < answers.pain_score ? painTone.segment : 'bg-white/70'
                                 }`}
                               />
                             ))}
@@ -653,15 +635,15 @@ export default function ConversationalFlow({
                             max={currentStep.max ?? 10}
                             value={answers.pain_score}
                             onChange={(event) => setAnswer('pain_score', Number(event.target.value))}
-                            className="w-full accent-cyan-300"
+                            className="w-full accent-emerald-600"
                           />
-                          <div className="mt-4 flex justify-between text-[11px] font-black uppercase tracking-widest text-slate-600">
+                          <div className="mt-4 flex justify-between text-[11px] font-black uppercase tracking-widest text-slate-400">
                             <span>1</span>
                             <span>5</span>
                             <span>10</span>
                           </div>
                           {answers.pain_score >= 7 && (
-                            <div className="mt-5 flex gap-3 rounded-2xl border border-amber-300/25 bg-amber-900/35 p-4 text-sm font-bold text-amber-100">
+                            <div className="mt-5 flex gap-3 rounded-2xl border border-amber-200 bg-white p-4 text-sm font-bold text-amber-800">
                               <AlertTriangle className="h-5 w-5 shrink-0" />
                               Przy takim bólu zgłoszenie potraktujemy jako priorytetowe w godzinach kontaktu.
                             </div>
@@ -670,7 +652,7 @@ export default function ConversationalFlow({
                         <button
                           type="button"
                           onClick={handleSliderContinue}
-                          className="inline-flex w-full items-center justify-center gap-2 rounded-2xl bg-cyan-200 px-5 py-4 text-sm font-black text-slate-950 shadow-xl shadow-cyan-500/15 transition hover:bg-white"
+                          className={`inline-flex w-full items-center justify-center gap-2 rounded-2xl px-5 py-4 text-sm font-black shadow-xl transition ${urgencyTone.button}`}
                         >
                           Dalej
                           <ArrowRight className="h-4 w-4" />
@@ -683,15 +665,15 @@ export default function ConversationalFlow({
                         <div
                           className={`rounded-[1.35rem] border p-4 ${
                             isUrgent
-                              ? 'border-amber-400/30 bg-amber-900/45 text-amber-100'
+                              ? 'border-amber-200 bg-amber-50 text-amber-900'
                               : urgencyTone.soft
                           }`}
                         >
-                          <p className={`flex items-center gap-2 text-sm font-black ${isUrgent ? 'text-amber-400' : 'text-white'}`}>
-                            {isUrgent ? <AlertTriangle className="h-4 w-4" /> : <Activity className="h-4 w-4" />}
+                          <p className={`flex items-center gap-2 text-sm font-black ${isUrgent ? 'text-amber-800' : 'text-slate-950'}`}>
+                            {isUrgent ? <AlertTriangle className="h-4 w-4" /> : <CheckCircle2 className="h-4 w-4" />}
                             {isUrgent ? 'Sprawa priorytetowa.' : getUrgencyCopy(scoring)}
                           </p>
-                          <p className={`mt-2 text-sm font-medium leading-relaxed ${isUrgent ? 'text-amber-100' : 'text-slate-300'}`}>
+                          <p className={`mt-2 text-sm font-medium leading-relaxed ${isUrgent ? 'text-amber-900' : 'text-slate-600'}`}>
                             {isUrgent
                               ? `Zgłoszenie priorytetowe. Przy takim bólu lub opuchliźnie warto szybciej ustalić kolejny krok. Oddzwonimy w pierwszej kolejności w godzinach pracy: ${CALLBACK_HOURS}.`
                               : `To nie jest zapis na zabieg. Oddzwonimy z informacją, jaki kolejny krok ma sens, w godzinach pracy: ${CALLBACK_HOURS}.`}
@@ -704,69 +686,69 @@ export default function ConversationalFlow({
                             ['2', 'Ustalimy krok', 'Konsultacja, RTG albo spokojne zaplanowanie rozmowy.'],
                             ['3', 'Bez rezerwacji', 'Formularz nie jest zapisem na zabieg.'],
                           ].map(([number, title, text]) => (
-                            <div key={title} className="rounded-2xl border border-white/10 bg-white/[0.035] p-4">
-                              <span className="mb-3 flex h-8 w-8 items-center justify-center rounded-xl border border-cyan-200/15 bg-cyan-200/10 text-xs font-black text-cyan-100">
+                            <div key={title} className="rounded-2xl border border-emerald-100 bg-emerald-50/60 p-4">
+                              <span className="mb-3 flex h-8 w-8 items-center justify-center rounded-xl bg-white text-xs font-black text-emerald-700 shadow-sm">
                                 {number}
                               </span>
-                              <p className="text-sm font-black text-white">{title}</p>
-                              <p className="mt-1 text-xs font-medium leading-relaxed text-slate-400">{text}</p>
+                              <p className="text-sm font-black text-slate-950">{title}</p>
+                              <p className="mt-1 text-xs font-medium leading-relaxed text-slate-500">{text}</p>
                             </div>
                           ))}
                         </div>
 
-                        <div className="rounded-2xl border border-white/10 bg-white/[0.03] p-4 text-xs font-medium leading-relaxed text-slate-500">
+                        <div className="rounded-2xl border border-slate-100 bg-slate-50 p-4 text-xs font-medium leading-relaxed text-slate-500">
                           Jeśli konsultacja będzie wskazana, wizyta odbywa się w {PARTNER_LOCATION_COPY}. Jeśli masz szybko narastający obrzęk, gorączkę albo trudności z przełykaniem lub oddychaniem, skorzystaj z pilnej pomocy medycznej.
                         </div>
 
                         <div>
-                          <label className="mb-2 block text-xs font-black uppercase tracking-widest text-slate-500">Imię</label>
+                          <label className="mb-2 block text-xs font-black uppercase tracking-widest text-slate-400">Imię</label>
                           <input
                             required
                             value={answers.name}
                             onChange={(event) => setAnswer('name', event.target.value)}
-                            className="w-full rounded-2xl border border-white/10 bg-white/[0.06] p-4 text-base font-semibold text-white outline-none transition placeholder:text-slate-600 focus:border-cyan-200/80 focus:bg-white/[0.08]"
+                            className="w-full rounded-2xl border border-slate-200 bg-white p-4 text-base font-semibold text-slate-950 outline-none transition placeholder:text-slate-300 focus:border-emerald-400 focus:ring-4 focus:ring-emerald-100"
                             placeholder="np. Anna"
                           />
                         </div>
 
                         <div>
-                          <label className="mb-2 block text-xs font-black uppercase tracking-widest text-slate-500">Telefon</label>
+                          <label className="mb-2 block text-xs font-black uppercase tracking-widest text-slate-400">Telefon</label>
                           <input
                             required
                             type="tel"
                             value={answers.phone}
                             onChange={(event) => setAnswer('phone', formatPhone(event.target.value))}
-                            className="w-full rounded-2xl border border-white/10 bg-white/[0.06] p-4 text-base font-semibold text-white outline-none transition placeholder:text-slate-600 focus:border-cyan-200/80 focus:bg-white/[0.08]"
+                            className="w-full rounded-2xl border border-slate-200 bg-white p-4 text-base font-semibold text-slate-950 outline-none transition placeholder:text-slate-300 focus:border-emerald-400 focus:ring-4 focus:ring-emerald-100"
                             placeholder="Twój numer telefonu"
                           />
                         </div>
 
-                        <label className="flex gap-3 rounded-2xl border border-white/10 bg-white/[0.035] p-4 text-sm font-medium leading-relaxed text-slate-300">
+                        <label className="flex gap-3 rounded-2xl border border-slate-200 bg-white p-4 text-sm font-medium leading-relaxed text-slate-600">
                           <input
                             type="checkbox"
                             checked={answers.consent_contact}
                             onChange={(event) => setAnswer('consent_contact', event.target.checked)}
-                            className="mt-1 h-4 w-4 shrink-0 accent-cyan-300"
+                            className="mt-1 h-4 w-4 shrink-0 accent-emerald-600"
                           />
                           Wyrażam zgodę na kontakt telefoniczny w celu obsługi tego zgłoszenia.
                         </label>
 
-                        {formError && <p className="text-sm font-bold text-red-200">{formError}</p>}
+                        {formError && <p className="text-sm font-bold text-rose-600">{formError}</p>}
                         {status === 'error' && (
-                          <p className="text-sm font-bold text-red-200">
-                            Nie udało się wysłać zgłoszenia. Spróbuj ponownie za chwilę albo zadzwoń bezpośrednio.
+                          <p className="text-sm font-bold text-rose-600">
+                            Nie udało się wysłać zgłoszenia. Spróbuj ponownie za chwilę.
                           </p>
                         )}
 
                         <button
                           disabled={status === 'loading'}
-                          className="inline-flex w-full items-center justify-center gap-2 rounded-2xl bg-cyan-200 px-5 py-4 text-sm font-black text-slate-950 shadow-xl shadow-cyan-500/15 transition hover:bg-white disabled:cursor-not-allowed disabled:opacity-60"
+                          className={`inline-flex w-full items-center justify-center gap-2 rounded-2xl px-5 py-4 text-sm font-black shadow-xl transition disabled:cursor-not-allowed disabled:opacity-60 ${urgencyTone.button}`}
                         >
                           {status === 'loading' ? 'Wysyłanie...' : 'Poproś o kontakt'}
                           <ArrowRight className="h-4 w-4" />
                         </button>
 
-                        <p className="flex items-center justify-center gap-1.5 text-center text-xs font-medium leading-relaxed text-slate-500">
+                        <p className="flex items-center justify-center gap-1.5 text-center text-xs font-medium leading-relaxed text-slate-400">
                           <LockKeyhole className="h-3.5 w-3.5" />
                           Twoje dane są bezpieczne i służą wyłącznie do obsługi tego zgłoszenia.
                         </p>
@@ -777,7 +759,7 @@ export default function ConversationalFlow({
                       <button
                         type="button"
                         onClick={handleBack}
-                        className="mt-5 inline-flex items-center gap-2 text-xs font-black uppercase tracking-widest text-slate-500 transition hover:text-slate-300"
+                        className="mt-5 inline-flex items-center gap-2 text-xs font-black uppercase tracking-widest text-slate-400 transition hover:text-slate-600"
                       >
                         <ChevronLeft className="h-4 w-4" />
                         Wstecz
@@ -790,7 +772,7 @@ export default function ConversationalFlow({
           </div>
         </section>
 
-        <footer className="pb-4 text-center text-[11px] font-semibold leading-relaxed text-slate-600">
+        <footer className="pb-4 text-center text-[11px] font-semibold leading-relaxed text-slate-400">
           Kwalifikacja online nie zastępuje konsultacji lekarskiej. Kontakt zwrotny: {CALLBACK_HOURS}.
         </footer>
       </main>

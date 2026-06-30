@@ -7,7 +7,7 @@ const INDEXED_URSYNOW_LOCATION_LIMIT = 60;
 
 export function GET() {
   const urls = (locations as LocationRecord[])
-    .filter((loc) => loc.klinika.includes('KEN'))
+    .filter((loc) => loc.hubSlug === 'ursynow')
     .sort((a, b) => getLocationSearchVolume(b) - getLocationSearchVolume(a))
     .slice(0, INDEXED_URSYNOW_LOCATION_LIMIT)
     .map(
