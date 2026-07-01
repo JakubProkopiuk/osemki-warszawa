@@ -1,5 +1,6 @@
 import Link from 'next/link';
 import { AlertTriangle, Clock, FileCheck, MapPin, ShieldCheck } from 'lucide-react';
+import { DentalProcessVisualStrip } from './DentalTrustVisuals';
 import type { LocationRecord } from '@/lib/clinic';
 import { TRIAGE_FAQ_ITEMS } from '@/lib/triageFaq';
 
@@ -68,6 +69,10 @@ export default function TriageSeoContent({ location, popularLocations }: TriageS
                 </p>
               </div>
             )}
+
+            <div className="mt-8">
+              <DentalProcessVisualStrip />
+            </div>
 
             <div className="mt-8 grid gap-4 sm:grid-cols-2">
               {sections.map((section) => (

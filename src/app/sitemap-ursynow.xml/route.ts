@@ -4,6 +4,7 @@ import { getLocationSearchVolume, type LocationRecord } from '@/lib/clinic';
 
 const BASE_URL = 'https://www.osemki-warszawa.pl';
 const INDEXED_URSYNOW_LOCATION_LIMIT = 18;
+const LASTMOD = new Date().toISOString().split('T')[0];
 
 export function GET() {
   const urls = (locations as LocationRecord[])
@@ -11,7 +12,7 @@ export function GET() {
     .sort((a, b) => getLocationSearchVolume(b) - getLocationSearchVolume(a))
     .slice(0, INDEXED_URSYNOW_LOCATION_LIMIT)
     .map(
-      (loc) => `<url><loc>${BASE_URL}/${loc.slug}</loc><changefreq>weekly</changefreq><priority>0.8</priority></url>`,
+      (loc) => `<url><loc>${BASE_URL}/${loc.slug}</loc><lastmod>${LASTMOD}</lastmod><changefreq>weekly</changefreq><priority>0.8</priority></url>`,
     )
     .join('');
 

@@ -11,6 +11,7 @@ const wisdomTeethFlowPath = new URL('../src/lib/flows/wisdomTeethFlow.ts', impor
 const scoringPath = new URL('../src/lib/flows/scoring.ts', import.meta.url);
 const robotsPath = new URL('../public/robots.txt', import.meta.url);
 const sitemapIndexPath = new URL('../src/app/sitemap.xml/route.ts', import.meta.url);
+const sitemapCorePath = new URL('../src/app/sitemap-core.xml/route.ts', import.meta.url);
 const sitemapUrsynowPath = new URL('../src/app/sitemap-ursynow.xml/route.ts', import.meta.url);
 const locationsPath = new URL('../src/data/locations.json', import.meta.url);
 const nextConfigPath = new URL('../next.config.ts', import.meta.url);
@@ -26,6 +27,7 @@ const wisdomTeethFlowSource = fs.readFileSync(wisdomTeethFlowPath, 'utf-8');
 const scoringSource = fs.readFileSync(scoringPath, 'utf-8');
 const robotsSource = fs.readFileSync(robotsPath, 'utf-8');
 const sitemapIndexSource = fs.readFileSync(sitemapIndexPath, 'utf-8');
+const sitemapCoreSource = fs.readFileSync(sitemapCorePath, 'utf-8');
 const sitemapUrsynowSource = fs.readFileSync(sitemapUrsynowPath, 'utf-8');
 const nextConfigSource = fs.readFileSync(nextConfigPath, 'utf-8');
 const locations = JSON.parse(fs.readFileSync(locationsPath, 'utf-8'));
@@ -106,7 +108,11 @@ const checks = [
       sitemapIndexSource.includes('/sitemap-ursynow.xml') &&
       sitemapUrsynowSource.includes("loc.hubSlug === 'ursynow'") &&
       sitemapUrsynowSource.includes('INDEXED_URSYNOW_LOCATION_LIMIT') &&
-      sitemapUrsynowSource.includes('= 18'),
+      sitemapUrsynowSource.includes('= 18') &&
+      sitemapIndexSource.includes('<lastmod>') &&
+      sitemapCoreSource.includes('<lastmod>') &&
+      sitemapUrsynowSource.includes('<lastmod>') &&
+      !sitemapCoreSource.includes('${BASE_URL}/ursynow'),
   },
   {
     name: 'FAQ source is robust (dataset or schema fallback)',

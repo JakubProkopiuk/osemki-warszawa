@@ -17,6 +17,7 @@ import {
 } from 'lucide-react';
 import { calculateWisdomTeethLead } from '@/lib/flows/scoring';
 import type { FlowConfig, LeadScoringResult, TriageAnswers } from '@/lib/flows/types';
+import { DentalClinicVisual } from './DentalTrustVisuals';
 
 type ConversationalFlowProps = {
   config: FlowConfig;
@@ -491,6 +492,10 @@ export default function ConversationalFlow({
               Nie zapisujemy automatycznie na zabieg. Najpierw porządkujemy objawy i ustalamy sensowny kolejny krok.
             </p>
 
+            <div className="mt-6 max-w-xl lg:hidden">
+              <DentalClinicVisual compact />
+            </div>
+
             <div className="mt-5 hidden max-w-xl rounded-[1.5rem] border border-emerald-100 bg-white/90 p-3 shadow-sm backdrop-blur md:block md:p-5">
               <div className="mb-2 flex items-center justify-between gap-3 md:mb-4 md:gap-4">
                 <div>
@@ -917,26 +922,7 @@ export default function ConversationalFlow({
 
             <div className="mt-5 hidden overflow-hidden rounded-[2rem] border border-emerald-100 bg-white/95 p-5 shadow-xl shadow-emerald-900/5 backdrop-blur lg:block">
               <div className="grid gap-5 md:grid-cols-[0.9fr,1.1fr] md:items-center">
-                <div className="relative min-h-48 overflow-hidden rounded-[1.5rem] bg-gradient-to-br from-emerald-50 via-white to-cyan-50 ring-1 ring-emerald-100">
-                  <div className="absolute -right-10 -top-10 h-32 w-32 rounded-full bg-emerald-200/60 blur-2xl" />
-                  <div className="absolute bottom-0 left-0 h-24 w-full bg-gradient-to-t from-white to-transparent" />
-                  <div className="relative flex h-48 items-center justify-center">
-                    <motion.div
-                      className="relative h-28 w-28 rounded-[2rem] border border-emerald-200 bg-white shadow-2xl shadow-emerald-900/10"
-                      animate={{ y: [0, -6, 0] }}
-                      transition={{ duration: 7, repeat: Infinity, ease: 'easeInOut' }}
-                    >
-                      <div className="absolute left-5 top-5 h-11 w-11 rounded-full bg-emerald-100" />
-                      <div className="absolute right-5 top-8 h-9 w-9 rounded-full bg-cyan-100" />
-                      <div className="absolute bottom-5 left-4 h-9 w-20 rounded-full bg-slate-100" />
-                    </motion.div>
-                    <div className="absolute bottom-5 left-5 rounded-2xl border border-white bg-white/90 px-4 py-3 shadow-lg shadow-emerald-900/10">
-                      <p className="text-xs font-black uppercase tracking-widest text-emerald-800">spokojny wywiad</p>
-                      <p className="mt-1 text-sm font-bold text-slate-700">bez presji na zabieg</p>
-                    </div>
-                  </div>
-                </div>
-
+                <DentalClinicVisual compact />
                 <div>
                   <p className="text-xs font-black uppercase tracking-widest text-emerald-800">Jak to działa?</p>
                   <div className="mt-4 grid gap-3">
