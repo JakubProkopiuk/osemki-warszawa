@@ -2,6 +2,7 @@ import fs from 'node:fs';
 
 const pagePath = new URL('../src/app/[slug]/page.tsx', import.meta.url);
 const clientPath = new URL('../src/app/[slug]/LocationClient.tsx', import.meta.url);
+const triageClientPath = new URL('../src/components/TriageFlowClient.tsx', import.meta.url);
 const layoutPath = new URL('../src/app/layout.tsx', import.meta.url);
 const schemaPath = new URL('../src/lib/generateSchema.ts', import.meta.url);
 const flowPath = new URL('../src/components/ConversationalFlow.tsx', import.meta.url);
@@ -14,6 +15,7 @@ const locationsPath = new URL('../src/data/locations.json', import.meta.url);
 
 const pageSource = fs.readFileSync(pagePath, 'utf-8');
 const clientSource = fs.readFileSync(clientPath, 'utf-8');
+const triageClientSource = fs.readFileSync(triageClientPath, 'utf-8');
 const layoutSource = fs.readFileSync(layoutPath, 'utf-8');
 const schemaSource = fs.readFileSync(schemaPath, 'utf-8');
 const flowSource = fs.readFileSync(flowPath, 'utf-8');
@@ -29,7 +31,7 @@ const faqCoverage =
     : 0;
 const hasSchemaFaqFallback =
   schemaSource.includes('location.faq && location.faq.length > 0') &&
-  schemaSource.includes('czy diagnostyka będzie potrzebna');
+  schemaSource.includes('TRIAGE_FAQ_ITEMS');
 
 const checks = [
   {
@@ -54,7 +56,11 @@ const checks = [
   },
   {
     name: 'Conversational qualification flow wired on slug',
-    pass: clientSource.includes('<ConversationalFlow') && clientSource.includes('wisdomTeethFlow'),
+    pass:
+      clientSource.includes('<TriageFlowClient') &&
+      triageClientSource.includes('<ConversationalFlow') &&
+      triageClientSource.includes('wisdomTeethFlow') &&
+      triageClientSource.includes('slug={slug}'),
   },
   {
     name: 'Conversational flow captures lead and UTM context',
@@ -84,8 +90,9 @@ const checks = [
     name: 'Robots has Googlebot-Image rules',
     pass:
       robotsSource.includes('User-agent: Googlebot-Image') &&
-      robotsSource.includes('Disallow: /ulica-*') &&
+      robotsSource.includes('Disallow: /ul-*') &&
       robotsSource.includes('Disallow: /osiedle-*') &&
+      robotsSource.includes('Sitemap: https://www.osemki-warszawa.pl/sitemap.xml') &&
       !robotsSource.includes('/ochota'),
   },
   {

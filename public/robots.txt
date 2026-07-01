@@ -6,6 +6,8 @@ Crawl-delay: 2
 Allow: /
 
 User-agent: Googlebot-Image
-Disallow: /ulica-*
+Disallow: /ul-*
 Disallow: /osiedle-*
 Allow: /ursynow
+
+Sitemap: https://www.osemki-warszawa.pl/sitemap.xml

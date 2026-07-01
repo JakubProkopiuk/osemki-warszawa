@@ -1,7 +1,6 @@
 'use client';
 
-import ConversationalFlow from '@/components/ConversationalFlow';
-import { wisdomTeethFlow } from '@/lib/flows/wisdomTeethFlow';
+import TriageFlowClient from '@/components/TriageFlowClient';
 
 type LocationData = {
   slug: string;
@@ -10,11 +9,5 @@ type LocationData = {
 };
 
 export default function LocationClient({ locationData }: { locationData: LocationData }) {
-  return (
-    <ConversationalFlow
-      config={wisdomTeethFlow}
-      localArea={locationData.nazwa_lokalizacji}
-      slug={locationData.slug}
-    />
-  );
+  return <TriageFlowClient localArea={locationData.nazwa_lokalizacji} slug={locationData.slug} />;
 }

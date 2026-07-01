@@ -1,3 +1,5 @@
+import { CURATED_LOCATION_PRIORITY } from './locationPriority';
+
 export type LocationRecord = {
   slug: string;
   nazwa_lokalizacji: string;
@@ -56,8 +58,5 @@ export function getLocationCoordinates(location: LocationRecord): { lat: number;
 }
 
 export function getLocationSearchVolume(location: LocationRecord): number {
-  if (typeof location.searchVolume === 'number') {
-    return location.searchVolume;
-  }
-  return 200 + (hashSlug(location.slug) % 800);
+  return CURATED_LOCATION_PRIORITY.get(location.slug) ?? 1;
 }

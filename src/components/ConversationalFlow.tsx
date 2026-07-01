@@ -365,6 +365,14 @@ export default function ConversationalFlow({
               ))}
             </div>
 
+            <a
+              href="#triage-quiz"
+              className="mt-6 inline-flex w-full items-center justify-center gap-2 rounded-xl bg-emerald-600 px-8 py-4 text-center text-base font-bold text-white shadow-lg shadow-emerald-600/25 transition-all hover:bg-emerald-700 hover:shadow-xl hover:shadow-emerald-600/30 active:scale-95 md:w-auto"
+            >
+              Rozpocznij darmową kwalifikację
+              <ArrowRight className="h-5 w-5" />
+            </a>
+
             <div className="mt-8 grid max-w-xl gap-4 sm:grid-cols-[0.95fr,1.05fr]">
               <div className="relative min-h-64 overflow-hidden rounded-[2rem] border border-emerald-100 bg-white p-6 shadow-xl shadow-emerald-900/5">
                 <div className="absolute -right-16 -top-16 h-40 w-40 rounded-full bg-emerald-100" />
@@ -402,39 +410,39 @@ export default function ConversationalFlow({
               </div>
             </div>
 
-            <div className="mt-5 max-w-xl rounded-[1.5rem] border border-emerald-100 bg-white/90 p-5 shadow-sm backdrop-blur">
-              <div className="mb-4 flex items-center justify-between gap-4">
+            <div className="mt-5 max-w-xl rounded-[1.5rem] border border-emerald-100 bg-white/90 p-3 shadow-sm backdrop-blur md:p-5">
+              <div className="mb-2 flex items-center justify-between gap-3 md:mb-4 md:gap-4">
                 <div>
-                  <p className="text-xs font-black uppercase tracking-widest text-slate-400">Twoje odpowiedzi</p>
-                  <p className="mt-1 text-sm font-semibold text-slate-700">Pomagają przygotować kontakt zwrotny</p>
+                  <p className="text-[11px] font-black uppercase tracking-widest text-emerald-800 md:text-xs">Twoje odpowiedzi</p>
+                  <p className="mt-1 hidden text-sm font-semibold text-slate-700 md:block">Pomagają przygotować kontakt zwrotny</p>
                 </div>
-                <span className={`rounded-full border px-3 py-1.5 text-xs font-black ${urgencyTone.badge}`}>
+                <span className={`rounded-full border px-2 py-1 text-[10px] font-black md:px-3 md:py-1.5 md:text-xs ${urgencyTone.badge}`}>
                   {getUrgencyCopy(scoring)}
                 </span>
               </div>
 
-              <div className="mb-4 overflow-hidden rounded-full bg-slate-100">
+              <div className="mb-3 overflow-hidden rounded-full bg-emerald-100 md:mb-4">
                 <motion.div
-                  className={`h-2 rounded-full bg-gradient-to-r ${urgencyTone.bar}`}
+                  className="h-2 rounded-full bg-emerald-500"
                   animate={{ width: `${Math.min(scoring.leadScore, 100)}%` }}
                   transition={{ type: 'spring', stiffness: 120, damping: 22 }}
                 />
               </div>
 
-              <div className="flex flex-wrap gap-2">
+              <div className="flex flex-wrap gap-1.5 md:gap-2">
                 {isUrgent && (
-                  <span className="rounded-full border border-rose-200 bg-rose-50 px-3 py-1.5 text-[11px] font-black uppercase tracking-widest text-rose-600">
+                  <span className="rounded-full border border-rose-200 bg-rose-50 px-2 py-1 text-[10px] font-black uppercase tracking-widest text-rose-600 md:px-3 md:py-1.5 md:text-[11px]">
                     Pilne
                   </span>
                 )}
                 {summary.length > 0 ? (
                   summary.map((item) => (
-                    <span key={item.label} className="rounded-full border border-slate-100 bg-slate-50 px-3 py-1.5 text-[11px] font-bold text-slate-600">
-                      <span className="text-slate-400">{item.label}:</span> {item.value}
+                    <span key={item.label} className="rounded-full border border-slate-100 bg-slate-50 px-2 py-1 text-[10px] font-bold text-slate-700 md:px-3 md:py-1.5 md:text-[11px]">
+                      <span className="text-slate-500">{item.label}:</span> {item.value}
                     </span>
                   ))
                 ) : (
-                  <div className="rounded-full border border-dashed border-slate-200 bg-slate-50 px-4 py-2 text-xs font-semibold leading-relaxed text-slate-400">
+                  <div className="rounded-full border border-dashed border-slate-200 bg-slate-50 px-2 py-1 text-[10px] font-semibold leading-relaxed text-slate-500 md:px-4 md:py-2 md:text-xs">
                     Odpowiedzi pojawią się tutaj w trakcie kwalifikacji.
                   </div>
                 )}
@@ -442,27 +450,27 @@ export default function ConversationalFlow({
             </div>
           </aside>
 
-          <div className="order-2 mx-auto w-full max-w-3xl lg:order-none">
+          <div id="triage-quiz" className="order-2 mx-auto w-full scroll-mt-4 max-w-3xl lg:order-none">
             <div className={`relative overflow-hidden rounded-[1.75rem] border border-emerald-100 bg-white p-4 shadow-2xl shadow-emerald-900/10 sm:rounded-[2rem] sm:p-6 md:p-8 ${urgencyTone.ring} ring-1`}>
               <div className="absolute -right-24 -top-24 h-56 w-56 rounded-full bg-emerald-50" />
               <div className="absolute right-14 top-10 h-20 w-20 rounded-full bg-cyan-100 blur-2xl" />
 
               <div className="relative mb-5 sm:mb-7">
                 <div className="mb-4 flex items-center justify-between gap-4">
-                  <div className="flex items-center gap-2 text-xs font-black uppercase tracking-widest text-slate-400">
-                    <span className="h-2 w-2 rounded-full bg-emerald-500" />
+                  <div className="flex items-center gap-2 text-xs font-black uppercase tracking-widest text-emerald-800">
+                    <span className="h-2 w-2 rounded-full bg-emerald-600" />
                     <span>{status === 'success' ? 'Gotowe' : currentStep.eyebrow}</span>
                   </div>
-                  <span className={`rounded-full border px-3 py-1.5 text-xs font-black ${urgencyTone.badge}`}>
+                  <span className="rounded-full border border-emerald-200 bg-emerald-50 px-3 py-1.5 text-xs font-black text-emerald-800">
                     {progress}%
                   </span>
                 </div>
 
                 <div className="flex gap-1.5">
                   {visibleSteps.map((step, index) => (
-                    <div key={step.id} className="h-1.5 flex-1 overflow-hidden rounded-full bg-slate-100">
+                    <div key={step.id} className="h-1.5 flex-1 overflow-hidden rounded-full bg-emerald-100">
                       <motion.div
-                        className={`h-full rounded-full bg-gradient-to-r ${urgencyTone.bar}`}
+                        className="h-full rounded-full bg-emerald-500"
                         animate={{ width: index <= safeStepIndex || status === 'success' ? '100%' : '0%' }}
                         transition={{ duration: 0.28 }}
                       />

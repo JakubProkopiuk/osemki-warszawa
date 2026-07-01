@@ -1,20 +1,39 @@
 import type { LocationRecord } from './clinic';
+import { TRIAGE_FAQ_ITEMS } from './triageFaq';
+
+const BASE_URL = 'https://www.osemki-warszawa.pl';
 
 export function generateMedicalSchema(location: LocationRecord) {
-  const url = `https://www.osemki-warszawa.pl/${location.slug}`;
-  const faq =
-    location.faq && location.faq.length > 0
-      ? location.faq
+  const url = location.slug === 'home' ? `${BASE_URL}/` : `${BASE_URL}/${location.slug}`;
+  const faq = location.faq && location.faq.length > 0 ? location.faq : TRIAGE_FAQ_ITEMS;
+  const breadcrumbItems =
+    location.slug === 'home'
+      ? [
+          {
+            '@type': 'ListItem',
+            position: 1,
+            name: 'Strona główna',
+            item: `${BASE_URL}/`,
+          },
+        ]
       : [
           {
-            question: 'Czy formularz oznacza zapis na zabieg?',
-            answer:
-              'Nie. Formularz służy wyłącznie do kwalifikacji zgłoszenia i kontaktu zwrotnego. Decyzja o leczeniu zapada po konsultacji.',
+            '@type': 'ListItem',
+            position: 1,
+            name: 'Strona główna',
+            item: `${BASE_URL}/`,
           },
           {
-            question: 'Czy muszę mieć skierowanie lub RTG?',
-            answer:
-              'Skierowanie zwykle nie jest konieczne. Jeśli nie masz aktualnego zdjęcia, podczas kontaktu ustalimy, czy diagnostyka będzie potrzebna.',
+            '@type': 'ListItem',
+            position: 2,
+            name: 'Ursynów',
+            item: `${BASE_URL}/ursynow`,
+          },
+          {
+            '@type': 'ListItem',
+            position: 3,
+            name: location.nazwa_lokalizacji,
+            item: url,
           },
         ];
 
@@ -23,9 +42,9 @@ export function generateMedicalSchema(location: LocationRecord) {
     '@graph': [
       {
         '@type': 'WebSite',
-        '@id': 'https://www.osemki-warszawa.pl/#website',
+        '@id': `${BASE_URL}/#website`,
         name: 'Ósemki Ursynów',
-        url: 'https://www.osemki-warszawa.pl/',
+        url: `${BASE_URL}/`,
         inLanguage: 'pl-PL',
       },
       {
@@ -37,7 +56,7 @@ export function generateMedicalSchema(location: LocationRecord) {
           'Niezależna kwalifikacja online dla osób z problemem ósemki w rejonie Ursynowa. Formularz nie jest zapisem na zabieg i nie zastępuje konsultacji lekarskiej.',
         inLanguage: 'pl-PL',
         isPartOf: {
-          '@id': 'https://www.osemki-warszawa.pl/#website',
+          '@id': `${BASE_URL}/#website`,
         },
         about: {
           '@id': `${url}#service`,
@@ -55,7 +74,7 @@ export function generateMedicalSchema(location: LocationRecord) {
         provider: {
           '@type': 'Organization',
           name: 'Ósemki Ursynów',
-          url: 'https://www.osemki-warszawa.pl/',
+          url: `${BASE_URL}/`,
         },
       },
       {
@@ -73,26 +92,7 @@ export function generateMedicalSchema(location: LocationRecord) {
       {
         '@type': 'BreadcrumbList',
         '@id': `${url}#breadcrumbs`,
-        itemListElement: [
-          {
-            '@type': 'ListItem',
-            position: 1,
-            name: 'Strona główna',
-            item: 'https://www.osemki-warszawa.pl/',
-          },
-          {
-            '@type': 'ListItem',
-            position: 2,
-            name: 'Ursynów',
-            item: 'https://www.osemki-warszawa.pl/ursynow',
-          },
-          {
-            '@type': 'ListItem',
-            position: 3,
-            name: location.nazwa_lokalizacji,
-            item: url,
-          },
-        ],
+        itemListElement: breadcrumbItems,
       },
     ],
   };

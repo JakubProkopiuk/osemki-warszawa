@@ -7,12 +7,12 @@ export const wisdomTeethFlow: FlowConfig = {
   location: 'Ursynów',
   webhookUrl: 'https://hook.eu1.make.com/k73x9s65dxykfhry5uyodhl6bg2kvkx7',
   intro: {
-    eyebrow: 'Szybka kwalifikacja',
-    title: 'Boli ósemka na Ursynowie?',
-    localTitle: (localArea) => `Boli ósemka w okolicy ${localArea}?`,
+    eyebrow: 'Kwalifikacja objawów online',
+    title: 'Sprawdź, jak pilny może być problem z ósemką',
+    localTitle: (localArea) => `Sprawdź, jak pilny może być problem z ósemką w okolicy ${localArea}`,
     description:
-      'Odpowiedz na kilka pytań i sprawdź, czy warto zacząć od konsultacji, RTG albo kontaktu z koordynatorem.',
-    cta: 'Rozpocznij kwalifikację',
+      'Odpowiedz na kilka pytań o ból, opuchliznę i RTG. Na tej podstawie przygotujemy kontakt zwrotny z gabinetu stomatologicznego w rejonie Metra Ursynów.',
+    cta: 'Rozpocznij darmową kwalifikację',
   },
   steps: [
     {

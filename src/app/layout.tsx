@@ -14,9 +14,13 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: 'Ósemki Ursynów | Szybka kwalifikacja bólu ósemki',
+  title: 'Sprawdź pilność problemu z ósemką | Ósemki Ursynów',
   description:
-    'Lokalna kwalifikacja problemów z ósemkami na Ursynowie. Sprawdź, czy sensowna jest konsultacja chirurgiczna, RTG lub pilniejszy kontakt telefoniczny.',
+    'Krótka kwalifikacja objawów ósemki na Ursynowie: ból, opuchlizna, RTG i pilność kontaktu zwrotnego z gabinetu w rejonie Metra Ursynów.',
+  metadataBase: new URL('https://www.osemki-warszawa.pl'),
+  alternates: {
+    canonical: '/',
+  },
   verification: {
     google: '_vO5_sjty4HV81TiSXbD7Tuu5opYlFzhJimN4ZnF1Ks',
   },

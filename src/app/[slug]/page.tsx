@@ -1,9 +1,11 @@
 import { notFound } from 'next/navigation';
 import LocationClient from './LocationClient';
+import TriageSeoContent from '@/components/TriageSeoContent';
 import locations from '../../data/locations.json';
 import { generateMedicalSchema } from '@/lib/generateSchema';
 import { getClinicProfile, getLocationSearchVolume, type LocationRecord } from '@/lib/clinic';
 import { getCanonical } from '@/lib/getCanonical';
+import { TRIAGE_FAQ_ITEMS } from '@/lib/triageFaq';
 
 export const revalidate = 2_592_000;
 export const dynamicParams = true;
@@ -53,16 +55,16 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
   
   if (location.slug === 'ursynow') {
     return {
-      title: 'Boli ósemka na Ursynowie? Szybka kwalifikacja online',
+      title: 'Sprawdź pilność problemu z ósemką na Ursynowie',
       description:
-        'Sprawdź w 30 sekund, czy przy bólu ósemki na Ursynowie warto umówić konsultację chirurgiczną, RTG lub pilniejszy kontakt zwrotny.',
+        'Odpowiedz na kilka pytań o ból, opuchliznę i RTG. Przygotujemy kontakt zwrotny z gabinetu stomatologicznego w rejonie Metra Ursynów.',
       alternates: {
         canonical,
       },
       openGraph: {
-        title: 'Boli ósemka na Ursynowie? Szybka kwalifikacja online',
+        title: 'Sprawdź pilność problemu z ósemką na Ursynowie',
         description:
-          'Krótka kwalifikacja problemu z ósemką: objawy, RTG, pilność kontaktu i kolejny sensowny krok.',
+          'Krótka kwalifikacja objawów ósemki: ból, RTG, opuchlizna, pilność kontaktu i kolejny sensowny krok.',
         url: canonical,
         siteName: 'Ósemki Ursynów',
         locale: 'pl_PL',
@@ -72,14 +74,14 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
   }
 
   return {
-    title: `Boli ósemka ${location.nazwa_lokalizacji}? Kwalifikacja Ursynów`,
-    description: `Boli Cię ząb mądrości w okolicy: ${location.nazwa_lokalizacji}? Sprawdź, czy sensowna jest konsultacja, RTG lub pilniejszy kontakt z gabinetem na Ursynowie. Dojazd: ${travelTime}.`,
+    title: `Problem z ósemką ${location.nazwa_lokalizacji}? Kwalifikacja Ursynów`,
+    description: `Sprawdź, jak pilny może być problem z ósemką w okolicy ${location.nazwa_lokalizacji}. Krótka kwalifikacja objawów, RTG i kontakt zwrotny z rejonu Metra Ursynów. Dojazd: ${travelTime}.`,
     alternates: {
       canonical,
     },
     openGraph: {
-      title: `Chirurgiczne Usuwanie Ósemek - ${location.nazwa_lokalizacji}`,
-      description: `Kwalifikacja problemu z ósemką blisko ${location.punkt_orientacyjny}.`,
+      title: `Kwalifikacja problemu z ósemką - ${location.nazwa_lokalizacji}`,
+      description: `Sprawdź objawy i pilność kontaktu przy problemie z ósemką blisko ${location.punkt_orientacyjny}.`,
       url: canonical,
       siteName: 'Ósemki Ursynów',
       locale: 'pl_PL',
@@ -114,32 +116,11 @@ export default async function LocationPage({ params }: { params: Promise<{ slug:
     displayName: locationData.displayName ?? locationData.nazwa_lokalizacji,
   };
 
-  const faqItems = [
-    {
-      question: 'Czy zabieg będzie bolesny?',
-      answer:
-        'Podczas konsultacji lekarz omawia znieczulenie miejscowe i przebieg wizyty. Celem jest zaplanowanie leczenia w możliwie komfortowych warunkach.',
-    },
-    {
-      question: 'Czy muszę mieć skierowanie lub RTG?',
-      answer:
-        'Skierowanie zwykle nie jest konieczne. Jeśli nie masz aktualnego zdjęcia, podczas kontaktu ustalimy, czy diagnostyka będzie potrzebna.',
-    },
-    {
-      question: 'Co po zabiegu? Czy dostanę zwolnienie (L4)?',
-      answer:
-        'Powrót do codziennych obowiązków zależy od sytuacji klinicznej i zakresu zabiegu. Zalecenia są omawiane indywidualnie po konsultacji.',
-    },
-    {
-      question: 'Jakie są koszty usunięcia ósemki?',
-      answer:
-        'Koszt jest ustalany indywidualnie na podstawie konsultacji, diagnostyki i stopnia trudności. Przed decyzją pacjent otrzymuje informację o dalszym planie.',
-    },
-  ];
+  const popularLocations = indexedUrsynowLocations.filter((loc) => loc.slug !== locationData.slug).slice(0, 18);
 
   const schema = generateMedicalSchema({
     ...enrichedLocation,
-    faq: faqItems.map((item) => ({ question: item.question, answer: item.answer })),
+    faq: TRIAGE_FAQ_ITEMS,
   });
 
   return (
@@ -149,6 +130,7 @@ export default async function LocationPage({ params }: { params: Promise<{ slug:
         dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }}
       />
       <LocationClient locationData={enrichedLocation} />
+      <TriageSeoContent location={enrichedLocation} popularLocations={popularLocations} />
     </>
   );
 }
