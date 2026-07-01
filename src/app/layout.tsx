@@ -14,9 +14,9 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: 'Sprawdź pilność problemu z ósemką | Ósemki Ursynów',
+  title: 'Boli ósemka na Ursynowie? | Kwalifikacja online',
   description:
-    'Krótka kwalifikacja objawów ósemki na Ursynowie: ból, opuchlizna, RTG i pilność kontaktu zwrotnego z gabinetu w rejonie Metra Ursynów.',
+    'Krótka kwalifikacja objawów ósemki na Ursynowie: ból, opuchlizna, RTG i kontakt zwrotny z gabinetu w rejonie Metra Ursynów.',
   metadataBase: new URL('https://www.osemki-warszawa.pl'),
   alternates: {
     canonical: '/',

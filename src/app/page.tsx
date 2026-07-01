@@ -6,14 +6,14 @@ import { generateMedicalSchema } from '@/lib/generateSchema';
 import { getLocationSearchVolume, type LocationRecord } from '@/lib/clinic';
 
 export const metadata: Metadata = {
-  title: 'Sprawdź pilność problemu z ósemką na Ursynowie',
+  title: 'Boli ósemka na Ursynowie? Kwalifikacja online',
   description:
     'Krótka kwalifikacja objawów ósemki: ból, opuchlizna, RTG i kontakt zwrotny z gabinetu stomatologicznego w rejonie Metra Ursynów.',
   alternates: {
     canonical: '/',
   },
   openGraph: {
-    title: 'Sprawdź pilność problemu z ósemką na Ursynowie',
+    title: 'Boli ósemka na Ursynowie? Kwalifikacja online',
     description:
       'Odpowiedz na kilka pytań o ból, opuchliznę i RTG. Przygotujemy kontakt zwrotny w rejonie Metra Ursynów.',
     url: 'https://www.osemki-warszawa.pl/',

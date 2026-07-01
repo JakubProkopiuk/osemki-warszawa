@@ -2,6 +2,7 @@
 
 import { useState } from 'react';
 import { AnimatePresence, motion } from 'framer-motion';
+import { track } from '@vercel/analytics';
 import {
   AlertTriangle,
   ArrowRight,
@@ -28,10 +29,28 @@ const initialAnswers: TriageAnswers = {
   name: '',
   phone: '',
   consent_contact: false,
+  consent_symptoms: false,
 };
 
 const CALLBACK_HOURS = 'pon-pt 9:00-20:00';
 const PARTNER_LOCATION_COPY = 'gabinecie stomatologicznym w okolicy Metra Ursynów';
+
+const getPainBucket = (painScore: number) => {
+  if (painScore >= 7) return 'high';
+  if (painScore >= 4) return 'medium';
+  return 'low';
+};
+
+const trackTriageEvent = (
+  name: string,
+  properties: Record<string, string | number | boolean | undefined> = {},
+) => {
+  const safeProperties = Object.fromEntries(
+    Object.entries(properties).filter(([, value]) => value !== undefined),
+  ) as Record<string, string | number | boolean>;
+
+  track(name, safeProperties);
+};
 
 const getPainFeedback = (painScore: number) => {
   if (painScore >= 7) return 'Przy takim bólu oznaczymy zgłoszenie jako priorytetowe.';
@@ -133,6 +152,7 @@ export default function ConversationalFlow({
   const [feedback, setFeedback] = useState<string | null>(null);
   const [status, setStatus] = useState<'idle' | 'loading' | 'success' | 'error'>('idle');
   const [formError, setFormError] = useState<string | null>(null);
+  const [hasTrackedStart, setHasTrackedStart] = useState(false);
 
   const getVisibleSteps = (candidateAnswers: TriageAnswers) => {
     const candidateScoring = scoreLead(candidateAnswers);
@@ -154,6 +174,19 @@ export default function ConversationalFlow({
   const urgencyTone = getUrgencyTone(scoring);
   const isUrgent = scoring.urgencyBand === 'high';
   const painTone = getPainTone(answers.pain_score);
+  const shouldShowEarlyCallback = safeStepIndex >= 2 && currentStep.type !== 'lead' && status !== 'success';
+
+  const trackStart = (source: string) => {
+    if (hasTrackedStart) return;
+
+    setHasTrackedStart(true);
+    trackTriageEvent('triage_started', {
+      source,
+      slug,
+      local_area: localArea,
+      flow_variant: config.variant,
+    });
+  };
 
   const handleNext = (nextAnswers = answers, fromStepId = currentStep.id) => {
     const nextVisibleSteps = getVisibleSteps(nextAnswers);
@@ -167,11 +200,35 @@ export default function ConversationalFlow({
     setStepIndex((prev) => Math.max(prev - 1, 0));
   };
 
+  const handleJumpToLead = (source = 'shortcut') => {
+    const leadIndex = visibleSteps.findIndex((step) => step.type === 'lead');
+    if (leadIndex === -1) return;
+
+    trackStart(source);
+    trackTriageEvent('triage_contact_shortcut_clicked', {
+      source,
+      slug,
+      step_id: currentStep.id,
+      step_number: safeStepIndex + 1,
+      urgency_band: scoring.urgencyBand,
+    });
+
+    setFeedback(null);
+    setFormError(null);
+    setStatus('idle');
+    setStepIndex(leadIndex);
+    window.setTimeout(() => {
+      document.getElementById('triage-quiz')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }, 0);
+  };
+
   const setAnswer = <Key extends keyof TriageAnswers>(key: Key, value: TriageAnswers[Key]) => {
     setAnswers((prev) => ({ ...prev, [key]: value }));
   };
 
-  const handleChoice = (value: string, optionFeedback?: string) => {
+  const handleChoice = (value: string, optionFeedback?: string, optionIndex?: number, optionUrgent?: boolean) => {
+    trackStart('first_answer');
+
     const nextAnswers = { ...answers, [currentStep.id]: value } as TriageAnswers;
 
     if (currentStep.id === 'symptom') {
@@ -181,6 +238,14 @@ export default function ConversationalFlow({
 
     setAnswers(nextAnswers);
     setFeedback(optionFeedback ?? null);
+    trackTriageEvent('triage_step_answered', {
+      slug,
+      step_id: currentStep.id,
+      step_number: safeStepIndex + 1,
+      option_index: optionIndex === undefined ? undefined : optionIndex + 1,
+      urgent_option: optionUrgent,
+      urgency_band: scoreLead(nextAnswers).urgencyBand,
+    });
     window.setTimeout(() => {
       setFeedback(null);
       handleNext(nextAnswers, currentStep.id);
@@ -188,6 +253,14 @@ export default function ConversationalFlow({
   };
 
   const handleSliderContinue = () => {
+    trackStart('pain_slider');
+    trackTriageEvent('triage_pain_selected', {
+      slug,
+      step_id: currentStep.id,
+      step_number: safeStepIndex + 1,
+      pain_bucket: getPainBucket(answers.pain_score),
+      urgency_band: scoring.urgencyBand,
+    });
     setFeedback(getPainFeedback(answers.pain_score));
     window.setTimeout(() => {
       setFeedback(null);
@@ -207,6 +280,11 @@ export default function ConversationalFlow({
 
     if (!answers.consent_contact) {
       setFormError('Zaznacz zgodę na kontakt telefoniczny w sprawie zgłoszenia.');
+      return;
+    }
+
+    if (!answers.consent_symptoms) {
+      setFormError('Zaznacz zgodę na przetwarzanie informacji o objawach w celu obsługi zgłoszenia.');
       return;
     }
 
@@ -238,6 +316,11 @@ export default function ConversationalFlow({
     ].join('\n');
 
     setStatus('loading');
+    trackTriageEvent('triage_lead_submit_attempt', {
+      slug,
+      urgency_band: result.urgencyBand,
+      lead_score_bucket: result.leadScore >= 70 ? 'high' : result.leadScore >= 35 ? 'medium' : 'low',
+    });
     try {
       const response = await fetch(config.webhookUrl, {
         method: 'POST',
@@ -264,6 +347,7 @@ export default function ConversationalFlow({
           lead_priority: result.leadPriority,
           urgent_label: result.urgentLabel,
           consent_contact: answers.consent_contact,
+          consent_symptoms: answers.consent_symptoms,
           callback_hours: CALLBACK_HOURS,
           partner_location: PARTNER_LOCATION_COPY,
           trello_card_title: trelloCardTitle,
@@ -292,8 +376,18 @@ export default function ConversationalFlow({
       });
 
       setStatus(response.ok ? 'success' : 'error');
+      trackTriageEvent(response.ok ? 'triage_lead_submit_success' : 'triage_lead_submit_error', {
+        slug,
+        urgency_band: result.urgencyBand,
+        http_ok: response.ok,
+      });
     } catch {
       setStatus('error');
+      trackTriageEvent('triage_lead_submit_error', {
+        slug,
+        urgency_band: result.urgencyBand,
+        network_error: true,
+      });
     }
   };
 
@@ -313,10 +407,9 @@ export default function ConversationalFlow({
     <div className="relative min-h-screen overflow-hidden bg-[#f7fbf8] text-slate-950 antialiased">
       <div className="absolute inset-x-0 top-0 h-2 bg-emerald-700" />
       <div className="absolute inset-0 bg-[radial-gradient(circle_at_14%_20%,rgba(16,185,129,0.13),transparent_32%),radial-gradient(circle_at_86%_8%,rgba(20,184,166,0.16),transparent_30%),linear-gradient(180deg,#ffffff_0%,#f7fbf8_52%,#eef8f4_100%)]" />
-      <div className="absolute right-[-12rem] top-24 hidden h-[34rem] w-[34rem] rounded-full bg-emerald-100 lg:block" />
-      <div className="absolute right-[8rem] top-40 hidden h-[21rem] w-[21rem] rounded-full border-[10px] border-emerald-700 bg-white shadow-2xl shadow-emerald-900/10 lg:block" />
+      <div className="absolute right-[-12rem] top-24 hidden h-[34rem] w-[34rem] rounded-full bg-emerald-100/70 blur-3xl lg:block" />
 
-      <main className="relative z-10 mx-auto flex min-h-screen w-full max-w-7xl flex-col px-4 py-5 md:px-8 md:py-7">
+      <main className="relative z-10 mx-auto flex min-h-screen w-full max-w-7xl flex-col px-4 pb-28 pt-5 md:px-8 md:py-7 lg:pb-7">
         <header className="flex items-center justify-between gap-3">
           <div className="flex items-center gap-3">
             <div className="relative flex h-11 w-11 items-center justify-center overflow-hidden rounded-xl bg-emerald-700 shadow-lg shadow-emerald-700/20">
@@ -337,7 +430,7 @@ export default function ConversationalFlow({
           </div>
         </header>
 
-        <section className="grid flex-1 items-start gap-6 py-6 lg:grid-cols-[0.92fr,1.08fr] lg:items-center lg:gap-10 md:py-10">
+        <section className="grid flex-1 items-start gap-6 py-6 lg:grid-cols-[0.9fr,1.1fr] lg:items-center lg:gap-10 md:py-10">
           <aside className="order-1 lg:order-none">
             <div className="mb-5 inline-flex items-center gap-2 rounded-full border border-emerald-200 bg-white px-3 py-2 text-xs font-black uppercase tracking-widest text-emerald-800 shadow-sm">
               <ShieldCheck className="h-4 w-4" />
@@ -352,6 +445,16 @@ export default function ConversationalFlow({
               {config.intro.description}
             </p>
 
+            <div className="mt-5 max-w-xl rounded-2xl border border-emerald-100 bg-white/85 p-3 shadow-sm backdrop-blur sm:p-4">
+              <div className="flex flex-wrap items-center gap-2 text-sm font-bold text-slate-700">
+                <span className="inline-flex items-center gap-1.5 rounded-full bg-emerald-50 px-3 py-1.5 text-emerald-800">
+                  <MapPin className="h-3.5 w-3.5" />
+                  Ursynów, Natolin, Kabaty, Stokłosy
+                </span>
+                <span className="rounded-full bg-slate-50 px-3 py-1.5">Objawy · RTG · kolejny krok</span>
+              </div>
+            </div>
+
             <div className="mt-7 flex flex-wrap gap-2.5">
               {[
                 'Kontakt pon-pt 9:00-20:00',
@@ -365,52 +468,29 @@ export default function ConversationalFlow({
               ))}
             </div>
 
-            <a
-              href="#triage-quiz"
-              className="mt-6 inline-flex w-full items-center justify-center gap-2 rounded-xl bg-emerald-600 px-8 py-4 text-center text-base font-bold text-white shadow-lg shadow-emerald-600/25 transition-all hover:bg-emerald-700 hover:shadow-xl hover:shadow-emerald-600/30 active:scale-95 md:w-auto"
-            >
-              Rozpocznij darmową kwalifikację
-              <ArrowRight className="h-5 w-5" />
-            </a>
-
-            <div className="mt-8 grid max-w-xl gap-4 sm:grid-cols-[0.95fr,1.05fr]">
-              <div className="relative min-h-64 overflow-hidden rounded-[2rem] border border-emerald-100 bg-white p-6 shadow-xl shadow-emerald-900/5">
-                <div className="absolute -right-16 -top-16 h-40 w-40 rounded-full bg-emerald-100" />
-                <div className="absolute bottom-6 right-8 h-20 w-20 rounded-full bg-cyan-100 blur-xl" />
-                <div className="relative flex h-44 items-center justify-center">
-                  <motion.div
-                    className="relative h-36 w-36 rounded-[46%_54%_42%_58%] border-[7px] border-emerald-700 bg-gradient-to-br from-white via-emerald-50 to-cyan-50 shadow-2xl shadow-emerald-900/10"
-                    animate={{ y: [0, -8, 0], rotate: [0, 4, 0] }}
-                    transition={{ duration: 8, repeat: Infinity, ease: 'easeInOut' }}
-                  >
-                    <div className="absolute left-10 top-8 h-10 w-10 rounded-full bg-cyan-200/70 blur-sm" />
-                    <div className="absolute bottom-8 right-8 h-12 w-12 rounded-full bg-emerald-200/70 blur-sm" />
-                  </motion.div>
-                </div>
-                <p className="relative text-xs font-black uppercase tracking-widest text-emerald-800">Nowoczesna kwalifikacja</p>
-                <p className="relative mt-2 text-sm font-semibold leading-relaxed text-slate-600">
-                  Prosty wywiad pomaga ustalić, czy potrzebna może być konsultacja, RTG lub szybszy kontakt.
-                </p>
-              </div>
-
-              <div className="grid gap-3">
-                {[
-                  { icon: <FileCheck className="h-4 w-4" />, title: 'Najpierw odpowiedzi', text: 'Bez długiego formularza na start.' },
-                  { icon: <Clock className="h-4 w-4" />, title: 'Kontakt w godzinach pracy', text: CALLBACK_HOURS },
-                  { icon: <ShieldCheck className="h-4 w-4" />, title: 'Bez rezerwacji zabiegu', text: 'To tylko prośba o kontakt.' },
-                ].map((item) => (
-                  <div key={item.title} className="rounded-2xl border border-emerald-100 bg-white p-4 shadow-sm">
-                    <div className="mb-3 flex h-9 w-9 items-center justify-center rounded-xl bg-emerald-50 text-emerald-700">
-                      {item.icon}
-                    </div>
-                    <p className="text-sm font-black text-slate-950">{item.title}</p>
-                    <p className="mt-1 text-sm font-medium leading-relaxed text-slate-500">{item.text}</p>
-                  </div>
-                ))}
-              </div>
+            <div className="mt-6 flex flex-col gap-3 sm:flex-row">
+              <a
+                href="#triage-quiz"
+                onClick={() => trackStart('hero_primary_cta')}
+                className="inline-flex w-full items-center justify-center gap-2 rounded-xl bg-emerald-600 px-8 py-4 text-center text-base font-bold text-white shadow-lg shadow-emerald-600/25 transition-all hover:bg-emerald-700 hover:shadow-xl hover:shadow-emerald-600/30 active:scale-95 sm:w-auto"
+              >
+                {config.intro.cta}
+                <ArrowRight className="h-5 w-5" />
+              </a>
+              <button
+                type="button"
+                onClick={() => handleJumpToLead('hero_secondary_callback')}
+                className="inline-flex w-full items-center justify-center gap-2 rounded-xl border border-emerald-200 bg-white px-6 py-4 text-center text-base font-bold text-emerald-800 shadow-sm transition-all hover:border-emerald-300 hover:bg-emerald-50 active:scale-95 sm:w-auto"
+              >
+                Poproś o kontakt
+              </button>
             </div>
 
-            <div className="mt-5 max-w-xl rounded-[1.5rem] border border-emerald-100 bg-white/90 p-3 shadow-sm backdrop-blur md:p-5">
+            <p className="mt-3 max-w-xl text-sm font-semibold leading-relaxed text-slate-500">
+              Nie zapisujemy automatycznie na zabieg. Najpierw porządkujemy objawy i ustalamy sensowny kolejny krok.
+            </p>
+
+            <div className="mt-5 hidden max-w-xl rounded-[1.5rem] border border-emerald-100 bg-white/90 p-3 shadow-sm backdrop-blur md:block md:p-5">
               <div className="mb-2 flex items-center justify-between gap-3 md:mb-4 md:gap-4">
                 <div>
                   <p className="text-[11px] font-black uppercase tracking-widest text-emerald-800 md:text-xs">Twoje odpowiedzi</p>
@@ -544,8 +624,8 @@ export default function ConversationalFlow({
                         <div className="flex h-10 w-10 items-center justify-center rounded-2xl bg-emerald-50 text-sm font-black text-emerald-700 ring-1 ring-emerald-100">
                           {safeStepIndex + 1}
                         </div>
-                        <div className="text-xs font-black uppercase tracking-[0.22em] text-slate-400">
-                          Krok {safeStepIndex + 1} z {visibleSteps.length}
+                        <div className="text-xs font-black uppercase tracking-[0.22em] text-emerald-800">
+                          Krótka kwalifikacja · ok. 30 sek.
                         </div>
                       </div>
                       <h2 className="max-w-2xl text-3xl font-black leading-[0.98] tracking-[-0.04em] text-slate-950 sm:text-5xl">
@@ -558,6 +638,26 @@ export default function ConversationalFlow({
                       )}
                     </div>
 
+                    {shouldShowEarlyCallback && (
+                      <div className="mb-5 rounded-2xl border border-emerald-100 bg-emerald-50/70 p-4 shadow-sm">
+                        <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
+                          <div>
+                            <p className="text-sm font-black text-slate-950">Wolisz, żebyśmy oddzwonili i dokończyli razem?</p>
+                            <p className="mt-1 text-xs font-medium leading-relaxed text-slate-600">
+                              Zostaw numer teraz. Resztę objawów można doprecyzować podczas rozmowy.
+                            </p>
+                          </div>
+                          <button
+                            type="button"
+                            onClick={() => handleJumpToLead('early_callback')}
+                            className="inline-flex shrink-0 items-center justify-center rounded-xl border border-emerald-200 bg-white px-4 py-3 text-sm font-black text-emerald-800 shadow-sm transition hover:border-emerald-300 hover:bg-emerald-50 active:scale-95"
+                          >
+                            Zostaw numer
+                          </button>
+                        </div>
+                      </div>
+                    )}
+
                     {currentStep.type === 'choice' && currentStep.options && (
                       <div className="grid gap-3">
                         {currentStep.options.map((option, index) => {
@@ -569,7 +669,7 @@ export default function ConversationalFlow({
                             <button
                               key={option.value}
                               type="button"
-                              onClick={() => handleChoice(option.value, option.feedback)}
+                              onClick={() => handleChoice(option.value, option.feedback, index, option.urgent)}
                               className={`group relative overflow-hidden rounded-[1.25rem] border p-4 text-left shadow-sm transition-all duration-200 hover:-translate-y-0.5 hover:shadow-lg active:scale-95 sm:p-5 ${
                                 isSelected
                                   ? option.urgent
@@ -597,12 +697,6 @@ export default function ConversationalFlow({
                                     {option.description && (
                                       <span className="mt-1.5 block text-sm font-medium leading-relaxed text-slate-500">
                                         {option.description}
-                                      </span>
-                                    )}
-                                    {option.urgent && (
-                                      <span className="mt-3 inline-flex items-center gap-1.5 rounded-full border border-amber-200 bg-white px-2.5 py-1 text-[11px] font-black uppercase tracking-widest text-amber-700">
-                                        <AlertTriangle className="h-3 w-3" />
-                                        sygnał pilniejszy
                                       </span>
                                     )}
                                   </span>
@@ -741,6 +835,16 @@ export default function ConversationalFlow({
                           Wyrażam zgodę na kontakt telefoniczny w celu obsługi tego zgłoszenia.
                         </label>
 
+                        <label className="flex gap-3 rounded-2xl border border-slate-200 bg-white p-4 text-sm font-medium leading-relaxed text-slate-600">
+                          <input
+                            type="checkbox"
+                            checked={answers.consent_symptoms}
+                            onChange={(event) => setAnswer('consent_symptoms', event.target.checked)}
+                            className="mt-1 h-4 w-4 shrink-0 accent-emerald-600"
+                          />
+                          Wyrażam zgodę na przetwarzanie podanych informacji o objawach w celu kwalifikacji zgłoszenia i przygotowania kontaktu zwrotnego.
+                        </label>
+
                         {formError && <p className="text-sm font-bold text-rose-600">{formError}</p>}
                         {status === 'error' && (
                           <p className="text-sm font-bold text-rose-600">
@@ -777,6 +881,73 @@ export default function ConversationalFlow({
                 )}
               </AnimatePresence>
             </div>
+
+            <div className="mt-4 rounded-2xl border border-emerald-100 bg-white/90 p-4 shadow-sm">
+              <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
+                <div>
+                  <p className="text-sm font-black text-slate-950">Nie chcesz wypełniać wszystkich pytań?</p>
+                  <p className="mt-1 text-xs font-medium leading-relaxed text-slate-500">
+                    Możesz od razu zostawić numer. Oddzwonimy w godzinach pracy i dopytamy o najważniejsze objawy.
+                  </p>
+                </div>
+                <button
+                  type="button"
+                  onClick={() => handleJumpToLead('bottom_contact_shortcut')}
+                  className="inline-flex shrink-0 items-center justify-center rounded-xl border border-emerald-200 bg-emerald-50 px-4 py-3 text-sm font-black text-emerald-800 transition hover:border-emerald-300 hover:bg-emerald-100 active:scale-95"
+                >
+                  Przejdź do kontaktu
+                </button>
+              </div>
+            </div>
+
+            <p className="mt-3 text-center text-xs font-medium leading-relaxed text-slate-500">
+              Ta kwalifikacja nie zastępuje konsultacji lekarskiej. Pomaga przygotować kontakt zwrotny i ocenić, czy warto działać szybciej.
+            </p>
+
+            <div className="mt-5 hidden overflow-hidden rounded-[2rem] border border-emerald-100 bg-white/95 p-5 shadow-xl shadow-emerald-900/5 backdrop-blur lg:block">
+              <div className="grid gap-5 md:grid-cols-[0.9fr,1.1fr] md:items-center">
+                <div className="relative min-h-48 overflow-hidden rounded-[1.5rem] bg-gradient-to-br from-emerald-50 via-white to-cyan-50 ring-1 ring-emerald-100">
+                  <div className="absolute -right-10 -top-10 h-32 w-32 rounded-full bg-emerald-200/60 blur-2xl" />
+                  <div className="absolute bottom-0 left-0 h-24 w-full bg-gradient-to-t from-white to-transparent" />
+                  <div className="relative flex h-48 items-center justify-center">
+                    <motion.div
+                      className="relative h-28 w-28 rounded-[2rem] border border-emerald-200 bg-white shadow-2xl shadow-emerald-900/10"
+                      animate={{ y: [0, -6, 0] }}
+                      transition={{ duration: 7, repeat: Infinity, ease: 'easeInOut' }}
+                    >
+                      <div className="absolute left-5 top-5 h-11 w-11 rounded-full bg-emerald-100" />
+                      <div className="absolute right-5 top-8 h-9 w-9 rounded-full bg-cyan-100" />
+                      <div className="absolute bottom-5 left-4 h-9 w-20 rounded-full bg-slate-100" />
+                    </motion.div>
+                    <div className="absolute bottom-5 left-5 rounded-2xl border border-white bg-white/90 px-4 py-3 shadow-lg shadow-emerald-900/10">
+                      <p className="text-xs font-black uppercase tracking-widest text-emerald-800">spokojny wywiad</p>
+                      <p className="mt-1 text-sm font-bold text-slate-700">bez presji na zabieg</p>
+                    </div>
+                  </div>
+                </div>
+
+                <div>
+                  <p className="text-xs font-black uppercase tracking-widest text-emerald-800">Jak to działa?</p>
+                  <div className="mt-4 grid gap-3">
+                    {[
+                      { icon: <FileCheck className="h-4 w-4" />, title: 'Odpowiadasz na pytania', text: 'Objawy, ból, RTG i preferowany kontakt.' },
+                      { icon: <Clock className="h-4 w-4" />, title: 'Kontakt w godzinach pracy', text: CALLBACK_HOURS },
+                      { icon: <ShieldCheck className="h-4 w-4" />, title: 'Ustalany jest kolejny krok', text: 'Bez automatycznej rezerwacji zabiegu.' },
+                    ].map((item) => (
+                      <div key={item.title} className="flex gap-3 rounded-2xl border border-emerald-100 bg-emerald-50/50 p-3">
+                        <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-xl bg-white text-emerald-700 shadow-sm">
+                          {item.icon}
+                        </div>
+                        <div>
+                          <p className="text-sm font-black text-slate-950">{item.title}</p>
+                          <p className="mt-0.5 text-xs font-medium leading-relaxed text-slate-600">{item.text}</p>
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
         </section>
 
@@ -784,6 +955,25 @@ export default function ConversationalFlow({
           Kwalifikacja online nie zastępuje konsultacji lekarskiej. Kontakt zwrotny: {CALLBACK_HOURS}.
         </footer>
       </main>
+
+      <div className="fixed inset-x-0 bottom-0 z-30 border-t border-emerald-100 bg-white/95 p-3 shadow-2xl shadow-emerald-900/10 backdrop-blur lg:hidden">
+        <div className="mx-auto grid max-w-xl grid-cols-[1fr,1.1fr] gap-2">
+          <a
+            href="#triage-quiz"
+            onClick={() => trackStart('mobile_sticky_quiz')}
+            className="inline-flex items-center justify-center rounded-xl border border-emerald-200 bg-white px-3 py-3 text-center text-xs font-black text-emerald-800 shadow-sm active:scale-95"
+          >
+            Kwalifikacja
+          </a>
+          <button
+            type="button"
+            onClick={() => handleJumpToLead('mobile_sticky_callback')}
+            className="inline-flex items-center justify-center rounded-xl bg-emerald-600 px-3 py-3 text-center text-xs font-black text-white shadow-lg shadow-emerald-600/20 active:scale-95"
+          >
+            Poproś o kontakt
+          </button>
+        </div>
+      </div>
     </div>
   );
 }

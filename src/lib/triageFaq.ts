@@ -15,6 +15,16 @@ export const TRIAGE_FAQ_ITEMS = [
       'Nie zawsze. Jeśli masz aktualne zdjęcie, warto przygotować tę informację do rozmowy. Jeśli go nie masz, podczas kontaktu ustalimy, czy diagnostyka będzie potrzebna przed decyzją o dalszym postępowaniu.',
   },
   {
+    question: 'Ile może kosztować konsultacja lub usunięcie ósemki?',
+    answer:
+      'Koszt zależy od sytuacji klinicznej, diagnostyki i stopnia trudności. Formularz pomaga przygotować kontakt zwrotny, ale wycena i plan leczenia są ustalane indywidualnie po ocenie przypadku.',
+  },
+  {
+    question: 'Czy to jest wizyta prywatna czy na NFZ?',
+    answer:
+      'Ten formularz służy do kontaktu zwrotnego z gabinetem stomatologicznym w rejonie Metra Ursynów. Szczegóły dotyczące zakresu wizyty, diagnostyki i kosztów są potwierdzane podczas rozmowy.',
+  },
+  {
     question: 'Czy kwalifikacja online zastępuje konsultację lekarską?',
     answer:
       'Nie. To krótki wywiad, który pomaga uporządkować objawy, pilność i potrzebne informacje przed kontaktem zwrotnym. Nie jest diagnozą medyczną.',

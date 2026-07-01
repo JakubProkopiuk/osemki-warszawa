@@ -7,12 +7,12 @@ export const wisdomTeethFlow: FlowConfig = {
   location: 'Ursynów',
   webhookUrl: 'https://hook.eu1.make.com/k73x9s65dxykfhry5uyodhl6bg2kvkx7',
   intro: {
-    eyebrow: 'Kwalifikacja objawów online',
-    title: 'Sprawdź, jak pilny może być problem z ósemką',
-    localTitle: (localArea) => `Sprawdź, jak pilny może być problem z ósemką w okolicy ${localArea}`,
+    eyebrow: 'Ósemki Ursynów · kwalifikacja objawów online',
+    title: 'Boli ósemka na Ursynowie?',
+    localTitle: (localArea) => `Boli ósemka w okolicy ${localArea}?`,
     description:
-      'Odpowiedz na kilka pytań o ból, opuchliznę i RTG. Na tej podstawie przygotujemy kontakt zwrotny z gabinetu stomatologicznego w rejonie Metra Ursynów.',
-    cta: 'Rozpocznij darmową kwalifikację',
+      'Odpowiedz na kilka krótkich pytań i sprawdź, czy warto zacząć od konsultacji, RTG lub szybszego kontaktu z gabinetem.',
+    cta: 'Rozpocznij bezpłatną kwalifikację',
   },
   steps: [
     {
@@ -25,32 +25,32 @@ export const wisdomTeethFlow: FlowConfig = {
         {
           value: 'Boli',
           label: 'Boli',
-          description: 'Ćmienie, pulsowanie albo ból przy nagryzaniu.',
+          description: 'Czujesz ból, ćmienie, pulsowanie albo dyskomfort przy nagryzaniu.',
           feedback: 'Rozumiem. Sprawdźmy, jak pilna może być sytuacja.',
         },
         {
           value: 'Jest opuchlizna',
           label: 'Jest opuchlizna',
-          description: 'Obrzęk, stan zapalny lub narastający dyskomfort.',
+          description: 'Pojawił się obrzęk, stan zapalny lub narastający dyskomfort.',
           feedback: 'Opuchlizna może wymagać szybszej oceny. Oznaczymy to jako ważne.',
           urgent: true,
         },
         {
           value: 'Mam zalecenie od ortodonty',
           label: 'Mam zalecenie od ortodonty',
-          description: 'Ósemki mogą przeszkadzać w leczeniu ortodontycznym.',
+          description: 'Chodzi o ocenę ósemek przed lub w trakcie leczenia.',
           feedback: 'Dobrze, to pomaga zaplanować dalszy krok.',
         },
         {
           value: 'Chcę sprawdzić ósemki',
           label: 'Chcę sprawdzić ósemki',
-          description: 'Nie boli, ale chcesz ocenić sytuację.',
+          description: 'Nie musi boleć. Chcesz po prostu ocenić sytuację.',
           feedback: 'Jasne, kwalifikacja pomoże ustalić, czy potrzebne jest RTG.',
         },
         {
           value: 'Nie wiem, ale coś jest nie tak',
           label: 'Nie wiem, ale coś jest nie tak',
-          description: 'Czujesz dyskomfort, ale nie masz pewności, czy to ósemka.',
+          description: 'Czujesz dyskomfort, ale trudno określić przyczynę.',
           feedback: 'W porządku. Przejdziemy przez kilka prostych pytań.',
         },
       ],

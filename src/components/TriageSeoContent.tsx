@@ -1,4 +1,5 @@
 import Link from 'next/link';
+import { AlertTriangle, Clock, FileCheck, MapPin, ShieldCheck } from 'lucide-react';
 import type { LocationRecord } from '@/lib/clinic';
 import { TRIAGE_FAQ_ITEMS } from '@/lib/triageFaq';
 
@@ -23,20 +24,24 @@ export default function TriageSeoContent({ location, popularLocations }: TriageS
 
   const sections = [
     {
-      title: 'Kiedy warto sprawdzić pilność problemu?',
-      body: `Ból ósemki ${areaPhrase} może mieć różne przyczyny: wyrzynanie, stan zapalny dziąsła, ucisk na sąsiedni ząb albo problem z zatrzymaną ósemką. Krótka kwalifikacja pomaga zebrać najważniejsze informacje przed rozmową: gdzie boli, jak mocny jest ból, czy pojawia się opuchlizna i czy masz aktualne RTG lub CBCT.`,
+      icon: <AlertTriangle className="h-4 w-4" />,
+      title: 'Kiedy warto działać szybciej?',
+      body: `Silny ból ósemki ${areaPhrase}, opuchlizna albo trudność z otwieraniem ust to sygnały, których nie warto ignorować. Krótka kwalifikacja porządkuje objawy przed rozmową.`,
     },
     {
-      title: 'Co daje kwalifikacja online?',
-      body: 'Formularz nie stawia diagnozy i nie zapisuje automatycznie na zabieg. Jego zadaniem jest uporządkowanie zgłoszenia, wskazanie potencjalnej pilności kontaktu i przygotowanie rozmowy z gabinetem stomatologicznym w rejonie Metra Ursynów.',
+      icon: <FileCheck className="h-4 w-4" />,
+      title: 'Czy potrzebne jest RTG?',
+      body: 'Jeśli masz aktualne RTG lub CBCT, warto zaznaczyć to w formularzu. Jeśli nie, podczas kontaktu ustalimy, czy diagnostyka będzie potrzebna przed dalszą decyzją.',
     },
     {
-      title: 'Jakie objawy są najważniejsze?',
-      body: 'Największe znaczenie mają: narastający ból, opuchlizna, trudność z otwieraniem ust, ból przy nagryzaniu, nawracające stany zapalne oraz informacja, czy ósemka była już oceniana na zdjęciu. Jeśli objawy szybko się nasilają, nie warto odkładać kontaktu.',
+      icon: <Clock className="h-4 w-4" />,
+      title: 'Co dzieje się po wysłaniu?',
+      body: 'Zgłoszenie trafia do kontaktu zwrotnego w godzinach pracy. Rozmowa pomaga ustalić, czy sensowna jest konsultacja, RTG albo spokojne zaplanowanie kolejnego kroku.',
     },
     {
-      title: 'Jak wygląda kolejny krok?',
-      body: 'Po wysłaniu formularza zgłoszenie trafia do kontaktu zwrotnego w godzinach pracy. Podczas rozmowy można ustalić, czy sensowna jest konsultacja, diagnostyka obrazowa lub inny dalszy krok. Koszty i plan leczenia są omawiane indywidualnie po ocenie sytuacji.',
+      icon: <ShieldCheck className="h-4 w-4" />,
+      title: 'Czy to zapis na zabieg?',
+      body: 'Nie. Formularz służy do kwalifikacji zgłoszenia i przygotowania kontaktu. Koszty, diagnostyka i plan leczenia są omawiane dopiero po ocenie sytuacji.',
     },
   ];
 
@@ -56,6 +61,9 @@ export default function TriageSeoContent({ location, popularLocations }: TriageS
             <div className="mt-8 grid gap-4 sm:grid-cols-2">
               {sections.map((section) => (
                 <article key={section.title} className="rounded-3xl border border-emerald-100 bg-emerald-50/35 p-5 shadow-sm">
+                  <div className="mb-4 flex h-10 w-10 items-center justify-center rounded-2xl bg-white text-emerald-700 shadow-sm ring-1 ring-emerald-100">
+                    {section.icon}
+                  </div>
                   <h3 className="text-lg font-black tracking-[-0.02em] text-slate-950">{section.title}</h3>
                   <p className="mt-3 text-sm font-medium leading-relaxed text-slate-600">{section.body}</p>
                 </article>
@@ -74,6 +82,19 @@ export default function TriageSeoContent({ location, popularLocations }: TriageS
                   <p className="mt-3 text-sm font-medium leading-relaxed text-slate-600">{item.answer}</p>
                 </details>
               ))}
+            </div>
+
+            <div className="mt-8 rounded-3xl border border-emerald-100 bg-white p-5 shadow-sm">
+              <div className="mb-4 flex h-10 w-10 items-center justify-center rounded-2xl bg-emerald-50 text-emerald-700">
+                <MapPin className="h-4 w-4" />
+              </div>
+              <h3 className="text-lg font-black tracking-[-0.02em] text-slate-950">Kontakt w rejonie Ursynowa</h3>
+              <ul className="mt-4 space-y-2 text-sm font-medium leading-relaxed text-slate-600">
+                <li>Obsługa zgłoszeń: pon-pt 9:00-20:00.</li>
+                <li>Lokalizacja wizyty: okolice Metra Ursynów.</li>
+                <li>Konsultacja, RTG i dalszy krok są ustalane po kontakcie.</li>
+                <li>Zgłoszenie nie oznacza automatycznego zapisu na zabieg.</li>
+              </ul>
             </div>
 
             {relatedLocations.length > 0 && (

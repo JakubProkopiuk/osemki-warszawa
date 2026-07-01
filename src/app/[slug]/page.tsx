@@ -55,14 +55,14 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
   
   if (location.slug === 'ursynow') {
     return {
-      title: 'Sprawdź pilność problemu z ósemką na Ursynowie',
+      title: 'Boli ósemka na Ursynowie? Kwalifikacja online',
       description:
         'Odpowiedz na kilka pytań o ból, opuchliznę i RTG. Przygotujemy kontakt zwrotny z gabinetu stomatologicznego w rejonie Metra Ursynów.',
       alternates: {
         canonical,
       },
       openGraph: {
-        title: 'Sprawdź pilność problemu z ósemką na Ursynowie',
+        title: 'Boli ósemka na Ursynowie? Kwalifikacja online',
         description:
           'Krótka kwalifikacja objawów ósemki: ból, RTG, opuchlizna, pilność kontaktu i kolejny sensowny krok.',
         url: canonical,

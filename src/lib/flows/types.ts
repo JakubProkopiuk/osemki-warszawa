@@ -41,6 +41,7 @@ export type TriageAnswers = {
   name: string;
   phone: string;
   consent_contact: boolean;
+  consent_symptoms: boolean;
 };
 
 export type LeadScoringResult = {
