@@ -1,42 +1,78 @@
+import Image from 'next/image';
+
 type DentalClinicVisualProps = {
   compact?: boolean;
 };
 
+type TriageStepVisualProps = {
+  stepId: string;
+  compact?: boolean;
+};
+
+const visualByStep: Record<string, { src: string; alt: string; label: string }> = {
+  symptom: {
+    src: '/visuals/quiz-symptom.jpeg',
+    alt: 'Ilustracja anatomiczna ósemki w kości szczęki',
+    label: 'Objawy ósemki',
+  },
+  tooth_area: {
+    src: '/visuals/quiz-symptom.jpeg',
+    alt: 'Ilustracja anatomiczna ósemki w kości szczęki',
+    label: 'Lokalizacja bólu',
+  },
+  pain_score: {
+    src: '/visuals/quiz-symptom.jpeg',
+    alt: 'Ilustracja anatomiczna ósemki w kości szczęki',
+    label: 'Natężenie bólu',
+  },
+  swelling_or_limited_opening: {
+    src: '/visuals/quiz-symptom.jpeg',
+    alt: 'Ilustracja anatomiczna ósemki w kości szczęki',
+    label: 'Sygnały pilniejsze',
+  },
+  has_rtg: {
+    src: '/visuals/quiz-xray.jpeg',
+    alt: 'Monitor diagnostyczny z obrazem RTG i CBCT szczęki',
+    label: 'RTG / CBCT',
+  },
+  main_objection: {
+    src: '/visuals/success-checklist.jpeg',
+    alt: 'Nowoczesne stanowisko konsultacji stomatologicznej bez widocznego brandingu',
+    label: 'Rozmowa przed decyzją',
+  },
+  preferred_contact_time: {
+    src: '/visuals/callback-visual.jpeg',
+    alt: 'Medyczna ilustracja kontaktu zwrotnego z pacjentem',
+    label: 'Kontakt zwrotny',
+  },
+  lead_capture: {
+    src: '/visuals/callback-visual.jpeg',
+    alt: 'Medyczna ilustracja kontaktu zwrotnego z pacjentem',
+    label: 'Kontakt zwrotny',
+  },
+};
+
 export function DentalClinicVisual({ compact = false }: DentalClinicVisualProps) {
   return (
-    <div className={`relative overflow-hidden rounded-[1.75rem] border border-emerald-100 bg-gradient-to-br from-white via-emerald-50/55 to-cyan-50 p-5 shadow-xl shadow-emerald-900/5 ${compact ? 'min-h-44' : 'min-h-64'}`}>
+    <div className={`relative overflow-hidden rounded-[1.75rem] border border-emerald-100 bg-gradient-to-br from-white via-emerald-50/55 to-cyan-50 p-3 shadow-xl shadow-emerald-900/5 ${compact ? 'min-h-44' : 'min-h-64'}`}>
       <div className="absolute -right-12 -top-12 h-32 w-32 rounded-full bg-emerald-200/45 blur-2xl" />
       <div className="absolute -bottom-10 left-8 h-24 w-24 rounded-full bg-cyan-200/40 blur-2xl" />
 
-      <svg
-        viewBox="0 0 420 280"
-        role="img"
-        aria-label="Ilustracja gabinetu stomatologicznego z fotelem, lampą i panelem RTG"
-        className="relative mx-auto h-auto w-full max-w-md"
-      >
-        <rect x="26" y="40" width="368" height="212" rx="34" fill="#ffffff" opacity="0.72" />
-        <rect x="48" y="62" width="108" height="96" rx="20" fill="#ecfdf5" stroke="#a7f3d0" strokeWidth="3" />
-        <path d="M72 125c18-22 38-22 58 0" fill="none" stroke="#0f766e" strokeWidth="7" strokeLinecap="round" />
-        <circle cx="91" cy="97" r="10" fill="#99f6e4" />
-        <circle cx="124" cy="97" r="10" fill="#bbf7d0" />
-        <rect x="66" y="142" width="70" height="8" rx="4" fill="#ccfbf1" />
-
-        <path d="M284 51c-35 8-58 29-66 62" fill="none" stroke="#0f766e" strokeWidth="10" strokeLinecap="round" />
-        <rect x="270" y="38" width="62" height="28" rx="14" fill="#064e3b" />
-        <ellipse cx="304" cy="68" rx="43" ry="19" fill="#ecfeff" stroke="#0f766e" strokeWidth="5" />
-        <path d="M286 73h36" stroke="#99f6e4" strokeWidth="6" strokeLinecap="round" />
-
-        <path d="M126 190c18-31 50-47 94-42l57 7c20 2 32 16 30 34-3 20-19 31-42 28l-125-14c-13-2-20-6-14-13Z" fill="#059669" />
-        <path d="M170 151c8-31 31-52 70-64 15-5 31 2 37 16l22 52-65 2c-28 1-49-1-64-6Z" fill="#34d399" />
-        <path d="M221 218v34" stroke="#0f766e" strokeWidth="10" strokeLinecap="round" />
-        <path d="M178 252h86" stroke="#0f766e" strokeWidth="10" strokeLinecap="round" />
-        <path d="M119 199l-36 38" stroke="#0f766e" strokeWidth="9" strokeLinecap="round" />
-        <path d="M105 236h45" stroke="#0f766e" strokeWidth="9" strokeLinecap="round" />
-
-        <rect x="302" y="170" width="62" height="46" rx="14" fill="#ffffff" stroke="#a7f3d0" strokeWidth="3" />
-        <path d="M318 191h31" stroke="#0f766e" strokeWidth="5" strokeLinecap="round" />
-        <path d="M319 204h19" stroke="#99f6e4" strokeWidth="5" strokeLinecap="round" />
-      </svg>
+      <div className={`relative overflow-hidden rounded-[1.35rem] bg-emerald-950 ${compact ? 'aspect-[16/10]' : 'aspect-[4/3]'}`}>
+        <Image
+          src="/visuals/hero-dental-suite.jpeg"
+          alt="Nowoczesny gabinet stomatologiczny w jasnej, sterylnej aranżacji bez widocznego brandingu"
+          fill
+          sizes={compact ? '(max-width: 1024px) 90vw, 340px' : '(max-width: 1024px) 90vw, 520px'}
+          className="object-cover"
+          priority={!compact}
+        />
+        <div className="absolute inset-0 bg-gradient-to-t from-emerald-950/55 via-transparent to-white/5" />
+        <div className="absolute bottom-3 left-3 right-3 rounded-2xl border border-white/20 bg-white/90 p-3 shadow-lg backdrop-blur">
+          <p className="text-xs font-black uppercase tracking-widest text-emerald-800">Rejon Metra Ursynów</p>
+          <p className="mt-1 text-sm font-bold leading-snug text-slate-800">Konsultacja, diagnostyka i kolejny krok ustalane po kontakcie.</p>
+        </div>
+      </div>
 
       <div className="relative mt-4 grid gap-2 sm:grid-cols-3">
         {[
@@ -48,6 +84,42 @@ export function DentalClinicVisual({ compact = false }: DentalClinicVisualProps)
             {label}
           </div>
         ))}
+      </div>
+    </div>
+  );
+}
+
+export function TriageStepVisual({ stepId, compact = false }: TriageStepVisualProps) {
+  const visual = visualByStep[stepId] ?? visualByStep.symptom;
+
+  return (
+    <div className={`relative overflow-hidden rounded-[1.35rem] border border-emerald-100 bg-emerald-50 shadow-sm ${compact ? 'h-24 w-32' : 'h-36 w-44'}`}>
+      <Image
+        src={visual.src}
+        alt={visual.alt}
+        fill
+        sizes={compact ? '128px' : '176px'}
+        className="object-cover"
+      />
+      <div className="absolute inset-0 bg-gradient-to-t from-emerald-950/55 via-transparent to-transparent" />
+      <span className="absolute bottom-2 left-2 right-2 rounded-full bg-white/90 px-2 py-1 text-center text-[10px] font-black uppercase tracking-widest text-emerald-800 shadow-sm backdrop-blur">
+        {visual.label}
+      </span>
+    </div>
+  );
+}
+
+export function SuccessVisual() {
+  return (
+    <div className="mx-auto mb-7 max-w-sm overflow-hidden rounded-[1.5rem] border border-emerald-100 bg-emerald-50 p-2 shadow-xl shadow-emerald-900/5">
+      <div className="relative aspect-[16/9] overflow-hidden rounded-[1.15rem] bg-emerald-950">
+        <Image
+          src="/visuals/success-checklist.jpeg"
+          alt="Nowoczesne stanowisko konsultacji stomatologicznej przygotowane do omówienia kolejnego kroku"
+          fill
+          sizes="(max-width: 640px) 90vw, 384px"
+          className="object-cover"
+        />
       </div>
     </div>
   );

@@ -17,7 +17,7 @@ import {
 } from 'lucide-react';
 import { calculateWisdomTeethLead } from '@/lib/flows/scoring';
 import type { FlowConfig, LeadScoringResult, TriageAnswers } from '@/lib/flows/types';
-import { DentalClinicVisual } from './DentalTrustVisuals';
+import { DentalClinicVisual, SuccessVisual, TriageStepVisual } from './DentalTrustVisuals';
 
 type ConversationalFlowProps = {
   config: FlowConfig;
@@ -574,13 +574,14 @@ export default function ConversationalFlow({
                     exit={{ opacity: 0, y: -18, scale: 0.98 }}
                     className="relative py-8 text-center sm:py-10"
                   >
+                    <SuccessVisual />
                     <motion.div
                       initial={{ scale: 0.72, rotate: -10 }}
                       animate={{ scale: 1, rotate: 0 }}
                       transition={{ type: 'spring', stiffness: 230, damping: 14 }}
-                      className="mx-auto mb-7 flex h-20 w-20 items-center justify-center rounded-full border border-emerald-200 bg-emerald-50 text-emerald-700 shadow-2xl shadow-emerald-900/10"
+                      className="mx-auto mb-6 flex h-16 w-16 items-center justify-center rounded-full border border-emerald-200 bg-emerald-50 text-emerald-700 shadow-2xl shadow-emerald-900/10"
                     >
-                      <CheckCircle2 className="h-10 w-10" />
+                      <CheckCircle2 className="h-8 w-8" />
                     </motion.div>
                     <h2 className="mx-auto max-w-lg text-4xl font-black leading-tight tracking-[-0.035em] text-slate-950">
                       {finalMessage.title}
@@ -634,14 +635,21 @@ export default function ConversationalFlow({
                           Krótka kwalifikacja · ok. 30 sek.
                         </div>
                       </div>
-                      <h2 className="max-w-2xl text-3xl font-black leading-[0.98] tracking-[-0.04em] text-slate-950 sm:text-5xl">
-                        {currentStep.question}
-                      </h2>
-                      {currentStep.helper && (
-                        <p className="mt-3 max-w-xl text-sm font-medium leading-relaxed text-slate-500 sm:mt-4 sm:text-base">
-                          {currentStep.helper}
-                        </p>
-                      )}
+                      <div className="flex items-start justify-between gap-5">
+                        <div>
+                          <h2 className="max-w-2xl text-3xl font-black leading-[0.98] tracking-[-0.04em] text-slate-950 sm:text-5xl">
+                            {currentStep.question}
+                          </h2>
+                          {currentStep.helper && (
+                            <p className="mt-3 max-w-xl text-sm font-medium leading-relaxed text-slate-500 sm:mt-4 sm:text-base">
+                              {currentStep.helper}
+                            </p>
+                          )}
+                        </div>
+                        <div className="hidden shrink-0 md:block">
+                          <TriageStepVisual stepId={currentStep.id} />
+                        </div>
+                      </div>
                     </div>
 
                     {shouldShowEarlyCallback && (
@@ -770,6 +778,9 @@ export default function ConversationalFlow({
 
                     {currentStep.type === 'lead' && (
                       <form onSubmit={handleSubmit} className="space-y-4">
+                        <div className="md:hidden">
+                          <TriageStepVisual stepId={currentStep.id} compact />
+                        </div>
                         <div
                           className={`rounded-[1.35rem] border p-4 ${
                             isUrgent
