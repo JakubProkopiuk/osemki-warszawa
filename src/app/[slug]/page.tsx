@@ -13,7 +13,7 @@ export const dynamicParams = true;
 type LocationData = LocationRecord;
 
 const allLocations = locations as LocationData[];
-const INDEXED_URSYNOW_LOCATION_LIMIT = 60;
+const INDEXED_URSYNOW_LOCATION_LIMIT = 18;
 const isUrsynowLocation = (loc: LocationData) => loc.hubSlug === 'ursynow';
 const indexedUrsynowLocations = [...allLocations]
   .filter(isUrsynowLocation)
@@ -51,8 +51,6 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
   }
 
   const canonical = getCanonical(location, allLocations);
-  const travelTime = location.czas_dojazdu || 'kilkanaście minut';
-  
   if (location.slug === 'ursynow') {
     return {
       title: 'Boli ósemka na Ursynowie? Kwalifikacja online',
@@ -75,7 +73,7 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
 
   return {
     title: `Problem z ósemką ${location.nazwa_lokalizacji}? Kwalifikacja Ursynów`,
-    description: `Sprawdź, jak pilny może być problem z ósemką w okolicy ${location.nazwa_lokalizacji}. Krótka kwalifikacja objawów, RTG i kontakt zwrotny z rejonu Metra Ursynów. Dojazd: ${travelTime}.`,
+    description: `Sprawdź, jak pilny może być problem z ósemką w okolicy ${location.nazwa_lokalizacji}. Krótka kwalifikacja objawów, RTG i kontakt zwrotny z rejonu Metra Ursynów.`,
     alternates: {
       canonical,
     },

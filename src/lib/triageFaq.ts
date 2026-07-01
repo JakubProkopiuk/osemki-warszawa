@@ -22,7 +22,7 @@ export const TRIAGE_FAQ_ITEMS = [
   {
     question: 'Czy to jest wizyta prywatna czy na NFZ?',
     answer:
-      'Ten formularz służy do kontaktu zwrotnego z gabinetem stomatologicznym w rejonie Metra Ursynów. Szczegóły dotyczące zakresu wizyty, diagnostyki i kosztów są potwierdzane podczas rozmowy.',
+      'Formularz nie służy do rejestracji świadczeń NFZ. Dotyczy kontaktu zwrotnego w sprawie prywatnej konsultacji lub diagnostyki w rejonie Metra Ursynów. Szczegóły zakresu wizyty i kosztów są potwierdzane podczas rozmowy.',
   },
   {
     question: 'Czy kwalifikacja online zastępuje konsultację lekarską?',

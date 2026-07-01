@@ -1,6 +1,7 @@
 'use client';
 
 import { useState } from 'react';
+import Link from 'next/link';
 import { AnimatePresence, motion } from 'framer-motion';
 import { track } from '@vercel/analytics';
 import {
@@ -832,7 +833,12 @@ export default function ConversationalFlow({
                             onChange={(event) => setAnswer('consent_contact', event.target.checked)}
                             className="mt-1 h-4 w-4 shrink-0 accent-emerald-600"
                           />
-                          Wyrażam zgodę na kontakt telefoniczny w celu obsługi tego zgłoszenia.
+                          <span>
+                            Wyrażam zgodę na kontakt telefoniczny w celu obsługi tego zgłoszenia.{' '}
+                            <Link href="/polityka-prywatnosci" className="font-bold text-emerald-700 underline underline-offset-2">
+                              Polityka prywatności
+                            </Link>
+                          </span>
                         </label>
 
                         <label className="flex gap-3 rounded-2xl border border-slate-200 bg-white p-4 text-sm font-medium leading-relaxed text-slate-600">
@@ -842,7 +848,12 @@ export default function ConversationalFlow({
                             onChange={(event) => setAnswer('consent_symptoms', event.target.checked)}
                             className="mt-1 h-4 w-4 shrink-0 accent-emerald-600"
                           />
-                          Wyrażam zgodę na przetwarzanie podanych informacji o objawach w celu kwalifikacji zgłoszenia i przygotowania kontaktu zwrotnego.
+                          <span>
+                            Wyrażam zgodę na przetwarzanie podanych informacji o objawach w celu kwalifikacji zgłoszenia i przygotowania kontaktu zwrotnego.{' '}
+                            <Link href="/polityka-prywatnosci" className="font-bold text-emerald-700 underline underline-offset-2">
+                              Polityka prywatności
+                            </Link>
+                          </span>
                         </label>
 
                         {formError && <p className="text-sm font-bold text-rose-600">{formError}</p>}
@@ -952,7 +963,10 @@ export default function ConversationalFlow({
         </section>
 
         <footer className="pb-4 text-center text-[11px] font-semibold leading-relaxed text-slate-400">
-          Kwalifikacja online nie zastępuje konsultacji lekarskiej. Kontakt zwrotny: {CALLBACK_HOURS}.
+          Kwalifikacja online nie zastępuje konsultacji lekarskiej. Kontakt zwrotny: {CALLBACK_HOURS}.{' '}
+          <Link href="/polityka-prywatnosci" className="font-bold text-emerald-700 underline underline-offset-2">
+            Polityka prywatności
+          </Link>
         </footer>
       </main>
 

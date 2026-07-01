@@ -58,6 +58,17 @@ export default function TriageSeoContent({ location, popularLocations }: TriageS
               Ten krótki wywiad jest przygotowany dla osób, które chcą ocenić, czy problem z ósemką może wymagać konsultacji, RTG albo pilniejszego kontaktu zwrotnego.
             </p>
 
+            {location.slug !== 'home' && location.slug !== 'ursynow' && (
+              <div className="mt-6 rounded-3xl border border-cyan-100 bg-cyan-50/50 p-5 shadow-sm">
+                <h3 className="text-lg font-black tracking-[-0.02em] text-slate-950">
+                  Lokalny kontekst: {location.nazwa_lokalizacji}
+                </h3>
+                <p className="mt-3 text-sm font-medium leading-relaxed text-slate-600">
+                  Jeśli jesteś w okolicy {location.nazwa_lokalizacji}, formularz pomaga zebrać objawy przed kontaktem z gabinetem w rejonie Metra Ursynów. W rozmowie można odnieść się do najbliższego punktu orientacyjnego: {location.punkt_orientacyjny || 'Metro Ursynów'}.
+                </p>
+              </div>
+            )}
+
             <div className="mt-8 grid gap-4 sm:grid-cols-2">
               {sections.map((section) => (
                 <article key={section.title} className="rounded-3xl border border-emerald-100 bg-emerald-50/35 p-5 shadow-sm">

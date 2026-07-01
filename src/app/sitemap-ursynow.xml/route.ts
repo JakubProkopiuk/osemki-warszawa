@@ -3,7 +3,7 @@ import locations from '../../data/locations.json';
 import { getLocationSearchVolume, type LocationRecord } from '@/lib/clinic';
 
 const BASE_URL = 'https://www.osemki-warszawa.pl';
-const INDEXED_URSYNOW_LOCATION_LIMIT = 60;
+const INDEXED_URSYNOW_LOCATION_LIMIT = 18;
 
 export function GET() {
   const urls = (locations as LocationRecord[])

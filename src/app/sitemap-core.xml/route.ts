@@ -15,6 +15,11 @@ export function GET() {
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
+  <url>
+    <loc>${BASE_URL}/polityka-prywatnosci</loc>
+    <changefreq>yearly</changefreq>
+    <priority>0.2</priority>
+  </url>
 </urlset>`;
 
   return new NextResponse(xml, {

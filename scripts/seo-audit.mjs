@@ -6,12 +6,14 @@ const triageClientPath = new URL('../src/components/TriageFlowClient.tsx', impor
 const layoutPath = new URL('../src/app/layout.tsx', import.meta.url);
 const schemaPath = new URL('../src/lib/generateSchema.ts', import.meta.url);
 const flowPath = new URL('../src/components/ConversationalFlow.tsx', import.meta.url);
+const privacyPath = new URL('../src/app/polityka-prywatnosci/page.tsx', import.meta.url);
 const wisdomTeethFlowPath = new URL('../src/lib/flows/wisdomTeethFlow.ts', import.meta.url);
 const scoringPath = new URL('../src/lib/flows/scoring.ts', import.meta.url);
 const robotsPath = new URL('../public/robots.txt', import.meta.url);
 const sitemapIndexPath = new URL('../src/app/sitemap.xml/route.ts', import.meta.url);
 const sitemapUrsynowPath = new URL('../src/app/sitemap-ursynow.xml/route.ts', import.meta.url);
 const locationsPath = new URL('../src/data/locations.json', import.meta.url);
+const nextConfigPath = new URL('../next.config.ts', import.meta.url);
 
 const pageSource = fs.readFileSync(pagePath, 'utf-8');
 const clientSource = fs.readFileSync(clientPath, 'utf-8');
@@ -19,11 +21,13 @@ const triageClientSource = fs.readFileSync(triageClientPath, 'utf-8');
 const layoutSource = fs.readFileSync(layoutPath, 'utf-8');
 const schemaSource = fs.readFileSync(schemaPath, 'utf-8');
 const flowSource = fs.readFileSync(flowPath, 'utf-8');
+const privacySource = fs.readFileSync(privacyPath, 'utf-8');
 const wisdomTeethFlowSource = fs.readFileSync(wisdomTeethFlowPath, 'utf-8');
 const scoringSource = fs.readFileSync(scoringPath, 'utf-8');
 const robotsSource = fs.readFileSync(robotsPath, 'utf-8');
 const sitemapIndexSource = fs.readFileSync(sitemapIndexPath, 'utf-8');
 const sitemapUrsynowSource = fs.readFileSync(sitemapUrsynowPath, 'utf-8');
+const nextConfigSource = fs.readFileSync(nextConfigPath, 'utf-8');
 const locations = JSON.parse(fs.readFileSync(locationsPath, 'utf-8'));
 const faqCoverage =
   locations.length > 0
@@ -101,11 +105,31 @@ const checks = [
       !sitemapIndexSource.includes('/sitemap-ochota.xml') &&
       sitemapIndexSource.includes('/sitemap-ursynow.xml') &&
       sitemapUrsynowSource.includes("loc.hubSlug === 'ursynow'") &&
-      sitemapUrsynowSource.includes('INDEXED_URSYNOW_LOCATION_LIMIT'),
+      sitemapUrsynowSource.includes('INDEXED_URSYNOW_LOCATION_LIMIT') &&
+      sitemapUrsynowSource.includes('= 18'),
   },
   {
     name: 'FAQ source is robust (dataset or schema fallback)',
     pass: faqCoverage === 1 || hasSchemaFaqFallback,
+  },
+  {
+    name: 'Privacy policy is linked near medical lead capture',
+    pass:
+      privacySource.includes('Polityka prywatności') &&
+      flowSource.includes('/polityka-prywatnosci') &&
+      flowSource.includes('consent_symptoms'),
+  },
+  {
+    name: 'Local landing metadata avoids travel-time placeholders',
+    pass: !pageSource.includes('Dojazd: ${travelTime}') && !pageSource.includes('zależnie od lokalizacji'),
+  },
+  {
+    name: 'Legacy local URLs redirect to current Ursynów pages',
+    pass:
+      nextConfigSource.includes("source: '/ulica-:slug'") &&
+      nextConfigSource.includes("destination: '/ursynow'") &&
+      nextConfigSource.includes("source: `/ulica-${slug}`") &&
+      nextConfigSource.includes("destination: `/ul-${slug}`"),
   },
 ];
 
