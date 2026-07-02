@@ -122,14 +122,15 @@ const checks = [
   {
     name: 'Wisdom teeth scoring has urgent routing',
     pass:
-      scoringSource.includes('answers.pain_score >= 7') &&
+      scoringSource.includes("answers.preferred_contact_time === 'Jak najszybciej'") &&
       scoringSource.includes("urgentLabel: urgencyBand === 'high' ? 'PILNE' : null"),
   },
   {
     name: 'Wisdom teeth flow uses expected conversion variant',
     pass:
       wisdomTeethFlowSource.includes("variant: 'clinical_triage'") &&
-      wisdomTeethFlowSource.includes('Co się dzieje z ósemką?'),
+      wisdomTeethFlowSource.includes('Czego dotyczy zgłoszenie?') &&
+      !wisdomTeethFlowSource.includes('W skali od 1 do 10'),
   },
   {
     name: 'Layout avoids map preconnects',

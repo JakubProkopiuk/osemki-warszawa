@@ -27,7 +27,7 @@ type ConversationalFlowProps = {
 };
 
 const initialAnswers: TriageAnswers = {
-  pain_score: 5,
+  pain_score: 0,
   name: '',
   phone: '',
   consent_contact: false,
@@ -241,11 +241,6 @@ export default function ConversationalFlow({
 
     const nextAnswers = { ...answers, [currentStep.id]: value } as TriageAnswers;
 
-    if (currentStep.id === 'symptom') {
-      nextAnswers.swelling_or_limited_opening =
-        value === 'Jest opuchlizna' ? 'Tak, jest opuchlizna' : undefined;
-    }
-
     setAnswers(nextAnswers);
     setFeedback(optionFeedback ?? null);
     trackTriageEvent('triage_step_answered', {
@@ -306,7 +301,7 @@ export default function ConversationalFlow({
     const toothArea = answers.tooth_area ?? 'brak informacji';
     const rtg = answers.has_rtg ?? 'brak informacji';
     const mainObjection = answers.main_objection ?? 'pominięto lub brak informacji';
-    const trelloCardTitle = `${result.urgencyBand === 'high' ? 'PRIORYTET | ' : ''}Ósemka | ${leadId} | Ból ${answers.pain_score}/10 | ${answers.name} | ${contactTime}`;
+    const trelloCardTitle = `${result.urgencyBand === 'high' ? 'PRIORYTET | ' : ''}Ósemka | ${leadId} | ${symptom} | ${answers.name} | ${contactTime}`;
     const trelloDescription = [
       `LEAD ID: ${leadId}`,
       `PACJENT: ${answers.name}`,
@@ -314,7 +309,7 @@ export default function ConversationalFlow({
       '',
       `OBJAW: ${symptom}`,
       `MIEJSCE: ${toothArea}`,
-      `BÓL: ${answers.pain_score}/10`,
+      `BÓL: ${answers.pain_score ? `${answers.pain_score}/10` : 'nie zbierano w formularzu MVP'}`,
       `OPUCHLIZNA / OTWIERANIE UST: ${answers.swelling_or_limited_opening ?? 'brak informacji'}`,
       `RTG: ${rtg}`,
       `OBAWA: ${mainObjection}`,
@@ -348,7 +343,7 @@ export default function ConversationalFlow({
           local_area: localArea,
           symptom: answers.symptom ?? null,
           tooth_area: answers.tooth_area ?? null,
-          pain_score: answers.pain_score,
+          pain_score: answers.pain_score || null,
           swelling_or_limited_opening: answers.swelling_or_limited_opening ?? null,
           has_rtg: answers.has_rtg ?? null,
           main_objection: answers.main_objection ?? null,
@@ -368,8 +363,8 @@ export default function ConversationalFlow({
           trello_description: trelloDescription,
           reason: answers.symptom ?? null,
           toothArea: answers.tooth_area ?? null,
-          painScore: answers.pain_score,
-          pain: answers.pain_score,
+          painScore: answers.pain_score || null,
+          pain: answers.pain_score || null,
           hasRTG: answers.has_rtg ?? null,
           biggestFear: answers.main_objection ?? null,
           preferredContactTime: answers.preferred_contact_time ?? null,
@@ -405,9 +400,7 @@ export default function ConversationalFlow({
   };
 
   const summary = [
-    { label: 'Objaw', value: answers.symptom },
-    { label: 'Miejsce', value: answers.tooth_area },
-    { label: 'Ból', value: safeStepIndex >= 2 ? `${answers.pain_score}/10` : null },
+    { label: 'Zgłoszenie', value: answers.symptom },
     { label: 'RTG', value: answers.has_rtg },
     { label: 'Kontakt', value: answers.preferred_contact_time },
   ].filter((item): item is { label: string; value: string } => Boolean(item.value));
@@ -464,7 +457,7 @@ export default function ConversationalFlow({
                   <MapPin className="h-3.5 w-3.5" />
                   Ursynów, Natolin, Kabaty, Stokłosy
                 </span>
-                <span className="rounded-full bg-slate-50 px-3 py-1.5">Objawy · RTG · kolejny krok</span>
+                <span className="rounded-full bg-slate-50 px-3 py-1.5">Zgłoszenie · RTG · kontakt</span>
               </div>
             </div>
 
@@ -511,7 +504,7 @@ export default function ConversationalFlow({
               <div className="mb-2 flex items-center justify-between gap-3 md:mb-4 md:gap-4">
                 <div>
                   <p className="text-[11px] font-black uppercase tracking-widest text-emerald-800 md:text-xs">Twoje odpowiedzi</p>
-                  <p className="mt-1 hidden text-sm font-semibold text-slate-700 md:block">Pomagają przygotować kontakt zwrotny</p>
+                  <p className="mt-1 hidden text-sm font-semibold text-slate-700 md:block">Pomagają przygotować przekazanie zgłoszenia</p>
                 </div>
                 <span className={`rounded-full border px-2 py-1 text-[10px] font-black md:px-3 md:py-1.5 md:text-xs ${urgencyTone.badge}`}>
                   {getUrgencyCopy(scoring)}
@@ -925,7 +918,7 @@ export default function ConversationalFlow({
                 <div>
                   <p className="text-sm font-black text-slate-950">Nie chcesz wypełniać wszystkich pytań?</p>
                   <p className="mt-1 text-xs font-medium leading-relaxed text-slate-500">
-                    Możesz od razu zostawić numer. Oddzwonimy w godzinach pracy i dopytamy o najważniejsze objawy.
+                    Możesz od razu zostawić numer. Współpracujący gabinet może oddzwonić w godzinach pracy i dopytać o szczegóły.
                   </p>
                 </div>
                 <button
@@ -939,7 +932,7 @@ export default function ConversationalFlow({
             </div>
 
             <p className="mt-3 text-center text-xs font-medium leading-relaxed text-slate-500">
-              Ta kwalifikacja nie zastępuje konsultacji lekarskiej. Pomaga przygotować kontakt zwrotny i ocenić, czy warto działać szybciej.
+              Ta kwalifikacja nie zastępuje konsultacji lekarskiej. Pomaga przygotować zgłoszenie do kontaktu zwrotnego.
             </p>
 
             <div className="mt-5 hidden overflow-hidden rounded-[2rem] border border-emerald-100 bg-white/95 p-5 shadow-xl shadow-emerald-900/5 backdrop-blur lg:block">
@@ -949,7 +942,7 @@ export default function ConversationalFlow({
                   <p className="text-xs font-black uppercase tracking-widest text-emerald-800">Jak to działa?</p>
                   <div className="mt-4 grid gap-3">
                     {[
-                      { icon: <FileCheck className="h-4 w-4" />, title: 'Wysyłasz zgłoszenie', text: 'Objawy, RTG i preferowany kontakt.' },
+                      { icon: <FileCheck className="h-4 w-4" />, title: 'Wysyłasz zgłoszenie', text: 'Powód kontaktu, RTG i preferowana pora rozmowy.' },
                       { icon: <Clock className="h-4 w-4" />, title: 'Gabinet może oddzwonić', text: CALLBACK_HOURS },
                       { icon: <ShieldCheck className="h-4 w-4" />, title: 'Decyzja po konsultacji', text: 'Bez diagnozy online i automatycznej rezerwacji.' },
                     ].map((item) => (

@@ -129,21 +129,21 @@ export function DentalProcessVisualStrip() {
   const items = [
     {
       title: 'Wywiad objawów',
-      text: 'Ból, opuchlizna, RTG i preferowany kontakt.',
+      text: 'Ogólny powód zgłoszenia, RTG i preferowany kontakt.',
       icon: (
         <path d="M22 74h76M22 102h54M22 130h64M142 72l16 16 32-38" stroke="currentColor" strokeWidth="10" strokeLinecap="round" strokeLinejoin="round" />
       ),
     },
     {
       title: 'Ocena pilności',
-      text: 'Sygnały pilniejsze są oznaczane w zgłoszeniu.',
+      text: 'Preferencja szybkiego kontaktu jest oznaczana w zgłoszeniu.',
       icon: (
         <path d="M105 36 30 164h150L105 36Zm0 45v35m0 30h.1" stroke="currentColor" strokeWidth="11" strokeLinecap="round" strokeLinejoin="round" />
       ),
     },
     {
       title: 'Kontakt zwrotny',
-      text: 'Rozmowa pomaga ustalić sensowny następny krok.',
+      text: 'Placówka partnerska może oddzwonić i ustalić możliwy termin.',
       icon: (
         <path d="M52 58h106c15 0 27 12 27 27v42c0 15-12 27-27 27H91l-39 30v-30H42c-15 0-27-12-27-27V85c0-15 12-27 27-27Z" stroke="currentColor" strokeWidth="10" strokeLinejoin="round" />
       ),

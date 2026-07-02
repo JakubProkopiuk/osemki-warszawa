@@ -15,8 +15,8 @@ const getAreaPhrase = (location: LocationRecord) => {
 };
 
 const getAreaHeading = (location: LocationRecord) => {
-  if (location.slug === 'home' || location.slug === 'ursynow') return 'Kwalifikacja objawów ósemki na Ursynowie';
-  return `Kwalifikacja objawów ósemki ${location.nazwa_lokalizacji}`;
+  if (location.slug === 'home' || location.slug === 'ursynow') return 'Kwalifikacja zgłoszenia w sprawie ósemki na Ursynowie';
+  return `Kwalifikacja zgłoszenia w sprawie ósemki ${location.nazwa_lokalizacji}`;
 };
 
 export default function TriageSeoContent({ location, popularLocations }: TriageSeoContentProps) {
@@ -27,7 +27,7 @@ export default function TriageSeoContent({ location, popularLocations }: TriageS
     {
       icon: <AlertTriangle className="h-4 w-4" />,
       title: 'Kiedy warto działać szybciej?',
-      body: `Silny ból ósemki ${areaPhrase}, opuchlizna albo trudność z otwieraniem ust to sygnały, których nie warto ignorować. Krótka kwalifikacja porządkuje objawy przed rozmową.`,
+      body: `Jeśli sprawa z ósemką ${areaPhrase} wymaga szybszego kontaktu, zaznacz to w formularzu. Przy gorączce, narastającej opuchliźnie albo trudnościach z oddychaniem lub połykaniem nie czekaj na formularz.`,
     },
     {
       icon: <FileCheck className="h-4 w-4" />,
@@ -37,12 +37,12 @@ export default function TriageSeoContent({ location, popularLocations }: TriageS
     {
       icon: <Clock className="h-4 w-4" />,
       title: 'Co dzieje się po wysłaniu?',
-      body: 'Zgłoszenie trafia do kontaktu zwrotnego w godzinach pracy. Rozmowa pomaga ustalić, czy sensowna jest konsultacja, RTG albo spokojne zaplanowanie kolejnego kroku.',
+      body: 'Zgłoszenie może zostać przekazane do współpracującego gabinetu na Ursynowie. Recepcja może oddzwonić w godzinach pracy i ustalić możliwy termin kontaktu lub konsultacji.',
     },
     {
       icon: <ShieldCheck className="h-4 w-4" />,
       title: 'Czy to zapis na zabieg?',
-      body: 'Nie. Formularz służy do kwalifikacji zgłoszenia i przygotowania kontaktu. Koszty, diagnostyka i plan leczenia są omawiane dopiero po ocenie sytuacji.',
+      body: 'Nie. Formularz służy do przekazania zgłoszenia i przygotowania kontaktu. Koszty, diagnostyka i plan leczenia są omawiane dopiero po konsultacji z lekarzem.',
     },
   ];
 
@@ -56,8 +56,25 @@ export default function TriageSeoContent({ location, popularLocations }: TriageS
               {getAreaHeading(location)}
             </h2>
             <p className="mt-4 max-w-3xl text-base font-medium leading-relaxed text-slate-600">
-              Ten krótki wywiad jest przygotowany dla osób, które chcą ocenić, czy problem z ósemką może wymagać konsultacji, RTG albo pilniejszego kontaktu zwrotnego.
+              Ten krótki formularz jest przygotowany dla osób, które chcą przekazać zgłoszenie w sprawie ósemki do kontaktu zwrotnego z placówką partnerską na Ursynowie.
             </p>
+
+            <div className="mt-6 rounded-3xl border border-emerald-100 bg-white p-5 shadow-sm">
+              <h3 className="text-lg font-black tracking-[-0.02em] text-slate-950">Jak działa ten serwis?</h3>
+              <div className="mt-4 grid gap-3 text-sm font-medium leading-relaxed text-slate-600 sm:grid-cols-2">
+                <p>Wypełniasz krótki formularz kontaktowy dotyczący konsultacji w sprawie ósemki.</p>
+                <p>Zgłoszenie może zostać przekazane do współpracującego gabinetu stomatologicznego na Ursynowie.</p>
+                <p>Recepcja może oddzwonić w godzinach pracy i ustalić możliwy termin wizyty.</p>
+                <p>Serwis nie świadczy usług medycznych, nie diagnozuje i nie rezerwuje automatycznie zabiegu.</p>
+              </div>
+            </div>
+
+            <div className="mt-6 rounded-3xl border border-cyan-100 bg-cyan-50/50 p-5 shadow-sm">
+              <h3 className="text-lg font-black tracking-[-0.02em] text-slate-950">Co wpływa na koszt?</h3>
+              <p className="mt-3 text-sm font-medium leading-relaxed text-slate-600">
+                Koszt konsultacji lub usunięcia ósemki zależy między innymi od diagnostyki, położenia zęba, stopnia trudności i decyzji lekarza po badaniu. Formularz nie podaje automatycznej wyceny, bo bez konsultacji i analizy RTG/CBCT byłaby ona nieprecyzyjna.
+              </p>
+            </div>
 
             {location.slug !== 'home' && location.slug !== 'ursynow' && (
               <div className="mt-6 rounded-3xl border border-cyan-100 bg-cyan-50/50 p-5 shadow-sm">
