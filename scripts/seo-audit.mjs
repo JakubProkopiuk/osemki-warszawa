@@ -115,6 +115,8 @@ const checks = [
     name: 'Conversational flow captures lead and UTM context',
     pass:
       flowSource.includes('consent_contact') &&
+      flowSource.includes('lead_id') &&
+      flowSource.includes('reception_status') &&
       flowSource.includes("params.get('utm_source')") &&
       flowSource.includes('lead_score') &&
       flowSource.includes('urgency_band'),

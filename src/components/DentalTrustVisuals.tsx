@@ -69,7 +69,10 @@ export function DentalClinicVisual({ compact = false }: DentalClinicVisualProps)
         />
         <div className="absolute inset-0 bg-gradient-to-t from-emerald-950/55 via-transparent to-white/5" />
         <div className="absolute bottom-3 left-3 right-3 rounded-2xl border border-white/20 bg-white/90 p-3 shadow-lg backdrop-blur">
-          <p className="text-xs font-black uppercase tracking-widest text-emerald-800">Rejon Metra Ursynów</p>
+          <div className="flex items-center justify-between gap-3">
+            <p className="text-xs font-black uppercase tracking-widest text-emerald-800">Rejon Metra Ursynów</p>
+            <span className="rounded-full bg-slate-100 px-2 py-1 text-[9px] font-black uppercase tracking-widest text-slate-500">Zdjęcie ilustracyjne</span>
+          </div>
           <p className="mt-1 text-sm font-bold leading-snug text-slate-800">Konsultacja, diagnostyka i kolejny krok ustalane po kontakcie.</p>
         </div>
       </div>
@@ -105,6 +108,11 @@ export function TriageStepVisual({ stepId, compact = false }: TriageStepVisualPr
       <span className="absolute bottom-2 left-2 right-2 rounded-full bg-white/90 px-2 py-1 text-center text-[10px] font-black uppercase tracking-widest text-emerald-800 shadow-sm backdrop-blur">
         {visual.label}
       </span>
+      {!compact && (
+        <span className="absolute right-2 top-2 rounded-full bg-white/85 px-2 py-1 text-[9px] font-black uppercase tracking-widest text-slate-500 shadow-sm backdrop-blur">
+          Ilustracja
+        </span>
+      )}
     </div>
   );
 }
@@ -120,6 +128,9 @@ export function SuccessVisual() {
           sizes="(max-width: 640px) 90vw, 384px"
           className="object-cover"
         />
+        <span className="absolute right-3 top-3 rounded-full bg-white/85 px-2 py-1 text-[9px] font-black uppercase tracking-widest text-slate-500 shadow-sm backdrop-blur">
+          Zdjęcie ilustracyjne
+        </span>
       </div>
     </div>
   );

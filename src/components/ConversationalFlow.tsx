@@ -38,6 +38,18 @@ const CALLBACK_HOURS = 'pon-pt 9:00-20:00';
 const PARTNER_LOCATION_COPY = 'współpracującym gabinecie stomatologicznym w rejonie Metra Ursynów';
 const LEADGEN_DISCLOSURE_COPY = 'Serwis nie jest podmiotem leczniczym. Pomaga uporządkować zgłoszenie i może przekazać je do współpracującego gabinetu stomatologicznego na Ursynowie.';
 const SAFETY_COPY = 'Jeśli masz narastającą opuchliznę twarzy lub szyi, gorączkę, trudność z połykaniem, oddychaniem albo nie możesz otworzyć ust, nie czekaj na formularz. Skontaktuj się pilnie z lekarzem, dentystą dyżurnym lub odpowiednią pomocą medyczną.';
+const INITIAL_LEAD_STATUS = 'nowy';
+const RECEPTION_STATUS_OPTIONS = [
+  'nowy',
+  'przekazany',
+  'oddzwoniono',
+  'nieodebrany',
+  'umówiony',
+  'odbył wizytę',
+  'odrzucony',
+  'duplikat',
+  'poza zakresem',
+];
 
 const getPainBucket = (painScore: number) => {
   if (painScore >= 7) return 'high';
@@ -163,6 +175,7 @@ export default function ConversationalFlow({
   const [status, setStatus] = useState<'idle' | 'loading' | 'success' | 'error'>('idle');
   const [formError, setFormError] = useState<string | null>(null);
   const [hasTrackedStart, setHasTrackedStart] = useState(false);
+  const [submittedLeadId, setSubmittedLeadId] = useState<string | null>(null);
 
   const getVisibleSteps = (candidateAnswers: TriageAnswers) => {
     const candidateScoring = scoreLead(candidateAnswers);
@@ -226,6 +239,7 @@ export default function ConversationalFlow({
     setFeedback(null);
     setFormError(null);
     setStatus('idle');
+    setSubmittedLeadId(null);
     setStepIndex(leadIndex);
     window.setTimeout(() => {
       document.getElementById('triage-quiz')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
@@ -315,6 +329,9 @@ export default function ConversationalFlow({
       `OBAWA: ${mainObjection}`,
       `PREFEROWANY KONTAKT: ${contactTime}`,
       '',
+      `STATUS RECEPCJI: ${INITIAL_LEAD_STATUS}`,
+      `NASTĘPNY KROK: telefon recepcji / aktualizacja statusu po lead_id`,
+      '',
       `PILNOŚĆ: ${result.urgencyBand}`,
       `LEAD SCORE: ${result.leadScore}`,
       `ŹRÓDŁO: conversational_flow`,
@@ -335,6 +352,12 @@ export default function ConversationalFlow({
         body: JSON.stringify({
           source: 'conversational_flow',
           lead_id: leadId,
+          lead_status: INITIAL_LEAD_STATUS,
+          reception_status: INITIAL_LEAD_STATUS,
+          pipeline_stage: INITIAL_LEAD_STATUS,
+          status_options: RECEPTION_STATUS_OPTIONS,
+          status_update_key: leadId,
+          next_action: 'reception_callback',
           service: config.service,
           domain: window.location.hostname || config.domain,
           landing_url: window.location.href,
@@ -361,6 +384,8 @@ export default function ConversationalFlow({
           trello_card_title: trelloCardTitle,
           trello_title: trelloCardTitle,
           trello_description: trelloDescription,
+          trello_list: result.urgencyBand === 'high' ? 'Priorytetowe' : 'Nowe leady',
+          trello_labels: [result.urgencyBand, 'ursynow', 'osemki', INITIAL_LEAD_STATUS],
           reason: answers.symptom ?? null,
           toothArea: answers.tooth_area ?? null,
           painScore: answers.pain_score || null,
@@ -384,6 +409,7 @@ export default function ConversationalFlow({
       });
 
       setStatus(response.ok ? 'success' : 'error');
+      setSubmittedLeadId(response.ok ? leadId : null);
       trackTriageEvent(response.ok ? 'triage_lead_submit_success' : 'triage_lead_submit_error', {
         slug,
         urgency_band: result.urgencyBand,
@@ -391,6 +417,7 @@ export default function ConversationalFlow({
       });
     } catch {
       setStatus('error');
+      setSubmittedLeadId(null);
       trackTriageEvent('triage_lead_submit_error', {
         slug,
         urgency_band: result.urgencyBand,
@@ -406,14 +433,15 @@ export default function ConversationalFlow({
   ].filter((item): item is { label: string; value: string } => Boolean(item.value));
 
   const successBody = isUrgent
-    ? `Oddzwonimy w pierwszej kolejności w godzinach pracy: ${CALLBACK_HOURS}. Jeśli wysyłasz formularz poza tym czasem, wrócimy do Ciebie w najbliższym dniu roboczym.`
-    : `Oddzwonimy w wybranym terminie lub w najbliższym dostępnym oknie kontaktu w godzinach pracy: ${CALLBACK_HOURS}.`;
+    ? `Zgłoszenie może zostać przekazane do współpracującego gabinetu jako priorytetowe. Kontakt odbywa się w godzinach pracy: ${CALLBACK_HOURS}.`
+    : `Zgłoszenie może zostać przekazane do współpracującego gabinetu. Kontakt odbywa się w wybranym terminie lub w najbliższym dostępnym oknie: ${CALLBACK_HOURS}.`;
 
   return (
-    <div className="relative min-h-screen overflow-hidden bg-[#f7fbf8] text-slate-950 antialiased">
-      <div className="absolute inset-x-0 top-0 h-2 bg-emerald-700" />
-      <div className="absolute inset-0 bg-[radial-gradient(circle_at_14%_20%,rgba(16,185,129,0.13),transparent_32%),radial-gradient(circle_at_86%_8%,rgba(20,184,166,0.16),transparent_30%),linear-gradient(180deg,#ffffff_0%,#f7fbf8_52%,#eef8f4_100%)]" />
-      <div className="absolute right-[-12rem] top-24 hidden h-[34rem] w-[34rem] rounded-full bg-emerald-100/70 blur-3xl lg:block" />
+    <div className="relative min-h-screen overflow-hidden bg-[#f8fbf7] text-slate-950 antialiased">
+      <div className="absolute inset-x-0 top-0 h-1.5 bg-emerald-800" />
+      <div className="absolute inset-0 bg-[linear-gradient(180deg,#ffffff_0%,#f8fbf7_54%,#eef7f2_100%)]" />
+      <div className="absolute left-0 top-0 hidden h-full w-px bg-emerald-100 lg:block" />
+      <div className="absolute right-[-16rem] top-16 hidden h-[38rem] w-[38rem] rounded-full bg-emerald-50 blur-3xl lg:block" />
 
       <main className="relative z-10 mx-auto flex min-h-screen w-full max-w-7xl flex-col px-4 pb-28 pt-5 md:px-8 md:py-7 lg:pb-7">
         <header className="flex items-center justify-between gap-3">
@@ -438,12 +466,12 @@ export default function ConversationalFlow({
 
         <section className="grid flex-1 items-start gap-6 py-6 lg:grid-cols-[0.9fr,1.1fr] lg:items-center lg:gap-10 md:py-10">
           <aside className="order-1 lg:order-none">
-            <div className="mb-5 inline-flex items-center gap-2 rounded-full border border-emerald-200 bg-white px-3 py-2 text-xs font-black uppercase tracking-widest text-emerald-800 shadow-sm">
+            <div className="mb-5 inline-flex items-center gap-2 rounded-full border border-emerald-200 bg-white/90 px-3 py-2 text-xs font-black uppercase tracking-widest text-emerald-800 shadow-sm">
               <ShieldCheck className="h-4 w-4" />
               {config.intro.eyebrow}
             </div>
 
-            <h1 className="max-w-2xl text-5xl font-black leading-[0.92] tracking-[-0.055em] text-slate-950 sm:text-6xl xl:text-7xl">
+            <h1 className="max-w-2xl text-5xl font-black leading-[0.94] tracking-[-0.06em] text-slate-950 sm:text-6xl xl:text-7xl">
               {isLocalEntry ? config.intro.localTitle(localArea) : config.intro.title}
             </h1>
 
@@ -451,7 +479,7 @@ export default function ConversationalFlow({
               {config.intro.description}
             </p>
 
-            <div className="mt-5 max-w-xl rounded-2xl border border-emerald-100 bg-white/85 p-3 shadow-sm backdrop-blur sm:p-4">
+            <div className="mt-5 max-w-xl rounded-[1.35rem] border border-emerald-100 bg-white/85 p-3 shadow-sm backdrop-blur sm:p-4">
               <div className="flex flex-wrap items-center gap-2 text-sm font-bold text-slate-700">
                 <span className="inline-flex items-center gap-1.5 rounded-full bg-emerald-50 px-3 py-1.5 text-emerald-800">
                   <MapPin className="h-3.5 w-3.5" />
@@ -496,11 +524,11 @@ export default function ConversationalFlow({
               {LEADGEN_DISCLOSURE_COPY} Formularz nie oznacza automatycznej rezerwacji wizyty ani diagnozy online.
             </p>
 
-            <div className="mt-6 max-w-xl lg:hidden">
+            <div className="mt-6 max-w-xl">
               <DentalClinicVisual compact />
             </div>
 
-            <div className="mt-5 hidden max-w-xl rounded-[1.5rem] border border-emerald-100 bg-white/90 p-3 shadow-sm backdrop-blur md:block md:p-5">
+            <div className="mt-5 hidden max-w-xl rounded-[1.5rem] border border-slate-200 bg-white/90 p-3 shadow-sm backdrop-blur md:block md:p-5">
               <div className="mb-2 flex items-center justify-between gap-3 md:mb-4 md:gap-4">
                 <div>
                   <p className="text-[11px] font-black uppercase tracking-widest text-emerald-800 md:text-xs">Twoje odpowiedzi</p>
@@ -541,9 +569,20 @@ export default function ConversationalFlow({
           </aside>
 
           <div id="triage-quiz" className="order-2 mx-auto w-full scroll-mt-4 max-w-3xl lg:order-none">
-            <div className={`relative overflow-hidden rounded-[1.75rem] border border-emerald-100 bg-white p-4 shadow-2xl shadow-emerald-900/10 sm:rounded-[2rem] sm:p-6 md:p-8 ${urgencyTone.ring} ring-1`}>
-              <div className="absolute -right-24 -top-24 h-56 w-56 rounded-full bg-emerald-50" />
-              <div className="absolute right-14 top-10 h-20 w-20 rounded-full bg-cyan-100 blur-2xl" />
+            <div className={`relative overflow-hidden rounded-[1.75rem] border border-slate-200 bg-white p-4 shadow-2xl shadow-emerald-950/10 sm:rounded-[2rem] sm:p-6 md:p-8 ${urgencyTone.ring} ring-1`}>
+              <div className="absolute inset-y-0 left-0 w-1.5 bg-emerald-700" />
+              <div className="absolute -right-28 -top-28 h-60 w-60 rounded-full bg-emerald-50" />
+              <div className="absolute right-14 top-10 h-20 w-20 rounded-full bg-cyan-50 blur-2xl" />
+
+              <div className="relative mb-5 flex flex-wrap items-center justify-between gap-3 rounded-2xl border border-slate-100 bg-slate-50/80 px-4 py-3">
+                <div>
+                  <p className="text-[11px] font-black uppercase tracking-[0.24em] text-slate-400">Karta zgłoszenia</p>
+                  <p className="mt-1 text-sm font-black tracking-[-0.02em] text-slate-900">Ósemka · Ursynów · kontakt zwrotny</p>
+                </div>
+                <span className="rounded-full border border-emerald-100 bg-white px-3 py-1.5 text-[10px] font-black uppercase tracking-widest text-emerald-800 shadow-sm">
+                  MVP kontaktowy
+                </span>
+              </div>
 
               <div className="relative mb-5 sm:mb-7">
                 <div className="mb-4 flex items-center justify-between gap-4">
@@ -551,14 +590,14 @@ export default function ConversationalFlow({
                     <span className="h-2 w-2 rounded-full bg-emerald-600" />
                     <span>{status === 'success' ? 'Gotowe' : currentStep.eyebrow}</span>
                   </div>
-                  <span className="rounded-full border border-emerald-200 bg-emerald-50 px-3 py-1.5 text-xs font-black text-emerald-800">
+                  <span className="rounded-full border border-slate-200 bg-white px-3 py-1.5 text-xs font-black text-slate-600">
                     {progress}%
                   </span>
                 </div>
 
                 <div className="flex gap-1.5">
                   {visibleSteps.map((step, index) => (
-                    <div key={step.id} className="h-1.5 flex-1 overflow-hidden rounded-full bg-emerald-100">
+                    <div key={step.id} className="h-1.5 flex-1 overflow-hidden rounded-full bg-slate-100">
                       <motion.div
                         className="h-full rounded-full bg-emerald-500"
                         animate={{ width: index <= safeStepIndex || status === 'success' ? '100%' : '0%' }}
@@ -593,11 +632,20 @@ export default function ConversationalFlow({
                     <p className="mx-auto mt-5 max-w-md text-base font-medium leading-relaxed text-slate-600">
                       {successBody}
                     </p>
+                    {submittedLeadId && (
+                      <div className="mx-auto mt-6 max-w-md rounded-2xl border border-slate-200 bg-slate-50 p-4 text-left shadow-sm">
+                        <p className="text-[11px] font-black uppercase tracking-[0.22em] text-slate-400">Numer zgłoszenia</p>
+                        <p className="mt-1 font-mono text-lg font-black tracking-[-0.02em] text-slate-950">{submittedLeadId}</p>
+                        <p className="mt-2 text-xs font-medium leading-relaxed text-slate-500">
+                          Ten numer służy do statusowania leada po stronie recepcji i późniejszego raportowania skuteczności kampanii.
+                        </p>
+                      </div>
+                    )}
                     <div className="mx-auto mt-8 grid max-w-xl gap-3 sm:grid-cols-3">
                       {[
                         ['1', 'Zapisaliśmy zgłoszenie'],
-                        ['2', 'Sprawdzimy odpowiedzi'],
-                        ['3', 'Oddzwonimy w godzinach pracy'],
+                        ['2', 'Może trafić do placówki'],
+                        ['3', 'Recepcja aktualizuje status'],
                       ].map(([number, label]) => (
                         <div key={label} className="rounded-2xl border border-emerald-100 bg-emerald-50/60 p-4 text-left">
                           <span className="mb-3 flex h-8 w-8 items-center justify-center rounded-xl bg-white text-xs font-black text-emerald-700 shadow-sm">
@@ -688,7 +736,7 @@ export default function ConversationalFlow({
                               key={option.value}
                               type="button"
                               onClick={() => handleChoice(option.value, option.feedback, index, option.urgent)}
-                              className={`group relative overflow-hidden rounded-[1.25rem] border p-4 text-left shadow-sm transition-all duration-200 hover:-translate-y-0.5 hover:shadow-lg active:scale-95 sm:p-5 ${
+                                className={`group relative overflow-hidden rounded-[1.25rem] border p-4 text-left shadow-sm transition-all duration-200 hover:-translate-y-0.5 hover:shadow-lg active:scale-95 sm:p-5 ${
                                 isSelected
                                   ? option.urgent
                                     ? 'border-amber-300 bg-amber-50 ring-2 ring-amber-100'
@@ -698,7 +746,7 @@ export default function ConversationalFlow({
                                     : 'border-slate-200 bg-white hover:border-emerald-200'
                               }`}
                             >
-                              <div className={`absolute inset-0 bg-gradient-to-br ${accent} opacity-70 transition group-hover:opacity-100`} />
+                              <div className={`absolute inset-0 bg-gradient-to-br ${accent} opacity-45 transition group-hover:opacity-90`} />
                               <div className="relative flex items-start justify-between gap-4">
                                 <div className="flex gap-4">
                                   <span
@@ -935,9 +983,17 @@ export default function ConversationalFlow({
               Ta kwalifikacja nie zastępuje konsultacji lekarskiej. Pomaga przygotować zgłoszenie do kontaktu zwrotnego.
             </p>
 
-            <div className="mt-5 hidden overflow-hidden rounded-[2rem] border border-emerald-100 bg-white/95 p-5 shadow-xl shadow-emerald-900/5 backdrop-blur lg:block">
-              <div className="grid gap-5 md:grid-cols-[0.9fr,1.1fr] md:items-center">
-                <DentalClinicVisual compact />
+            <div className="mt-5 hidden overflow-hidden rounded-[2rem] border border-slate-200 bg-white/95 p-5 shadow-xl shadow-emerald-900/5 backdrop-blur lg:block">
+              <div className="grid gap-5 md:grid-cols-[0.85fr,1.15fr] md:items-start">
+                <div className="rounded-3xl border border-emerald-100 bg-emerald-50/50 p-5">
+                  <p className="text-xs font-black uppercase tracking-widest text-emerald-800">Zasady serwisu</p>
+                  <h3 className="mt-3 text-2xl font-black leading-tight tracking-[-0.04em] text-slate-950">
+                    Uczciwy kontakt zamiast obietnicy zabiegu online.
+                  </h3>
+                  <p className="mt-3 text-sm font-medium leading-relaxed text-slate-600">
+                    Formularz ma tylko przygotować zgłoszenie. Nie diagnozuje, nie wycenia i nie rezerwuje automatycznie wizyty.
+                  </p>
+                </div>
                 <div>
                   <p className="text-xs font-black uppercase tracking-widest text-emerald-800">Jak to działa?</p>
                   <div className="mt-4 grid gap-3">

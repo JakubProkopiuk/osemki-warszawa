@@ -4,7 +4,7 @@ import Link from 'next/link';
 export const metadata: Metadata = {
   title: 'Polityka prywatności | Ósemki Ursynów',
   description:
-    'Informacje o przetwarzaniu danych podawanych w formularzu kwalifikacji objawów ósemki na Ursynowie.',
+    'Informacje o przetwarzaniu danych podawanych w formularzu kontaktowym dotyczącym ósemki na Ursynowie.',
   alternates: {
     canonical: '/polityka-prywatnosci',
   },
@@ -13,19 +13,19 @@ export const metadata: Metadata = {
 const sections = [
   {
     title: 'Zakres danych',
-    body: 'Formularz może zbierać imię, numer telefonu, wybrane odpowiedzi dotyczące objawów, preferowany czas kontaktu, adres strony, podstawowe dane techniczne przeglądarki oraz parametry kampanii, jeśli użytkownik trafił na stronę z reklamy lub linku oznaczonego UTM.',
+    body: 'Formularz może zbierać imię, numer telefonu, ogólny powód zgłoszenia, informację o posiadaniu RTG lub CBCT, preferowany czas kontaktu, adres strony, identyfikator zgłoszenia, podstawowe dane techniczne przeglądarki oraz parametry kampanii, jeśli użytkownik trafił na stronę z reklamy lub linku oznaczonego UTM.',
   },
   {
     title: 'Cel przetwarzania',
-    body: 'Dane są wykorzystywane do obsługi zgłoszenia, przygotowania kontaktu zwrotnego, uporządkowania informacji o objawach oraz ustalenia, jaki kolejny krok może mieć sens: rozmowa, konsultacja lub diagnostyka. Formularz nie zastępuje konsultacji lekarskiej i nie stawia diagnozy.',
+    body: 'Dane są wykorzystywane do obsługi zgłoszenia, przygotowania kontaktu zwrotnego, przekazania zgłoszenia do obsługi oraz późniejszego raportowania statusu leada po identyfikatorze zgłoszenia. Formularz nie zastępuje konsultacji lekarskiej i nie stawia diagnozy.',
   },
   {
     title: 'Przekazanie zgłoszenia',
     body: 'Zgłoszenie może zostać przekazane do współpracującego gabinetu stomatologicznego na Ursynowie w celu kontaktu telefonicznego i obsługi zapytania. Szczegółowe dane administratora oraz odbiorców danych powinny zostać uzupełnione przed szerszym uruchomieniem kampanii.',
   },
   {
-    title: 'Informacje o objawach',
-    body: 'Odpowiedzi dotyczące bólu, opuchlizny, RTG lub innych objawów mogą dotyczyć zdrowia. Dlatego w formularzu prosimy o osobną zgodę na przetwarzanie tych informacji wyłącznie w celu obsługi zgłoszenia i kontaktu zwrotnego.',
+    title: 'Informacje o problemie stomatologicznym',
+    body: 'Odpowiedzi dotyczące problemu stomatologicznego mogą dotyczyć zdrowia. Dlatego formularz ogranicza zakres pytań i prosi o osobną zgodę na przetwarzanie tych informacji wyłącznie w celu obsługi zgłoszenia, kontaktu zwrotnego i ewentualnego przekazania zgłoszenia do współpracującego gabinetu.',
   },
   {
     title: 'Kontakt i przechowywanie',
@@ -34,6 +34,10 @@ const sections = [
   {
     title: 'Analityka',
     body: 'Strona może zbierać zdarzenia analityczne bez danych osobowych, takie jak rozpoczęcie kwalifikacji, odpowiedź na krok quizu, kliknięcie przycisku kontaktu lub status wysłania formularza. Treść formularza, numer telefonu i informacje o problemie stomatologicznym nie powinny być wysyłane do systemów reklamowych.',
+  },
+  {
+    title: 'Status zgłoszenia',
+    body: 'Każde wysłane zgłoszenie może otrzymać techniczny identyfikator, który pomaga śledzić status obsługi, np. nowe, przekazane, oddzwoniono, umówione, odrzucone lub duplikat. Identyfikator służy raportowaniu skuteczności serwisu i nie zastępuje dokumentacji medycznej.',
   },
   {
     title: 'Prawa użytkownika',
@@ -52,7 +56,7 @@ export default function PrivacyPolicyPage() {
           Polityka prywatności
         </h1>
         <p className="mt-5 text-base font-medium leading-relaxed text-slate-600">
-          Ta strona opisuje podstawowe zasady przetwarzania danych w formularzu kwalifikacji objawów ósemki. Dokument powinien zostać zweryfikowany i uzupełniony o pełne dane administratora przed uruchomieniem szerokich kampanii płatnych.
+          Ta strona opisuje podstawowe zasady przetwarzania danych w formularzu kontaktowym dotyczącym ósemki. Dokument powinien zostać zweryfikowany i uzupełniony o pełne dane administratora przed uruchomieniem szerokich kampanii płatnych.
         </p>
 
         <div className="mt-8 grid gap-4">

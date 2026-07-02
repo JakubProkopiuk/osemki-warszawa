@@ -60,12 +60,29 @@ export default function TriageSeoContent({ location, popularLocations }: TriageS
             </p>
 
             <div className="mt-6 rounded-3xl border border-emerald-100 bg-white p-5 shadow-sm">
-              <h3 className="text-lg font-black tracking-[-0.02em] text-slate-950">Jak działa ten serwis?</h3>
-              <div className="mt-4 grid gap-3 text-sm font-medium leading-relaxed text-slate-600 sm:grid-cols-2">
-                <p>Wypełniasz krótki formularz kontaktowy dotyczący konsultacji w sprawie ósemki.</p>
-                <p>Zgłoszenie może zostać przekazane do współpracującego gabinetu stomatologicznego na Ursynowie.</p>
-                <p>Recepcja może oddzwonić w godzinach pracy i ustalić możliwy termin wizyty.</p>
-                <p>Serwis nie świadczy usług medycznych, nie diagnozuje i nie rezerwuje automatycznie zabiegu.</p>
+              <div className="flex flex-col gap-4 sm:flex-row sm:items-start sm:justify-between">
+                <div>
+                  <p className="text-xs font-black uppercase tracking-widest text-emerald-700">Transparentny proces</p>
+                  <h3 className="mt-2 text-2xl font-black tracking-[-0.035em] text-slate-950">Jak działa ten serwis?</h3>
+                </div>
+                <span className="rounded-full border border-slate-200 bg-slate-50 px-3 py-1.5 text-[10px] font-black uppercase tracking-widest text-slate-500">
+                  Nie jest gabinetem
+                </span>
+              </div>
+              <div className="mt-5 grid gap-3 sm:grid-cols-2">
+                {[
+                  'Wypełniasz krótki formularz kontaktowy dotyczący konsultacji w sprawie ósemki.',
+                  'Zgłoszenie może zostać przekazane do współpracującego gabinetu stomatologicznego na Ursynowie.',
+                  'Recepcja może oddzwonić w godzinach pracy i ustalić możliwy termin wizyty.',
+                  'Serwis nie świadczy usług medycznych, nie diagnozuje i nie rezerwuje automatycznie zabiegu.',
+                ].map((item, index) => (
+                  <div key={item} className="rounded-2xl border border-slate-100 bg-slate-50/70 p-4 text-sm font-medium leading-relaxed text-slate-600">
+                    <span className="mb-3 flex h-7 w-7 items-center justify-center rounded-xl bg-white text-xs font-black text-emerald-700 shadow-sm">
+                      {index + 1}
+                    </span>
+                    {item}
+                  </div>
+                ))}
               </div>
             </div>
 
@@ -73,6 +90,13 @@ export default function TriageSeoContent({ location, popularLocations }: TriageS
               <h3 className="text-lg font-black tracking-[-0.02em] text-slate-950">Co wpływa na koszt?</h3>
               <p className="mt-3 text-sm font-medium leading-relaxed text-slate-600">
                 Koszt konsultacji lub usunięcia ósemki zależy między innymi od diagnostyki, położenia zęba, stopnia trudności i decyzji lekarza po badaniu. Formularz nie podaje automatycznej wyceny, bo bez konsultacji i analizy RTG/CBCT byłaby ona nieprecyzyjna.
+              </p>
+            </div>
+
+            <div className="mt-6 rounded-3xl border border-amber-200 bg-amber-50 p-5 shadow-sm">
+              <h3 className="text-lg font-black tracking-[-0.02em] text-amber-950">Kiedy nie czekać na formularz?</h3>
+              <p className="mt-3 text-sm font-medium leading-relaxed text-amber-900">
+                Jeśli pojawia się gorączka, narastająca opuchlizna twarzy lub szyi, trudność z połykaniem, oddychaniem albo brak możliwości otwarcia ust, skontaktuj się pilnie z lekarzem, dentystą dyżurnym lub odpowiednią pomocą medyczną.
               </p>
             </div>
 
@@ -124,7 +148,7 @@ export default function TriageSeoContent({ location, popularLocations }: TriageS
               <h3 className="text-lg font-black tracking-[-0.02em] text-slate-950">Kontakt w rejonie Ursynowa</h3>
               <ul className="mt-4 space-y-2 text-sm font-medium leading-relaxed text-slate-600">
                 <li>Obsługa zgłoszeń: pon-pt 9:00-20:00.</li>
-                  <li>Lokalizacja wizyty: współpracujący gabinet w okolicy Metra Ursynów.</li>
+                <li>Lokalizacja wizyty: współpracujący gabinet w okolicy Metra Ursynów.</li>
                 <li>Konsultacja, RTG i dalszy krok są ustalane po kontakcie.</li>
                 <li>Zgłoszenie nie oznacza automatycznego zapisu na zabieg.</li>
               </ul>
