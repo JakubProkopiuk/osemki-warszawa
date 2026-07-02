@@ -31,6 +31,49 @@ const sitemapCoreSource = fs.readFileSync(sitemapCorePath, 'utf-8');
 const sitemapUrsynowSource = fs.readFileSync(sitemapUrsynowPath, 'utf-8');
 const nextConfigSource = fs.readFileSync(nextConfigPath, 'utf-8');
 const locations = JSON.parse(fs.readFileSync(locationsPath, 'utf-8'));
+const sourceRoots = [
+  new URL('../src', import.meta.url),
+  new URL('../public/robots.txt', import.meta.url),
+  new URL('../next.config.ts', import.meta.url),
+];
+const blockedPatterns = [
+  /Ochota na Uśmiech/i,
+  /Pruszkowska/i,
+  /KEN 96/i,
+  /bez bólu/i,
+  /bezboles/i,
+  /4\.9\/5/i,
+  /Ponad 10 000/i,
+  /lek\. dent\./i,
+  /Dojazd: zależnie/i,
+  /najlepsz/i,
+  /najtańsz/i,
+  /ostatnie wolne terminy/i,
+];
+const sourceFileExtensions = new Set(['.ts', '.tsx', '.js', '.mjs', '.json', '.css', '.txt']);
+
+const collectSourceFiles = (entryUrl) => {
+  const entryPath = entryUrl.pathname;
+  const stat = fs.statSync(entryPath);
+
+  if (stat.isFile()) return [entryPath];
+
+  return fs.readdirSync(entryPath, { withFileTypes: true }).flatMap((item) => {
+    const itemPath = `${entryPath}/${item.name}`;
+    if (item.isDirectory()) return collectSourceFiles(new URL(`file://${itemPath}`));
+    const extension = item.name.slice(item.name.lastIndexOf('.'));
+    return sourceFileExtensions.has(extension) ? [itemPath] : [];
+  });
+};
+
+const blockedMatches = sourceRoots
+  .flatMap(collectSourceFiles)
+  .flatMap((filePath) => {
+    const source = fs.readFileSync(filePath, 'utf-8');
+    return blockedPatterns
+      .filter((pattern) => pattern.test(source))
+      .map((pattern) => `${filePath}: ${pattern}`);
+  });
 const faqCoverage =
   locations.length > 0
     ? locations.filter((loc) => Array.isArray(loc.faq) && loc.faq.length > 0).length / locations.length
@@ -130,12 +173,18 @@ const checks = [
     pass: !pageSource.includes('Dojazd: ${travelTime}') && !pageSource.includes('zależnie od lokalizacji'),
   },
   {
-    name: 'Legacy local URLs redirect to current Ursynów pages',
+    name: 'Legacy local URLs consolidate to Ursynów hub',
     pass:
+      pageSource.includes('dynamicParams = false') &&
+      nextConfigSource.includes("source: '/ochota'") &&
+      nextConfigSource.includes("source: '/ul-:slug'") &&
       nextConfigSource.includes("source: '/ulica-:slug'") &&
       nextConfigSource.includes("destination: '/ursynow'") &&
-      nextConfigSource.includes("source: `/ulica-${slug}`") &&
-      nextConfigSource.includes("destination: `/ul-${slug}`"),
+      nextConfigSource.includes("source: '/osiedle-:slug'"),
+  },
+  {
+    name: 'Old clinic branding and risky claims are blocked',
+    pass: blockedMatches.length === 0,
   },
 ];
 
@@ -145,5 +194,9 @@ for (const check of checks) {
 }
 
 if (failed.length > 0) {
+  if (blockedMatches.length > 0) {
+    console.error('\nBlocked copy found:');
+    for (const match of blockedMatches) console.error(`- ${match}`);
+  }
   process.exit(1);
 }

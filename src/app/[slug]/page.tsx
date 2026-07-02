@@ -8,7 +8,7 @@ import { getCanonical } from '@/lib/getCanonical';
 import { TRIAGE_FAQ_ITEMS } from '@/lib/triageFaq';
 
 export const revalidate = 2_592_000;
-export const dynamicParams = true;
+export const dynamicParams = false;
 
 type LocationData = LocationRecord;
 

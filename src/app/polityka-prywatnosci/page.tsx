@@ -20,6 +20,10 @@ const sections = [
     body: 'Dane są wykorzystywane do obsługi zgłoszenia, przygotowania kontaktu zwrotnego, uporządkowania informacji o objawach oraz ustalenia, jaki kolejny krok może mieć sens: rozmowa, konsultacja lub diagnostyka. Formularz nie zastępuje konsultacji lekarskiej i nie stawia diagnozy.',
   },
   {
+    title: 'Przekazanie zgłoszenia',
+    body: 'Zgłoszenie może zostać przekazane do współpracującego gabinetu stomatologicznego na Ursynowie w celu kontaktu telefonicznego i obsługi zapytania. Szczegółowe dane administratora oraz odbiorców danych powinny zostać uzupełnione przed szerszym uruchomieniem kampanii.',
+  },
+  {
     title: 'Informacje o objawach',
     body: 'Odpowiedzi dotyczące bólu, opuchlizny, RTG lub innych objawów mogą dotyczyć zdrowia. Dlatego w formularzu prosimy o osobną zgodę na przetwarzanie tych informacji wyłącznie w celu obsługi zgłoszenia i kontaktu zwrotnego.',
   },
@@ -29,7 +33,7 @@ const sections = [
   },
   {
     title: 'Analityka',
-    body: 'Strona może zbierać zdarzenia analityczne bez danych osobowych, takie jak rozpoczęcie kwalifikacji, odpowiedź na krok quizu, kliknięcie przycisku kontaktu lub status wysłania formularza. Zdarzenia służą do poprawy użyteczności strony.',
+    body: 'Strona może zbierać zdarzenia analityczne bez danych osobowych, takie jak rozpoczęcie kwalifikacji, odpowiedź na krok quizu, kliknięcie przycisku kontaktu lub status wysłania formularza. Treść formularza, numer telefonu i informacje o problemie stomatologicznym nie powinny być wysyłane do systemów reklamowych.',
   },
   {
     title: 'Prawa użytkownika',

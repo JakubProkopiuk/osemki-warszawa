@@ -35,7 +35,9 @@ const initialAnswers: TriageAnswers = {
 };
 
 const CALLBACK_HOURS = 'pon-pt 9:00-20:00';
-const PARTNER_LOCATION_COPY = 'gabinecie stomatologicznym w okolicy Metra Ursynów';
+const PARTNER_LOCATION_COPY = 'współpracującym gabinecie stomatologicznym w rejonie Metra Ursynów';
+const LEADGEN_DISCLOSURE_COPY = 'Serwis nie jest podmiotem leczniczym. Pomaga uporządkować zgłoszenie i może przekazać je do współpracującego gabinetu stomatologicznego na Ursynowie.';
+const SAFETY_COPY = 'Jeśli masz narastającą opuchliznę twarzy lub szyi, gorączkę, trudność z połykaniem, oddychaniem albo nie możesz otworzyć ust, nie czekaj na formularz. Skontaktuj się pilnie z lekarzem, dentystą dyżurnym lub odpowiednią pomocą medyczną.';
 
 const getPainBucket = (painScore: number) => {
   if (painScore >= 7) return 'high';
@@ -65,6 +67,12 @@ const formatPhone = (value: string) => {
   const matched = digits.match(/(\d{0,3})(\d{0,3})(\d{0,3})/);
   if (!matched) return '';
   return !matched[2] ? matched[1] : `${matched[1]}-${matched[2]}${matched[3] ? `-${matched[3]}` : ''}`;
+};
+
+const generateLeadId = () => {
+  const datePart = new Date().toISOString().slice(0, 10).replace(/-/g, '');
+  const randomPart = Math.random().toString(36).slice(2, 6).toUpperCase();
+  return `OW-U-${datePart}-${randomPart}`;
 };
 
 const getUrgencyCopy = (result: LeadScoringResult) => {
@@ -281,24 +289,26 @@ export default function ConversationalFlow({
     }
 
     if (!answers.consent_contact) {
-      setFormError('Zaznacz zgodę na kontakt telefoniczny w sprawie zgłoszenia.');
+      setFormError('Zaznacz zgodę na kontakt telefoniczny w sprawie obsługi zgłoszenia.');
       return;
     }
 
     if (!answers.consent_symptoms) {
-      setFormError('Zaznacz zgodę na przetwarzanie informacji o objawach w celu obsługi zgłoszenia.');
+      setFormError('Zaznacz zgodę na przetwarzanie informacji o problemie stomatologicznym i przekazanie zgłoszenia do współpracującego gabinetu.');
       return;
     }
 
     const params = new URLSearchParams(window.location.search);
     const result = scoreLead(answers);
+    const leadId = generateLeadId();
     const contactTime = answers.preferred_contact_time ?? 'brak preferencji';
     const symptom = answers.symptom ?? 'brak informacji';
     const toothArea = answers.tooth_area ?? 'brak informacji';
     const rtg = answers.has_rtg ?? 'brak informacji';
     const mainObjection = answers.main_objection ?? 'pominięto lub brak informacji';
-    const trelloCardTitle = `${result.urgencyBand === 'high' ? 'PRIORYTET | ' : ''}Ósemka | Ból ${answers.pain_score}/10 | ${answers.name} | ${contactTime}`;
+    const trelloCardTitle = `${result.urgencyBand === 'high' ? 'PRIORYTET | ' : ''}Ósemka | ${leadId} | Ból ${answers.pain_score}/10 | ${answers.name} | ${contactTime}`;
     const trelloDescription = [
+      `LEAD ID: ${leadId}`,
       `PACJENT: ${answers.name}`,
       `TEL: ${rawPhone}`,
       '',
@@ -329,6 +339,7 @@ export default function ConversationalFlow({
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
           source: 'conversational_flow',
+          lead_id: leadId,
           service: config.service,
           domain: window.location.hostname || config.domain,
           landing_url: window.location.href,
@@ -460,9 +471,9 @@ export default function ConversationalFlow({
             <div className="mt-7 flex flex-wrap gap-2.5">
               {[
                 'Kontakt pon-pt 9:00-20:00',
-                'Okolice Metra Ursynów',
+                'Współpracujący gabinet na Ursynowie',
                 'Bez zobowiązania do zabiegu',
-                'Kwalifikacja online',
+                'Serwis kwalifikacyjny',
               ].map((chip) => (
                 <span key={chip} className="rounded-full border border-emerald-100 bg-white px-4 py-2 text-xs font-bold text-slate-700 shadow-sm">
                   {chip}
@@ -489,7 +500,7 @@ export default function ConversationalFlow({
             </div>
 
             <p className="mt-3 max-w-xl text-sm font-semibold leading-relaxed text-slate-500">
-              Nie zapisujemy automatycznie na zabieg. Najpierw porządkujemy objawy i ustalamy sensowny kolejny krok.
+              {LEADGEN_DISCLOSURE_COPY} Formularz nie oznacza automatycznej rezerwacji wizyty ani diagnozy online.
             </p>
 
             <div className="mt-6 max-w-xl lg:hidden">
@@ -657,8 +668,8 @@ export default function ConversationalFlow({
                         <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
                           <div>
                             <p className="text-sm font-black text-slate-950">Wolisz, żebyśmy oddzwonili i dokończyli razem?</p>
-                            <p className="mt-1 text-xs font-medium leading-relaxed text-slate-600">
-                              Zostaw numer teraz. Resztę objawów można doprecyzować podczas rozmowy.
+                          <p className="mt-1 text-xs font-medium leading-relaxed text-slate-600">
+                              Zostaw numer teraz. Zgłoszenie może zostać przekazane do współpracującego gabinetu, który doprecyzuje szczegóły podczas rozmowy.
                             </p>
                           </div>
                           <button
@@ -761,7 +772,7 @@ export default function ConversationalFlow({
                           {answers.pain_score >= 7 && (
                             <div className="mt-5 flex gap-3 rounded-2xl border border-amber-200 bg-white p-4 text-sm font-bold text-amber-800">
                               <AlertTriangle className="h-5 w-5 shrink-0" />
-                              Przy takim bólu zgłoszenie potraktujemy jako priorytetowe w godzinach kontaktu.
+                              Przy takim bólu zgłoszenie potraktujemy jako priorytetowe w godzinach kontaktu. {SAFETY_COPY}
                             </div>
                           )}
                         </div>
@@ -794,15 +805,15 @@ export default function ConversationalFlow({
                           </p>
                           <p className={`mt-2 text-sm font-medium leading-relaxed ${isUrgent ? 'text-amber-900' : 'text-slate-600'}`}>
                             {isUrgent
-                              ? `Zgłoszenie priorytetowe. Przy takim bólu lub opuchliźnie warto szybciej ustalić kolejny krok. Oddzwonimy w pierwszej kolejności w godzinach pracy: ${CALLBACK_HOURS}.`
-                              : `To nie jest zapis na zabieg. Oddzwonimy z informacją, jaki kolejny krok ma sens, w godzinach pracy: ${CALLBACK_HOURS}.`}
+                              ? `Zgłoszenie priorytetowe. Może zostać przekazane do współpracującego gabinetu na Ursynowie, który oddzwoni w pierwszej kolejności w godzinach pracy: ${CALLBACK_HOURS}.`
+                              : `To nie jest zapis na zabieg. Zgłoszenie może trafić do współpracującego gabinetu, który oddzwoni w godzinach pracy: ${CALLBACK_HOURS}.`}
                           </p>
                         </div>
 
                         <div className="grid gap-3 sm:grid-cols-3">
                           {[
-                            ['1', 'Oddzwonimy', `Kontakt zwrotny w godzinach ${CALLBACK_HOURS}.`],
-                            ['2', 'Ustalimy krok', 'Konsultacja, RTG albo spokojne zaplanowanie rozmowy.'],
+                            ['1', 'Przyjmujemy zgłoszenie', 'Dane służą wyłącznie obsłudze tego zapytania.'],
+                            ['2', 'Przekazujemy do kontaktu', `Współpracujący gabinet może oddzwonić w godzinach ${CALLBACK_HOURS}.`],
                             ['3', 'Bez rezerwacji', 'Formularz nie jest zapisem na zabieg.'],
                           ].map(([number, title, text]) => (
                             <div key={title} className="rounded-2xl border border-emerald-100 bg-emerald-50/60 p-4">
@@ -816,7 +827,7 @@ export default function ConversationalFlow({
                         </div>
 
                         <div className="rounded-2xl border border-slate-100 bg-slate-50 p-4 text-xs font-medium leading-relaxed text-slate-500">
-                          Jeśli konsultacja będzie wskazana, wizyta odbywa się w {PARTNER_LOCATION_COPY}. Jeśli masz szybko narastający obrzęk, gorączkę albo trudności z przełykaniem lub oddychaniem, skorzystaj z pilnej pomocy medycznej.
+                          {LEADGEN_DISCLOSURE_COPY} Jeśli konsultacja będzie wskazana, wizyta odbywa się w {PARTNER_LOCATION_COPY}. {SAFETY_COPY}
                         </div>
 
                         <div>
@@ -850,7 +861,7 @@ export default function ConversationalFlow({
                             className="mt-1 h-4 w-4 shrink-0 accent-emerald-600"
                           />
                           <span>
-                            Wyrażam zgodę na kontakt telefoniczny w celu obsługi tego zgłoszenia.{' '}
+                            Wyrażam zgodę na kontakt telefoniczny w celu obsługi mojego zgłoszenia i ustalenia możliwości konsultacji stomatologicznej.{' '}
                             <Link href="/polityka-prywatnosci" className="font-bold text-emerald-700 underline underline-offset-2">
                               Polityka prywatności
                             </Link>
@@ -865,7 +876,7 @@ export default function ConversationalFlow({
                             className="mt-1 h-4 w-4 shrink-0 accent-emerald-600"
                           />
                           <span>
-                            Wyrażam zgodę na przetwarzanie podanych informacji o objawach w celu kwalifikacji zgłoszenia i przygotowania kontaktu zwrotnego.{' '}
+                            Wyrażam zgodę na przetwarzanie podanych informacji dotyczących mojego problemu stomatologicznego w celu obsługi zgłoszenia oraz przekazania go do współpracującego gabinetu stomatologicznego na Ursynowie.{' '}
                             <Link href="/polityka-prywatnosci" className="font-bold text-emerald-700 underline underline-offset-2">
                               Polityka prywatności
                             </Link>
@@ -889,7 +900,7 @@ export default function ConversationalFlow({
 
                         <p className="flex items-center justify-center gap-1.5 text-center text-xs font-medium leading-relaxed text-slate-400">
                           <LockKeyhole className="h-3.5 w-3.5" />
-                          Twoje dane są bezpieczne i służą wyłącznie do obsługi tego zgłoszenia.
+                          Dane służą wyłącznie obsłudze zgłoszenia. Nie wysyłamy odpowiedzi z formularza do systemów reklamowych.
                         </p>
                       </form>
                     )}
@@ -938,9 +949,9 @@ export default function ConversationalFlow({
                   <p className="text-xs font-black uppercase tracking-widest text-emerald-800">Jak to działa?</p>
                   <div className="mt-4 grid gap-3">
                     {[
-                      { icon: <FileCheck className="h-4 w-4" />, title: 'Odpowiadasz na pytania', text: 'Objawy, ból, RTG i preferowany kontakt.' },
-                      { icon: <Clock className="h-4 w-4" />, title: 'Kontakt w godzinach pracy', text: CALLBACK_HOURS },
-                      { icon: <ShieldCheck className="h-4 w-4" />, title: 'Ustalany jest kolejny krok', text: 'Bez automatycznej rezerwacji zabiegu.' },
+                      { icon: <FileCheck className="h-4 w-4" />, title: 'Wysyłasz zgłoszenie', text: 'Objawy, RTG i preferowany kontakt.' },
+                      { icon: <Clock className="h-4 w-4" />, title: 'Gabinet może oddzwonić', text: CALLBACK_HOURS },
+                      { icon: <ShieldCheck className="h-4 w-4" />, title: 'Decyzja po konsultacji', text: 'Bez diagnozy online i automatycznej rezerwacji.' },
                     ].map((item) => (
                       <div key={item.title} className="flex gap-3 rounded-2xl border border-emerald-100 bg-emerald-50/50 p-3">
                         <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-xl bg-white text-emerald-700 shadow-sm">
@@ -960,7 +971,7 @@ export default function ConversationalFlow({
         </section>
 
         <footer className="pb-4 text-center text-[11px] font-semibold leading-relaxed text-slate-400">
-          Kwalifikacja online nie zastępuje konsultacji lekarskiej. Kontakt zwrotny: {CALLBACK_HOURS}.{' '}
+          Serwis nie jest podmiotem leczniczym. Kwalifikacja online nie zastępuje konsultacji lekarskiej. Kontakt zwrotny: {CALLBACK_HOURS}.{' '}
           <Link href="/polityka-prywatnosci" className="font-bold text-emerald-700 underline underline-offset-2">
             Polityka prywatności
           </Link>

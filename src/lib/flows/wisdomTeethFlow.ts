@@ -7,12 +7,12 @@ export const wisdomTeethFlow: FlowConfig = {
   location: 'Ursynów',
   webhookUrl: 'https://hook.eu1.make.com/k73x9s65dxykfhry5uyodhl6bg2kvkx7',
   intro: {
-    eyebrow: 'Ósemki Ursynów · kwalifikacja objawów online',
-    title: 'Boli ósemka na Ursynowie?',
-    localTitle: (localArea) => `Boli ósemka w okolicy ${localArea}?`,
+    eyebrow: 'Ósemki Ursynów · serwis kwalifikacyjny',
+    title: 'Problem z ósemką na Ursynowie?',
+    localTitle: (localArea) => `Problem z ósemką w okolicy ${localArea}?`,
     description:
-      'Odpowiedz na kilka krótkich pytań i sprawdź, czy warto zacząć od konsultacji, RTG lub szybszego kontaktu z gabinetem.',
-    cta: 'Rozpocznij bezpłatną kwalifikację',
+      'Odpowiedz na kilka krótkich pytań. Zgłoszenie może zostać przekazane do współpracującego gabinetu stomatologicznego na Ursynowie w celu kontaktu telefonicznego.',
+    cta: 'Rozpocznij kwalifikację',
   },
   steps: [
     {
@@ -146,20 +146,20 @@ export const wisdomTeethFlow: FlowConfig = {
       id: 'lead_capture',
       type: 'lead',
       eyebrow: 'ostatni krok',
-      question: 'Zostaw numer. Oddzwonimy i powiemy, co dalej.',
-      helper: 'Kontaktujemy się od poniedziałku do piątku w godzinach 9:00-20:00.',
+      question: 'Zostaw numer do kontaktu w sprawie zgłoszenia.',
+      helper: 'Zgłoszenie może trafić do współpracującego gabinetu na Ursynowie. Kontakt odbywa się od poniedziałku do piątku w godzinach 9:00-20:00.',
     },
   ],
   finalMessages: {
     high: {
       title: 'Zgłoszenie priorytetowe przyjęte',
       body:
-        'Zgłoszenie oznaczymy jako priorytetowe. Koordynator oddzwoni w pierwszej kolejności w godzinach pracy: pon-pt 9:00-20:00.',
+        'Zgłoszenie oznaczymy jako priorytetowe. Może zostać przekazane do współpracującego gabinetu, który oddzwoni w pierwszej kolejności w godzinach pracy: pon-pt 9:00-20:00.',
     },
     medium: {
       title: 'Zgłoszenie zapisane',
       body:
-        'Koordynator oddzwoni w wybranym terminie lub w najbliższym dostępnym oknie kontaktu w godzinach pracy: pon-pt 9:00-20:00.',
+        'Zgłoszenie może zostać przekazane do współpracującego gabinetu, który oddzwoni w wybranym terminie lub w najbliższym dostępnym oknie kontaktu w godzinach pracy: pon-pt 9:00-20:00.',
     },
     low: {
       title: 'Dziękujemy, zgłoszenie zapisane',

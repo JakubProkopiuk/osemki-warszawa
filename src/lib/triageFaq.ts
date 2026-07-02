@@ -2,12 +2,12 @@ export const TRIAGE_FAQ_ITEMS = [
   {
     question: 'Czy formularz oznacza zapis na zabieg?',
     answer:
-      'Nie. Formularz służy do wstępnej kwalifikacji zgłoszenia i przygotowania kontaktu zwrotnego. Decyzja o leczeniu zapada dopiero po konsultacji.',
+      'Nie. Formularz służy do wstępnej kwalifikacji zgłoszenia i może zostać przekazany do współpracującego gabinetu stomatologicznego na Ursynowie. Decyzja o leczeniu zapada dopiero po konsultacji.',
   },
   {
     question: 'Kiedy problem z ósemką może wymagać szybszego kontaktu?',
     answer:
-      'Wyższy priorytet zwykle mają zgłoszenia z silnym bólem, opuchlizną, trudnością z otwieraniem ust albo objawami, które szybko narastają. Jeśli pojawia się problem z oddychaniem lub połykaniem, nie czekaj na formularz.',
+      'Wyższy priorytet zwykle mają zgłoszenia z silnym bólem, opuchlizną, trudnością z otwieraniem ust albo objawami, które szybko narastają. Jeśli pojawia się problem z oddychaniem lub połykaniem, gorączka albo narastająca opuchlizna twarzy lub szyi, nie czekaj na formularz.',
   },
   {
     question: 'Czy muszę mieć RTG albo CBCT?',
@@ -22,7 +22,7 @@ export const TRIAGE_FAQ_ITEMS = [
   {
     question: 'Czy to jest wizyta prywatna czy na NFZ?',
     answer:
-      'Formularz nie służy do rejestracji świadczeń NFZ. Dotyczy kontaktu zwrotnego w sprawie prywatnej konsultacji lub diagnostyki w rejonie Metra Ursynów. Szczegóły zakresu wizyty i kosztów są potwierdzane podczas rozmowy.',
+      'Formularz nie służy do rejestracji świadczeń NFZ. Dotyczy kontaktu zwrotnego w sprawie prywatnej konsultacji lub diagnostyki u współpracującego gabinetu w rejonie Metra Ursynów. Szczegóły zakresu wizyty i kosztów są potwierdzane podczas rozmowy.',
   },
   {
     question: 'Czy kwalifikacja online zastępuje konsultację lekarską?',
@@ -32,6 +32,11 @@ export const TRIAGE_FAQ_ITEMS = [
   {
     question: 'Gdzie odbywa się wizyta?',
     answer:
-      'Kontakt dotyczy gabinetu stomatologicznego w rejonie Metra Ursynów. Szczegóły organizacyjne są potwierdzane podczas kontaktu zwrotnego.',
+      'Kontakt dotyczy współpracującego gabinetu stomatologicznego w rejonie Metra Ursynów. Szczegóły organizacyjne są potwierdzane podczas kontaktu zwrotnego.',
+  },
+  {
+    question: 'Czy ten serwis jest gabinetem stomatologicznym?',
+    answer:
+      'Nie. To serwis kwalifikacyjny. Pomaga uporządkować zgłoszenie i może przekazać je do współpracującego gabinetu stomatologicznego na Ursynowie w celu kontaktu telefonicznego.',
   },
 ];

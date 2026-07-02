@@ -65,7 +65,7 @@ export default function TriageSeoContent({ location, popularLocations }: TriageS
                   Lokalny kontekst: {location.nazwa_lokalizacji}
                 </h3>
                 <p className="mt-3 text-sm font-medium leading-relaxed text-slate-600">
-                  Jeśli jesteś w okolicy {location.nazwa_lokalizacji}, formularz pomaga zebrać objawy przed kontaktem z gabinetem w rejonie Metra Ursynów. W rozmowie można odnieść się do najbliższego punktu orientacyjnego: {location.punkt_orientacyjny || 'Metro Ursynów'}.
+                  Jeśli jesteś w okolicy {location.nazwa_lokalizacji}, formularz pomaga zebrać informacje przed kontaktem ze współpracującym gabinetem w rejonie Metra Ursynów. W rozmowie można odnieść się do najbliższego punktu orientacyjnego: {location.punkt_orientacyjny || 'Metro Ursynów'}.
                 </p>
               </div>
             )}
@@ -107,7 +107,7 @@ export default function TriageSeoContent({ location, popularLocations }: TriageS
               <h3 className="text-lg font-black tracking-[-0.02em] text-slate-950">Kontakt w rejonie Ursynowa</h3>
               <ul className="mt-4 space-y-2 text-sm font-medium leading-relaxed text-slate-600">
                 <li>Obsługa zgłoszeń: pon-pt 9:00-20:00.</li>
-                <li>Lokalizacja wizyty: okolice Metra Ursynów.</li>
+                  <li>Lokalizacja wizyty: współpracujący gabinet w okolicy Metra Ursynów.</li>
                 <li>Konsultacja, RTG i dalszy krok są ustalane po kontakcie.</li>
                 <li>Zgłoszenie nie oznacza automatycznego zapisu na zabieg.</li>
               </ul>
