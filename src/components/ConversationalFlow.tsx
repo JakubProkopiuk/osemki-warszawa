@@ -437,41 +437,56 @@ export default function ConversationalFlow({
     : `Zgłoszenie może zostać przekazane do współpracującego gabinetu. Kontakt odbywa się w wybranym terminie lub w najbliższym dostępnym oknie: ${CALLBACK_HOURS}.`;
 
   return (
-    <div className="relative min-h-screen overflow-hidden bg-[#f8fbf7] text-slate-950 antialiased">
-      <div className="absolute inset-x-0 top-0 h-1.5 bg-emerald-800" />
-      <div className="absolute inset-0 bg-[linear-gradient(180deg,#ffffff_0%,#f8fbf7_54%,#eef7f2_100%)]" />
+    <div className="relative min-h-screen overflow-hidden bg-[#fbfaf6] text-slate-950 antialiased">
+      <div className="absolute inset-x-0 top-0 h-1.5 bg-[#0f4f46]" />
+      <div className="absolute inset-0 bg-[linear-gradient(180deg,#fffefa_0%,#fbfaf6_55%,#eef7f2_100%)]" />
       <div className="absolute left-0 top-0 hidden h-full w-px bg-emerald-100 lg:block" />
-      <div className="absolute right-[-16rem] top-16 hidden h-[38rem] w-[38rem] rounded-full bg-emerald-50 blur-3xl lg:block" />
+      <div className="absolute right-[-18rem] top-20 hidden h-[40rem] w-[40rem] rounded-full bg-[#e8f4ee] blur-3xl lg:block" />
 
       <main className="relative z-10 mx-auto flex min-h-screen w-full max-w-7xl flex-col px-4 pb-28 pt-5 md:px-8 md:py-7 lg:pb-7">
-        <header className="flex items-center justify-between gap-3">
+        <header className="flex items-center justify-between gap-3 rounded-[1.5rem] border border-slate-200 bg-white/80 px-3 py-3 shadow-sm backdrop-blur md:px-4">
           <div className="flex items-center gap-3">
-            <div className="relative flex h-11 w-11 items-center justify-center overflow-hidden rounded-xl bg-emerald-700 shadow-lg shadow-emerald-700/20">
+            <div className="relative flex h-11 w-11 items-center justify-center overflow-hidden rounded-xl bg-[#0f4f46] shadow-lg shadow-emerald-900/15">
               <span className="text-base font-black tracking-tighter text-white">8U</span>
-              <div className="absolute bottom-0 left-0 h-1 w-full bg-cyan-300" />
+              <div className="absolute bottom-0 left-0 h-1 w-full bg-[#bdebd7]" />
             </div>
             <div>
-              <p className="text-sm font-black leading-none tracking-tight text-slate-950">Ósemki Ursynów</p>
+              <p className="text-sm font-black leading-none tracking-tight text-slate-950">Ósemki Warszawa</p>
               <p className="mt-1 hidden text-xs font-semibold text-slate-500 sm:block">
                 Kwalifikacja online, kontakt {CALLBACK_HOURS}
               </p>
             </div>
           </div>
 
-          <div className="flex items-center gap-1.5 rounded-full border border-emerald-100 bg-white px-3 py-2 text-xs font-bold text-slate-700 shadow-sm">
-            <MapPin className="h-3.5 w-3.5 text-emerald-700" />
-            {isLocalEntry ? localArea : 'Ursynów'}
+          <nav className="hidden items-center gap-6 text-xs font-black uppercase tracking-widest text-slate-500 lg:flex">
+            <a href="#jak-dziala" className="transition hover:text-emerald-800">Jak działa</a>
+            <a href="#koszt" className="transition hover:text-emerald-800">Koszt</a>
+            <a href="#faq" className="transition hover:text-emerald-800">FAQ</a>
+          </nav>
+
+          <div className="flex items-center gap-2">
+            <div className="hidden items-center gap-1.5 rounded-full border border-emerald-100 bg-white px-3 py-2 text-xs font-bold text-slate-700 shadow-sm sm:flex">
+              <MapPin className="h-3.5 w-3.5 text-emerald-700" />
+              {isLocalEntry ? localArea : 'Ursynów'}
+            </div>
+            <a
+              href="#triage-quiz"
+              onClick={() => trackStart('header_cta')}
+              className="hidden rounded-full bg-[#0f4f46] px-4 py-2.5 text-xs font-black uppercase tracking-widest text-white shadow-lg shadow-emerald-900/10 transition hover:bg-emerald-800 md:inline-flex"
+            >
+              Wyślij zgłoszenie
+            </a>
           </div>
         </header>
 
-        <section className="grid flex-1 items-start gap-6 py-6 lg:grid-cols-[0.9fr,1.1fr] lg:items-center lg:gap-10 md:py-10">
+        <section className="grid flex-1 items-start gap-7 py-6 lg:grid-cols-[0.92fr,1.08fr] lg:items-center lg:gap-12 md:py-10">
           <aside className="order-1 lg:order-none">
             <div className="mb-5 inline-flex items-center gap-2 rounded-full border border-emerald-200 bg-white/90 px-3 py-2 text-xs font-black uppercase tracking-widest text-emerald-800 shadow-sm">
               <ShieldCheck className="h-4 w-4" />
               {config.intro.eyebrow}
             </div>
 
-            <h1 className="max-w-2xl text-5xl font-black leading-[0.94] tracking-[-0.06em] text-slate-950 sm:text-6xl xl:text-7xl">
+            <h1 className="max-w-2xl text-5xl font-black leading-[0.95] tracking-[-0.06em] text-slate-950 sm:text-6xl xl:text-7xl">
               {isLocalEntry ? config.intro.localTitle(localArea) : config.intro.title}
             </h1>
 
@@ -479,7 +494,7 @@ export default function ConversationalFlow({
               {config.intro.description}
             </p>
 
-            <div className="mt-5 max-w-xl rounded-[1.35rem] border border-emerald-100 bg-white/85 p-3 shadow-sm backdrop-blur sm:p-4">
+            <div className="mt-5 max-w-xl rounded-[1.35rem] border border-slate-200 bg-white/85 p-3 shadow-sm backdrop-blur sm:p-4">
               <div className="flex flex-wrap items-center gap-2 text-sm font-bold text-slate-700">
                 <span className="inline-flex items-center gap-1.5 rounded-full bg-emerald-50 px-3 py-1.5 text-emerald-800">
                   <MapPin className="h-3.5 w-3.5" />
@@ -524,7 +539,7 @@ export default function ConversationalFlow({
               {LEADGEN_DISCLOSURE_COPY} Formularz nie oznacza automatycznej rezerwacji wizyty ani diagnozy online.
             </p>
 
-            <div className="mt-6 max-w-xl">
+            <div className="mt-6 hidden max-w-xl lg:block">
               <DentalClinicVisual compact />
             </div>
 

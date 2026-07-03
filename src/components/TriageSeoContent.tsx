@@ -59,7 +59,7 @@ export default function TriageSeoContent({ location, popularLocations }: TriageS
               Ten krótki formularz jest przygotowany dla osób, które chcą przekazać zgłoszenie w sprawie ósemki do kontaktu zwrotnego z placówką partnerską na Ursynowie.
             </p>
 
-            <div className="mt-6 rounded-3xl border border-emerald-100 bg-white p-5 shadow-sm">
+            <div id="jak-dziala" className="mt-6 scroll-mt-24 rounded-3xl border border-emerald-100 bg-white p-5 shadow-sm">
               <div className="flex flex-col gap-4 sm:flex-row sm:items-start sm:justify-between">
                 <div>
                   <p className="text-xs font-black uppercase tracking-widest text-emerald-700">Transparentny proces</p>
@@ -86,7 +86,7 @@ export default function TriageSeoContent({ location, popularLocations }: TriageS
               </div>
             </div>
 
-            <div className="mt-6 rounded-3xl border border-cyan-100 bg-cyan-50/50 p-5 shadow-sm">
+            <div id="koszt" className="mt-6 scroll-mt-24 rounded-3xl border border-cyan-100 bg-cyan-50/50 p-5 shadow-sm">
               <h3 className="text-lg font-black tracking-[-0.02em] text-slate-950">Co wpływa na koszt?</h3>
               <p className="mt-3 text-sm font-medium leading-relaxed text-slate-600">
                 Koszt konsultacji lub usunięcia ósemki zależy między innymi od diagnostyki, położenia zęba, stopnia trudności i decyzji lekarza po badaniu. Formularz nie podaje automatycznej wyceny, bo bez konsultacji i analizy RTG/CBCT byłaby ona nieprecyzyjna.
@@ -128,7 +128,7 @@ export default function TriageSeoContent({ location, popularLocations }: TriageS
             </div>
           </div>
 
-          <aside className="rounded-[2rem] border border-emerald-100 bg-slate-50 p-5 shadow-sm sm:p-6">
+          <aside id="faq" className="scroll-mt-24 rounded-[2rem] border border-emerald-100 bg-slate-50 p-5 shadow-sm sm:p-6">
             <h2 className="text-2xl font-black tracking-[-0.03em] text-slate-950">Najczęstsze pytania</h2>
             <div className="mt-5 space-y-3">
               {TRIAGE_FAQ_ITEMS.map((item) => (
